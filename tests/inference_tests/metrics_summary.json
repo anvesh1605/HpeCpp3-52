@@ -1,0 +1,84 @@
+{
+  "product_lstm": {
+    "best_val_accuracy": 0.9996580027359782,
+    "best_val_macro_f1": 0.7498081350729087,
+    "train_accuracy": 0.9999572320588487,
+    "test_accuracy": 0.9996580027359782,
+    "test_macro_precision": 0.7496165644171779,
+    "test_macro_recall": 0.75,
+    "test_macro_f1": 0.7498081350729087,
+    "labels": [
+      "cli_syntax",
+      "concept_explanation",
+      "data_not_available",
+      "out_of_domain"
+    ],
+    "confusion_matrix_path": "outputs_product_lstm/all_switches/confusion_matrix.json"
+  },
+  "release_lookup": {
+    "total_questions": 322,
+    "lookup_found": 322,
+    "lookup_correct": 322,
+    "accuracy": 1.0,
+    "lookup_exact_match": 1.0,
+    "lookup_token_f1": 1.0,
+    "lookup_rouge_l": 1.0,
+    "per_intent_accuracy": {
+      "bug_category": 1.0,
+      "bug_scenario": 1.0,
+      "bug_symptom": 1.0,
+      "bug_workaround": 1.0,
+      "release_caveat": 1.0
+    },
+    "report_path": "outputs_release_lstm/lookup_report.json"
+  },
+  "qwen_answer": {
+    "total_questions": 322,
+    "lookup_found": 322,
+    "qwen_used": 322,
+    "qwen_validation_passed": 234,
+    "qwen_validation_failed": 88,
+    "final_exact_match": 0.531055900621118,
+    "final_token_f1": 0.9373190263161308,
+    "final_rouge_l": 0.9371511565830436,
+    "answer_source_counts": {
+      "qwen_grounded": 234,
+      "lookup_fallback": 88
+    },
+    "report_path": "outputs_release_lstm/qwen_answer_report.json"
+  },
+  "qwen_formatter": {
+    "total_questions": 322,
+    "lookup_found": 322,
+    "formatted_correct": 257,
+    "formatted_exact_match": 0.7981366459627329,
+    "formatted_token_f1": 0.9237212018203876,
+    "formatted_rouge_l": 0.9165249115565405,
+    "qwen_used": 236,
+    "qwen_skipped": 86,
+    "qwen_accepted": 66,
+    "qwen_rejected": 170,
+    "report_path": "outputs_release_lstm/qwen_formatter_report.json"
+  },
+  "test_bundle": {
+    "total_cases": 12,
+    "good_cases": 11,
+    "known_missing_cases": 1,
+    "product_doc_cases": 7,
+    "release_note_cases": 5,
+    "syntax_cases": 1
+  },
+  "recommended_repo_metrics": [
+    "accuracy",
+    "macro_precision",
+    "macro_recall",
+    "macro_f1",
+    "confusion_matrix",
+    "lookup_accuracy",
+    "lookup_exact_match",
+    "qwen_validation_passed",
+    "final_exact_match",
+    "formatted_exact_match",
+    "fallback_rate"
+  ]
+}
