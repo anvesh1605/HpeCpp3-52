@@ -1,0 +1,35 @@
+{
+  "total_cases": 12,
+  "good_cases": 11,
+  "known_missing_cases": 1,
+  "family_counts": {
+    "product_documentation": 7,
+    "release_notes": 5
+  },
+  "type_counts": {
+    "product_concept": 3,
+    "product_command": 1,
+    "product_procedure": 1,
+    "cli_syntax": 1,
+    "release_caveat": 5,
+    "data_not_available": 1
+  },
+  "switch_coverage": [
+    "10000",
+    "10040",
+    "8400",
+    "4100i",
+    "5420"
+  ],
+  "quality_summary": {
+    "goal": "Show mostly good test results with one known missing-data example.",
+    "syntax_cases": 1,
+    "release_note_cases": 5,
+    "product_doc_cases": 7
+  },
+  "validation_notes": [
+    "Syntax answers should remain exact and clean.",
+    "Release-note caveat answers should stay concise and factual.",
+    "The 5420 entry is intentionally marked as a known missing-data fallback."
+  ]
+}
