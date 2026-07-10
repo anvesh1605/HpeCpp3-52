@@ -1,0 +1,16 @@
+{
+  "total_rows_before": 47319,
+  "total_rows_after": 47299,
+  "jsonl_parse_errors": 0,
+  "exact_duplicate_qa_pairs": 0,
+  "duplicate_questions_found_before": 153,
+  "duplicate_questions_found": 153,
+  "duplicate_question_extra_rows": 222,
+  "duplicate_question_rows_fixed_by_merge": 18,
+  "duplicate_question_rows_fixed_by_section_specific_question": 511,
+  "duplicate_question_rows_dropped": 0,
+  "duplicate_questions_final": 0,
+  "rows_with_bug_id": 35171,
+  "rows_with_data_family": 47299,
+  "placeholder_rows_dropped": 2
+}
