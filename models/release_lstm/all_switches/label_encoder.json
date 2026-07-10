@@ -1,0 +1,29 @@
+{
+  "label_names": [
+    "bug_category",
+    "bug_scenario",
+    "bug_symptom",
+    "bug_workaround",
+    "release_caveat",
+    "data_not_available",
+    "out_of_domain"
+  ],
+  "label_to_id": {
+    "bug_category": 0,
+    "bug_scenario": 1,
+    "bug_symptom": 2,
+    "bug_workaround": 3,
+    "release_caveat": 4,
+    "data_not_available": 5,
+    "out_of_domain": 6
+  },
+  "id_to_label": {
+    "0": "bug_category",
+    "1": "bug_scenario",
+    "2": "bug_symptom",
+    "3": "bug_workaround",
+    "4": "release_caveat",
+    "5": "data_not_available",
+    "6": "out_of_domain"
+  }
+}

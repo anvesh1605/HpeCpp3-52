@@ -1,0 +1,125 @@
+# Samples Eval
+
+## 10 Best Predictions
+- intent: `bug_category`
+  - input: Which category does Bug 292078 belong to?
+  - reference: IGMP/MLD (Bug ID 292078): This bug belongs to the IGMP/MLD category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 324362 belong to?
+  - reference: Local user management (Bug ID 324362): This bug belongs to the Local user management category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 385266 belong to?
+  - reference: Internal services: DSS (Bug ID 385266): This bug belongs to the Internal services: DSS category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 385689 belong to?
+  - reference: L3 Routes (Bug ID 385689): This bug belongs to the L3 Routes category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 384894 belong to?
+  - reference: Slot Management (Bug ID 384894): This bug belongs to the Slot Management category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 318235 belong to?
+  - reference: IP Directed Broadcast (Bug ID 318235): This bug belongs to the IP Directed Broadcast category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 303156 belong to?
+  - reference: ACLs (Bug ID 303156): This bug belongs to the ACLs category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 375775 belong to?
+  - reference: Routing (Bug ID 375775): This bug belongs to the Routing category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 307133 belong to?
+  - reference: BGP (Bug ID 307133): This bug belongs to the BGP category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 405486 belong to?
+  - reference: Physical Interfaces (Bug ID 405486): This bug belongs to the Physical Interfaces category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+
+## 10 Worst Predictions
+- intent: `data_not_available`
+  - input: For 4100i AOS-CX 10.99, what is the workaround for Bug 123456?
+  - reference: This particular data is not available in the current Aruba switch dataset.
+  - prediction: bug_workaround
+  - confidence: 1.0000
+  - correct: false
+- intent: `release_caveat`
+  - input: For 6200 AOS-CX 10.16.0002, what limitation is mentioned for Classifiers in HPE Aruba AOS-CX 10.16.0002?
+  - reference: For secure classifier policy modifications, HPE Aruba Networking strongly encourages a three-step process: bring down the port, make the modifications, and then bring the port back up.
+  - prediction: release_caveat
+  - confidence: 0.9997
+  - correct: true
+- intent: `release_caveat`
+  - input: For 4100i AOS-CX 10.16.1010, what limitation is mentioned for Classifiers in HPE Aruba AOS-CX 10.16.1010?
+  - reference: For secure classifier policy modifications, HPE Aruba Networking strongly encourages a three-step process: bring down the port, make the modifications, and then bring the port back up.
+  - prediction: release_caveat
+  - confidence: 0.9998
+  - correct: true
+- intent: `release_caveat`
+  - input: For 6100 AOS-CX 10.15.1060, what limitation is mentioned for Classifiers in HPE Aruba AOS-CX 10.15.1060?
+  - reference: For secure classifier policy modifications, HPE Aruba Networking strongly encourages a three-step process: bring down the port, make the modifications, and then bring the port back up.
+  - prediction: release_caveat
+  - confidence: 0.9998
+  - correct: true
+- intent: `release_caveat`
+  - input: For 4100i AOS-CX 10.16.1020, what limitation is mentioned for Classifiers in HPE Aruba AOS-CX 10.16.1020?
+  - reference: For secure classifier policy modifications, HPE Aruba Networking strongly encourages a three-step process: bring down the port, make the modifications, and then bring the port back up.
+  - prediction: release_caveat
+  - confidence: 0.9998
+  - correct: true
+- intent: `release_caveat`
+  - input: For 10000 AOS-CX 10.16.1030, what limitation is mentioned for BGP in AOS-CX 10.16.1030?
+  - reference: Feature Caveat: BGP - The next-hop-unchanged option needs to be explicitly configured to preserve nexthop while advertising routes to eBGP peers, in the L2VPN EVPN address-family. For example: Copy router bgp.
+  - prediction: release_caveat
+  - confidence: 0.9998
+  - correct: true
+- intent: `release_caveat`
+  - input: For 6200 AOS-CX 10.14.0006, what limitation is mentioned for User Based Tunnel in AOS-CX 10.14.0006?
+  - reference: Feature Caveat: User Based Tunnel - In the event of license issues when onboarding a DUT to primary or backup mobility conductor, the DUT will not try to bootstrap to another mobility conductor where a license is available. For example, if a mobility conductor does not have a license to onboard the DUT but the backup mobility conductor does have adequate licenses, if both mobility conductors are reachable then UBT will be down, and the DUT will not attempt to bootstrap to the backup controller. However, if the primary mobility conductor is not reachable, the DUT gets tunneled to the standby/backup mobility conductor. Once the primary mobility conductor is reachable by the DUT once again, the DUT will not automatically bootstrap back to the primary. Network administrators should manually disable and enable UBT on the DUT to re-establish the tunnel to the primary mobility conductor.
+  - prediction: release_caveat
+  - confidence: 0.9998
+  - correct: true
+- intent: `release_caveat`
+  - input: For 10000 AOS-CX 10.15.1010, what caveat is documented for DHCP Server, DHCP Relay, and DHCP Snooping in AOS-CX 10.15.1010?
+  - reference: DHCP Relay and DHCP Snooping can co-exist on the same switch. DHCP Snooping and DHCP Server cannot co-exist on the same switch. DHCP Snooping, DHCP Relay, and DHCP Server together cannot co-exist on the same switch.
+  - prediction: release_caveat
+  - confidence: 0.9998
+  - correct: true
+- intent: `release_caveat`
+  - input: For 10000 AOS-CX 10.15.1010, what caveat is documented for RPVST+ and MSTP in AOS-CX 10.15.1010?
+  - reference: Feature Caveat: RPVST+ and MSTP - Spanning Tree can only run in MSTP or RPVST+ mode.
+  - prediction: release_caveat
+  - confidence: 0.9998
+  - correct: true
+- intent: `release_caveat`
+  - input: For 6200 AOS-CX 10.14.0007, what limitation is mentioned for User Based Tunnel in AOS-CX 10.14.0007?
+  - reference: Feature Caveat: User Based Tunnel - In the event of license issues when onboarding a DUT to primary or backup mobility conductor, the DUT will not try to bootstrap to another mobility conductor where a license is available. For example, if a mobility conductor does not have a license to onboard the DUT but the backup mobility conductor does have adequate licenses, if both mobility conductors are reachable then UBT will be down, and the DUT will not attempt to bootstrap to the backup controller. However, if the primary mobility conductor is not reachable, the DUT gets tunneled to the standby/backup mobility conductor. Once the primary mobility conductor is reachable by the DUT once again, the DUT will not automatically bootstrap back to the primary. Network administrators should manually disable and enable UBT on the DUT to re-establish the tunnel to the primary mobility conductor.
+  - prediction: release_caveat
+  - confidence: 0.9999
+  - correct: true

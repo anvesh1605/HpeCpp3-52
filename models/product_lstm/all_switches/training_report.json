@@ -1,0 +1,1040 @@
+{
+  "data_dir": "None",
+  "output_dir": "C:\\Hpe\\Train\\outputs_product_lstm\\all_switches",
+  "model_type": "bilstm",
+  "rows_scanned": 337139,
+  "rows_kept": 153129,
+  "split_sizes": {
+    "train": 122505,
+    "val": 15312,
+    "test": 15312
+  },
+  "filter_reasons": {
+    "duplicate": 171310,
+    "empty target_value": 11800,
+    "intent not selected": 900
+  },
+  "best_epoch": 8,
+  "best_val_macro_f1": 0.9334006623372876,
+  "best_val_accuracy": 0.9962774294670846,
+  "validation_metrics": {
+    "accuracy": 0.9962774294670846,
+    "macro_precision": 0.9177552208626942,
+    "macro_recall": 0.9642085236870215,
+    "macro_f1": 0.9334006623372876,
+    "per_class": {
+      "cli_meaning": {
+        "precision": 0.9991876523151909,
+        "recall": 0.9989171629669734,
+        "f1": 0.9990523893326113,
+        "support": 3694
+      },
+      "cli_syntax": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 4646
+      },
+      "cli_output": {
+        "precision": 0.8181818181818182,
+        "recall": 0.75,
+        "f1": 0.7826086956521738,
+        "support": 12
+      },
+      "show_command_syntax": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1794
+      },
+      "show_command_meaning": {
+        "precision": 0.9985734664764622,
+        "recall": 1.0,
+        "f1": 0.9992862241256245,
+        "support": 1400
+      },
+      "configuration_procedure": {
+        "precision": 0.9959183673469387,
+        "recall": 0.9568627450980393,
+        "f1": 0.9759999999999999,
+        "support": 510
+      },
+      "concept_explanation": {
+        "precision": 0.9906137184115523,
+        "recall": 0.9906137184115523,
+        "f1": 0.9906137184115523,
+        "support": 1385
+      },
+      "event_id_meaning": {
+        "precision": 0.47368421052631576,
+        "recall": 0.75,
+        "f1": 0.5806451612903226,
+        "support": 12
+      },
+      "event_id_action": {
+        "precision": 0.5263157894736842,
+        "recall": 0.8333333333333334,
+        "f1": 0.6451612903225806,
+        "support": 12
+      },
+      "event_log_meaning": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 997
+      },
+      "snmp_mib_info": {
+        "precision": 0.9903846153846154,
+        "recall": 0.9686520376175548,
+        "f1": 0.9793977812995245,
+        "support": 319
+      },
+      "troubleshooting": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 63
+      },
+      "support_matrix": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 24
+      },
+      "version_support": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 44
+      },
+      "capacity_or_scale": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 12
+      },
+      "product_generic": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 234
+      },
+      "product_limitation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 66
+      },
+      "product_requirement": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 48
+      },
+      "product_caveat": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 16
+      },
+      "limitation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 12
+      },
+      "requirement": {
+        "precision": 0.48,
+        "recall": 1.0,
+        "f1": 0.6486486486486487,
+        "support": 12
+      }
+    },
+    "total": 15312
+  },
+  "train_metrics": {
+    "accuracy": 0.996391984000653,
+    "macro_precision": 0.9170264647797275,
+    "macro_recall": 0.9638998654494877,
+    "macro_f1": 0.9341633492515173,
+    "per_class": {
+      "cli_meaning": {
+        "precision": 0.9993566083099116,
+        "recall": 0.9985450854339367,
+        "f1": 0.9989506820566632,
+        "support": 29555
+      },
+      "cli_syntax": {
+        "precision": 1.0,
+        "recall": 0.9998654720585466,
+        "f1": 0.9999327315045271,
+        "support": 37167
+      },
+      "cli_output": {
+        "precision": 0.7647058823529411,
+        "recall": 0.8041237113402062,
+        "f1": 0.7839195979899498,
+        "support": 97
+      },
+      "show_command_syntax": {
+        "precision": 0.9996518590725526,
+        "recall": 1.0,
+        "f1": 0.9998258992304746,
+        "support": 14357
+      },
+      "show_command_meaning": {
+        "precision": 0.998306142462334,
+        "recall": 1.0,
+        "f1": 0.9991523533348204,
+        "support": 11198
+      },
+      "configuration_procedure": {
+        "precision": 0.9949122360722462,
+        "recall": 0.9585784313725491,
+        "f1": 0.9764074397703159,
+        "support": 4080
+      },
+      "concept_explanation": {
+        "precision": 0.9900161899622234,
+        "recall": 0.9932322685435842,
+        "f1": 0.9916216216216215,
+        "support": 11082
+      },
+      "event_id_meaning": {
+        "precision": 0.5035971223021583,
+        "recall": 0.7291666666666666,
+        "f1": 0.5957446808510638,
+        "support": 96
+      },
+      "event_id_action": {
+        "precision": 0.5094339622641509,
+        "recall": 0.84375,
+        "f1": 0.6352941176470588,
+        "support": 96
+      },
+      "event_log_meaning": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 7973
+      },
+      "snmp_mib_info": {
+        "precision": 0.9975757575757576,
+        "recall": 0.966718872357087,
+        "f1": 0.9819049512825612,
+        "support": 2554
+      },
+      "troubleshooting": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 500
+      },
+      "support_matrix": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 197
+      },
+      "version_support": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 355
+      },
+      "capacity_or_scale": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 100
+      },
+      "product_generic": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1873
+      },
+      "product_limitation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 526
+      },
+      "product_requirement": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 383
+      },
+      "product_caveat": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 124
+      },
+      "limitation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 96
+      },
+      "requirement": {
+        "precision": 0.5,
+        "recall": 0.9479166666666666,
+        "f1": 0.6546762589928058,
+        "support": 96
+      }
+    },
+    "total": 122505
+  },
+  "test_metrics": {
+    "accuracy": 0.995559038662487,
+    "macro_precision": 0.9105949522630881,
+    "macro_recall": 0.963528665633827,
+    "macro_f1": 0.929762903927714,
+    "per_class": {
+      "cli_meaning": {
+        "precision": 0.9994578476551911,
+        "recall": 0.9981050351922036,
+        "f1": 0.9987809833401057,
+        "support": 3694
+      },
+      "cli_syntax": {
+        "precision": 1.0,
+        "recall": 0.9991390443392165,
+        "f1": 0.9995693367786391,
+        "support": 4646
+      },
+      "cli_output": {
+        "precision": 0.7142857142857143,
+        "recall": 0.8333333333333334,
+        "f1": 0.7692307692307692,
+        "support": 12
+      },
+      "show_command_syntax": {
+        "precision": 0.9977753058954394,
+        "recall": 1.0,
+        "f1": 0.9988864142538975,
+        "support": 1794
+      },
+      "show_command_meaning": {
+        "precision": 0.9978617248752673,
+        "recall": 1.0,
+        "f1": 0.9989297181591152,
+        "support": 1400
+      },
+      "configuration_procedure": {
+        "precision": 0.9938650306748467,
+        "recall": 0.9529411764705882,
+        "f1": 0.972972972972973,
+        "support": 510
+      },
+      "concept_explanation": {
+        "precision": 0.9884809215262779,
+        "recall": 0.9913357400722022,
+        "f1": 0.9899062725306416,
+        "support": 1385
+      },
+      "event_id_meaning": {
+        "precision": 0.5,
+        "recall": 0.75,
+        "f1": 0.6,
+        "support": 12
+      },
+      "event_id_action": {
+        "precision": 0.4166666666666667,
+        "recall": 0.8333333333333334,
+        "f1": 0.5555555555555556,
+        "support": 12
+      },
+      "event_log_meaning": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 997
+      },
+      "snmp_mib_info": {
+        "precision": 0.9902912621359223,
+        "recall": 0.9592476489028213,
+        "f1": 0.9745222929936307,
+        "support": 319
+      },
+      "troubleshooting": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 63
+      },
+      "support_matrix": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 24
+      },
+      "version_support": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 44
+      },
+      "capacity_or_scale": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 12
+      },
+      "product_generic": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 234
+      },
+      "product_limitation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 66
+      },
+      "product_requirement": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 48
+      },
+      "product_caveat": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 16
+      },
+      "limitation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 12
+      },
+      "requirement": {
+        "precision": 0.5238095238095238,
+        "recall": 0.9166666666666666,
+        "f1": 0.6666666666666667,
+        "support": 12
+      }
+    },
+    "total": 15312
+  },
+  "train_loss": 0.0057996128291454,
+  "val_loss": 0.007235445705161498,
+  "test_loss": 0.009399458372883342,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.042302255608835285,
+      "val_loss": 0.00984781827520221,
+      "val_accuracy": 0.9958855799373041,
+      "macro_precision": 0.9268232439272056,
+      "macro_recall": 0.9488111550464637,
+      "macro_f1": 0.9131222966973712
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.011381700810011249,
+      "val_loss": 0.007475160108743877,
+      "val_accuracy": 0.9956896551724138,
+      "macro_precision": 0.8845355871716685,
+      "macro_recall": 0.8581380441366628,
+      "macro_f1": 0.8678043271729807
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.009617426545332144,
+      "val_loss": 0.007419197653344499,
+      "val_accuracy": 0.9964733542319749,
+      "macro_precision": 0.9138338368000545,
+      "macro_recall": 0.9601320030349162,
+      "macro_f1": 0.9285419310826482
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.008525213317046582,
+      "val_loss": 0.008437927809559022,
+      "val_accuracy": 0.9957549634273772,
+      "macro_precision": 0.8861417016555135,
+      "macro_recall": 0.8710271915085462,
+      "macro_f1": 0.8719656237677007
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.008219146203479988,
+      "val_loss": 0.007341730926361109,
+      "val_accuracy": 0.9962121212121212,
+      "macro_precision": 0.8933434053780848,
+      "macro_recall": 0.9447689840990809,
+      "macro_f1": 0.9112553314385179
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.007361855006045822,
+      "val_loss": 0.006197842038314344,
+      "val_accuracy": 0.9961468129571578,
+      "macro_precision": 0.9155352933518441,
+      "macro_recall": 0.953046597863358,
+      "macro_f1": 0.926221977336181
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.007016625160820388,
+      "val_loss": 0.006191840865336603,
+      "val_accuracy": 0.9964733542319749,
+      "macro_precision": 0.8930444965316288,
+      "macro_recall": 0.9255819267042937,
+      "macro_f1": 0.9059178620883472
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.0072669650530116205,
+      "val_loss": 0.007235445705161498,
+      "val_accuracy": 0.9962774294670846,
+      "macro_precision": 0.9177552208626942,
+      "macro_recall": 0.9642085236870215,
+      "macro_f1": 0.9334006623372876
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.006887930593714656,
+      "val_loss": 0.0074114424005622456,
+      "val_accuracy": 0.9962121212121212,
+      "macro_precision": 0.8953108375582184,
+      "macro_recall": 0.9057160501490988,
+      "macro_f1": 0.8994493703926852
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.006890479963885918,
+      "val_loss": 0.006574916885678593,
+      "val_accuracy": 0.9956896551724138,
+      "macro_precision": 0.8923398071481181,
+      "macro_recall": 0.9170052438155103,
+      "macro_f1": 0.8991184173612116
+    }
+  ],
+  "label_names": [
+    "cli_meaning",
+    "cli_syntax",
+    "cli_output",
+    "show_command_syntax",
+    "show_command_meaning",
+    "configuration_procedure",
+    "concept_explanation",
+    "event_id_meaning",
+    "event_id_action",
+    "event_log_meaning",
+    "snmp_mib_info",
+    "troubleshooting",
+    "support_matrix",
+    "version_support",
+    "capacity_or_scale",
+    "product_generic",
+    "product_limitation",
+    "product_requirement",
+    "product_caveat",
+    "limitation",
+    "requirement"
+  ],
+  "confusion_matrix": [
+    [
+      3690,
+      0,
+      2,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      4646,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      0,
+      9,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1794,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1400,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      488,
+      0,
+      0,
+      9,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      13
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1372,
+      10,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      9,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      10,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      997,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      10,
+      0,
+      0,
+      0,
+      309,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      63,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      44,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      12,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      234,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      66,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      48,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      16,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      12,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      12
+    ]
+  ],
+  "device": "cuda",
+  "gpu_name": "NVIDIA GeForce RTX 5070 Ti",
+  "verdict": "strong",
+  "artifacts": {
+    "best_model": "C:\\Hpe\\Train\\outputs_product_lstm\\all_switches\\best_model.pt",
+    "vocab": "C:\\Hpe\\Train\\outputs_product_lstm\\all_switches\\vocab.json",
+    "label_encoder": "C:\\Hpe\\Train\\outputs_product_lstm\\all_switches\\label_encoder.json",
+    "training_report": "C:\\Hpe\\Train\\outputs_product_lstm\\all_switches\\training_report.json",
+    "training_metrics": "C:\\Hpe\\Train\\outputs_product_lstm\\all_switches\\training_metrics.csv",
+    "confusion_matrix": "C:\\Hpe\\Train\\outputs_product_lstm\\all_switches\\confusion_matrix.json",
+    "samples_eval": "C:\\Hpe\\Train\\outputs_product_lstm\\all_switches\\samples_eval.md"
+  }
+}

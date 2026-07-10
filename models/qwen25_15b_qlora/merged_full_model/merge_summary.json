@@ -1,0 +1,7 @@
+{
+  "status": "complete",
+  "adapter_path": "E:\\52\\models\\qwen25_15b_qlora\\lora_adapters",
+  "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "merged_model_dir": "E:\\52\\models\\qwen25_15b_qlora\\merged_full_model",
+  "dtype": "torch.bfloat16"
+}
