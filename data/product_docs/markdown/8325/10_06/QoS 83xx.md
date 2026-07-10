@@ -1,0 +1,2910 @@
+AOS-CX 10.06 Quality of Service Guide
+8320, 8325, 8360 Switch Series
+
+Part Number: 5200-7719
+Published: November 2020
+Edition: 1
+
+© Copyright 2020 Hewlett Packard Enterprise Development LP
+
+Notices
+
+The information contained herein is subject to change without notice. The only warranties for Hewlett
+Packard Enterprise products and services are set forth in the express warranty statements accompanying
+such products and services. Nothing herein should be construed as constituting an additional warranty.
+Hewlett Packard Enterprise shall not be liable for technical or editorial errors or omissions contained herein.
+
+Confidential computer software. Valid license from Hewlett Packard Enterprise required for possession, use,
+or copying. Consistent with FAR 12.211 and 12.212, Commercial Computer Software, Computer Software
+Documentation, and Technical Data for Commercial Items are licensed to the U.S. Government under
+vendor's standard commercial license.
+
+Links to third-party websites take you outside the Hewlett Packard Enterprise website. Hewlett Packard
+Enterprise has no control over and is not responsible for information outside the Hewlett Packard Enterprise
+website.
+
+Acknowledgments
+
+Intel®, Itanium®, Optane™, Pentium®, Xeon®, Intel Inside®, and the Intel Inside logo are trademarks of Intel
+Corporation in the U.S. and other countries.
+
+Microsoft® and Windows® are either registered trademarks or trademarks of Microsoft Corporation in the
+United States and/or other countries.
+
+Adobe® and Acrobat® are trademarks of Adobe Systems Incorporated.
+
+Java® and Oracle® are registered trademarks of Oracle and/or its affiliates.
+
+UNIX® is a registered trademark of The Open Group.
+
+All third-party marks are property of their respective owners.
+
+Contents
+
+Chapter 1 About this document...................................................................... 5
+Applicable products........................................................................................................................................5
+Latest version available online......................................................................................................................5
+Command syntax notation conventions..................................................................................................... 5
+About the examples....................................................................................................................................... 6
+Identifying switch ports and interfaces .......................................................................................................7
+
+Chapter 2 QoS overview ................................................................................... 8
+End-to-end QoS behavior.............................................................................................................................. 8
+QoS on the switch........................................................................................................................................ 10
+QoS trust............................................................................................................................................ 11
+Port rate limiting............................................................................................................................... 13
+Queue profile.....................................................................................................................................13
+Schedule profiles...............................................................................................................................14
+Egress queue shaping.......................................................................................................................14
+Egress port shaping.......................................................................................................................... 15
+Explicit Congestion Notification...................................................................................................... 15
+Terms.................................................................................................................................................. 15
+
+Chapter 3 QoS configuration .........................................................................17
+Configuring QoS........................................................................................................................................... 17
+Configuring expedited forwarding for VoIP traffic................................................................................... 18
+Configuring rate limiting..............................................................................................................................20
+Configuring egress queue shaping............................................................................................................ 21
+Configuring egress port shaping................................................................................................................ 21
+Monitoring queue operation.......................................................................................................................22
+
+Chapter 4 QoS commands ..............................................................................23
+apply qos....................................................................................................................................................23
+apply qos threshold-profile........................................................................................................... 25
+dwrr queue..................................................................................................................................................25
+map queue....................................................................................................................................................26
+name queue..................................................................................................................................................27
+qos cos-map............................................................................................................................................... 28
+qos dscp...................................................................................................................................................... 29
+qos dscp-map............................................................................................................................................. 30
+qos queue-profile..................................................................................................................................32
+qos schedule-profile........................................................................................................................... 32
+qos shape....................................................................................................................................................34
+qos threshold-profile.........................................................................................................................35
+qos trust....................................................................................................................................................35
+queue.............................................................................................................................................................37
+rate-limit..................................................................................................................................................38
+show interface queues.........................................................................................................................39
+show interface qos............................................................................................................................... 40
+show qos cos-map.................................................................................................................................... 41
+
+Contents
+
+3
+
+show qos dscp-map..................................................................................................................................42
+show qos queue-profile...................................................................................................................... 43
+show qos schedule-profile................................................................................................................45
+show qos threshold-profile............................................................................................................. 46
+show qos trust........................................................................................................................................ 47
+strict queue............................................................................................................................................. 47
+
+Chapter 5 Support and other resources...................................................... 49
+Accessing Aruba Support............................................................................................................................ 49
+Accessing updates........................................................................................................................................ 49
+Warranty information.................................................................................................................................. 50
+Regulatory information............................................................................................................................... 50
+Documentation feedback............................................................................................................................ 50
+
+4
+
+AOS-CX 10.06 Quality of Service Guide
+
+Chapter 1
+About this document
+
+This document describes features of the AOS-CX network operating system. It is intended for administrators
+responsible for installing, configuring, and managing Aruba switches on a network.
+
+Applicable products
+This document applies to the following products:
+
+• Aruba 8320 Switch Series (JL479A, JL579A, JL581A)
+
+• Aruba 8325 Switch Series (JL624A, JL625A, JL626A, JL627A)
+
+• Aruba 8360 Switch Series (JL700A, JL701A, JL702A, JL703A, JL706A, JL707A, JL708A, JL709A, JL710A, JL711A)
+
+Latest version available online
+Updates to this document can occur after initial publication. For the latest versions of product
+documentation, see the links provided in Support and other resources.
+
+Command syntax notation conventions
+
+Convention
+
+example-text
+
+Usage
+
+Identifies commands and their options and operands, code examples,
+filenames, pathnames, and output displayed in a command window.
+Items that appear like the example text in the previous column are to be
+entered exactly as shown and are required unless enclosed in brackets
+([ ]).
+
+example-text
+
+In code and screen examples, indicates text entered by a user.
+
+Any of the following:
+
+• <example-text>
+
+• <example-text>
+
+• example-text
+
+•
+
+example-text
+
+|
+
+Identifies a placeholder—such as a parameter or a variable—that you
+must substitute with an actual value in a command or in code:
+
+•
+
+•
+
+For output formats where italic text cannot be displayed, variables
+are enclosed in angle brackets (< >). Substitute the text—including
+the enclosing angle brackets—with an actual value.
+
+For output formats where italic text can be displayed, variables might
+or might not be enclosed in angle brackets. Substitute the text
+including the enclosing angle brackets, if any, with an actual value.
+
+Vertical bar. A logical OR that separates multiple items from which you
+can choose only one.
+
+Any spaces that are on either side of the vertical bar are included for
+readability and are not a required part of the command syntax.
+
+Chapter 1 About this document
+
+Table Continued
+
+5
+
+Convention
+
+Usage
+
+{ }
+
+[ ]
+
+… or
+
+...
+
+Braces. Indicates that at least one of the enclosed items is required.
+
+Brackets. Indicates that the enclosed item or items are optional.
+
+Ellipsis:
+
+•
+
+•
+
+In code and screen examples, a vertical or horizontal ellipsis indicates
+an omission of information.
+
+In syntax using brackets and braces, an ellipsis indicates items that
+can be repeated. When an item followed by ellipses is enclosed in
+brackets, zero or more items can be specified.
+
+About the examples
+Examples in this document are representative and might not match your particular switch or environment.
+
+The slot and port numbers in this document are for illustration only and might be unavailable on your
+switch.
+
+Understanding the CLI prompts
+
+When illustrating the prompts in the command line interface (CLI), this document uses the generic term
+switch, instead of the host name of the switch. For example:
+
+switch>
+
+The CLI prompt indicates the current command context. For example:
+
+switch>
+
+Indicates the operator command context.
+
+switch#
+
+Indicates the manager command context.
+
+switch(CONTEXT-NAME)#
+
+Indicates the configuration context for a feature. For example:
+
+switch(config-if)#
+
+Identifies the interface context.
+
+Variable information in CLI prompts
+
+In certain configuration contexts, the prompt may include variable information. For example, when in
+the VLAN configuration context, a VLAN number appears in the prompt:
+
+switch(config-vlan-100)#
+
+When referring to this context, this document uses the syntax:
+
+switch(config-vlan-<VLAN-ID>)#
+
+Where <VLAN-ID> is a variable representing the VLAN number.
+
+6
+
+AOS-CX 10.06 Quality of Service Guide
+
+Identifying switch ports and interfaces
+Physical ports on the switch and their corresponding logical software interfaces are identified using the
+format:
+
+member/slot/port
+
+On the 83xx Switch Series
+
+• member: Always 1. VSF is not supported on this switch.
+
+•
+
+slot: Line module number. Always 1.
+
+• port: Physical number of a port on a line module
+
+For example, the logical interface 1/1/4 in software is associated with physical port 4 in slot 1 on member 1.
+
+NOTE: If using breakout cables, the port designation changes to x:y, where x is the physical port
+and y is the lane when split to 4 x 10G or 4 x 25G. For example, the logical interface 1/1/4:2 in
+software is associated with lane 2 on physical port 4 in slot 1 on member 1.
+
+Chapter 1 About this document
+
+7
+
+Chapter 2
+QoS overview
+
+Quality of Service (QoS) enables network administrators to customize how different types of traffic are
+serviced on a network, taking into account the unique characteristics of each traffic type and its importance
+within an organization's infrastructure. QoS ensures uniform and efficient traffic handling, keeping the most
+important traffic moving at an acceptable speed, regardless of current bandwidth usage. It also provides
+methods for administrators to control the priority settings of inbound traffic arriving at each network device.
+
+End-to-end QoS behavior
+The QoS settings on each network device must be aligned to achieve the desired end-to-end QoS behavior
+for a network. Three service types can be used to categorize and prioritize network traffic:
+
+• Best Effort Service
+
+• Ethernet Class of Service (CoS)
+
+•
+
+Internet Differentiated Services (DiffServ)
+
+For a network as a whole, it is best to select one service type to use as the primary end-to-end behavior, and
+then use the other two service types as needed.
+
+Best effort service
+
+This is the simplest service type. All traffic is treated equally in a first-come, first-served manner. If the traffic
+load is low in relation to the capacity of the network links, then there is no need for the administrative
+complexity and costs of maintaining a more complex end-to-end policy. This is sometimes called over-
+provisioning, as all link speeds are much higher than peak loads on the network.
+
+Class of Service
+
+Class of Service (CoS) is a method for classifying network traffic at layer 2 by marking 802.1Q VLAN Ethernet
+frames with one of eight service classes.
+
+CoS
+
+Traffic type
+
+Example protocols
+
+7
+
+6
+
+5
+
+4
+
+3
+
+2
+
+0
+
+1
+
+Network Control
+
+STP, PVST
+
+Internetwork Control
+
+BGP, OSPF, PIM
+
+Voice (<10ms latency)
+
+VoIP(UDP)
+
+Video (<100ms latency)
+
+RTP
+
+Critical Applications
+
+SQL RPC, SNMP
+
+Excellent Effort
+
+NFS, SMB
+
+Best Effort
+
+Background
+
+HTTP, TELNET
+
+SMTP, IMAP
+
+CoS 1 is deliberately set as the lowest CoS. This enables a traffic service level below the default (best effort)
+traffic level to be specified.
+
+The 3-bit Priority Code Point (PCP) field within the 16-bit Ethernet VLAN tag is used to mark the CoS.
+
+8
+
+AOS-CX 10.06 Quality of Service Guide
+
+ +--------+--------+--------+----------+-----------+--------
+ | mac-da | mac-sa | 0x8100 | VLAN tag | ethertype | data...
+ +--------+--------+--------+----------+-----------+--------
+                           /            \
+                          /              \
+                         /                \
+                      +-----+-----+---------+
+                      | pcp | dei | vlan_id |
+                      +-----+-----+---------+
+Differentiated services
+Differentiated services (DiffServ) is a method for classifying network traffic at layer 3 by marking packets
+with one of 64 different service classes. Services classes are identified by the Differentiated services Code
+Point (DSCP) value. Some common DSCP values are:
+| DSCP       | Name             | Service class           | RFC  |
+| ---------- | ---------------- | ----------------------- | ---- |
+| 56         | CS6              | Network Control         | 2474 |
+| 46         | EF               | Telephony               | 3246 |
+| 40         | CS5              | Signaling               | 2474 |
+| 34, 36, 38 | AF41, AF42, AF43 | Multimedia Conferencing | 2597 |
+| 32         | CS4              | Real-Time Interactive   | 2474 |
+| 26, 28, 30 | AF31, AF32, AF33 | Multimedia Streaming    | 2597 |
+| 24         | CS3              | Broadcast Video         | 2474 |
+| 18, 20, 22 | AF21, AF22, AF23 | Low-Latency Data        | 2597 |
+| 16         | CS2              | OAM                     | 2474 |
+| 00         | CS0,BE,DF        | Best Effort             | 2474 |
+| 10, 12, 14 | AF11, AF12, AF13 | Bulk Data               | 2597 |
+| 08         | CS1              | Low-Priority Data       | 3662 |
+DSCP CS1 (08) CoS 1 is deliberately set as the lowest priority. This enables a traffic service level below the
+standard (best effort or default forwarding) level to be specified.
+The DSCP value is carried within the IPv4 DSCP field or the upper 6-bits of the 8-bit IPv6 Traffic Class (TC)
+field.
+      +-----+------+-----+-----+----+--------+-----+-------+--------+-------+-------+--------
+IPv4  | ver | dscp | ecn | len | id | offset | ttl | proto | chksum | ip-sa | ip-da | data...
+      +-----+------+-----+-----+----+--------+-----+-------+--------+-------+-------+--------
+
+          +------+-----+
+          | dscp | ecn |
+          +------+-----+
+           \         /
+            \       /
+       +-----+-----+-----+-------+-------------+-----------+-------+-------+--------
+ IPv6  | ver | tc  | len | label | next_header | hop_limit | ip-sa | ip-da | data...
+       +-----+-----+-----+-------+-------------+-----------+-------+-------+--------
+Chapter 2 QoS overview 9
+
+QoS on the switch
+There are five key stages a packet passes through when traversing a switch: ingress, prioritization,
+destination determination, egress queuing, and transmission. The following table provides an overview of
+each stage, and lists the commands that can be used to configure QoS settings.
+
+The following diagram shows how different packets might traverse a switch. It also shows how QoS
+configuration settings apply at each stage.
+
+10
+
+AOS-CX 10.06 Quality of Service Guide
+
+QoS trust
+
+Traffic priorities for networks can be carried in VLAN tags, using the CoS Priority Code Point (PCP), or in IP
+packet headers, using the Differentiated Services Code Point (DSCP). Whether these priorities affect how
+traffic is serviced, depends on how QoS trust mode is configured on the switch. QoS trust mode specifies
+how the switch assigns local priority values to ingress packets. Trust mode can be set globally for all
+interfaces, or individually for each interface. By default, trust mode is set to none, meaning that any QoS
+information in the packet (CoS or DSCP) is ignored, and local priority values are assigned from the CoS map
+value for code point 0. An exception to this can be configured, allowing a QoS remark to be applied to DSCP
+values when trust mode is none.
+
+Chapter 2 QoS overview
+
+11
+
+When trust mode is set to CoS or DSCP, the switch translates the QoS settings in VLAN tags (for CoS), or the
+DS field in an IP header (for DSCP), to local priority values on the switch. Translation is controlled by the CoS
+map or DSCP map tables.
+
+For example:
+
+12
+
+AOS-CX 10.06 Quality of Service Guide
+
+Dynamic QoS trust mode
+
+The device profile feature can dynamically set the QoS trust mode on an interface based on the LLDP
+information exchanged with a link partner. The device profile's trust mode temporarily overrides the static
+trust mode configured for an interface. The override remains in place as long as that link partner is
+connected and its link state is up. Use command show interface IFNAME qos to view the current QoS
+trust mode for an interface.
+
+Port rate limiting
+
+Port rate limiting helps control undesirable traffic. Its purpose is to allow enough broadcast, multicast, and
+ICMP rate-limit traffic for the network to function properly, while preventing flooding and traffic storms.
+
+A certain amount of each type of traffic is required for normal network operation. Broadcast packets may
+include ARP and DHCP traffic, for instance. Video streams, and certain types of network protocol packets,
+are multicasts. Unknown-unicast packets may be intended for devices whose addresses have temporarily
+aged out of network-forwarding caches. Configuring rate limits can help provide the balance between
+necessary and flooded traffic.
+
+Queue profile
+
+A queue profile defines the queues that are associated with an interface to control the transmission of
+packets. Each profile supports up to eight queues, numbered 0 to 7. The larger the queue number, the
+higher its priority during transmission scheduling. Packets are assigned to a queue based on their local
+priority value (0 to 7). A queue profile must map all eight local priority values to whatever queues are being
+used on the switch, and a schedule profile must specify the configuration for those same queues. A queue
+without a local priority value assigned to it is not used to store packets.
+
+The switch is automatically provisioned with an initial queue profile named factory-default which
+assigns each local priority to the queue of the same number. To see the default queue profile, use the
+command show qos queue-profile factory-default:
+
+switch# show qos queue-profile factory-default
+queue_num local_priorities name
+--------- ---------------- ----
+0         0                Scavenger_and_backup_data
+1         1
+2         2
+3         3
+4         4
+5         5
+6         6
+7         7
+
+More than one local priority value can be assigned to the same queue. For example,
+
+Local
+Priority
+
+Queue
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+5
+
+5
+
+Chapter 2 QoS overview
+
+13
+
+Commonly used commands for working with QoS queues are as follows:
+
+• qos queue-profile: Creates an empty queue-profile and enters the profile configuration context.
+
+• name queue: Assigns a descriptive name to a queue.
+
+• map queue: Assigns a local-priority to a queue.
+
+• apply qos queue-profile: Applies a queue-profile globally to all interfaces.
+
+Schedule profiles
+
+A schedule profile determines the order in which queues are selected for transmission, and the amount of
+service available for each queue. A schedule profile must be configured on every interface at all times. A
+schedule profile can be applied globally to all interfaces, or only to specific interfaces.
+
+Three options are available:
+
+• All queues use deficit weighted round robin queuing (DWRR)
+
+• All queues use strict priority
+
+• The highest priority queue uses strict priority, and all other queues use DWRR
+
+A weighted schedule profile assigns relative servicing for each queue. The amount of service per weight is
+relative to the underlying hardware implementation, and to the weights assigned to the other non-empty
+queues. Strict scheduling can be used to service queues purely on the basis of highest priority first (at the
+risk of starving lower-priority queues during high stress periods). A combination of strict and weighted
+scheduling offers more service to the highest priority queue when needed, while preserving scheduling
+between the remaining queues, thus decreasing the risk of starvation.
+
+The switch is automatically provisioned with a schedule profile named factory-default, which assigns
+DWRR to all queues with a weight of 1. Use the command show schedule-profile factory-default to
+view the default schedule profile. (Do not use show running-configuration, as it only displays changes
+from the initial settings.)
+
+switch# show qos schedule-profile default
+queue_num algorithm weight
+--------- --------- ------
+0         dwrr      1
+1         dwrr      1
+2         dwrr      1
+3         dwrr      1
+4         dwrr      1
+5         dwrr      1
+6         dwrr      1
+7         dwrr      1
+
+Egress queue shaping
+
+Egress queue shaping limits the amount of traffic transmitted per strict output queue. The buffer associated
+with each egress queue stores excess traffic to absorb bursts and smooths the output rate. For example, an
+administrator might limit strict-priority queue traffic to prevent low-priority queue starvation in the event
+that a device inappropriately sends too many higher-priority packets.
+
+Egress queue shaping can be configured on an Ethernet port or on a link aggregation group (LAG). To
+configure egress queue shaping, define a schedule profile with the strict priority algorithm assigned to each
+queue.
+
+14
+
+AOS-CX 10.06 Quality of Service Guide
+
+Egress port shaping
+
+NOTE: This feature only applies to the Aruba 8360 switch.
+
+Egress port shaping limits the amount of aggregate traffic transmitted through a port.
+
+To be effective, the egress port-shaping rate must be less than the port's line rate. By default, the egress
+port-shaping rate is the same as the line-rate of the port. Buffers associated with each port store excess
+traffic.
+
+When both egress port-shaping and egress queue-shaping are configured on the same interface, the switch
+respects the minimum of both configurations.
+
+Explicit Congestion Notification
+
+Explicit Congestion Notification (ECN) provides a mechanism for two end-points to exchange end-to-end
+notification of network congestion. ECN uses a 2-bit field in the IP header to indicate that the traffic load on
+network equipment in the path between an ECN-capable sender and receiver is causing packets to be
+buffered, as defined by IETF RFC 3168 (https://tools.ietf.org/html/rfc3168).
+
+Threshold profiles
+
+Threshold profiles configure individual queue utilization thresholds as triggers for taking action (i.e., ECN
+marking) on a packet. A threshold profile is applied per-port and defines the threshold and action for each
+queue. Omitting configuration for a queue in a threshold profile means that queue will not be configured
+with a threshold value or action.
+
+In an environment where responsive transport protocols are in use and congestion management features
+are required to reduce latency, ECN can be configured on queues carrying delay-sensitive traffic. The result
+is that queue utilization is actively managed, resulting in ECT packets being CE marked when queue
+utilization reaches or exceeds a configured threshold.
+
+Terms
+
+Class
+
+For networking, a set of packets sharing a common characteristic. For example, all IPv4 packets.
+
+Code point
+
+The name of a packet header field, or the value carried within a packet header field:
+
+Example 1: Priority code point (PCP) is the name of a field in the IEEE 802.1Q VLAN tag.
+
+Example 2: Differentiated services code point (DSCP) is the name of a field carried within the DS field of
+an IP packet header.
+
+Color
+
+A metadata label associated with each packet within the switch. It has three values: green (0), yellow (1),
+or red (2). When packets encounter congestion for a resource (queue), the switch uses packet color to
+distinguish which packets must be dropped, and is mostly used for packets marked with Assured
+Forwarding (AF) DSCP values.
+
+Not supported in this release.
+
+Class of service (CoS)
+
+A 3-bit value used to mark packets with one of eight classes (levels of priority). It is carried within the
+priority code point (PCP) field of the IEEE 802.1Q VLAN tag.
+
+Chapter 2 QoS overview
+
+15
+
+Differentiated services code point (DSCP)
+
+A 6-bit value used to mark packets for different per-hop behavior as originally defined by IETF RFC 2474.
+It is carried within the differentiated services (DS) field of the IPv4 or IPv6 header.
+
+Local priority
+
+A meta-data label associated with a packet within the switch which is used to classify packets for
+different treatment (such as queue assignment). Eight local priorities are defined on the switch,
+numbered from 0 to 7. A queue profile must map all eight local priorities to whatever queues are in use
+on the switch, and a schedule profile must specify the configuration for these same queues.
+
+Metadata
+
+Information labels associated with each packet in the switch, separate from the packet headers and
+data. These labels are used by the switch in its handling of the packet. For example: arrival port, egress
+port, VLAN membership, and local priority.
+
+Priority code point (PCP)
+
+The name of a 3-bit field in the IEEE 802.1Q VLAN tag. It carries the CoS value to mark a packet with one
+of eight classes (priority levels).
+
+Quality of service (QoS)
+
+General term used when describing or measuring performance. For networking, it means how different
+classes of packets are treated when traversing a network or device.
+
+Traffic class (TC)
+
+General term for a set of packets sharing a common characteristic. It used to be the name of an 8-bit
+field in the IPv6 header originally defined by IETF RFC 2460. This field name was changed to
+differentiated services by IETF RFC 2474.
+
+Type of service (ToS)
+
+General term when there are different levels of treatment (fare class). It used to be the name of an 8-bit
+field in the IPv4 header originally defined by IETF RFC 791. This field name was changed to differentiated
+services by IETF RFC 2474.
+
+16
+
+AOS-CX 10.06 Quality of Service Guide
+
+Chapter 3
+QoS configuration
+
+Configuring QoS
+
+Procedure
+
+1. Configure how local priority values are assigned to ingress packets with the commands qos cos-map ,
+
+qos dscp-map, and qos trust.
+
+2. Optionally, add a rate limit for ingress traffic on one or more interfaces with the command rate-limit.
+
+3. If you do not want to use the default QoS queue profile to map local priority to queue, create one or
+more custom queue profiles with the command qos queue-profile. For each queue in a custom
+queue profile:
+
+a. Assign a local priority value with the command map queue.
+
+b. Optionally, define a descriptive name with the command name queue. All local priorities (0 to 7) must
+be mapped to a queue, and the queues selected for use must be in contiguous order starting at 0.
+
+4. If you do not want to use the default QoS schedule profile to determine the order in which queues are
+selected to transmit a packet, create one or more custom schedule profiles with the command qos
+schedule-profile. For each queue in a custom schedule queue profile, define scheduling priority with
+the commands strict queue and dwrr queue.
+
+5. Optionally, on the 8360 Switch Series, create a threshold profile to limit throughput on one or more
+
+queues with the command . Assign threshold values to the queue with the command . Then, apply the
+profile with the command apply qoes threshold-profile
+
+6. Optionally for strict queues, configure egress queue shaping to limit egress bandwidth on an interface to
+
+a value that is less than its line rate. Use the max-bandwidth parameter of the strict queue
+command.
+
+7. Activate QoS settings with the command apply qos. This command lets you apply a queue profile and
+
+schedule profile globally to all interfaces, or a schedule profile override to individual interfaces.
+
+When applying QoS settings to a port configured to support priority-based flow control, specific
+configuration settings must be respected when defining a CoS map and queue profile. See the command
+flow-control in the ArubaOS-CX Command-Line Interface Guide for details.
+
+8. View QoS configuration settings with the provided show commands.
+
+Examples
+
+This example creates the following configuration:
+
+• Configures CoS to be used to assign local priority to ingress packets.
+
+• Modifies the default CoS map to assign CoS 1 to local priority 1.
+
+• Creates a queue profile named Q1 and assigns local priorities as follows:
+
+Chapter 3 QoS configuration
+
+17
+
+Queue
+
+Local
+Priority
+
+0
+
+1
+
+1
+
+2
+
+3
+
+4
+
+5
+
+5
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+• Creates a schedule profile named S1 and assigns DWRR to all queues in the schedule profile with the
+
+following weights:
+
+Queue
+
+Weight
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+5
+
+10
+
+15
+
+20
+
+25
+
+50
+
+• Applies Q1 and S1 to all interfaces that do not have a QoS override applied.
+
+switch(config)# qos trust cos
+switch(config)# qos cos-map 1 local-priority 1
+switch(config)# qos queue-profile Q1
+switch(config)# map queue 0 local-priority 0
+switch(config)# map queue 1 local-priority 1
+switch(config)# map queue 1 local-priority 2
+switch(config)# map queue 2 local-priority 3
+switch(config)# map queue 3 local-priority 4
+switch(config)# map queue 4 local-priority 5
+switch(config)# map queue 5 local-priority 6
+switch(config)# map queue 5 local-priority 7
+switch(config)# qos schedule-profile S1
+switch(config)# dwrr queue 0 weight 5
+switch(config)# dwrr queue 1 weight 10
+switch(config)# dwrr queue 2 weight 15
+switch(config)# dwrr queue 3 weight 20
+switch(config)# dwrr queue 4 weight 25
+switch(config)# dwrr queue 5 weight 50
+switch(config)# apply qos queue-profile Q1 schedule-profile S1
+
+Configuring expedited forwarding for VoIP traffic
+Voice over IP (VoIP) traffic is delay and jitter sensitive. Therefore, for optimum transmission of VoIP traffic,
+dwell time in network devices must be kept to a minimum, and all network devices in the data path must
+have identical per-hop behaviors. To configure a dedicated queue on the switch to handle VoIP traffic with
+priority service before all other queues, follow these steps.
+
+18
+
+AOS-CX 10.06 Quality of Service Guide
+
+Prerequisites
+This scenario assumes that VoIP packets are uniquely identified using DiffServ code point 46, Expedited
+Forwarding (EF).
+
+Procedure
+
+1. Map DSCP EF packets exclusively to local priority 5. The default DSCP map has eight code points (40
+
+through 47), that are mapped to local priority 5. To reserve local priority 5 for VoIP traffic, the other code
+points must be reassigned. In this scenario, local priority 6 is used for all reassignments, including for
+code point 40, Call Signaling protocol (CS5).
+
+switch# config
+switch(config)# qos dscp-map 40 local-priority 6 name CS5
+switch(config)# qos dscp-map 41 local-priority 6
+switch(config)# qos dscp-map 42 local-priority 6
+switch(config)# qos dscp-map 43 local-priority 6
+switch(config)# qos dscp-map 44 local-priority 6
+switch(config)# qos dscp-map 45 local-priority 6
+switch(config)# qos dscp-map 47 local-priority 6
+
+2. Queue 7 is the highest priority queue, so for best throughput, create a queue profile that maps local
+
+priority 5 to queue 7.
+
+switch(config)# qos queue-profile ef_priority
+switch(config-queue)# name queue 7 Voice_Priority_Queue
+switch(config-queue)# map queue 7 local-priority 5
+switch(config-queue)# map queue 6 local-priority 7
+switch(config-queue)# map queue 5 local-priority 6
+switch(config-queue)# map queue 4 local-priority 4
+switch(config-queue)# map queue 3 local-priority 3
+switch(config-queue)# map queue 2 local-priority 2
+switch(config-queue)# map queue 1 local-priority 1
+switch(config-queue)# map queue 0 local-priority 0
+switch(config-queue)# exit
+switch(config)#
+
+3. Create a schedule profile that services queue 7 using strict priority (SP), and the remaining queues with
+
+DWRR. This scenario gives all DWRR queues equal weight.
+
+switch(config)# qos schedule-profile voip
+switch(config-schedule)# strict queue 7
+switch(config-schedule)# dwrr queue 6 weight 1
+switch(config-schedule)# dwrr queue 5 weight 1
+switch(config-schedule)# dwrr queue 4 weight 1
+switch(config-schedule)# dwrr queue 3 weight 1
+switch(config-schedule)# dwrr queue 2 weight 1
+switch(config-schedule)# dwrr queue 1 weight 1
+switch(config-schedule)# dwrr queue 0 weight 1
+switch(config-schedule)# exit
+switch(config)#
+
+4. Apply the profiles to all interfaces.
+
+switch(config)# apply qos queue-profile ef_priority schedule-profile voip
+
+5. Configure DSCP trust mode on all ports
+
+switch(config)# qos trust dscp
+
+Chapter 3 QoS configuration
+
+19
+
+Configuring rate limiting
+This scenario illustrates how to use rate limiting to manage the traffic from various devices connected to a
+switch. The physical topology of the network looks like this:
+
+A certain amount of broadcast traffic is necessary to maintain healthy network operation, particularly from
+routers and across service boundaries. In this scenario, both the service cloud and the router connections
+limit this traffic to 1 Gbps. The server has a smaller limit, as it does not require as much network protocol
+traffic as the service cloud and router.
+
+A multicast server needs to be able to stream multicast traffic to clients, so a multicast rate limit may not be
+helpful. A computer, however, should not be generating large amounts of multicast traffic (it may be
+receiving streams, but typically not sending them). In this example, the computer is configured with a
+multicast rate limit to prevent malicious traffic from taking up network bandwidth.
+
+Finally, while the service cloud and router may need to send traffic for unknown unicast addresses to resolve
+address forwarding, the server and computer should send very little of this type of traffic. Rate limiting
+unknown unicast traffic on those two devices enforces that.
+
+Procedure
+
+1. Configure broadcast and multicast rate limiting for the service cloud connection.
+
+switch# config
+switch(config)# interface 1/1/1
+switch(config-if)# rate-limit broadcast 500 pps
+switch(config-if)# rate-limit multicast 500 pps
+switch(config-if)# exit
+
+2. Configure broadcast rate limiting for the router connection.
+
+switch(config-if)# interface 1/1/2
+switch(config-if)# rate-limit broadcast 500 pps
+switch(config-if)# exit
+
+3. Configure broadcast rate limiting for the server connection.
+
+switch(config-if)# interface 1/1/5
+switch(config-if)# rate-limit broadcast 100 pps
+switch(config-if)# exit
+
+4. Configure broadcast, and multicast rate limiting for the computer connection.
+
+20
+
+AOS-CX 10.06 Quality of Service Guide
+
+switch(config-if)# interface 1/1/10
+switch(config-if)# rate-limit broadcast 50 pps
+switch(config-if)# rate-limit multicast 50 pps
+
+Configuring egress queue shaping
+This example shows how to apply egress queue shaping to an interface. First, a schedule profile is created
+that has per-queue bandwidth limits set on all queues with strict as the scheduling algorithm. Next, this
+profile is applied to an interface or LAG.
+
+The following example creates a schedule profile named EQSExample, which services all eight queues using
+strict priority. This profile configures queues 1, 4, and 7 with a bandwidth limit of 10 Gbps, 20 Gbps, and
+30 Gbps respectively. Also, queues 1 and 7 are configured with a burst of 120 KB (burst configuration is only
+supported on the 8320 and 8325). The profile is then applied to interface 1/1/1. (The actual burst and
+bandwidth configured on the interface can be found by using the show interface <IFNAME> qos
+command.)
+
+switch(config)# qos schedule-profile EQSExample
+switch(config-schedule)# strict queue 0
+switch(config-schedule)# strict queue 1 max-bandwidth 10000000 burst 120
+switch(config-schedule)# strict queue 2
+switch(config-schedule)# strict queue 3
+switch(config-schedule)# strict queue 4 max-bandwidth 20000000
+switch(config-schedule)# strict queue 5
+switch(config-schedule)# strict queue 6
+switch(config-schedule)# strict queue 7 max-bandwidth 30000000 burst 120
+switch(config-schedule)# exit
+switch(config)# interface 1/1/1
+switch(config-if)# apply qos schedule-profile EQSExample
+
+Configuring egress port shaping
+
+NOTE: Egress port shaping only applies to the Aruba 8360 switch.
+
+This example shows how to apply egress port shaping to an interface to limit the rate of egress traffic.
+Egress port shaping is configured by specifying the desired bandwidth rate in kilobits per second (kbps). To
+be effective, the egress rate must be less than the line rate of the egress interface. If the configured egress
+rate exceeds the interface's line rate, then egress shaping has no effect.
+
+The configured egress rate on a specific interface can be found by using the show interface and show
+interface qos commands.
+
+The following example configures an egress rate of 100 Mbps .
+
+switch(config)# interface 1/1/1
+switch(config-if)# qos shape 100000
+
+In the next example, both egress port shaping and egress queue shaping are configured on the same
+interface.
+
+The example creates a schedule profile named EQSExample with strict priority for all seven queues. Queue
+7 is configured with a bandwidth limit of 300 Mbps. The profile is then applied to interface 1/1/1 with
+egress port shaping of 400 Mbps . As egress queue shaping and egress port shaping are both configured on
+port 1/1/1, egress queue shaping is subject to the lower port or queue shape rate. The effective bandwidth
+for the traffic egressing on queue 7 will be 300 Mbps .
+
+Chapter 3 QoS configuration
+
+21
+
+switch(config)# qos schedule-profile EQSExample
+switch(config-schedule)# strict queue 0
+switch(config-schedule)# strict queue 1
+switch(config-schedule)# strict queue 2
+switch(config-schedule)# strict queue 3
+switch(config-schedule)# strict queue 4
+switch(config-schedule)# strict queue 5
+switch(config-schedule)# strict queue 6
+switch(config-schedule)# strict queue 7 max-bandwidth 300000
+switch(config-schedule)# exit
+switch(config)# interface 1/1/1
+switch(config-if)# apply qos schedule-profile EQSExample
+switch(config-if)# qos shape 400000
+
+Monitoring queue operation
+Use the show interface queues command to display the traffic transmitted per queue, and the number of
+packets dropped due to the queue being full. For example:
+
+switch# show interface 1/1/1 queues
+Interface 1/1/1 is  (Administratively down)
+ Admin state is down
+ State information: admin_down
+         Tx Packets             Tx Bytes          Tx Drops
+ Q0             100                 8000                 0
+ Q1         1234567          12345678908                 5
+ Q2              0                     0                 0
+ Q3              0                     0                 0
+ Q4              0                     0                 0
+ Q5              0                     0                 0
+ Q6              0                     0                 0
+ Q7              0                     0                 0
+
+• Tx Bytes: Total bytes transmitted. The byte count may include packet headers and internal metadata that
+are removed before the packet is transmitted. Packet headers added when the packet is transmitted may
+not be included.
+
+• Tx Packets: Total packets transmitted.
+
+• Tx Drops: The number of packets dropped by a queue before it was sent. When traffic cannot be
+
+transmitted out of an egress interface, it may be buffered in memory if space is available. The more
+servicing assigned to a queue by a schedule profile, the less likely traffic destined for that queue will back
+up and potentially dropped.
+
+22
+
+AOS-CX 10.06 Quality of Service Guide
+
+Chapter 4
+QoS commands
+
+apply qos
+
+Syntax
+
+apply qos [queue-profile <QUEUE-NAME>] schedule-profile <SCHEDULE-NAME>
+
+no apply qos schedule-profile <SCHEDULE-NAME>
+
+Description
+
+Applies a queue profile and schedule profile globally to all Ethernet and LAG interfaces on the switch, or
+applies a schedule profile to a specific interface. When applied globally, the specified schedule profile is
+configured only on Ethernet interfaces and LAGs that do not already have their own schedule profile.
+
+The same profile can be applied both globally and locally to an interface. This guarantees that an interface
+always uses the specified profile, even if the global profile is changed.
+
+The no form of this command removes the specified schedule profile from an interface and the interface
+uses the global schedule profile. This is the only way to remove a schedule profile override from the
+interface.
+
+NOTE: When applying QoS settings to a port configured to support priority-based flow control,
+specific configuration settings must be respected when defining a CoS map and queue profile.
+See the command flow-control in the ArubaOS-CX Command-Line Interface Guide for details.
+
+NOTE: Interfaces may shut down briefly during reconfiguration.
+
+Command context
+
+config
+
+config-if
+
+config-lag-if
+
+Parameters
+queue-profile <QUEUE-NAME>
+
+Specifies the name of the queue profile to apply. Range: 1 to 64 alphanumeric characters, including
+period (.), underscore (_), and hyphen (-). This parameter is not supported in the config-if context.
+
+schedule-profile <SCHEDULE-NAME>
+
+Specifies the name of the schedule profile to apply. Range: 1 to 64 alphanumeric characters, including
+period (.), underscore (_), and hyphen (-).
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Chapter 4 QoS commands
+
+23
+
+Usage
+
+•
+
+•
+
+For a queue profile to be complete and ready to be applied, all eight local priorities must be mapped to a
+queue.
+
+For a schedule profile to be complete and ready to be applied, it must define all queues specified in the
+queue profile. All queues must use the same algorithm, except for the highest numbered queue, which
+can be strict.
+
+• Both the queue profile and the schedule profile must specify the same number of queues.
+
+• Schedule profiles can be modified while applied, but only in ways where a single command will not result
+in the profile becoming invalid. For example, queue 7 can have the algorithm changed, and weighted
+queues can have their weights changed.
+
+• The following commands illustrate a valid configuration, where every local priority value is assigned to a
+
+queue, and all assigned queues are defined.
+
+qos cos-map 1 local-priority 1
+qos queue-profile Q1
+map queue 0 local-priority 0
+map queue 1 local-priority 1
+map queue 2 local-priority 2
+map queue 3 local-priority 3
+map queue 4 local-priority 4
+map queue 5 local-priority 5
+map queue 5 local-priority 6
+map queue 5 local-priority 7
+qos schedule-profile S1
+dwrr queue 0 weight 5
+dwrr queue 1 weight 10
+dwrr queue 2 weight 15
+dwrr queue 3 weight 20
+dwrr queue 4 weight 25
+dwrr queue 5 weight 50
+
+The following commands illustrate an invalid configuration, because local priority 2 is not assigned to a
+queue.
+
+qos cos-map 1 local-priority 1
+qos queue-profile Q1
+map queue 0 local-priority 0
+map queue 1 local-priority 1
+map queue 3 local-priority 3
+map queue 4 local-priority 4
+map queue 5 local-priority 5
+map queue 5 local-priority 6
+map queue 5 local-priority 7
+qos schedule-profile S1
+dwrr queue 0 weight 5
+dwrr queue 1 weight 10
+dwrr queue 3 weight 15
+dwrr queue 4 weight 25
+dwrr queue 5 weight 50
+
+Example
+
+Applying the QoS profile myprofile and the schedule profile myschedule to all interfaces that do not have
+an applied interface-specific schedule profile:
+
+switch(config)# apply qos queue-profile myprofile schedule-profile myschedule
+
+24
+
+AOS-CX 10.06 Quality of Service Guide
+
+apply qos threshold-profile
+
+NOTE: Only supported on the Aruba 8360 Switch Series.
+
+Syntax
+
+apply qos <THRESHOLD-NAME>
+
+no apply qos schedule-profile
+
+Description
+
+Applies a threshold profile globally to all Ethernet and LAG interfaces on the switch, or to a specific interface.
+When applied globally, the specified threshold profile is configured only on Ethernet interfaces and LAGs
+that do not already have their own schedule profile.
+
+The same profile can be applied both globally and locally to an interface. This guarantees that an interface
+always uses the specified threshold profile, even if the global profile is changed.
+
+The no form of this command removes the specified threshold profile from an interface, and causes it to use
+the global threshold profile. This is the only way to remove a threshold profile override from an interface. A
+profile can only be deleted once it is no longer applied to any interface.
+
+Command context
+
+config
+
+config-if
+
+config-lag-if
+
+Parameters
+<THRESHOLD-NAME>
+
+Specifies the name of the threshold profile to apply. Range: 1 to 64 alphanumeric characters, including
+period (.), underscore (_), and hyphen (-).
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Example
+
+Applying the threshold profile mythreshold to all interfaces that do not have an applied profile:
+
+switch(config)# apply qos threshold-profile mythreshold
+
+dwrr queue
+
+Syntax
+
+dwrr queue <QUEUE-NUMBER> weight <WEIGHT>
+
+no dwrr queue <QUEUE-NUMBER>
+
+Description
+
+Assigns the deficit weighted round robin (DWRR) algorithm and its weight to a queue in a schedule profile.
+DWRR allocates available bandwidth among all non-empty queues in relation to the queue weights.
+
+Chapter 4 QoS commands
+
+25
+
+The no form of this command removes the DWRR algorithm from a queue in a schedule profile.
+
+Command context
+
+config-schedule
+
+Parameters
+<QUEUE-NUMBER>
+
+Specifies the queue number. Range: 0 to 7.
+
+weight <WEIGHT>
+
+Specifies the scheduling weight. Range: 1 to 253.
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Assigning DWRR with a weight of 17 to queue 2 in the schedule profile myschedule:
+
+switch(config)# qos schedule-profile myschedule
+switch(config-schedule)# dwrr queue 2 weight 17
+
+Deleting DWRR for queue 2 from the schedule profile myschedule:
+
+switch(config)# qos schedule-profile myschedule
+switch(config-schedule)# no dwrr queue 2
+
+map queue
+
+Syntax
+
+map queue <QUEUE-NUMBER> local-priority <PRIORITY-NUMBER>
+
+no map queue <QUEUE-NUMBER> [local-priority <PRIORITY-NUMBER>]
+
+Description
+
+Assigns a local priority to a queue in a queue profile. By default, the larger the queue number the higher its
+priority. A queue without a local priority value assigned to it is not used to store packets. The same queue
+can be assigned multiple local priorities.
+
+The no form of this command removes the specified local priority from a specific queue. If no local priority
+number is specified, then all local priorities are removed from the queue.
+
+Command context
+
+config-queue
+
+Parameters
+<QUEUE-NUMBER>
+
+Specifies the queue number. Range: 0 to 7.
+
+<PRIORITY-NUMBER>
+
+Specifies the queue priority. Range: 0 to 7, where 0 is the lowest priority and 7 is the highest.
+
+26
+
+AOS-CX 10.06 Quality of Service Guide
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Usage
+
+For a queue profile to be complete and ready to be applied, all eight local priorities must be mapped to a
+queue.
+
+The following commands illustrate an invalid configuration, where every local priority value is assigned to a
+queue.
+
+map queue 0 local-priority 0
+map queue 1 local-priority 1
+map queue 1 local-priority 2
+map queue 3 local-priority 3
+map queue 4 local-priority 4
+map queue 5 local-priority 5
+map queue 5 local-priority 6
+map queue 5 local-priority 7
+
+The following commands illustrate an invalid configuration, because local priority 2 is not assigned to a
+queue.
+
+map queue 0 local-priority 0
+map queue 1 local-priority 1
+map queue 2 local-priority 3
+map queue 3 local-priority 4
+map queue 4 local-priority 5
+map queue 5 local-priority 6
+map queue 5 local-priority 7
+
+Examples
+
+Assigning priority 7 to queue 7 in profile myprofile:
+
+switch(config)# qos queue-profile myprofile
+switch(config-queue)# map queue 7 local-priority 7
+
+Removing priority 7 from queue 7 in profile myprofile:
+
+switch(config)# qos queue-profile myprofile
+switch(config-queue)# no map queue 7 local-priority 7
+
+name queue
+
+Syntax
+
+name queue  <QUEUE-NUMBER> <DESCRIPTION>
+
+no name queue  <QUEUE-NUMBER>
+
+Description
+
+Assigns a description to a queue in a queue profile. This is for identification purposes and has no effect on
+configuration.
+
+The no form of this command removes the description associated with a queue.
+
+Chapter 4 QoS commands
+
+27
+
+Command context
+
+config-queue
+
+Parameters
+<QUEUE-NUMBER>
+
+Specifies the queue number. Range: 0 to 7.
+
+<DESCRIPTION>
+
+Specifies a queue description for identification purposes. Range: 1 to 64 alphanumeric characters,
+including period (.), underscore (_), and hyphen (-).
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Assigning the description priority-traffic to queue 7:
+
+switch(config)# qos queue-profile myprofile
+switch(config-queue)# name queue 7 priority-traffic
+
+Removing the description from queue 7:
+
+switch(config)# qos queue-profile myprofile
+switch(config-queue)# no name queue 7
+
+qos cos-map
+
+Syntax
+
+qos cos-map <CODE-POINT> local-priority <PRIORITY-NUMBER> [color <COLOR>] [name <DESCRIPTION>]
+
+no qos cos-map <CODE-POINT>
+
+Description
+
+Defines the local priority assigned to incoming packets for a specific 802.1 VLAN priority code point (CoS)
+value. The CoS map values are used to mark incoming packets when QoS trust mode is set to cos. In trust
+none mode, CoS map entry 0 is used to set the port default local priority and color.
+
+To see the default CoS map settings, use the following command:
+
+switch# show qos cos-map default
+code_point local_priority color   name
+---------- -------------- ------- ----
+0          1              green   Best_Effort
+1          0              green   Background
+2          2              green   Excellent_Effort
+3          3              green   Critical_Applications
+4          4              green   Video
+5          5              green   Voice
+6          6              green   Internetwork_Control
+7          7              green   Network_Control
+
+The no form of this command restores the assignments for a CoS map value to the default setting.
+
+28
+
+AOS-CX 10.06 Quality of Service Guide
+
+Command context
+
+config
+
+Parameters
+<CODE-POINT>
+
+Specifies an 802.1 VLAN priority CoS value. Range: 0 to 7. Default 0.
+
+local-priority <PRIORITY-NUMBER>
+
+Specifies a local priority value to associate with the CODE-POINT value. Range: 0 to 7. Default: 0.
+
+color <COLOR>
+
+Reserved for future use.
+
+name <DESCRIPTION>
+
+Specifies a description for the CoS setting. The name is for identification only, and has no effect on
+queue configuration. Range: 1 to 64 alphanumeric characters, including period (.), underscore (_), and
+hyphen (-).
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Mapping CoS value 1 to a local priority of 2:
+
+switch(config)# qos cos-map 1 local-priority 2
+
+Mapping CoS value 1 to the default local priority value:
+
+switch(config)# no qos cos-map 1
+
+qos dscp
+
+Syntax
+
+qos dscp <CODE-POINT>
+
+no qos dscp
+
+Description
+
+Configures a differentiated services code point (DSCP) remark for an Ethernet or LAG interface. IPV4 and
+IPV6 packets that ingress on the interface are remarked at egress using the configured DSCP value.
+
+The remark only occurs when QoS trust mode on the interface is set to none. If a DSCP remark is configured
+and then trust mode is subsequently set to cos or dscp, then the DSCP remark is ignored.
+
+The following commands will show the remark status as ignored (incompatible Port Access Trust
+configuration) or not applied' (incompatible QoS global/port Trust configuration):
+
+• show running-configuration
+
+• show interface <PORT-NUM>
+
+• show interface <PORT-NUM> qos
+
+The no form of this command removes a CoS remark on an interface.
+
+Chapter 4 QoS commands
+
+29
+
+Command context
+
+config-if
+
+Parameters
+<CODE-POINT>
+
+Specifies an IP differentiated services code point value. Range: 0 to 63.
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Usage
+
+For all arriving IPv4 or IPv6 packets:
+
+•
+
+Local priority and color are assigned from the DSCP map entry indexed by the DSCP remark value
+
+• The packet's DSCP value in the IPv4 or IPv6 DS header field is remarked with the DSCP remark value.
+
+For all arriving non-IP packets:
+
+•
+
+Local priority and color are assigned from the CoS map entry 0.
+
+• The CoS of all arriving tagged non-IP packets are unchanged. If the packet is subsequently transmitted
+
+with a 802.1Q VLAN tag, the PCP field contains the unchanged CoS.
+
+Examples
+
+Configuring a DSCP remark of 43 on interface 1/1/1:
+
+switch(config)# interface 1/1/1
+switch(config-if)# qos trust none
+switch(config-if)# qos dscp 43
+
+Deleting a DSCP remark of 43 on interface 1/1/1:
+
+switch(config)# interface 1/1/1
+switch(config-if)# no dscp 43
+
+qos dscp-map
+
+Syntax
+
+qos dscp-map <CODE-POINT> local-priority <PRIORITY-NUMBER> [color <COLOR>] [cos COS-CODE-POINT] [name <DESCRIPTION>]
+
+no qos dscp-map <CODE-POINT>
+
+Description
+
+Defines the local priority assigned to incoming packets for a specific IP differentiated services code point
+(DSCP) value. The DSCP map values are used to prioritize incoming packets when QoS trust mode is set to
+dscp.
+
+To see the default DSCP map settings, use the following command:
+
+switch# show qos dscp-map default
+code_point local_priority cos color   name
+---------- -------------- --- ------- ----
+
+30
+
+AOS-CX 10.06 Quality of Service Guide
+
+0          1                  green   CS0
+1          1                  green
+2          1                  green
+3          1                  green
+4          1                  green
+5          1                  green
+...
+45         5                  green
+46         5                  green   EF
+47         5                  green
+48         6                  green   CS6
+...
+61         7                  green
+62         7                  green
+63         7                  green
+
+The no form of this command restores the assignments for a code point to the default setting.
+
+Command context
+
+config
+
+Parameters
+<CODE-POINT>
+
+Specifies an IP differentiated services code point. Range: 0 to 63. Default: 0.
+
+local-priority <PRIORITY-NUMBER>
+
+Specifies a local priority value to associate with the CODE-POINT value. Range: 0 to 7. Default: 0.
+
+color <COLOR>
+
+Reserved for future use.
+
+cos <COS-CODE-POINT>
+
+Specifies an 802.1 VLAN priority CoS remark value. Range: 0 to 7. Default 0
+
+name <DESCRIPTION>
+
+Specifies a description for the DSCP setting. The name is used for identification only, and has no effect
+on queue configuration. Range: 1 to 64 alphanumeric characters, including period (.), underscore (_), and
+hyphen (-).
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Setting code point 1 to a local priority of 2 and a CoS of 0:
+
+switch(config)# qos dscp-map 1 local-priority 2 cos 0
+
+Setting code point 1 to the default value:
+
+switch(config)# no qos dscp-map 1
+
+Chapter 4 QoS commands
+
+31
+
+qos queue-profile
+
+Syntax
+
+qos queue-profile <NAME>
+
+no qos queue-profile <NAME>
+
+Description
+
+Creates a new QoS queue profile and switches to the config-queue context for the profile. Or, if the
+specified QoS queue profile exists, this command switches to the config-queue context for the profile.
+
+A queue profile maps queues to local-priority values.
+
+Each profile has eight queues, numbered 0 to 7. The larger the queue number, the higher its priority during
+transmission scheduling.
+
+A queue profile named factory-default is defined by default and is automatically applied to all
+interfaces. It cannot be edited or deleted. Use the command show qos queue-profile factory-
+default to view this profile. Do not use show running-configuration, as it will only display changes
+from the initial values.
+
+The no form of this command removes the specified QoS queue profile. Only profiles that are not currently
+applied can be removed.
+
+Command context
+
+config
+
+Parameters
+<NAME>
+
+Specifies the name of the QoS queue profile to create or configure. Range: 1 to 64 alphanumeric
+characters, including period (.), underscore (_), and hyphen (-).
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Creating the profile myprofile:
+
+switch(config)# qos queue-profile myprofile
+switch(config-queue)#
+
+Deleting the profile myprofile:
+
+switch(config)# no qos queue-profile myprofile
+
+qos schedule-profile
+
+Syntax
+
+qos schedule-profile <NAME>
+
+no qos schedule-profile <NAME>
+
+32
+
+AOS-CX 10.06 Quality of Service Guide
+
+Description
+
+Creates a QoS schedule profile and switches to the config-schedule context for the profile. If the
+specified schedule profile exists, this command switches to the config-schedule context for the profile.
+The schedule profile determines the order in which queues are selected to transmit a packet, and the
+amount of service defined for each queue.
+
+Queues in a schedule profile are numbered consecutively starting from zero. Queue zero is the lowest
+priority queue. The larger the queue number, the higher priority the queue has in scheduling algorithms.
+
+A profile named factory-default is defined by default and applied to all interfaces. It cannot be edited or
+deleted. To see its settings, use the command:
+
+switch# show qos schedule-profile factory-default
+queue_num algorithm weight
+--------- --------- ------
+0         dwrr      1
+1         dwrr      1
+2         dwrr      1
+3         dwrr      1
+4         dwrr      1
+5         dwrr      1
+6         dwrr      1
+7         dwrr      1
+
+A profile named strict is predefined and cannot be edited or deleted. The strict profile services all queues
+of the queue profile to which it is applied, using the strict priority algorithm.
+
+A schedule profile must be defined on all interfaces at all times.
+
+There are two permitted configurations for a schedule profile:
+
+1. All queues use the same scheduling algorithm (for example, DWRR).
+
+2. The highest queue number uses strict priority, and all remaining (lower) queues use the same algorithm
+
+(for example, DWRR). This supports priority scheduling behavior necessary for the IEFT RFC 3246
+Expedited Forwarding specification (https://tools.ietf.org/html/rfc3246).
+
+Only limited changes can be made to an applied schedule profile:
+
+• The weight of a dwrr queue.
+
+• The bandwidth of a strict queue.
+
+• The algorithm of the highest numbered queue can be swapped between dwrr and strict, and vice versa.
+
+Applicable to REST: Any other changes will result in an unusable schedule profile, and the switch will revert
+to the factory-default profile until the profile is corrected.
+
+The no form of this command removes the specified QoS schedule profile when it is not applied. Only
+profiles that are not currently applied to an interface can be removed.
+
+Command context
+
+config
+
+Parameters
+<NAME>
+
+Specifies the name of the QoS schedule profile to create or configure. Range: 1 to 64 alphanumeric
+characters, including period (.), underscore (_), and hyphen (-).
+
+Chapter 4 QoS commands
+
+33
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Creating the schedule profile myschedule:
+
+switch(config)# qos schedule-profile myschedule
+switch(config-schedule)#
+
+Deleting the schedule profile myschedule:
+
+switch(config)# no qos schedule-profile myschedule
+
+qos shape
+
+NOTE: This command only applies to the Aruba 8360 switch.
+
+Syntax
+
+qos shape <RATE>
+
+no qos shape
+
+Description
+
+Limits the egress bandwidth on an interface to a value that is lower than its line rate.
+
+The no form of this command removes shaping from an interface.
+
+Command context
+
+config-if
+
+Parameters
+<RATE>
+
+Specifies the maximum traffic rate in kbps. Range: 468 to100000000.
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Configuring an egress port shaping rate of 400 Mbps on interface 1/1/1:
+
+switch(config)# interface 1/1/1
+switch(config-if)# qos shape 400000
+
+Deleting egress port shaping on interface 1/1/1:
+
+switch(config)# interface 1/1/1
+switch(config-if)# no qos shape
+
+34
+
+AOS-CX 10.06 Quality of Service Guide
+
+qos threshold-profile
+
+NOTE: Only supported on the Aruba 8360 Switch Series.
+
+Syntax
+
+qos threshold-profile <NAME>
+
+no qos threshold-profile <NAME>
+
+Description
+
+Creates a QoS threshold profile and switches to the config-threshold context for the profile. If the
+specified threshold profile exists, this command switches to the config-threshold context for the existing
+profile. The threshold profile determines the action to take when a threshold is exceeded for each queue.
+
+A threshold profile is composed of up to 8 queues, numbered from 0 to 7. Each queue defines the action to
+take when buffer utilization exceeds a specific threshold. Configure queues with the command queue,
+
+The no form of this command removes the specified QoS threshold profile. Only profiles that are not
+currently applied to an interface can be removed.
+
+Command context
+
+config
+
+Parameters
+<NAME>
+
+Specifies the name of the QoS threshold profile to create or configure. Range: 1 to 64 alphanumeric
+characters, including period (.), underscore (_), and hyphen (-).
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Creating the threshold profile mythreshold:
+
+switch(config)# qos threshold-profile mythreshold
+switch(config-threshold)#
+
+Deleting the threshold profile myschedule:
+
+switch(config)# no qos threshold-profile mythreshold
+
+qos trust
+
+Syntax
+
+qos trust {none | cos | dscp}
+
+no qos trust
+
+Chapter 4 QoS commands
+
+35
+
+Description
+
+Sets the trust mode. Trust mode determines whether CoS or DSCP values are used to assign local priority
+values to ingress packets. CoS values are taken from the CoS map, and DSCP values are taken from the DSCP
+map.
+
+In the config context:
+
+• This command sets the trust mode that is globally applied to all interfaces that do not have a trust mode
+
+configured.
+
+• The no form of this command restores all interfaces that do not currently have a trust mode configured
+
+to the default setting (none).
+
+In the config-if context:
+
+• This command sets the trust mode override for a specific interface.
+
+• The no form of this command clears a trust mode override. The interface then uses the global setting.
+
+This is the only way to remove a trust mode override.
+
+Command context
+
+config
+
+config-if
+
+Parameters
+none
+
+Ignore all packet headers. Ingress packets are assigned the priority value configured for CoS map value
+0. Default.
+
+NOTE: In the config-if context, the command qos cos can be used to remark packets
+when none is set as the trust mode.
+
+cos
+
+For 802.1 VLAN-tagged packets, use the priority code point field value from the outermost VLAN header
+as the index into the CoS map. If the packet is untagged, use the priority configured for CoS map value 0.
+
+dscp
+
+For IP packets, used the code point field value as the index into the DSCP map.
+
+For non-IP packets with 802.1 VLAN tags, use the priority code point field value of the outermost tag
+header as the index into the CoS map. For untagged, non-IP packets, use the priority configured for CoS
+map value 0.
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Example
+
+Setting the global trust mode to dscp, which is applied to all interfaces that do not already have an
+individual trust mode configured. An override is then applied to interface 2/2/2, and LAG 100, setting trust
+mode to cos:
+
+switch(config)# qos trust dscp
+switch(config)# interface 2/2/2
+switch(config-if)# qos trust cos
+
+36
+
+AOS-CX 10.06 Quality of Service Guide
+
+switch(config-if)# interface lag 100
+switch(config-if)# qos trust cos
+
+queue
+
+Syntax
+
+NOTE: Only applies to the Aruba 8360 Switch Series.
+
+queue <QUEUE-NUMBER> action ecn all threshold  <AMOUNT> percent
+
+no queue <QUEUE-NUMBER> action ecn all threshold  <AMOUNT> percent
+
+Description
+
+Defines the threshold value and action for a queue in a threshold-profile. When queue utilization exceeds
+the threshold value, ECT (ECN-Capable Transport) packets will be CE (Congestion Encountered) marked when
+transmitted.
+
+The no form of this command removes the settings for a queue.
+
+Command context
+
+config-threshold
+
+Parameters
+<QUEUE-NUMBER>
+
+Specifies the queue number. Range: 0 to 7.
+
+action ecn
+
+Apply ECN when the threshold is exceeded.
+
+all
+
+Applies the action to all colors. Colors are reserved for future use.
+
+threshold <AMOUNT> percent
+
+Specifies the threshold value in percent from 1 to 100.
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Assigning a threshold of 70 percent to queue 7 in profile mythreshold:
+
+switch(config)# qos threshold-profile mythreshold
+switch(config-threshold)# queue 7 action ecn all threshold 70 percent
+
+Removing a threshold of 70 percent from queue 7 in profile mythreshold:
+
+switch(config)# qos threshold-profile mythreshold
+switch(config-threshold)# no queue 7
+
+Chapter 4 QoS commands
+
+37
+
+rate-limit
+
+Syntax
+
+rate-limit {broadcast | multicast | unknown-unicast} <RATE> pps
+
+no rate-limit {broadcast | multicast | unknown-unicast}
+
+Description
+
+Sets the amount of traffic of a specific type that can ingress on an Ethernet port, or on each port of a LAG
+interface. Rate limits are enforced separately on each individual member of a LAG, not on the LAG as a
+whole.
+
+The no form of this command removes the traffic limit for the specified traffic type.
+
+Command context
+
+config-if
+
+Parameters
+{broadcast | multicast | unknown-unicast}
+
+Specifies the type of ingress traffic to which the rate limit applies: broadcast, multicast, or unknown-
+unicast. The multicast rate limit affects multicast and broadcast traffic. The broadcast rate limit only
+affects broadcast traffic. When both types are applied to the same interface, broadcast packets are
+limited to the lower of the two rate values. Layer 2 BPDU packets, like spanning tree, are also included in
+the multicast rate limit.
+
+rate
+
+Specifies the rate limit in packets per second (pps). Range: 64 to 209090910 pps. The actual rate limit
+varies with steps approximately equal to the minimum value. Verify the actual rate limit using the
+command show interface <INTERFACE-NAME>.
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Limiting multicast traffic to 4000 pps on interface 1/3/3:
+
+switch(config)# interface 1/3/3
+switch(config-if)# rate-limit multicast 4000 pps
+
+Viewing the results of the previous configuration setting.
+
+switch# show interface 1/3/3 qos
+Interface 1/3/3 is down (Administratively down)
+ Admin state is down
+ Hardware: Ethernet, MAC Address: 1c:98:ec:e3:6a:00
+ MTU 1500
+ Full-duplex
+ rate-limit multicast 4000 pps (4000 actual)
+
+ Speed 0 Mb/s
+ Auto-Negotiation is turned on
+ Input flow-control is off, output flow-control is off
+ RX
+            0 input packets              0 bytes
+            0 input error                0 dropped
+
+38
+
+AOS-CX 10.06 Quality of Service Guide
+
+0 CRC/FCS
+       L3:
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+ TX
+            0 output packets             0 bytes
+            0 input error                0 dropped
+            0 collision
+       L3:
+            ucast: 0 packets, 0 bytes
+            mcast: 0 packets, 0 bytes
+
+Limiting broadcast traffic to 50 pps on LAG 100.
+
+switch# config
+switch(config)# interface 1/3/3
+switch(config-if)# interface lag 100
+switch(config-if)# rate-limit broadcast 50 pps
+
+show interface queues
+
+Syntax
+
+show interface <INTERFACE-NAME> queues [vsx-peer]
+
+Description
+
+Shows the traffic transmitted per queue and the number of packets dropped due to the queue being full.
+
+Command context
+
+Operator (>) or Manager (#)
+
+Parameters
+<INTERFACE-NAME>
+
+Specifies the name of an interface on the switch. Format: member/slot/port.
+
+[vsx-peer]
+
+Shows the output from the VSX peer switch. If the switches do not have the VSX configuration or the ISL
+is down, the output from the VSX peer switch is not displayed. This parameter is available on switches
+that support VSX.
+
+Authority
+
+Operators or Administrators or local user group members with execution rights for this command.
+Operators can execute this command from the operator context (>) only.
+
+Usage
+
+Statistics include:
+
+• Tx Bytes: Total bytes transmitted. The byte count may include packet headers and internal metadata that
+are removed before the packet is transmitted. Packet headers added when the packet is transmitted may
+not be included.
+
+• Tx Packets: Total packets transmitted.
+
+Chapter 4 QoS commands
+
+39
+
+• Tx Drops: The number of packets dropped by a queue before it was sent. When traffic cannot be
+
+forwarded out an egress interface, it backs up at ingress. The more servicing assigned to a queue by a
+schedule profile, the less likely traffic destined for that queue will back up and be dropped. Tx Drops
+shows the sum of packets that were dropped across all line modules (due to insufficient capacity) by the
+ingress Virtual Output Queues (VOQs) destined for the egress port.
+
+• Tx Byte Depth: Largest byte depth (or high watermark) found on any ingress line module Virtual Output
+
+Queue (VOQ) destined for the egress port.
+
+Examples
+
+Showing settings for interface 1/1/5:
+
+switch# show interface 1/1/5
+Interface 1/1/5 is down (Administratively down)
+ Admin state is down
+ State information: admin_down
+ Hardware: Ethernet, MAC Address: aa:55:aa:55:00:29
+ MTU 1500
+ Full-duplex
+ qos trust cos
+ qos schedule-profile default
+ qos shape 400000 burst 70
+ qos dscp 46 (not applied)
+ rate-limit multicast 4000 pps
+ Speed 0 Mb/s
+ Auto-Negotiation is turned on
+ Flow-control: off
+
+Showing queue statistics for interface 1/1/5:
+
+switch# show interface 5 queues
+Interface 5 is down
+ Admin state is up
+                 Tx Bytes      Tx Packets        Tx Drops
+ Q0                     0               0               3
+ Q1                 15356              73               0
+ Q2                     0               0               0
+ Q3                     0               0               0
+ Q4                     0               0               0
+ Q5                     0               0               0
+ Q6                     0               0               0
+ Q7                     0               0               0
+
+show interface qos
+
+Syntax
+
+show interface <INTERFACE-NAME> qos
+
+Description
+
+Shows various QoS settings for a specific interface.
+
+Command context
+
+Operator (>) or Manager (#)
+
+40
+
+AOS-CX 10.06 Quality of Service Guide
+
+Parameters
+<INTERFACE-NAME>
+
+Specifies the name of an interface on the switch. Format: member/slot/port or lag number.
+
+[vsx-peer]
+
+Shows the output from the VSX peer switch. If the switches do not have the VSX configuration or the ISL
+is down, the output from the VSX peer switch is not displayed. This parameter is available on switches
+that support VSX.
+
+Authority
+
+Operators or Administrators or local user group members with execution rights for this command.
+Operators can execute this command from the operator context (>) only.
+
+Examples
+
+Showing QoS settings for interface 1/1/5:
+
+switch# show interface 1/1/5 qos
+Interface 1/1/5 is down
+ Admin state is up
+ qos trust none (global)
+ qos queue-profile factory-default (global)
+ qos schedule-profile EQSExample (override)
+ qos dscp 47
+ rate-limit unknown-unicast 64 pps (64 actual)
+ rate-limit broadcast 500 pps (500 actual)
+ rate-limit multicast 500 pps (500 actual)
+
+          Max-Bandwidth Pps      Burst KB
+ Q1                10082461           120
+ Q4                20164923            32
+ Q7                30247384           120
+
+show qos cos-map
+
+Syntax
+
+show qos cos-map [default] [vsx-peer]
+
+Description
+
+Shows the global QoS CoS code point settings, or the factory default settings.
+
+Command context
+
+Operator (>) or Manager (#)
+
+Parameters
+default
+
+Shows the factory default CoS code point settings.
+
+[vsx-peer]
+
+Shows the output from the VSX peer switch. If the switches do not have the VSX configuration or the ISL
+is down, the output from the VSX peer switch is not displayed. This parameter is available on switches
+that support VSX.
+
+Chapter 4 QoS commands
+
+41
+
+Authority
+
+Operators or Administrators or local user group members with execution rights for this command.
+Operators can execute this command from the operator context (>) only.
+
+Examples
+
+Showing the current CoS map:
+
+switch# show qos cos-map
+code_point local_priority color   name
+---------- -------------- ------- ----
+0          2              green   Bulk
+1          0              green   Scavenger
+2          1              green   Best_Effort
+3          3              green   Critical_Applications
+4          4              green   Video
+5          5              green   Voice
+6          6              green   Internetwork_Control
+7          7              green   Network_Control
+
+Showing the default CoS map:
+
+switch# show qos cos-map default
+code_point local_priority color   name
+---------- -------------- ------- ----
+0          1              green   Best_Effort
+1          0              green   Background
+2          2              green   Excellent_Effort
+3          3              green   Critical_Applications
+4          4              green   Video
+5          5              green   Voice
+6          6              green   Internetwork_Control
+7          7              green   Network_Control
+
+(Color is reserved for future use.)
+
+show qos dscp-map
+
+Syntax
+
+show qos dscp-map [default] [vsx-peer]
+
+Description
+
+Shows the global QoS DSCP code point settings, or the factory default settings.
+
+Command context
+
+Operator (>) or Manager (#)
+
+Parameters
+default
+
+Shows the factory default DSCP code point settings.
+
+[vsx-peer]
+
+Shows the output from the VSX peer switch. If the switches do not have the VSX configuration or the ISL
+is down, the output from the VSX peer switch is not displayed. This parameter is available on switches
+that support VSX.
+
+42
+
+AOS-CX 10.06 Quality of Service Guide
+
+Authority
+
+Operators or Administrators or local user group members with execution rights for this command.
+Operators can execute this command from the operator context (>) only.
+
+Examples
+
+Showing the current DSCP map:
+
+switch# show qos dscp-map
+code_point local_priority color   name
+---------- -------------- ------- ----
+0          1              green   CS0
+1          1              green
+2          1              green
+3          1              green
+4          1              green
+5          1              green
+6          1              green
+7          1              green
+8          0              green   CS1
+...
+45         5              green
+46         7              green   EF
+47         5              green
+48         6              green   CS6
+...
+61         7              green
+62         7              green
+63         7              green
+
+Showing the default DSCP map:
+
+switch# show qos dscp-map default
+code_point local_priority color   name
+---------- -------------- ------- ----
+0          1              green   CS0
+1          1              green
+2          1              green
+3          1              green
+4          1              green
+5          1              green
+...
+45         5              green
+46         5              green   EF
+47         5              green
+48         6              green   CS6
+...
+61         7              green
+62         7              green
+63         7              green
+
+(Color is reserved for future use.)
+
+show qos queue-profile
+
+Syntax
+
+show qos queue-profile [<NAME> | factory-default ] [vsx-peer]
+
+Chapter 4 QoS commands
+
+43
+
+Description
+
+Shows the status of all queue profiles, or a specific queue profile.
+
+Command context
+
+Operator (>) or Manager (#)
+
+Parameters
+<NAME>
+
+Specifies the name of a queue profile. Range 1 to 64 alphanumeric characters, including period (.),
+underscore (_), and hyphen (-).
+
+factory-default
+
+Specifies the default profile.
+
+[vsx-peer]
+
+Shows the output from the VSX peer switch. If the switches do not have the VSX configuration or the ISL
+is down, the output from the VSX peer switch is not displayed. This parameter is available on switches
+that support VSX.
+
+Authority
+
+Operators or Administrators or local user group members with execution rights for this command.
+Operators can execute this command from the operator context (>) only.
+
+Example
+
+Showing the status of queue profile myprofile:
+
+switch# show qos queue-profile myprofile
+queue_num local_priorities name
+--------- ---------------- ----
+0         2                Normal_and_Bulk
+1         0                Other
+2         1                Best_Effort
+3         3
+4         4
+5         5
+6         6
+7         7                High_Priority
+
+Showing the status of the default queue profile factory-default:
+
+switch# show qos queue-profile factory-default
+queue_num local_priorities name
+--------- ---------------- ----
+0         0                Scavenger_and_backup_data
+1         1
+2         2
+3         3
+4         4
+5         5
+6         6
+7         7
+
+44
+
+AOS-CX 10.06 Quality of Service Guide
+
+show qos schedule-profile
+
+Syntax
+
+show qos schedule-profile [<NAME> | factory-default] [vsx-peer]
+
+Description
+
+Shows the status of all schedule profiles, or a specific schedule profile.
+
+Command context
+
+Operator (>) or Manager (#)
+
+Parameters
+<NAME>
+
+Specifies the name of a queue or schedule profile. Range: 1 to 64 alphanumeric characters, including
+period (.), underscore (_), and hyphen (-).
+
+factory-default
+
+Specifies the default schedule profile.
+
+[vsx-peer]
+
+Shows the output from the VSX peer switch. If the switches do not have the VSX configuration or the ISL
+is down, the output from the VSX peer switch is not displayed. This parameter is available on switches
+that support VSX.
+
+Authority
+
+Operators or Administrators or local user group members with execution rights for this command.
+Operators can execute this command from the operator context (>) only.
+
+Example
+
+Showing the status of schedule profile myschedule:
+
+switch# show qos schedule-profile myschedule
+queue_num algorithm weight
+--------- --------- ------
+0         dwrr      1
+1         dwrr      2
+2         dwrr      4
+3         dwrr      8
+4         dwrr      16
+5         dwrr      24
+6         dwrr      32
+7         dwrr      64
+
+Showing the status of the default schedule profile:
+
+switch# show qos schedule-profile factory-default
+queue_num algorithm weight
+--------- --------- ------
+0         dwrr      1
+1         dwrr      1
+2         dwrr      1
+3         dwrr      1
+4         dwrr      1
+5         dwrr      1
+
+Chapter 4 QoS commands
+
+45
+
+6         dwrr      1
+7         dwrr      1
+
+show qos threshold-profile
+
+NOTE: Only supported on the Aruba 8360 Switch Series.
+
+Syntax
+
+show qos threshold-profile [<NAME> [vsx-peer]
+
+Description
+
+Shows the status of all threshold profiles, or a specific threshold profile.
+
+Command context
+
+Operator (>) or Manager (#)
+
+Parameters
+<NAME>
+
+Specifies the name of a threshold profile. Range: 1 to 64 alphanumeric characters, including period (.),
+underscore (_), and hyphen (-).
+
+[vsx-peer]
+
+Shows the output from the VSX peer switch. If the switches do not have the VSX configuration or the ISL
+is down, the output from the VSX peer switch is not displayed. This parameter is available on switches
+that support VSX.
+
+Authority
+
+Operators or Administrators or local user group members with execution rights for this command.
+Operators can execute this command from the operator context (>) only.
+
+Usage
+Status field values are:
+
+• applied : The threshold profile is applied to all configured ports.
+
+• partially applied: The threshold profile is applied to some configured ports but failed on other configured
+
+ports.
+
+• not applied : The threshold profile could not be applied to any configured ports.
+
+• blank field: The threshold profile is not applied in the configuration (globally or as a port override).
+
+Examples
+
+Showing the status of threshold profile mythreshold:
+
+switch# show qos threshold-profile mythreshold
+queue_num action  Threshold
+--------- ------- ---------
+5         ecn       40
+7         ecn       50
+
+Ports       Status
+
+46
+
+AOS-CX 10.06 Quality of Service Guide
+
+---------   --------------------
+1/1/1       applied
+1/1/8       applied
+
+show qos trust
+
+Syntax
+
+show qos trust [default] [vsx-peer]
+
+Description
+
+Shows the global QoS trust settings, or the factory default settings.
+
+Command context
+
+Operator (>) or Manager (#)
+
+Parameters
+default
+
+Shows the factory default QoS trust settings.
+
+[vsx-peer]
+
+Shows the output from the VSX peer switch. If the switches do not have the VSX configuration or the ISL
+is down, the output from the VSX peer switch is not displayed. This parameter is available on switches
+that support VSX.
+
+Authority
+
+Operators or Administrators or local user group members with execution rights for this command.
+Operators can execute this command from the operator context (>) only.
+
+Examples
+
+Showing the current QoS trust settings:
+
+switch# show qos trust
+qos trust cos
+
+Showing the default QoS trust settings:
+
+switch# show qos trust default
+qos trust none
+
+strict queue
+
+Syntax
+
+strict queue <QUEUE-NUMBER> [[max-bandwidth <BANDWIDTH>] [burst <BURST>]]
+
+no strict queue <QUEUE-NUMBER>
+
+Description
+
+Assigns the strict priority algorithm to a queue. Strict priority services all packets waiting in a queue, before
+servicing the packets in lower priority queues.
+
+Chapter 4 QoS commands
+
+47
+
+Egress queue shaping can be configured using the max-bandwidth and burst options to limit the amount
+of traffic transmitted per output queue. The buffer associated with each egress queue stores the excess
+traffic to absorb bursts and smooth the output rate. Sustained rates of traffic above the maximum
+bandwidth will eventually fill the output queue causing tail drops. Use the command show interface to
+determine if any tail drop errors have occurred.
+
+The no form of this command removes the the queue configuration from the schedule profile. To remove
+only egress queue shaping, re-enter the strict queue command without the max-bandwidth and burst
+parameters.
+
+Command context
+
+config-schedule
+
+Parameters
+<QUEUE-NUMBER>
+
+Specifies the number of the queue. Range: 0 to 7.
+
+max-bandwidth <BANDWIDTH>
+
+Specifies the maximum bandwidth allowed on the queue in Kbps. Range: 1 to 4294967295.
+
+burst <BURST>
+
+Specifies the maximum burst allowed on the queue. Range: 1 to 127 Kbps. Default: 32 Kbps.
+
+Authority
+
+Administrators or local user group members with execution rights for this command.
+
+Examples
+
+Assigning strict priority to queue 7 in the schedule profile myschedule:
+
+switch(config)# qos schedule-profile myschedule
+switch(config-schedule)# strict queue 7
+
+Deleting strict priority from queue 7 in the schedule profile myschedule:
+
+switch(config)# qos schedule-profile myschedule
+switch(config-schedule)# no strict queue 7
+
+Assigning strict priority to queue 7 in the schedule profile myschedule with a maximum bandwidth of
+10000 Kbps and a burst of 62 Kbps :
+
+switch(config)# qos schedule-profile myschedule
+switch(config-schedule)# strict queue 7 max-bandwith 10000 burst 62
+
+48
+
+AOS-CX 10.06 Quality of Service Guide
+
+Chapter 5
+Support and other resources
+
+Accessing Aruba Support
+
+Aruba Support Services
+
+https://www.arubanetworks.com/support-services/
+
+Aruba Support Portal
+
+https://asp.arubanetworks.com/
+
+North America telephone
+
+1-800-943-4526 (US & Canada Toll-Free Number)
+
++1-408-754-1200 (Primary - Toll Number)
+
++1-650-385-6582 (Backup - Toll Number - Use only when all other
+numbers are not working)
+
+International telephone
+
+https://www.arubanetworks.com/support-services/contact-
+support/
+
+Be sure to collect the following information before contacting Support:
+
+• Technical support registration number (if applicable)
+
+• Product name, model or version, and serial number
+
+• Operating system name and version
+
+•
+
+Firmware version
+
+• Error messages
+
+• Product-specific reports and logs
+
+• Add-on products or components
+
+• Third-party products or components
+
+Other useful sites
+
+Other websites that can be used to find information:
+
+Airheads social forums and
+Knowledge Base
+
+https://community.arubanetworks.com/
+
+Software licensing
+
+https://lms.arubanetworks.com/
+
+End-of-Life information
+
+https://www.arubanetworks.com/support-services/end-of-life/
+
+Aruba software and
+documentation
+
+https://asp.arubanetworks.com/downloads
+
+Accessing updates
+To download product updates:
+
+Chapter 5 Support and other resources
+
+49
+
+Aruba Support Portal
+
+https://asp.arubanetworks.com/downloads
+
+If you are unable to find your product in the Aruba Support Portal, you may need to search My Networking,
+where older networking products can be found:
+
+My Networking
+
+https://www.hpe.com/networking/support
+
+To view and update your entitlements, and to link your contracts and warranties with your profile, go to the
+Hewlett Packard Enterprise Support Center More Information on Access to Support Materials page:
+
+https://support.hpe.com/portal/site/hpsc/aae/home/
+
+IMPORTANT: Access to some updates might require product entitlement when accessed
+through the Hewlett Packard Enterprise Support Center. You must have an HP Passport set up
+with relevant entitlements.
+
+Some software products provide a mechanism for accessing software updates through the product
+interface. Review your product documentation to identify the recommended software update method.
+
+To subscribe to eNewsletters and alerts:
+
+https://asp.arubanetworks.com/notifications/subscriptions (requires an active Aruba Support Portal
+(ASP) account to manage subscriptions). Security notices are viewable without an ASP account.
+
+Warranty information
+To view warranty information for your product, go to https://www.arubanetworks.com/support-
+services/product-warranties/.
+
+Regulatory information
+To view the regulatory information for your product, view the Safety and Compliance Information for Server,
+Storage, Power, Networking, and Rack Products, available at https://www.hpe.com/support/Safety-
+Compliance-EnterpriseProducts
+
+Additional regulatory information
+
+Aruba is committed to providing our customers with information about the chemical substances in our
+products as needed to comply with legal requirements, environmental data (company programs, product
+recycling, energy efficiency), and safety information and compliance data, (RoHS and WEEE). For more
+information, see https://www.arubanetworks.com/company/about-us/environmental-citizenship/.
+
+Documentation feedback
+Aruba is committed to providing documentation that meets your needs. To help us improve the
+documentation, send any errors, suggestions, or comments to Documentation Feedback (docsfeedback-
+switching@hpe.com). When submitting your feedback, include the document title, part number, edition,
+and publication date located on the front cover of the document. For online help content, include the
+product name, product version, help edition, and publication date located on the legal notices page.
+
+50
+
+AOS-CX 10.06 Quality of Service Guide
