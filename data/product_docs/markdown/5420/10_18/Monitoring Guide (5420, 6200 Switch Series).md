@@ -1,0 +1,16730 @@
+AOS-CX 10.18.xxxx Monitoring Guide (5420, 6200 Switch Series)
+
+Published: May 2026
+
+AOS-CX 10.18.xxxx Monitoring Guide (5420, 6200 Switch Series)
+
+Published: May 2026
+
+© Copyright 2026 – Hewlett Packard Enterprise Development LP
+
+Notices
+
+The information provided here is subject to change without notice. Hewlett Packard Enterprise's products
+and services are covered only by the express warranty statements that come with them. This document
+does not constitute an additional warranty. Hewlett Packard Enterprise is not responsible for any technical
+or editorial errors or omissions in this document.
+
+Confidential computer software. You must have a valid license from Hewlett Packard Enterprise to possess,
+use, or copy the software. In accordance with FAR 12.211 and 12.212, Commercial Computer Software,
+Computer Software Documentation, and Technical Data for Commercial Items are licensed to the U.S.
+Government under the vendor's standard commercial license.
+
+Links to third-party websites will take you outside of the Hewlett Packard Enterprise website. Hewlett
+Packard Enterprise has no control over and is not responsible for the information outside the Hewlett
+Packard Enterprise website.
+
+Open source code
+
+This product includes code licensed under certain open source licenses which require source compliance.
+The corresponding source for these components is available upon request. This offer is valid to anyone in
+receipt of this information and shall expire three years following the date of the final distribution of this
+product version by Hewlett Packard Enterprise Company. To obtain such source code, please check if the
+code is available in the HPE Software Center at https://myenterpriselicense.hpe.com/cwp-ui/software
+but, if not, send a written request for specific software version and product for which you want the open
+source code. Along with the request, please send a check or money order in the amount of US $10.00 to:
+
+Hewlett Packard Enterprise Company
+
+Attn: General Counsel
+
+WW Corporate Headquarters
+
+1701 E Mossy Oaks Rd, Spring, TX 77389
+
+United States of America.
+
+Public
+
+AOS-CX 10.18.xxxx Monitoring Guide (5420, 6200 Swi...
+
+A
+O
+S
+-
+C
+X
+
+1
+0
+.
+1
+8
+.
+x
+x
+x
+x
+
+M
+o
+n
+i
+t
+o
+r
+i
+n
+g
+
+G
+u
+i
+d
+e
+
+(
+5
+4
+2
+0
+,
+
+6
+2
+0
+0
+
+S
+w
+i
+.
+.
+.
+
+Legal disclaimer
+
+The resource assets in this document may include abbreviated and/or legacy terminology for products. See
+www.arubanetworks.com for current and complete product lines and names.
+
+Public
+
+AOS-CX 10.18.xxxx Monitoring Guide (5420, 6200 Swi...
+
+Table of contents
+
+About this document..................................................................................................................................................................................9
+
+Applicable products........................................................................................................................................................................9
+
+Latest version available online.................................................................................................................................................9
+
+Command syntax notation conventions.............................................................................................................................9
+
+About the examples.................................................................................................................................................................... 11
+
+Identifying switch ports and interfaces........................................................................................................................... 11
+
+Monitoring hardware through visual observation..................................................................................................................12
+
+Confirming normal operation of the switch by reading LEDs.............................................................................12
+
+Detecting if the switch is not ready for a failover event........................................................................................ 14
+
+Finding faulted components using the switch LEDs................................................................................................15
+
+IP Flow Information Export..................................................................................................................................................................16
+
+Flow monitors..................................................................................................................................................................................22
+
+Flow Records................................................................................................................................................................................... 22
+
+Flow Exporters................................................................................................................................................................................23
+
+Destinations..................................................................................................................................................................................... 23
+
+Configuring IP Flow Information Export on 5420 and 6200 Switches.........................................................23
+
+Role-based IPFIX...........................................................................................................................................................................27
+
+FAQs and Troubleshooting..................................................................................................................................................... 29
+
+Flow monitoring commands................................................................................................................................................... 29
+
+alert-threshold aggregate active-flows percentage ...................................................................................30
+
+alert-threshold endpoint active-flows ................................................................................................................31
+
+alert-threshold endpoint new-connections accepted ............................................................................... 32
+
+alert-threshold endpoint new-connections initiated ................................................................................. 33
+
+diag-dump ipfix basic ...................................................................................................................................................34
+
+description ..........................................................................................................................................................................36
+
+exporter ................................................................................................................................................................................37
+
+flow exporter ..................................................................................................................................................................... 39
+
+flow monitor .......................................................................................................................................................................43
+
+flow record ..........................................................................................................................................................................45
+
+flow statistics .....................................................................................................................................................................51
+
+flow-tracking ......................................................................................................................................................................53
+
+ip|ipv6 flow monitor (interface) ..............................................................................................................................56
+
+show flow exporter ........................................................................................................................................................ 57
+
+show flow monitor ..........................................................................................................................................................60
+
+Public
+
+Table of contents 4
+
+show flow record ............................................................................................................................................................. 63
+
+show flow-tracking .........................................................................................................................................................67
+
+show tech ipfix ................................................................................................................................................................. 70
+
+show ip flow-table-utilization .................................................................................................................................. 72
+
+show IPv4 flow endpoint statistics .......................................................................................................................73
+
+show IPv6 flow session statistics .......................................................................................................................... 75
+
+Queue Monitoring......................................................................................................................................................................................77
+
+Queue statistics history.............................................................................................................................................................77
+
+Queue depth.................................................................................................................................................................................... 78
+
+Data retention limits....................................................................................................................................................................78
+
+Queue monitoring commands............................................................................................................................................... 78
+
+clear queue-monitor interface .................................................................................................................................79
+
+queue-monitor ..................................................................................................................................................................80
+
+show interface queue-monitor ................................................................................................................................82
+
+show interface queue-monitor status .................................................................................................................86
+
+show queue-monitor status ......................................................................................................................................89
+
+Congestion Event Detection............................................................................................................................................................... 90
+
+Using collected data....................................................................................................................................................................90
+
+Congestion event detection commands..........................................................................................................................91
+
+apply congestion-event profile ...............................................................................................................................91
+
+congestion-event profile ............................................................................................................................................ 93
+
+IP Flow Path Trace.................................................................................................................................................................................... 94
+
+Limitations, Conflicts or Exclusions....................................................................................................................................95
+
+IP Flow Path Trace commands..............................................................................................................................................96
+
+IP Flow Path Trace ......................................................................................................................................................... 96
+
+gRPC network management interface....................................................................................................................................... 103
+
+Boot commands.......................................................................................................................................................................................110
+
+Boot commands..........................................................................................................................................................................110
+
+boot set-default ............................................................................................................................................................110
+
+boot system .....................................................................................................................................................................111
+
+show boot-history ....................................................................................................................................................... 114
+
+External storage...................................................................................................................................................................................... 119
+
+External storage commands................................................................................................................................................120
+
+address .............................................................................................................................................................................. 120
+
+directory ............................................................................................................................................................................121
+
+disable ................................................................................................................................................................................ 123
+
+enable ................................................................................................................................................................................. 123
+
+external-storage ...........................................................................................................................................................125
+
+Public
+
+Table of contents 5
+
+password (external-storage) .................................................................................................................................125
+
+show external-storage .............................................................................................................................................. 127
+
+show running-config external-storage ............................................................................................................128
+
+type ......................................................................................................................................................................................129
+
+username ..........................................................................................................................................................................130
+
+vrf ..........................................................................................................................................................................................132
+
+IP-SLA............................................................................................................................................................................................................133
+
+IP-SLA guidelines.......................................................................................................................................................................133
+
+Limitations with VoIP SLAs..................................................................................................................................................134
+
+IP-SLA commands..................................................................................................................................................................... 135
+
+https .................................................................................................................................................................................... 135
+
+ip-sla responder ............................................................................................................................................................137
+
+show ip-sla all ................................................................................................................................................................ 139
+
+show ip-sla responder ...............................................................................................................................................142
+
+show ip-sla .......................................................................................................................................................................144
+
+L1-100Mbps downshift...................................................................................................................................................................... 146
+
+Limitations with speed downshift....................................................................................................................................146
+
+L1-100Mbps downshift commands................................................................................................................................146
+
+downshift enable ..........................................................................................................................................................146
+
+show interface ............................................................................................................................................................... 148
+
+show interface downshift-enable ....................................................................................................................... 160
+
+show running-config interface .............................................................................................................................161
+
+Mirroring...................................................................................................................................................................................................... 163
+
+Mirror statistics........................................................................................................................................................................... 165
+
+Classifier policies and mirroring sessions.................................................................................................................... 165
+
+VLAN as a source...................................................................................................................................................................... 166
+
+Mirroring commands................................................................................................................................................................167
+
+clear mirror ...................................................................................................................................................................... 168
+
+clear mirror endpoint .................................................................................................................................................169
+
+comment ........................................................................................................................................................................... 170
+
+copy tcpdump-pcap ................................................................................................................................................... 171
+
+copy tshark-pcap ......................................................................................................................................................... 173
+
+destination cpu ............................................................................................................................................................. 174
+
+destination interface ..................................................................................................................................................175
+
+destination tunnel ....................................................................................................................................................... 176
+
+diagnostic .........................................................................................................................................................................179
+
+diag utilities tcpdump ............................................................................................................................................... 180
+
+disable ................................................................................................................................................................................ 183
+
+Public
+
+Table of contents 6
+
+enable ................................................................................................................................................................................. 184
+
+mirror endpoint .............................................................................................................................................................185
+
+mirror session .................................................................................................................................................................187
+
+show mirror ..................................................................................................................................................................... 188
+
+show mirror endpoint ................................................................................................................................................192
+
+shutdown ..........................................................................................................................................................................193
+
+source ................................................................................................................................................................................. 194
+
+source interface ............................................................................................................................................................ 195
+
+source vlan .......................................................................................................................................................................198
+
+Monitoring a device using SNMP.................................................................................................................................................. 201
+
+Power-over-Ethernet............................................................................................................................................................................201
+
+PoE commands............................................................................................................................................................................203
+
+lldp dot3 poe .................................................................................................................................................................. 203
+
+lldp med poe ...................................................................................................................................................................204
+
+power-over-ethernet ................................................................................................................................................. 205
+
+power-over-ethernet allocate-by .......................................................................................................................207
+
+power-over-ethernet always-on ......................................................................................................................... 208
+
+power-over-ethernet assigned-class ............................................................................................................... 209
+
+power-over-ethernet pre-std-detect ............................................................................................................... 210
+
+power-over-ethernet priority ............................................................................................................................... 211
+
+power-over-ethernet quick-poe ..........................................................................................................................212
+
+power-over-ethernet threshold ...........................................................................................................................214
+
+power-over-ethernet trap .......................................................................................................................................215
+
+show lldp local ............................................................................................................................................................... 216
+
+show lldp neighbor ..................................................................................................................................................... 217
+
+show power-over-ethernet .................................................................................................................................... 218
+
+Aruba AirWave......................................................................................................................................................................................... 223
+
+SNMP support and AirWave................................................................................................................................................223
+
+Supported features with AirWave and the AOS-CX switch...............................................................................224
+
+Configuring the AOS-CX switch to be monitored by AirWave........................................................................ 225
+
+AirWave commands..................................................................................................................................................................226
+
+logging ............................................................................................................................................................................... 226
+
+snmp-server community ..........................................................................................................................................229
+
+snmp-server host .........................................................................................................................................................232
+
+snmp-server vrf ............................................................................................................................................................ 238
+
+snmpv3 context ............................................................................................................................................................239
+
+snmpv3 user ................................................................................................................................................................... 240
+
+snmpv3 user view ...........................................................................................................................................244
+
+Public
+
+Table of contents 7
+
+Support and Other Resources.........................................................................................................................................................245
+
+Accessing HPE Aruba Networking Support...............................................................................................................246
+
+Accessing Updates....................................................................................................................................................................247
+
+Warranty Information.............................................................................................................................................................. 247
+
+Regulatory Information.......................................................................................................................................................... 248
+
+Documentation Feedback.....................................................................................................................................................248
+
+Public
+
+Table of contents 8
+
+About this document
+
+This document describes features of the AOS-CX network operating system. It is intended for administrators
+responsible for installing, configuring, and managing HPE Aruba Networking switches on a network.
+
+Subtopics
+
+Applicable products
+Latest version available online
+Command syntax notation conventions
+About the examples
+Identifying switch ports and interfaces
+
+Applicable products
+
+This document applies to the following products:
+
+•  HPE Aruba Networking 5420 Switch Series (S0U67A, S0U55A, S0U63A, S0U64A, S0U65A, S0U75A,
+
+S0U72A, S0U78A, S0U58A, S0U73A, S0U74A, S0U71A, S0U76A, S0U70A, S0U77A, S0U60A,
+S0U61A, S0U62A, S0U66A, S0U68A)
+
+•  HPE Aruba Networking 6200 Switch Series (JL724A, JL725A, JL726A, JL727A, JL728A, R8Q67A,
+R8Q68A, R8Q69A, R8Q70A, R8Q71A, R8V08A, R8V09A, R8V10A, R8V11A, R8V12A, R8Q72A,
+JL724B, JL725B, JL726B, JL727B, JL728B, S0M81A, S0M82A, S0M83A, S0M84A, S0M85A, S0M86A,
+S0M87A, S0M88A, S0M89A, S0M90A, S0G13A, S0G14A, S0G15A, S0G16A, S0G17A)
+
+Latest version available online
+
+Updates to this document can occur after initial publication. For the latest versions of product
+documentation, see the links provided in Support and Other Resources.
+
+Command syntax notation conventions
+
+Public
+
+About this document 9
+
+Convention
+
+example‐text
+
+example‐text
+
+Any of the following:
+
+•  <example‐text>
+•  <example‐text>
+•  example‐text
+•  example‐text
+
+|
+
+{ }
+
+[ ]
+
+… or
+
+...
+
+Usage
+
+Identifies commands and their options and operands
+, code examples, filenames, pathnames, and output d
+isplayed in a command window. Items that appear li
+ke the example text in the previous column are to be
+entered exactly as shown and are required unless en
+closed in brackets ([ ]).
+
+In code and screen examples, indicates text entered
+by a user.
+
+Identifies a placeholder—such as a parameter or a va
+riable—that you must substitute with an actual valu
+e in a command or in code:
+
+•  For output formats where italic text cannot be di
+splayed, variables are enclosed in angle brackets
+(< >). Substitute the text—including the enclosin
+g angle brackets—with an actual value.
+
+•  For output formats where italic text can be displ
+ayed, variables might or might not be enclosed i
+n angle brackets. Substitute the text including th
+e enclosing angle brackets, if any, with an actual
+value.
+
+Vertical bar. A logical OR that separates multiple ite
+ms from which you can choose only one.
+
+Any spaces that are on either side of the vertical bar
+are included for readability and are not a required pa
+rt of the command syntax.
+
+Braces. Indicates that at least one of the enclosed ite
+ms is required.
+
+Brackets. Indicates that the enclosed item or items a
+re optional.
+
+Ellipsis:
+
+•
+
+•
+
+In code and screen examples, a vertical or horizo
+ntal ellipsis indicates an omission of information.
+In syntax using brackets and braces, an ellipsis i
+ndicates items that can be repeated. When an ite
+m followed by ellipses is enclosed in brackets, ze
+ro or more items can be specified.
+
+Public
+
+Command syntax notation conventions 10
+
+About the examples
+
+Examples in this document are representative and might not match your particular switch or environment.
+
+The slot and port numbers in this document are for illustration only and might be unavailable on your switch.
+
+Understanding the CLI prompts
+
+When illustrating the prompts in the command line interface (CLI), this document uses the generic term
+switch, instead of the host name of the switch. For example:
+
+switch>
+The CLI prompt indicates the current command context. For example:
+
+switch>
+Indicates the operator command context.
+
+switch#
+Indicates the manager command context.
+
+switch(CONTEXT-NAME)#
+Indicates the configuration context for a feature. For example:
+
+switch(config-if)#
+Identifies the interface context.
+
+Variable information in CLI prompts
+
+In certain configuration contexts, the prompt may include variable information. For example, when in the
+VLAN configuration context, a VLAN number appears in the prompt:
+
+switch(config-vlan-100)#
+When referring to this context, this document uses the syntax:
+
+switch(config-vlan-<VLAN-ID>)#
+Where <VLAN-ID> is a variable representing the VLAN number.
+
+Identifying switch ports and interfaces
+
+Physical ports on the switch and their corresponding logical software interfaces are identified using the
+format: member/slot/port.
+
+On the HPE Aruba Networking 6200 Switch Series
+
+•  member: Member number of the switch in a Virtual Switching Framework (VSF) stack. Range: 1 to 8. The
+
+primary switch is always member 1. If the switch is not a member of a VSF stack, then member is 1.
+
+Public
+
+About the examples 11
+
+•  slot: Always 1. This is not a modular switch, so there are no slots.
+
+•  port: Physical number of a port on the switch.
+
+For example, the logical interface 1/1/4 in software is associated with physical port 4 in slot 1 on member 1.
+
+On the HPE Aruba Networking 6400 and 5420 Switch Series
+
+•  member: Always 1. VSF is not supported on this switch.
+
+•  slot: Specifies physical location of a module in the switch chassis.
+
+◦  Management modules are on the front of the switch in slots 1/1 and 1/2.
+
+◦  Line modules are on the front of the switch starting in slot 1/3.
+
+•  port: Physical number of a port on a line module.
+
+For example, the logical interface 1/3/4 in software is associated with physical port 4 in slot 3 on member 1.
+
+Monitoring hardware through visual observation
+
+Subtopics
+
+Confirming normal operation of the switch by reading LEDs
+Detecting if the switch is not ready for a failover event
+Finding faulted components using the switch LEDs
+
+Confirming normal operation of the switch by reading LEDs
+
+This task describes using the switch LEDs to confirm that the switch is operating normally.
+
+NOTE
+For complete information on LED behaviors for your AOS-CX switch, refer to
+the Installation and Getting Started Guide for that switch series, available for
+download from the section of the .
+
+Procedure
+
+1.  Quick check: Verify that the chassis has power and there are no fault conditions.
+
+On the front of the switch, verify that the states of the following LEDs are On Green:
+
+Public
+
+Monitoring hardware through visual observation 12
+
+C
+o
+n
+fi
+r
+m
+i
+n
+g
+
+n
+o
+r
+m
+a
+l
+
+o
+p
+e
+r
+a
+t
+i
+o
+n
+
+o
+f
+
+t
+h
+e
+
+s
+w
+i
+t
+c
+h
+
+b
+y
+
+r
+e
+a
+d
+i
+.
+.
+.
+
+2.
+
+•  Power
+
+•  Health
+
+Verify that the Health LEDs of all installed line modules are On Green.
+
+3.  Verify that the Health LEDs of all installed management modules are On Green.
+
+4.  Verify that the network ports are operating normally.
+
+a.  On the active management module, check the Status Front section. Verify that each LED that
+
+indicates a line module is in one of the following states:
+
+•  On Green (normal operation)
+
+•  Off (no line module installed)
+
+b.  On each line module, verify that each port LED is in one of the following states:
+
+•  On Green, Half-Bright Green, or Flickering Green (normal operation)
+
+•  Off (no cable connected or port off by default in config)
+
+5.  Verify that the power supplies are operating normally.
+
+a.  On the active management module, check the Status Front section. Verify that each LED that
+
+indicates a power supply is in one of the following states:
+
+•  On Green (normal operation)
+
+•  Off (no power supply installed)
+
+b.  On each power supply, verify that LEDs are in the following states:
+
+•  Power LED: On Green
+
+•  Fault LED: Off
+
+6.  Verify that the rear components are operating normally by checking the Status Rear section of the
+
+active management module:
+
+a.  Verify that the LEDs for the fabric modules are in one of the following states:
+
+•  On Green (normal operation)
+
+•  Off (component not installed)
+
+b.  Verify that the LEDs for the fan trays and fans are On Green.
+
+Public
+
+Confirming normal operation of the switch by readi... 13
+
+7.  Verify that the standby management module is ready to take over as the active management module.
+
+On the standby management module, verify the states of the following LEDs:
+
+•  Health LED is On Green.
+
+•  Management state standby (Stby) LED is On Green.
+
+Detecting if the switch is not ready for a failover event
+
+This task describes using the switch LEDs to detect if the switch is not ready for the loss of a fabric module
+or for a failover from the active management module to the standby management module.
+
+NOTE
+
+Although you can detect power supply failures by viewing the LEDs, you
+must use software commands to determine if the power supply redundancy is
+sufficient to power the chassis if a power supply fails. For complete information
+on LED behaviors for your AOS-CX switch, refer to the Installation and Getting
+Started Guide for that switch series, available for download from the section of
+the .
+
+Procedure
+
+1.  Detect if the standby management module is shut down.
+
+If the standby management module is shut down, the LED states are as follows:
+
+•  The standby management module health LED is Off.
+
+•  The standby management state active (Actv) LED is Off.
+
+•  The standby management state standby (Stby) LED is Off.
+
+•  On the active management module in the Status Front Management Modules section, the LED
+for the standby management module is Off. For example, if the active management module is
+Management Module LED 5, Management Modules LED 6 is Off.
+
+2.  Detect if the standby management module is in a transient state. If the standby management module is
+
+booting, updating, or in another transient state, the LED states are as follows:
+
+•  The standby management module health LED is Slow Flash Green when the service operating
+
+system is running or during an operating system update.
+
+•  The standby management module Booting LED is Slow Flash Green when the AOS-CX operating
+
+system is booting.
+
+•  The standby management state active (Actv) LED is Off.
+
+Public
+
+Detecting if the switch is not ready for a failove... 14
+
+D
+e
+t
+e
+c
+t
+i
+n
+g
+
+i
+f
+
+t
+h
+e
+
+s
+w
+i
+t
+c
+h
+
+i
+s
+
+n
+o
+t
+
+r
+e
+a
+d
+y
+
+f
+o
+r
+
+a
+
+f
+a
+i
+l
+o
+v
+e
+.
+.
+.
+
+•  The standby management state standby (Stby) LED is Off.
+
+•  On the active management module in the Status Front Management Modules section, the LED for
+
+the standby management module is Slow Flash Green.
+
+3.  Detect if a fabric module is shut down or not present. If a fabric module is shut down or not present, the
+
+LED states are as follows:
+
+•  On the active management module, in the Status Rear section, the LED for the fabric module is Off.
+
+•  On the rear display module, the LED for the fabric module is Off.
+
+•  On the fabric module, the health LED is Off. However, the fabric module is behind fan 1 and is not
+
+directly visible.
+
+Finding faulted components using the switch LEDs
+
+This task describes using the switch LEDs to find components that are in a fault condition.
+
+NOTE
+
+All green LEDs—except for chassis power LEDs and the Usr1 LED—are off when
+the LED mode is set to Light Faults (The Usr1 LED of the LED Mode section
+of the active management module is On Green and the default behavior for the
+Usr1 LED is being used.). For complete information on LED behaviors for your
+AOS-CX switch, refer to the Installation and Getting Started Guide for that
+switch series, available for download from the section of the .
+
+Procedure
+
+1.  Find the switch that has the fault condition, which is indicated by a chassis health LED in the state of
+
+Slow Flash Orange.
+The chassis health LED is located on the front of the switch and on the rear panel of the switch.
+
+2.
+
+If you are at the back of the switch, on the rear panel, look for LEDs that are in the Slow Flash Orange
+state:
+The Status Rear area has LEDs for power supplies, fabric modules, fan trays, and fans. The number on
+the LED represents the unit number of the component.
+
+If the only LED in a state of Slow Flash Orange is the Chassis health LED, go to the front of the switch.
+
+3.  At the front of the switch, on the active management module, look for LEDs that are in the Slow Flash
+
+Orange state:
+
+Public
+
+Finding faulted components using the switch LEDs 15
+
+•  The Status Front area has LEDs for power supplies, line and fabric modules, and management
+
+modules. The number on the LED indicates the slot number of the component.
+
+•  The Status Rear area has LEDs for fabric modules and fan trays, with a single LED for all the fans in
+
+the fan tray. The number on the LED represents the slot or bay number of the component.
+
+4.  Use the number indicated by the LED that is flashing to locate the slot that contains the faulted
+
+component.
+The fabric modules are located behind the fan trays, and the fabric module number corresponds to the
+fan tray number.
+
+5.  At the front of the switch, on line modules, look for LEDs that are in the Slow Flash Orange state:
+
+Module LEDs and Port LEDs indicate faults if their states are Slow Flash Orange.
+
+IP Flow Information Export
+
+IP Flow Information Export (IPFIX) is an embedded network flow analysis tool that compiles characteristic
+and measured properties of flows and sends flow reports to internal or external flow collectors. IPFIX is
+configurable via the command-line or REST interfaces. With IPFIX, customers configure flow records with
+match (key) fields and collection (non-key) fields. Match fields are the set of fields that define a flow, such
+as IP address or UDP port. Collection fields are the set of fields that identify information to collect for a flow,
+such as packet and byte counters.
+
+A flow exporter defines where and how to export flow reports. Flow exporters are created as standalone
+entities in the config context to provide flow monitors the ability to export flow reports.
+
+Compatibility with Traffic Insight
+
+The AOS-CX traffic insight feature allows monitoring of large amount of data that it collects from various
+flow exporters like IPFIX, and provides the ability to filter, aggregate, and sort the data based on user
+flow monitor requests. Traffic insight tracks different monitor requests simultaneously and provides monitor
+reports per request. For more information on configuring the Traffic Insight features, refer to the AOS-CX
+Security Guide.
+
+Compatibility with Application Recognition
+
+If the application recognition feature is enabled, then the application data and the flow properties collected
+by AR and IPFIX are exported to external or internal IPFIX collectors. For more information on configuring
+the Application Recognition and Traffic Insight features, refer to the AOS-CX Security Guide.
+
+Information Elements
+
+The IPFIX Information Elements (IE) are entities that are defined and maintained by the Internet Assigned
+Numbers Authority (IANA). They are characterized by a unique piece of information they can provided
+about a flow. Information Elements may be either private or public. Private Information Elements are
+exported with a Private Enterprise Number (PEN).
+
+Public
+
+IP Flow Information Export 16
+
+AOS-CX can act as an intermediate collecting process for flow reports from hardware to append certain
+additional IPFIX information elements to the flow reports. When configured, the software will act as an
+intermediate exporting process to export the augmented flow reports to any configured flow exporters.
+
+AOS-CX supports the standard and private information elements shown in the tables below.
+
+NOTE
+
+Not all switches support all information elements. View a list of information
+elements supported by your switch using the command show flow monitor
+<monitor-name> information-elements. All Standard Information Element
+registration information can be found on the IANA website, at https://
+www.iana.org/assignments/ipfix/.
+
+Standard Information Elements
+
+Private Information Elements
+
+octetDeltaCount
+
+packetDeltaCount
+
+protocolIdentifier
+
+sourceTransportPort
+
+sourceIPv4Address
+
+ingressInterface
+
+destinationTransportPort
+
+destinationIPv4Address
+
+sourceIPv6Address
+
+destinationIPv6Address
+
+sourceIPv6Address
+
+destinationIPv6Address
+
+classId
+
+sourceMacAddress
+
+vlanId
+
+(No private information elements
+are currently supported by the 5
+420 Switch series)
+
+tlsClientVersion (ID 1029, 4823
+Aruba)
+
+tlsServerVersion (ID 1030, 4823
+Aruba)
+
+ja3 (ID 1031, 4823 Aruba)
+
+ja3s (ID 1032, 4823 Aruba)
+
+supportedNextProtocol (ID 1033
+, 4823 Aruba)
+
+CertificateIssuer (ID 1034, 4823
+Aruba)
+
+CertificateIssueDate (ID 1035, 4
+823 Aruba)
+
+CertificateExpiryDate (ID 1036,
+4823 Aruba)
+
+applicationType (ID 1100, 4823
+Aruba)
+
+Public
+
+IP Flow Information Export 17
+
+Standard Information Elements
+
+Private Information Elements
+
+ipVersion
+
+destinationMacAddress
+
+applicationDescription
+
+applicationId
+
+applicationName
+
+flowEndReason
+
+flowStartMicroseconds
+
+flowEndMicroseconds
+
+dnsResponseCode
+
+ingressPhysicalInterface
+
+egressPhysicalInterface
+
+applicationCategoryName
+
+(N/A)
+
+tcp3WayHsServerRespTime (ID
+1101, 4823 Aruba)
+
+(6200 Switch series only)
+
+tcp3WayHsClientRespTime (ID 1
+102, 4823 Aruba)
+
+(6200 Switch series only)
+
+dropGroup1 (ID 1200, 14823 Ar
+uba)
+
+dropReason1 (ID 1201, 14823 A
+ruba)
+
+dropStartMilliseconds1 (ID 1202,
+14823 Aruba)
+
+dropEndMilliseconds1 (ID 1203,
+14823 Aruba)
+
+dropGroup2 (ID 1210, 14823 Ar
+uba)
+
+dropReason2 (ID 1211, 14823 A
+ruba)
+
+dropStartMilliseconds2 (ID 1212,
+14823 Aruba)
+
+dropEndMilliseconds2 (ID 1213,
+14823 Aruba)
+
+dropGroup3 (ID 1220, 14823 Ar
+uba)
+
+dropReason3 (ID 1221, 14823 A
+ruba)
+
+dropStartMilliseconds3 (ID 1222,
+14823 Aruba)
+
+dropEndMilliseconds3 (ID 1223,
+14823 Aruba)
+
+dropGroup4 (ID 1230, 14823 Ar
+uba)
+
+Public
+
+IP Flow Information Export 18
+
+Private Information Elements
+
+dropReason4 (ID 1231, 14823 A
+ruba)
+
+dropStartMilliseconds4 (ID 1232,
+14823 Aruba)
+
+dropEndMilliseconds4 (ID 1233,
+14823 Aruba)
+
+cngQueueThreshold (ID 490, 14
+823 Aruba)
+
+cngQueueObservedTimeStamp (
+ID 491, 14823 Aruba)
+
+About individual Information Elements
+
+The following IEs are used for both IPv4 and IPv6 flows:
+
+•  cngSourceIP
+
+•  cngDestinationIP
+
+They are always 16 bytes wide. The IP version of the flow is indicated in the ipVersion IE. For IPv4
+addresses, the first 12 octets are zero and the IPv4 address is encoded in the last 4 octets. For IPv6
+addresses, the full 16 bytes encode the address.
+
+The following IEs reflect the hardware interface ID used by the associated flow:
+
+•
+
+ingressPhysicalInterface
+
+•  egressPhysicalInterface
+
+The hardware interface ID does not match the front-panel port number of the interface. The hardware
+interface ID can be mapped to the front-panel port number by using the REST API to query for hw_intf_info
+for all interfaces and saving the switch_intf_id value together with the associated front-panel name to form
+a mapping table.
+
+Example using curl and jq:
+
+bash
+
+$ curl -X GET
+    "{SWITCH}/rest/{VERSION}/system/interfaces?
+attributes=hw_intf,info,name&depth=2"
+
+    -H "x-csrf-token: {CSRFTOKEN}"
+
+    -b {AUTH COOKIE FILE}
+
+Public
+
+IP Flow Information Export 19
+
+| jq 'to_entries
+
+          | map({port: .key, switch_intf_id:
+
+(.value.hw_intf_info.switch_intf_id | tonumber)})
+
+          | sort_by(.switch_intf_id)
+
+          | map({(.port): .switch_intf_id})
+
+          | add'
+
+{
+
+  "1/1/6": 1,
+
+  "1/1/2": 2,
+
+  "1/1/1": 3,
+
+  ...
+
+}
+The IPFIX Drop Exceptions feature is a network debugging and triaging tool supported on 5420 and
+6200 Switch series. It is configured using the collect drop ingress-exceptions command in the config-flow-
+record context. The private information elements 1200-1233 contain possible drop reason information for
+why dropped packets are seen for a flow. Up to four drop reasons are supported for each flow. Data in
+consecutive values (for example, 1200, 1201, 1202, 1203) indicate the data in those fields are associated
+with each other.
+
+For each drop reason, AOS-CX reports the drop group name, drop reason name, and drop start and end
+timestamps in milliseconds.
+
+Table 1. Drop reasons for the IPFIX Drop Exceptions feature
+Drop reason
+
+Example Cause
+
+Supported Platforms
+
+Unknown VLAN
+
+MTU Failure
+
+Unroutable Unicast
+
+Unicast TTL expired
+
+The packet has an unknown VLAN 5420, 6200, 6300, 6400, 8100, 8
+325, 8325P, 8325H, 8360, 10000
+Switch series
+
+The packet size is larger than the
+IP Maximum Transmission Unit (M
+TU) configured in the interface.
+
+5420, 6200, 6300, 6400, 8100, 8
+325, 8325P, 8325H, 8360 Switch
+series
+
+The unicast packet can’t be routed
+as destination address is not resol
+ved.
+
+5420, 6200, 6300, 6400, 8100, 8
+360 Switch series.
+
+For IPv4: The unicast packet has a
+Time‐to‐Live (TTL) value of 0
+or 1.
+
+For IPv6: The unicast packet has a
+hop limit value of 0 or 1.
+
+5420, 6200, 6300, 6400, 8100, 8
+360 Switch series.
+
+Security Ingress IP Lockdown
+
+Packet’s source IP address, VLAN,
+MAC or Interface does not match t
+he IP binding entry.
+
+5420, 6200, 6300, 6400, 8100, 8
+360 Switch series.
+
+Public
+
+IP Flow Information Export 20
+
+| Drop reason |     | Example Cause | Supported Platforms |     |
+| ----------- | --- | ------------- | ------------------- | --- |
+Security Ingress MAC Lockout The packet is sourced from a locke 5420, 6200, 6300, 6400, 8100, 8
+|     |     | d‐out MAC address. | 360 Switch series. |     |
+| --- | --- | ------------------ | ------------------ | --- |
+IPTCAM invalid IP address Packet has invalid source or destin 5420, 6200, 6300, 6400, 8100, 8
+|     |     | ation IP address. | 360 Switch series. |     |
+| --- | --- | ----------------- | ------------------ | --- |
+(For example, an invalid IPv4 add
+ress of 0.0.0.0 or 127.0.0.0, or 24
+0.0.0.0, or an invalid IPv6 address
+of :: or ::1.)
+Security learn Packet is received on a security‐ 5420, 6200, 6300, 6400, 8100, 8
+|     |     | enabled interface and is learned fo | 360 Switch series. |     |
+| --- | --- | ----------------------------------- | ------------------ | --- |
+r the first time.
+Security drop Packet is received on a security‐ 5420, 6200, 6300, 6400, 8100, 8
+|     |     | enabled interface but is not allowe | 360 Switch series. |     |
+| --- | --- | ----------------------------------- | ------------------ | --- |
+d, as it as not authorized on the V
+LAN.
+Meter drop The packet is dropped because of 5420, 6200, 6300, 6400, 8100, 8
+|     |     | exceeding the rate limit configured | 360 Switch series. |     |
+| --- | --- | ----------------------------------- | ------------------ | --- |
+on port or via a port‐access polic
+y.
+ASIC drop The packet is dropped by ASIC be 5420, 6200, 6300, 6400, 8100, 8
+|     |     | cause of parity error, parser error o | 360 Switch series |     |
+| --- | --- | ------------------------------------- | ----------------- | --- |
+r invalid lookup entry.
+For 5420, 6200 6300, 6400 Switch Series:
+If the drop end timestamp has the same value as the drop start timestamp, that means only one packet of
+the flow was dropped. If the drop end timestamp is different from the drop start timestamp, that means more
+than one packet was dropped within 30 seconds.
+Subtopics
+Flow monitors
+Flow Records
+Flow Exporters
+Destinations
+Configuring IP Flow Information Export on 5420 and 6200 Switches
+Role-based IPFIX
+FAQs and Troubleshooting
+Flow monitoring commands
+
+|     | Public |     | IP Flow Information Export | 21  |
+| --- | ------ | --- | -------------------------- | --- |
+
+Flow monitors
+
+A flow monitor is applied to an interface to perform network traffic monitoring. A flow monitor consists of
+a flow record, a flow cache, and optional flow exporters. A flow record must be created and assigned to the
+flow monitor for the monitoring process to function. Flow data is compiled from the network traffic on the
+interface and stored in the flow cache based on the match (key) and collect (non-key) fields in the flow
+record. Data from the flow cache is exported by the flow exporters assigned to the flow monitor. 6200 series
+support a maximum of sixteen flow monitors with a limit of two flow exporters that can be applied to a single
+flow monitor.
+
+Flow Records
+
+A flow record defines match (key) fields and collection (non-key) fields. Match fields are the set of fields that
+define a flow, such as IP address or UDP port. Collection fields are the set of fields that identify information
+to collect for a flow, such as packet and byte counters. On the 5420, 6200, 6300, 6400, 8100, and 8360
+switch series a maximum of sixteen flow records can be created.
+
+There are six mandatory match fields, of which the IP match fields must be of the same type (IPv4 or IPv6).
+
+NOTE
+
+A flow record is invalid if it does not contain one of the supported sets of match
+fields.
+
+The supported sets of match fields are:
+
+•
+
+IPv4 version
+
+•
+
+IPV4 source address
+
+•
+
+IPv4 destination address
+
+•
+
+IPv4 protocol
+
+•  Transport destination port
+
+•  Transport source port
+
+•
+
+IPv6 version
+
+•
+
+IPv6 source address
+
+•
+
+IPv6 destination address
+
+•
+
+IPv6 protocol
+
+•  Transport destination port
+
+Public
+
+Flow monitors 22
+
+•  Transport source port
+
+Flow Exporters
+
+A flow exporter defines where and how to export flow reports. Flow exporters are created as standalone
+entities in the config context to provide flow monitors the ability to export flow reports. series support a
+maximum of sixteen flow monitors with a limit of two flow exporters that can be applied to a single flow
+monitor.
+
+Destinations
+
+About this task
+
+The destination specifies where flow reports are sent. There is one possible destination for a flow exporter
+within the 5420 and 6200 switch series:
+
+Procedure
+
+Hostname or IP address of a device with an optional VRF .
+
+Results
+
+A flow exporter can only send flow reports to one destination. The destination type specifies which
+destination to use. If no destination type is specified, the default destination type is the hostname or IP
+address of a device If no destination type is specified, the default destination type is the hostname or
+IP address of a device with an optional VRF . If a VRF is not specified, the default VRF will be used. A
+destination of each type can be configured, but only the one corresponding to the destination type is used.
+If there is no destination corresponding to the destination type, then the flow exporter configuration is
+incomplete. If a new destination of a particular type is configured, it will replace the destination of that type
+that was previously configured.
+
+•  Traffic Insight instance
+
+Configuring IP Flow Information Export on 5420 and 6200 Switches
+
+The following list describes the steps required to configure a IP flow information export (IPFIX) solution:
+
+•  Step one: Create flow records
+
+•  Step two: Configure flow exporter(s)
+
+Public
+
+Flow Exporters 23
+
+C
+o
+n
+fi
+g
+u
+r
+i
+n
+g
+
+I
+P
+
+F
+l
+o
+w
+
+I
+n
+f
+o
+r
+m
+a
+t
+i
+o
+n
+
+E
+x
+p
+o
+r
+t
+
+o
+n
+
+5
+4
+2
+0
+
+a
+n
+d
+.
+.
+.
+
+•  Step three: Configure monitor(s)
+
+•  Step four: Apply a flow monitors to interface(s)
+
+NOTE
+
+IPv6 related commands are only applicable to switches that support IPv6
+protocol.
+
+Step one: Create Flow Records
+
+Flow Records are used to define the data that will be added to the IPFIX template. This example configures
+one record for IPv4 and one for IPv6.
+
+switch(config)# flow record flowRecordv4
+
+switch(config-flow-record)# match ip protocol
+
+switch(config-flow-record)# match ip source address
+
+switch(config-flow-record)# match ip destination address
+
+switch(config-flow-record)# match ip version
+
+switch(config-flow-record)# match transport destination port
+
+switch(config-flow-record)# match transport source port
+
+switch(config-flow-record)# collect counter bytes
+
+switch(config-flow-record)# collect counter packets
+
+switch(config-flow-record)# collect application name
+
+switch(config-flow-record)# collect timestamp absolute first
+
+switch(config-flow-record)# collect timestamp absolute last
+
+switch(config-flow-record)# collect application https url
+
+switch(config)# flow record flowRecordv6
+
+switch(config-flow-record)# match ipv6 protocol
+
+switch(config-flow-record)# match ipv6 source address
+
+switch(config-flow-record)# match ipv6 destination address
+
+switch(config-flow-record)# match ipv6 version
+
+switch(config-flow-record)# match transport destination port
+
+switch(config-flow-record)# match transport source port
+
+switch(config-flow-record)# collect counter bytes
+
+switch(config-flow-record)# collect counter packets
+
+switch(config-flow-record)# collect application name
+
+switch(config-flow-record)# collect timestamp absolute first
+
+switch(config-flow-record)# collect timestamp absolute last
+
+switch(config-flow-record)# collect application https url
+Next, use the show flow record command to verify the configuration.
+
+Public
+
+Configuring IP Flow Information Export on 5420 and... 24
+
+Step two: Configure flow exporter(s)
+
+In this step, you can define an exporter to send to an external destination by hostname or IP address, or
+to an internal destination such as Traffic Insight. The example below configures IPFIX to export data to an
+external address/hostname:
+
+switch(config)# flow exporter flowExternal
+
+switch(config-flow-exporter)# destination type hostname-or-ip-addr
+
+switch(config-flow-exporter)# destination 11.1.1.1
+
+switch(config-flow-exporter)# show flow exporter
+
+----------------------------------------------------------------------------
+
+----
+
+Flow exporter 'flowExternal
+
+----------------------------------------------------------------------------
+
+----
+
+Status                  : Accepted
+
+Export Protocol         : ipfix
+
+Destination Type        : Hostname or IP address
+
+Destination             : 11.1.1.1
+
+Transport Configuration
+
+Protocol            : udp
+
+Port                : 4739
+To configure IPFIX to export to Traffic Insight, first configure Traffic Insight.
+
+switch(config)# traffic-insight TI
+
+switch(config-ti-TI)# source ipfix
+
+switch(config-ti-TI)# monitor topN type topN-flows
+
+switch(config-ti-TI)# monitor appFlow type application-flows
+
+switch(config-ti-TI)# monitor raw-mon type raw-flows
+
+switch(config-ti-TI)# enable
+Next, configure the flow exporter for Traffic Insight
+
+switch(config)# flow exporter flowExpTI
+
+switch(config-flow-exporter)# export-protocol ipfix
+
+switch(config-flow-exporter)# destination type traffic-insight
+
+switch(config-flow-exporter)# destination traffic-insight TI
+You can use the show flow exporter command to verify the flow exporter configuration for Traffic Insight
+
+switch(config)# show flow exporter flowExpTI
+
+----------------------------------------------------------------------------
+
+----
+
+Flow exporter 'flowExpTI'
+----------------------------------------------------------------------------
+----
+
+Status                  : Accepted
+
+Export Protocol         : ipfix
+
+Destination Type        : Traffic Insight
+
+Public
+
+Configuring IP Flow Information Export on 5420 and... 25
+
+Destination             : TI
+
+Transport Configuration
+
+Protocol            : udp
+
+Port                : 4739
+Finally, use the show run traffic-insight command to verify the Traffic Insight configuration:
+
+switch(config)# show running-config traffic-insight
+
+traffic-insight TI
+
+enable
+
+source ipfix
+
+!
+
+monitor topN type topN-flows entries 5
+
+monitor appFlow type application-flows
+
+monitor raw type raw-flows
+
+Step three: Configure the monitor(s)
+
+First, configure an IPv4 flow monitor.
+
+switch(config)# flow monitor flowMonv4
+
+switch(config-flow-monitor)# record flowRecordv4
+
+Switch (config-flow-monitor)# exporter flowExternal
+
+switch(config-flow-monitor)# exit
+Next, configure an IPv6 flow monitor.
+
+switch(config)# flow monitor flowMonv6
+
+switch(config-flow-monitor)# record flowRecordv6
+
+switch(config-flow-monitor)# exporter flowExternal
+
+switch(config-flow-monitor)# exit
+Once both flow monitors are created, use the show flow monitor command to verify the flow monitor
+configurations.
+
+switch(config-flow-monitor)# show flow monitor
+
+----------------------------------------------------------------------------
+
+----
+Flow monitor 'flowMonv4'
+
+----------------------------------------------------------------------------
+
+----
+
+Status                   : Accepted
+
+Flow Record              : flowRecordv4
+
+Flow Exporter(s)         : flowExternal
+
+Cache Configuration
+
+Inactive Timeout     : 30
+
+Active Timeout       : 1800
+
+----------------------------------------------------------------------------
+
+----
+
+Flow monitor 'flowMonv6'
+
+Public
+
+Configuring IP Flow Information Export on 5420 and... 26
+
+----------------------------------------------------------------------------
+
+----
+
+Status                   : Accepted
+
+Flow Record              : flowRecordv6
+
+Flow Exporter(s)         : flowExternal
+
+Cache Configuration
+
+Inactive Timeout         : 30
+
+Active Timeout  : 1800
+
+switch(config-flow-monitor)# show flow monitor
+
+----------------------------------------------------------------------------
+
+----
+
+Flow monitor 'flowMonv4'
+
+----------------------------------------------------------------------------
+
+----
+
+Status                   : Accepted
+
+Flow Record              : flowRecordv4
+
+Flow Exporter(s)         : flowExternal
+
+Cache Configuration
+
+Inactive Timeout     : 120
+
+Active Timeout       : 1800
+
+----------------------------------------------------------------------------
+
+----
+
+Flow monitor 'flowMonv6'
+
+----------------------------------------------------------------------------
+
+----
+
+Status                   : Accepted
+
+Flow Record              : flowRecordv6
+
+Flow Exporter(s)         : flowExternal
+
+Cache Configuration
+
+Inactive Timeout         : 120
+
+Active Timeout  : 1800
+
+Role-based IPFIX
+
+If IPFIX monitoring is configured on a port, a network administrator who wants to monitor traffic from clients
+must preconfigure IPFIX monitor before onboarding the clients. Also, if a client moves from one port to
+another, the monitor must be reconfigured accordingly. To reduce all these complexities, 5420, 6200, 6300,
+and 6400 switch series allow you to configure an IPFIX monitor on a port access role.
+
+An IPFIX deployment with monitoring configured on a port uses TCAM to get flow statistics. Since TCAM is
+a high-demand resource which is shared across multiple protocols including the security protocols, security
+policy applications could fail if IPFIX consumes most of the TCAM resources. Port access clients can use a
+
+Public
+
+Role-based IPFIX 27
+
+large amount of of TCAM resources for policy applications, making it difficult support port access clients
+with TCAM based IPFIX.
+
+With role-based IPFIX, when a user plugs a device into to a specific port, their user role is applied to the port.
+Whenever the user plugs that device into to a different port again, the role is applied to that specific port.
+This gives mobility and accessibility to the user and provides permissions specific to the user's role when the
+user's device moves across ports. Role-based IPFIX enables colorless port behavior.
+
+There are some mutually exclusive features that will disable role-based IPFIX when they are enabled on the
+6200, 6300, and 6400 platforms. The mutually exclusive features are:
+
+•  UBT
+
+•  MAC Lockout
+
+•  Extended Router MAC
+
+•  Source Port Filter
+
+•
+
+IP Lockdown
+
+•  L3VNI
+
+The following behaviors are observed in a deployment with role-based IPFIX:
+
+•
+
+If a user applies the IPFIX monitor configuration on the port, it uses the existing TCAM infrastructure.
+
+•
+
+•
+
+If a port has both Role based IPFIX and Port based IPFIX, the Port based IPFIX implementation takes the
+priority.
+
+If IPFIX monitor configuration on a port moves from role based to TCAM based or vice-versa, existing
+IPFIX flows learned on that port are deleted.
+
+•  When the user role has an IPFIX configuration and fails to apply it, port access logs it, but it does not
+
+prevent the client from getting authorized.
+
+•
+
+If port access is in the client mode and if there is more than one client with a conflicting IPFIX monitor
+configuration, traffic from all the clients will be exported through the IPFIX monitor configured for the
+first client.
+
+•  Role-based IPFIX and TCAM port-based IPFIX implementations can co-exist on a switch.
+
+•  Flows from unauthorized clients are not monitored.
+
+These are some limitations to role-based IPFIX:
+
+•  Role based IPFIX can be enabled only through port access role assignment.
+
+•  Starting with 10.17, role-based IPFIX supports monitoring in both directions. If only ingress is enabled,
+it monitors traffic in the ingress direction. Port-based IPFIX continues to support only ingress flow
+monitoring.
+
+Public
+
+Role-based IPFIX 28
+
+FAQs and Troubleshooting
+
+•  The following messages are displayed to indicate an illegal argument:
+
+◦  % The flow exporter <EXPORTER-NAME> does not exist.
+
+◦  % The flow record <RECORD-NAME> does not exist.
+
+◦  % The flow monitor <MONITOR-NAME> does not exist.
+
+◦
+
+Invalid destination IP address or hostname entered.
+
+◦  Unable to create the flow exporter. The maximum allowed number of flow exporters (<max>) has
+
+been reached.
+
+◦  Unable to create the flow record. The maximum allowed number of flow records (<max>) has been
+
+reached.
+
+◦  Unable to create the flow monitor. The maximum allowed number of flow monitors (<max>) has
+
+been reached.
+
+◦  Flow monitor cannot be applied while interface is part of LAG <LAG-NAME>.
+
+◦  Flow monitor could not be applied.
+
+◦  Flow monitor could not be unapplied.
+
+Flow monitoring commands
+
+Subtopics
+
+alert-threshold aggregate active-flows percentage
+alert-threshold endpoint active-flows
+alert-threshold endpoint new-connections accepted
+alert-threshold endpoint new-connections initiated
+diag-dump ipfix basic
+description
+exporter
+flow exporter
+flow monitor
+flow record
+flow statistics
+flow-tracking
+ip|ipv6 flow monitor (interface)
+show flow exporter
+
+Public
+
+FAQs and Troubleshooting 29
+
+show flow monitor
+show flow record
+show flow-tracking
+show tech ipfix
+show ip flow-table-utilization
+show IPv4 flow endpoint statistics
+show IPv6 flow session statistics
+
+alert-threshold aggregate active-flows percen
+tage
+
+Syntax
+
+[no] alert-threshold aggregate active-flows percentage <1-100>
+
+Description
+
+Sets the alert threshold as a percentage of maximum IP flow table entries per linecard or stack member.
+An alert is triggered when the number of active flows reaches or exceeds this percentage. The show ip
+flow-table-utilization command displays the IP flow table size on each LC or stack member.
+
+Parameter
+
+<1‐100>
+
+Examples
+
+Description
+
+Percentage of the maximum allowed aggregate active flows for
+alert.
+
+Configuring the aggregate active flows alert threshold per linecard or stack member:
+
+switch(config-flow-tracking)# alert-threshold aggregate active-flows
+percentage 50
+
+Removing the aggregate active flows alert threshold:
+
+switch(config-flow-tracking)# no alert-threshold aggregate active-flows
+
+percentage
+
+Public
+
+alert-threshold aggregate active-flows percentage 30
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐flow‐
+tracking
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+alert-threshold endpoint active-flows
+
+Syntax
+
+[no] alert-threshold endpoint active-flows <50-1000>
+
+Description
+
+Sets the alert threshold for the number of active flows per endpoint. An alert is triggered when an endpoint's
+active flow count reaches or exceeds this threshold.
+
+Parameter
+
+<50‐1000>
+
+Examples
+
+Description
+
+Endpoint session count alert threshold.
+
+Configuring the endpoint active flows alert threshold:
+
+switch(config-flow-tracking)# alert-threshold endpoint active-flows 50
+
+Removing the endpoint active flows alert threshold:
+
+switch(config-flow-tracking)#no alert-threshold endpoint active-flows
+
+Public
+
+alert-threshold endpoint active-flows 31
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐flow‐
+tracking
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+alert-threshold endpoint new-connections acce
+pted
+
+Syntax
+
+[no] alert-threshold endpoint new-connections accepted <10-500>
+
+Description
+
+Sets the alert threshold for the number of new connections accepted by an endpoint within a 30-second
+monitoring window. An alert is triggered when an endpoint's accepted connection count reaches or exceeds
+this threshold.
+
+Parameter
+
+<10‐500>
+
+Examples
+
+Description
+
+Endpoint new connections accepted alert threshold.
+
+Configuring the endpoint new connections accepted alert threshold:
+
+switch(config-flow-tracking)# alert-threshold endpoint new-connections
+
+accepted 50
+
+Removing the endpoint new connections accepted alert threshold:
+
+Public
+
+alert-threshold endpoint new-connections accepted 32
+
+switch(config-flow-tracking)#no alert-threshold endpoint new-connections
+
+accepted
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐flow‐
+tracking
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+alert-threshold endpoint new-connections init
+iated
+
+Syntax
+
+[no] alert-threshold endpoint new-connections initiated <10-500>
+
+Description
+
+Sets the alert threshold for the number of new connections initiated by an endpoint within a 30-second
+monitoring window. An alert is triggered when an endpoint's initiated connection count reaches or exceeds
+this threshold.
+
+Parameter
+
+<10‐500>
+
+Examples
+
+Description
+
+Endpoint new connections initiated alert threshold.
+
+Configuring the endpoint new connections initiated alert threshold:
+
+Public
+
+alert-threshold endpoint new-connections initiated 33
+
+switch(config-flow-tracking)# alert-threshold endpoint new-connections
+
+initiated 50
+
+Removing the endpoint new connections initiated alert threshold:
+
+switch(config-flow-tracking)#no alert-threshold endpoint new-connections
+
+initiated
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐flow‐
+tracking
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+diag-dump ipfix basic
+
+Syntax
+
+diag-dump ipfix basic
+
+Description
+
+Displays diagnostic information for IPFIX.
+
+Examples
+
+diag-dump ipfix basic
+
+=========================================================================
+
+[Start] Feature ipfix Time : Tue Apr 11 02:23:03 2023
+=========================================================================
+
+-------------------------------------------------------------------------
+
+[Start] Daemon ipfixd
+
+-------------------------------------------------------------------------
+
+Public
+
+diag-dump ipfix basic 34
+
+- IPFIX Record Cache dump -
+
+- IPFIX Record ipfix -
+
+....
+
+:- IPFIX Monitor v6ti completed -
+
+- End of IPFIX Monitor Cache dump -
+
+-------------------------------------------------------------------------
+
+[End] Daemon ipfixd
+
+-------------------------------------------------------------------------
+
+-------------------------------------------------------------------------
+
+[Start] Daemon ops-switchd
+
+-------------------------------------------------------------------------
+
+Key format: <traffic_type>_<coalescence_id>_<agent_id>_<asic_port>
+
+Key                              TCAM Entry ID    Count
+
+-------------------------------- ---------------- -----
+
+1_1532781829_3_20                0xffff7c7e7a00   1
+
+1_3217499901_1_12                0xffff91187580   1
+
+1_3217499901_1_13                0xffff91183d80   1
+
+1_3217499901_1_14                0xffff91186e80   1
+
+....
+
+-------------------------------------------------------------------------
+
+[End] Daemon ops-switchd
+
+-------------------------------------------------------------------------
+
+=========================================================================
+
+[End] Feature ipfix
+
+=========================================================================
+
+Diagnostic-dump captured for feature ipfix
+
+Command History
+
+Release
+
+10.15
+
+10.16
+
+Modification
+
+Command introduced on 6200 Switch series.
+
+Command introduced on the 5420 switch series.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+diag-dump ipfix basic 35
+
+description
+
+Syntax
+
+description <DESCRIPTION>
+
+no description <DESCRIPTION>
+
+Description
+
+Configures the description for the following telemetry options:
+
+•  flow monitor in the config-flow-monitor context
+
+•  flow congestion monitor in the config-flow-congestion-monitor context
+
+•  flow exporter in the config-flow-exporter context
+
+•  flow record in the config-flow-record context
+
+The no form deletes a flow congestion monitor.
+
+Parameter
+
+<DESCRIPTION>
+
+Examples
+
+Description
+
+Displays a string of 256 characters, maximum, including spaces.
+
+Adding or modifying the description of flow monitor, flow-monitor-1:
+
+switch(config)# flow monitor flow-monitor-1
+
+switch(config-flow-monitor)# description Used for analyzing basic ipv4
+
+traffic
+
+Adding or modifying the description of flow record, flow-record-1:
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# description Used for basic traffic analysis
+
+Adding or modifying the description of flow exporter, flow-exporter-1:
+
+switch(config)# flow exporter flow-exporter-1
+switch(config-flow-exporter)# description Exports flows to 10.2.3.45:2055
+
+Removing the description of flow monitor, flow-monitor-1:
+
+Public
+
+description 36
+
+switch(config)# flow exporter flow-monitor-1
+
+switch(config-flow-exporter)# no description
+
+Command History
+
+Release
+
+10.16
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+5420
+
+6200
+
+config‐flow‐
+record
+config‐flow‐
+monitor
+config‐flow‐
+congestion‐
+monitor
+config‐flow‐
+exporter
+
+exporter
+
+Syntax
+
+exporter <EXPORTER-NAME>
+
+no exporter <EXPORTER-NAME>
+
+Description
+
+Assigns a flow exporter to flow monitor in the config-flow-monitor context and flow congestion monitor
+in the config-flow-congestion-monitor context.
+
+The no form of this command removes the flow exporter from the selected monitor.
+
+Public
+
+exporter 37
+
+Parameter
+
+Description
+
+<EXPORTER‐NAME>
+
+Specifies the name of the flow exporter assigned to the monitor.
+
+NOTE
+
+A maximum of two flow exporters can be applied to each flow monitor, and one
+flow exporter can be applied to each flow congestion monitor.
+
+A maximum of one flow exporter can be applied to each flow monitor, and one
+flow exporter can be applied to each flow congestion monitor.
+
+Examples
+
+Assigning flow exporter, flow-exporter-1, to flow monitor, flow-monitor-1:
+
+switch(config)# flow monitor flow-monitor-1
+
+switch(config-flow-monitor)# exporter flow-exporter-1
+
+Removing a flow exporter assigned to flow monitor, flow-monitor-1:
+
+switch(config)# flow monitor flow-monitor-1
+
+switch(config-flow-monitor)# no exporter flow-exporter-1
+
+Attempting to assign non-existent flow exporter, flow-exporter-5, to flow monitor, flow-monitor-1:
+
+switch(config)# flow monitor flow-monitor-1
+
+switch(config-flow-monitor)# exporter flow-exporter-5
+
+Flow exporter 'flow-exporter-5' does not exist.
+
+switch(config-flow-monitor)#
+Assigning flow exporter, flow-exporter-1, to flow congestion monitor, congestion-monitor-1:
+
+switch(config)# flow congestion-monitor congestion-monitor-1
+
+switch(config-flow-congestion-monitor)# exporter flow-exporter-1
+
+Removing a flow exporter assigned to flow congestion monitor:
+
+switch(config)# flow congestion-monitor congestion-monitor-1
+
+switch(config-flow-congestion-monitor)# no exporter flow-exporter-1
+
+Attempting to assign non-existent flow exporter, flow-exporter-5, to flow congestion monitor, congestion-
+monitor-1:
+
+switch(config)# flow congestion-monitor congestion-monitor-1
+
+switch(config-flow-congestion-monitor)# exporter flow-exporter-5
+
+Flow exporter 'flow-exporter-5' does not exist.
+
+switch(config-flow-congestion-monitor)#
+
+Public
+
+exporter 38
+
+Assigning more than one flow exporter to flow monitor, flow-monitor-2:
+
+switch(config)# flow monitor flow-monitor-2
+
+switch(config-flow-monitor)# exporter flow-exporter-2
+
+switch(config-flow-monitor)# exporter flow-exporter-3
+
+Attempting to assign flow exporter, flow-exporter-6, to monitor, flow-monitor-3, when two exporters are
+assigned:
+
+switch(config)# flow monitor flow-monitor-3
+
+switch(config-flow-monitor)# exporter flow-exporter 4
+
+switch(config-flow-monitor)# exporter flow-exporter 5
+
+switch(config-flow-monitor)# exporter flow-exporter 6
+
+Cannot assign more than two flow exporters to a flow monitor.
+
+switch(config-flow-monitor)#
+
+Command History
+
+Release
+
+10.16
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+5420
+
+6200
+
+config‐flow‐
+monitor
+config‐flow‐
+congestion‐
+monitor
+
+flow exporter
+
+Syntax
+
+flow exporter <name>
+
+   description <description>
+
+   destination
+
+Public
+
+flow exporter 39
+
+<hostname>
+
+[vrf <vrfname>]
+
+<ipaddr>
+
+[vrf <vrfname>]
+
+<ip6addr>
+
+[vrf <vrfname>]
+
+type
+
+hostname-or-ip-addr
+
+traffic-insight}
+
+traffic-insight <instance-name>
+
+   no ...
+
+   template data timeout <timeout>
+
+   transport udp <port>
+
+Description
+
+A flow exporter is the part of the IP Flow Information Export (IPFIX) feature that defines how a flow monitor
+exports flow reports. You can assign the same flow exporter configuration to more than one flow monitor.
+Each flow exporter includes a destination setting that identifies the device to which the flow reports are sent
+
+Parameter
+
+<name>
+
+Description
+
+Name of the flow exporter, up to 64 characters.
+
+description <description>
+
+A description of the flow exporter, up to 256 characters and spa
+ces.
+
+destination
+
+   <hostname>
+
+   <IPaddr>
+
+   <ip6addr>
+
+vrf <vrfname>
+
+Configure the export destination
+
+The exporter sends flow records to the specified hostname dest
+ination. The hostname can be a string of up to 64 characters.
+
+The exporter sends flow records to this IPv4 address destinatio
+n.
+
+The exporter sends flow records to this IPv6 address destinatio
+n.
+
+You can optionally include the name of the destination VRF in t
+he destination definition on 5420, 6200, 6300, 6400, 8100, 83
+60, 9300S Switch series.
+
+type
+
+Configure the type of the destination.
+
+   hostname‐or‐ip‐addr
+
+Define the destination type as a hostname or IP address.
+
+   traffic‐insight <name>
+
+Define the destination type as a traffic insight instance.
+
+Public
+
+flow exporter 40
+
+Parameter
+
+no ...
+
+Description
+
+Negate any configured parameter.
+
+traffic‐insight <INSTANCE‐
+NAME>
+
+Specify the a Traffic Insight instance to be used as the destinati
+on.
+
+template data timeout
+
+<timeout>
+
+A flow exporter template describes the format of exported flow
+reports. Therefore, flow reports cannot be decoded properly wi
+thout the corresponding templates. This setting defines how o
+ften the flow exporter will resend templates to the flow monitor.
+The supported range is 1‐86400 seconds, and the default is 6
+00 seconds.
+
+transport udp <port>
+
+Transport protocol and port for sending flow record reports. Th
+e default port is port 4739.
+
+Usage
+
+The following table shows the maximum supported of flow monitors and flow exporters for each switch
+model.
+
+Switch
+
+Maximum Flow Monitors Maximum Flow Exporters
+
+5420
+
+6200
+
+16
+
+16
+
+Examples
+
+Two flow exporters can be applied to a single flow monitor.
+
+Two flow exporters can be applied to a single flow monitor.
+
+The following example creates a flow exporter configuration named exporter-1:
+
+switch(config)# flow exporter exporter-1
+
+switch(config-flow-exporter)# dscp 34
+
+switch(config-flow-exporter)# destination 192.0.2.1 vrf VRF1
+
+switch(config-flow-exporter)# template data timeout 1200
+
+switch(config-flow-exporter)# description Exports flows to 192.0.2.1
+The following example sets a Traffic Insight instance as the destination for a flow exporter:
+
+switch(config)# flow exporter exporter-3
+
+switch(config-flow-exporter)# destination type traffic-insight
+
+switch(config-flow-exporter)# destination traffic-insight instance-1
+The following example adds a destination of each possible type and set hostname-or-ip-addr as the type to
+use:
+
+switch(config)# flow exporter exporter-4
+
+switch(config-flow-exporter)# destination collector-1
+
+Public
+
+flow exporter 41
+
+switch(config-flow-exporter)# destination traffic-insight instance-1
+
+switch(config-flow-exporter)# destination type hostname-or-ip-addr
+The following example sets an IPv4 address as the destination for a flow exporter:
+
+switch(config)# flow exporter exporter-1
+
+switch(config-flow-exporter)# destination type hostname-or-ip-addr
+
+switch(config-flow-exporter)# destination 192.168.0.1
+The following example sets a hostname as the destination for a flow exporter:
+
+switch(config)# flow exporter exporter-1
+
+switch(config-flow-exporter)# destination type hostname-or-ip-addr
+
+switch(config-flow-exporter)# destination collector1
+The following example sets an IPv6 address as the destination for a flow exporter:
+
+switch(config)# flow exporter exporter-1
+
+switch(config-flow-exporter)# destination type hostname-or-ip-addr
+
+switch(config-flow-exporter)# destination 2001:db87::8a2e:370a:7334
+The following example sets an IPv4 address as the destination for a flow exporter with the VRF to which the
+IPv4 address belongs:
+
+switch(config)# flow exporter exporter-2
+
+switch(config-flow-exporter)# destination type hostname-or-ip-addr
+
+switch(config-flow-exporter)# destination 192.0.2.1 vrf VRF1
+The following example sets a Traffic Insight instance as the destination for a flow exporter:
+
+switch(config)# flow exporter exporter-3
+
+switch(config-flow-exporter)# destination type traffic-insight
+
+switch(config-flow-exporter)# destination traffic-insight instance-1
+The following example adds a destination of each possible type and set hostname-or-ip-addr as the type to
+use:
+
+switch(config)# flow exporter exporter-4
+
+switch(config-flow-exporter)# destination collector-1
+
+switch(config-flow-exporter)# destination traffic-insight instance-1
+
+switch(config-flow-exporter)# destination type hostname-or-ip-addr
+The following example removes the destination type of traffic-insight from a flow exporter:
+
+switch(config)# flow exporter exporter-3
+
+switch(config-flow-exporter)# no destination traffic-insight
+The following example removes the destination type of hostname-or-ip-addr from a flow exporter:
+
+switch(config)# flow exporter exporter-1
+
+switch(config-flow-exporter)# no destination
+
+Public
+
+flow exporter 42
+
+Command History
+
+Release
+
+10.16
+
+10.15
+
+Modification
+
+Command introduced on the 5420 switch series.
+
+Command introduced on 6200 Switch series.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+config‐flow‐
+exporter
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+flow monitor
+
+Syntax
+
+flow monitor <name>
+
+    exporter <name>
+
+cache timeout {inactive <timeout}|{active <timeout}
+
+    description <description>
+
+    record <name>
+
+Description
+
+On HPE Aruba Networking 5420, 6200, 6300, 6400, 8325, 8325H, 8325P, 8100, 8360, 9300, 9300S,
+and 10040 Switch series, a flow monitor is the part of the IP Flow Information Export (IPFIX) feature that
+performs network monitoring for the selected interface. A flow monitor configuration consists of a flow
+record, a flow cache, and one or more associated flow exporters. A flow monitor compiles data from the
+network traffic on the interface and stores it in the flow cache in a format defined by the flow record.
+The flow exporters associated with the monitor then export data from the flow cache to the flow exporter
+destination.
+
+NOTE
+
+HPE Aruba Networking 5420, 6200, 6300, 6400, 8100, 8360 Switch series
+support a maximum of sixteen flow monitors with a limit of two flow exporters
+that can be applied to a single flow monitor. If no software augmentation of flows
+is required, there is no need to configure a flow collector or flow monitor.
+
+Public
+
+flow monitor 43
+
+Parameter
+
+<name>
+
+Description
+
+Name of the flow monitor, up to 64 characters.
+
+ cache timeout active
+
+ <timeout>
+
+ cache timeout
+
+inactive <timeout>
+
+Use the cache timeout parameter to define an active or inactive
+timeout for the flow monitor. A flow monitor closes a flow sessio
+n that is active for longer than the active timeout or inactive for
+longer than the inactive timeout.
+
+The active timeout range is 30‐604800. The default active ti
+me out value is 1800 and inactive timeout value is 30.
+
+Use the cache timeout parameter to define an inactive timeout
+for the flow monitor. A flow monitor closes a flow session that is
+active for longer than the active timeout or inactive for longer t
+han the inactive timeout.
+
+For 5420, 6200, 6300, 6400, 8100, 8360, 9300S, 10040 Switc
+h Series, the inactive timeout range is 30‐604800. The defaul
+t active time out value is 1800 and inactive timeout value is 30.
+
+description
+
+A description up to 256 characters long, including spaces.
+
+exporter <name>
+
+Assign a flow exporter to a flow monitor.
+
+record <name>
+
+Examples
+
+(For HPE Aruba Networking 5420, 6200, 6300, 6400, 8100, 8
+325, 8325P, 8325H, 8360, 9300, 9300S, 10040 Switch series)
+Assigns a flow record to a flow monitor.
+
+The following example creates a flow monitor configuration named monitor-1.
+
+switch(config)# flow monitor monitor-1
+
+switch(config-flow-monitor)# description Monitor for analyzing basic ipv4
+
+traffic
+
+switch(config-flow-monitor)# exporter flow-exporter-1
+
+switch(config-flow-monitor)# record flow-record-1
+
+switch(config-flow-monitor)# cache timeout inactive 120
+
+switch(config-flow-monitor)# cache timeout active 1500
+The following workflow changes the flow record assigned to a flow monitor.
+
+switch(config)# flow monitor flow-monitor-1
+switch(config-flow-monitor)# record flow-record-2
+Create more than the maximum number of allowed flow monitors
+
+Public
+
+flow monitor 44
+
+switch(config)# flow monitor monitor-1
+
+switch(config)# flow monitor monitor-2
+
+<--OUTPUT OMITTED FOR BREVITY-->
+
+switch(config)# flow monitor monitor-16
+
+switch(config)# flow monitor monitor-17
+
+No more than 16 flow monitors can be configured. Another flow monitor
+
+must be removed first.
+Assign more than one flow exporter to flow monitor flow-monitor-2
+
+switch(config)# flow monitor flow-monitor-2
+
+switch(config-flow-monitor)# exporter flow-exporter-2
+
+switch(config-flow-monitor)# exporter flow-exporter-3
+Add or modify the description of flow record flow-record-1
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# description Used for basic traffic analysis
+Add or modify the description of flow exporter flow-exporter-1
+
+switch(config)# flow exporter flow-exporter-1
+
+switch(config-flow-exporter)# description Exports flows to 10.2.3.45:2055
+
+switch(config-flow-exporter)# description Exports flows to Traffic Insight
+
+Command History
+
+Release
+
+10.16
+
+10.15
+
+Modification
+
+Command introduced on the 5420 switch series.
+
+Command introduced on 6200 Switch series.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+config‐flow‐
+monitor
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+flow record
+
+Public
+
+flow record 45
+
+Syntax
+
+flow record <record-name>
+
+   match
+
+ip {source|destination} address
+
+ip protocol|version
+
+ipv6 {source|destination} address
+
+ipv6 protocol|version
+
+transport {source | destination} port
+
+   collect
+application name
+
+application https url
+
+application dns response-code
+
+forwarding-status
+
+drop ingress-exceptions
+
+egress vlan
+
+egress interface
+
+egress queue
+
+counter {packets|bytes}
+
+tcp establishment-time
+
+transport {source | destination} port
+
+timestamp absolute first
+
+timestamp absolute last
+
+   descriptioN <description>
+
+Description
+
+Creates or modifies a flow record and switches to the config-flow-record context for the flow record. Define
+data to be included in a flow record by configuring flow record match and collect fields.
+
+A flow record defines match (key) fields and collection (non-key) fields. Customers configure flow records
+with match (key) fields and collect (non-key) fields. Match fields are the set of fields that define a flow, such
+as IP address or UDP port. Collect fields are the set of fields that identify information to collect for a flow,
+such as packet and byte counters.
+
+Traffic with matching attributes (for example, traffic coming from the same interface, sent to the same
+destination with the same protocol) are classified as a single flow. Information for some or all of the matched
+
+Public
+
+flow record 46
+
+settings can be collected and exported to a destination defined by the flow exporter assigned to the flow
+monitor.
+
+NOTE
+
+Traffic must match a match rule definition before it can be collected and sent. You
+cannot collect and send data that is not matched.
+
+NOTE
+
+For 5420, 8325, 8325H, 8325P, 9300 and 9300S Switch series, a maximum of
+one flow record can be created.
+
+For 6200, 6300, 6400, 8100, and 8360 Switch series, a maximum of 16 flow
+records can be created.
+
+NOTE
+
+It is advised to configure collect egress interface and queue also when threshold
+is being configured.
+
+Parameter
+
+<record‐name>
+
+match
+
+description
+
+Description
+
+Name of the flow monitor, up to 64 characters.
+
+match traffic according to one or more of the following key attri
+butes:
+
+ip source: Match traffic from the same IPv4 source.
+•
+ip destination: Match traffic to the same IPv4 destination.
+•
+ip protocol: Match traffic using the same IP version
+•
+ip version: Match traffic using the same IP protocol
+•
+ipv6 source: Match traffic from an IPv6 source.
+•
+•
+ipv6 destination: Match traffic to an IPv6 destination.
+ipv6 protocol: Match traffic using the same IPv6 version
+•
+ipv6 version: Match traffic using the same IPv6 protocol
+•
+•  transport {source | destination} port: Match traffic by sou
+
+rce or destination transport port
+
+A description for the flow record up to 256 characters long, incl
+uding spaces.
+
+collect
+
+Configures data fields to be included a flow record.
+
+Public
+
+flow record 47
+
+Parameter
+
+Description
+
+•  application name: Specify the application name as a non
+
+‐key field in a flow record.
+
+•  application https url: Specify the HTTP/HTTPS applicatio
+
+n URL as a non‐key field in a flow record.
+
+•  application dns response‐code: Specify the DNS param
+eters and DNS response code as a non‐key field in the flo
+w record.
+
+•  application tcp establishment‐time: Specifies TCP conn
+ection establishment time as a non‐key field in a flow reco
+rd
+
+•  drop ingress‐exceptions: On 5420. 6200. 6300, 6400, 8
+100, 8325, 8325P, 8325H, 9300 and 10000 Switch series,
+this enables the IPFIX drop‐reason feature, which specifie
+s drop ingress‐exceptions as a non‐key field in a flow re
+cord.
+
+•  counter bytes: Collect counter data for bytes in the flow. By
+te count represents the number of incoming bytes since the
+previous report.
+
+•  counter packets: Collect counter data for packets in the flo
+w. Packet count represents the number of incoming packets
+since the previous report.
+
+•  egress interface: Specifies an egress interface as a non
+
+‐key field in a flow record.
+
+•  egress queue: Specifies an egress queue as a non‐key fiel
+
+d in a flow record.
+
+•  egress vlan: Specifies an egress VLAN ID as a non‐key fie
+
+ld in a flow record.
+
+•  fowarding status: Specifies forwarding status as a non‐
+
+key field in a flow record
+
+•  timestamp absolute first: Collect absolute timestamp of th
+
+e first packet observed.
+
+•  timestamp absolute last: Collect absolute timestamp of th
+
+e last packet observed.
+
+•  tcp establishment‐time: Specifies TCP connection establi
+
+shment time as a non‐key field in a flow record.
+
+Examples
+
+Adding IPv4 and transport match fields to flow-record-1:
+
+Public
+
+flow record 48
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# match ip source address
+
+switch(config-flow-record)# match ip destination address
+
+switch(config-flow-record)# match ip protocol
+
+switch(config-flow-record)# match ip version
+
+switch(config-flow-record)# match transport source port
+
+switch(config-flow-record)# match transport destination port
+
+switch(config-flow-record)# description Record used for basic ipv4 traffic
+
+analysis
+The following example adds a TCP connection establishment time to flow record flow-record-1 as a collect
+field. During this process, ARC inspects the first few packets of each flow and only those packets are
+copied to the switch. Time measurement for established TCP flows is possible during the TCP connection
+establishment phase, and all three packets are received in the order.
+
+switch(config-flow-record)# collect application tcp establishment-time
+
+Adding counter and timestamp collect fields to flow-record-1:
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# collect counter packets
+
+switch(config-flow-record)# collect counter bytes
+
+switch(config-flow-record)# collect timestamp absolute first
+
+switch(config-flow-record)# collect timestamp absolute last
+Adding IPv4 match fields to flow record flow-record-1 using the ip keyword:
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# match ip source address
+
+switch(config-flow-record)# match ip destination address
+
+switch(config-flow-record)# match ip protocol
+
+switch(config-flow-record)# match ip version
+Adding IPv6 match fields to flow record flow-record-2:
+
+switch(config)# flow record flow-record-2
+
+switch(config-flow-record)# match ipv6 source address
+
+switch(config-flow-record)# match ipv6 destination address
+
+switch(config-flow-record)# match ipv6 protocol
+
+switch(config-flow-record)# match ipv6 version
+Adding IPv6 collect fields to flow record flow-record-2:
+
+switch(config)# flow record flow-record-2
+
+switch(config-flow-record)# collect application tcp establishment-time
+switch(config-flow-record)# collect egress-vlan
+switch(config-flow-record)# collect egress interface
+
+switch(config-flow-record)# collect forwarding-status
+
+switch(config-flow-record)# collect egress queue
+Adding IPv4 match fields to flow record flow-record1:
+
+Public
+
+flow record 49
+
+switch(config)# flow record flowrecord1
+
+switch(config-flow-record)# match ip source address
+
+switch(config-flow-record)# match ip destination address
+
+switch(config-flow-record)# match ip protocol
+
+switch(config-flow-record)# match ip version
+
+switch(config-flow-record)# match transport source port
+
+switch(config-flow-record)# match transport destination port
+
+switch(config-flow-record)# collect application name
+
+switch(config-flow-record)# collect counter bytes
+
+switch(config-flow-record)# collect counter packets
+
+switch(config-flow-record)# collect egress interface
+
+switch(config-flow-record)# collect egress queue
+
+switch(config-flow-record)# collect egress vlan
+
+switch(config-flow-record)# collect forwarding-status
+
+switch(config-flow-record)# collect application https url
+
+switch(config-flow-record)# collect application tcp establishment-time
+
+switch(config-flow-record)# collect timestamp absolute first
+
+switch(config-flow-record)# collect timestamp absolute last
+Removing the IPv4 destination address match field from flow record flow-record-1 using the ip keyword:
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# no match ip destination address
+Removing the IPv4 destination address match field from flow record flow-record-1 using the ipv4 keyword:
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# no match ipv4 destination address
+Removing the transport destination port match field from flow record flow-record-1:
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# no match transport destination port
+Adding queue congestion threshold to flow-record-1 as a collect field:
+
+switch(config)# flow record flow-record-1
+
+switch(config-flow-record)# collect egress queue threshold
+
+NOTE
+
+To export queue threshold attribute, capture-flows threshold profile should
+be configured on the egress interfaces. If threshold profile is not configured,
+congested flows can't be detected and the IEs values are exported as 0. If
+threshold profile is configured, but collect field is not configured, these IEs
+are not exported. So in ether case, congested flows are not known. For more
+information on features that use this command, refer to the Monitoring Guide for
+your switch model.
+
+Public
+
+flow record 50
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+The collect drop ingress‐exceptions parameter is introduced on 5420, 6200,
+6200, 8325H, 9300 and 10000 Switch series.
+
+Support for egress vlan and egress interface parameters is added on 8100 an
+d 8360 Switch series.
+
+10.16
+
+Command introduced on the 5420 switch series.
+
+10.15.1000
+
+The collect tcp establishment‐time parameter is introduced on 6200 Switch
+series.
+
+10.15
+
+10.13
+
+Command introduced on the 6200 and 9300S Switch series
+
+Added application https url and dns response‐code parameters.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+config‐flow‐
+record
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+flow statistics
+
+Syntax
+
+flow statistics [enable] | ingress-only
+
+no flow statistics [enable] | ingress-only
+
+Description
+
+Configures collection of statistics for flows that are tracked.
+
+Parameter
+
+ enable
+
+Description
+
+Enables collection of statistics for flows that are tracked.
+
+Public
+
+flow statistics 51
+
+Parameter
+
+ingress‐only
+
+Description
+
+Enables collection of statistics for flows that are tracked on ing
+ress interface‐only.
+
+CAUTION
+
+If any of the mutually exclusive configurations are present on the switch, flow
+statistics will not be enabled and an error message is displayed.
+
+NOTE
+
+Flow statistics gets operational only after you run the flow-tracking enable
+command; systems with flow-tracking already enabled must disable it before
+configuring the statistics and then re-enable, or toggle it afterwards.
+
+Examples
+
+Enable flow statistics collection:
+
+switch(config-flow-tracking)# flow statistics enable
+Disable flow statistics collection:
+
+switch(config-flow-tracking)#no flow-statistics enable
+Enabling flow collection on ingress interface only:
+
+switch(config-flow-tracking)# flow statistics ingress-only
+Disabling flow collection on ingress interface only:
+
+switch(config-flow-tracking)#no flow statistics ingress-only
+
+Command History
+
+Release
+
+10.16
+
+10.15
+
+Modification
+
+Command introduced on the 5420 switch series.
+
+Command introduced on 6200 Switch Series
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Public
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+flow statistics 52
+
+flow-tracking
+
+Syntax
+
+flow-tracking
+
+   enable
+
+   icmp-ageout
+
+   interface-flow-limit
+
+   flow
+
+statistics
+
+enable
+
+ingress-only
+
+   tcp-ageout
+
+   track
+
+icmp
+
+   udp-ageout
+
+   no ...
+
+Description
+
+Configures flow tracking for TCP and UDP flows, and optionally, ICMP flows. The no form of this command
+deletes the flow tracking configuration context.
+
+In order to optimize the flow removal process, flows that have aged-out are flushed in batches. A flow that
+has aged out is flushed only when the next batch processes. This can cause some flows to stay inactive for a
+slightly longer time than the value configured here.
+
+Parameter
+
+enable
+
+icmp‐ageout
+
+interface‐flow‐limit
+
+Description
+
+Enables flow tracking.
+
+Configures an age‐out time for ICMP flows, in seconds. Range:
+10 to 86400. Default: 15.
+
+Configures global concurrent flow limit for flow tracking enable
+d interfaces. Range: For 6200 Switch series, 64 to 5000. For 54
+20 Switch series, 64 to 10000. Default: none.
+
+flow
+
+Configures flow parameters.
+
+   statistics
+
+Configures flow statistics.
+
+enable
+
+Enables flow statistics collection.
+
+Public
+
+flow-tracking 53
+
+Parameter
+
+ingress‐only
+
+Description
+
+Restricts flow tracking to the ingress direction.
+
+NOTE
+The application visibility feature requires traffi
+c flows in both the ingress and egress direction
+s. Configuring this option prevents features that
+depend on bi‐directional flows from functionin
+g.
+
+Configures age‐out time for established TCP flows in seconds.
+Range: 120 to 86400. Default: 600.
+
+Enables tracking of ICMP flows, in addition to the TCP/UDP flow
+s tracked by default.
+
+Configures age‐out time for established UDP flows in seconds
+. Range: 30 to 86400. Default: 30.
+
+tcp‐ageout
+
+track icmp
+
+udp‐ageout
+
+Examples
+
+Configuring flow tracking:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)#
+Deleting flow tracking:
+
+switch(config)# no flow-tracking
+
+switch(config)#
+Enabling flow tracking:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# enable
+
+Disabling flow tracking:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# no enable
+
+Configuring an established ICMP flow age-out to 600 seconds:
+
+switch(config)# flow-tracking
+switch(config-flow-tracking)# icmp-ageout 600
+
+Removing an established ICMP flow age-out of 600 seconds:
+
+Public
+
+flow-tracking 54
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# no icmp-ageout 600
+
+Configuring an established TCP flow age-out to 1000 seconds:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# tcp-ageout 1000
+
+Removing an established TCP flow age-out of 1000 seconds:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# no tcp-ageout 1000
+
+Configuring an established UDP flow age-out to 1000 seconds:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# udp-ageout 1000
+
+Removing an established UDP flow age-out of 1000 seconds:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# no udp-ageout 1000
+
+Configuring global level interface flow limit to 256 interfaces:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# interface-flow-limit 256
+
+Removing global level interface flow limit to 256 interfaces:
+
+switch(config)# flow-tracking
+
+switch(config-flow-tracking)# no interface-flow-limit 256
+
+Command History
+
+Release
+
+10.17
+
+10.16
+
+10.15
+
+Modification
+
+The flow statistics ingress‐only parameter was introduced.
+
+Command introduced on the 5420 switch series.
+
+Command introduced on 6200 Switch Series
+
+Public
+
+flow-tracking 55
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+ip|ipv6 flow monitor (interface)
+
+Syntax
+
+[no] ip|ipv6 flow monitor (interface)
+
+Description
+
+Enable flow monitoring on inbound and outbound interfaces by assigning a flow monitor to that interface.
+Only physical interfaces and LAG interfaces can be monitored. A flow monitor cannot be applied to an
+interface that is part of a LAG. If an unsupported application is attempted, an error message will be
+displayed. If the flow monitor is associated with a flow record that contains application fields as collect fields,
+then Application Recognition should be enabled on the same interface.
+
+The [no] form of command disables the flow monitoring.
+
+Examples
+
+Enable a flow monitor configuration named flow-monitor-1 for IPv4 traffic on a physical interface.
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# ip flow monitor flow-monitor-1 in
+Associate a flow monitor configuration named flow-monitor-2 for IPv4 traffic on a LAG interface.
+
+switch(config)# interface lag 1
+switch(config-if)# ip flow monitor flow-monitor-2 in
+Associate a flow monitor configuration named flow-monitor-3 for IPv6 traffic on a physical interface.
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# ip flow monitor flow-monitor-3 in
+Associate a flow monitor configuration named flow-monitor-4 for IPv6 traffic on a physical interface.
+
+switch(config)# interface lag 1
+switch(config-if)# ipv6 flow monitor flow-monitor-1 in
+
+Public
+
+ip|ipv6 flow monitor (interface) 56
+
+Command History
+
+Release
+
+10.16
+
+10.15
+
+Modification
+
+Command introduced on the 5420 switch series.
+
+Command introduced on the 6200 Switch Series
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+config‐flow‐
+monitor
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show flow exporter
+
+Syntax
+
+show flow exporter [<name>]
+
+[statistics]
+
+[vsx-peer]
+
+Description
+
+Displays flow exporter configuration and status. When no exporter name is specified, the output of this
+command displays information for all flow exporters.
+
+The output of this command can indicate the following status types:
+
+•  Accepted
+
+•  Rejected (Internal error: exporter does not exist)
+
+•  Rejected (Internal error: destination type does not exist)
+
+•  Rejected (Destination type is hostname or IP address, but no destination is specified)
+
+Public
+
+show flow exporter 57
+
+•  Rejected (Destination type is hostname or IP address, but the specified hostname or IP address is
+
+invalid)
+
+•  Rejected (Destination type is Traffic Insight, but no destination is specified)
+
+•  Rejected (Destination type is Traffic Insight, but the specified Traffic Insight instance does not exist)
+
+•  Rejected (Destination type is Traffic Insight, but the specified Traffic Insight instance is not enabled)
+
+•  Rejected (Destination type is Traffic Insight, but the specified Traffic Insight instance source is not IPFIX)
+
+•  Rejected (Internal error: destination type is Traffic Insight, but the specified Traffic Insight instance is
+
+invalid)
+
+•  Rejected (Internal error: the specified destination VRF is invalid)
+
+•  Rejected (Internal error: the specified destination VRF is not ready)
+
+Parameter
+
+<name>
+
+statistics
+
+vsx‐peer
+
+Examples
+
+Description
+
+Name of the flow exporter.
+
+Adds statistical information about the flow exporter to the outp
+ut.
+
+Displays flow collector configuration for the VSX peer.
+
+Display the configuration of all flow exporters:
+
+switch# show flow exporter
+
+----------------------------------------------------------------------------
+
+----
+
+Flow exporter 'exporter-1'
+
+----------------------------------------------------------------------------
+
+----
+
+Reports sent            : 0
+Display information with no flow exporters configured
+
+switch# show flow exporter
+
+No flow exporters configured.
+switch# show flow exporter statistics
+No flow exporters configured.
+Display a flow exporter information with TI as a destination
+
+Public
+
+show flow exporter 58
+
+switch# show flow exporter exporter-5
+
+----------------------------------------------------------------------------
+
+----
+
+Exporter Name           : exporter-5
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : Exporter configured with TI as the destination
+
+Status                  : Rejected (Destination type is Traffic Insight,
+
+but the specified Traffic Insight instance does not exist)
+
+Export Protocol         : ipfix
+
+Destination Type        : Traffic Insight
+
+Destination             : instance-1
+
+Transport Configuration
+
+Protocol            : UDP
+
+Port                : 2055
+Display information for a flow exporter that has multiple destinations of different types configured and
+hostname-or-ip-addr is specified as the destination type to use.
+
+switch# show flow exporter exporter-6
+
+----------------------------------------------------------------------------
+
+----
+
+Flow exporter 'exporter-6'
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : TI and hostname configured, but type is hostname-
+
+or-ip-addr
+
+Status                  : Accepted
+
+Export Protocol         : ipfix
+
+Destination Type        : Hostname or IP address
+
+Destination             : collector-1
+
+Destination VRF         : mgmt
+
+Transport Configuration
+
+Protocol            : UDP
+
+Port                : 4821
+
+Command History
+
+Release
+
+10.16
+
+10.15
+
+Modification
+
+Command introduced on the 5420 Switch series.
+
+Command introduced on the 6200 Switch series
+
+Public
+
+show flow exporter 59
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show flow monitor
+
+Syntax
+
+show flow monitor
+
+[statistics | information-elements]
+
+show flow monitor <MONITOR-NAME>
+
+[statistics]
+
+Description
+
+Displays flow monitor configuration and status. When no monitor name is specified, the output of this
+command displays information for all flow monitors.
+
+Parameter
+
+<name>
+
+statistics
+
+Description
+
+Name of the flow monitor.
+
+Includes the statistics parameter to display additional flow and
+cache statistics.
+
+information-elements
+
+Displays the configured information elements for the flow moni
+tor.
+
+Usage
+
+The output of this command can indicate the following status types:
+
+•  Possible status types for all switches
+
+◦  Accepted
+
+Public
+
+show flow monitor 60
+
+◦  Rejected (Internal error: monitor does not exist)
+
+◦  Rejected (The state of one or more of the assigned flow exporters is rejected)
+
+•  Possible Status types for 4100i, 5420 ,6000, 6100, 6200, 6300, 6400, 8100, 8325 ,8325P, 8325H,
+
+8360, 9300, 9300S, and 10040 Switch series:
+
+◦  Rejected (A record must be assigned to the monitor, but no record is assigned)
+
+◦  Rejected (The state of the assigned record is rejected)
+
+◦  Rejected (Internal error: failure in processing the record configuration)
+
+The possible statistics for a flow monitor are:
+
+Statistics name
+
+Meaning
+
+Switches that support this stat
+istic
+
+Current Entries
+
+Flows Added
+
+Total Flows Terminated
+
+Flows Aged
+
+Active Timeout
+
+Inactive Timeout
+
+End of Flow Detected
+
+Current number of flows in the flow cach
+e for this flow monitor
+
+Total number of flows added to the flow
+cache for this flow monitor since it was c
+reated
+
+5420
+
+6200
+
+5420
+
+6200
+
+Total number of flows removed from the f
+low cache for this flow monitor since it
+was created due to any flow end reason
+
+5420
+
+6200
+
+Number of flows removed from the flow
+cache for this flow monitor since it was c
+reated due to active or inactive timeout
+
+5420
+
+6200
+
+Number of flows removed from the flow
+cache for this flow monitor since it was c
+reated due to active cache timeout.
+
+Number of flows removed from the flow
+cache for this flow monitor since it was c
+reated due to inactive cache timeout.
+
+5420
+
+6200
+
+Number of flows removed from the flow
+cache for this flow monitor since it was c
+reated due to the detection of signals in
+dicating the end of the flow. For exampl
+e, a TCP FIN/RST flag.
+
+Forced End
+
+Number of flows removed from the flow
+cache for this flow monitor since it was
+created due to some external event. For
+
+5420
+
+6200
+
+Public
+
+show flow monitor 61
+
+Statistics name
+
+Meaning
+
+Switches that support this stat
+istic
+
+example, the shutdown of a flow monito
+r.
+
+Current Dropped Entries
+
+Current number of dropped flows in the f
+low cache for this flow monitor
+
+Current Forwarded Entries
+
+Current number of forwarded flows in th
+e flow cache for this flow monitor
+
+Examples
+
+Display information for a flow monitor on 6200, 6300, 6400, 8100 or 8360 Switch series:
+
+switch# show flow monitor 'monitor-1
+
+----------------------------------------------------------------------------
+
+----
+
+Flow monitor 'monitor-1'
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : Used for IPv4 traffic analysis
+
+Status                  : Accepted
+
+Flow Record             : record-1
+
+Flow Exporter(s)        : exporter-1, exporter-2
+
+Cache Configuration
+
+Inactive Timeout    : 1800
+
+Active Timeout      : 300
+
+----------------------------------------------------------------------------
+
+----
+Display information for a flow monitor on a 5420, 9300, 9300S, 10040 Switch series:
+
+switch# show flow monitor monitor-1
+
+----------------------------------------------------------------------------
+
+----
+
+Flow monitor 'monitor-1'
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : Used for IPv4 traffic analysis
+
+Status                  : Accepted
+
+Flow Record             : record-1
+
+Flow Exporter(s)        : exporter-1
+
+Cache Configuration
+
+Inactive Timeout    : 1800
+
+Active Timeout      : 300
+
+Public
+
+show flow monitor 62
+
+Display information and statistics for a flow monitor on 5420, 6200, 6300, 6400, 8100 or 8360 Switch
+series:
+
+show flow monitor statistics
+
+----------------------------------------------------------------------------
+
+----
+
+Flow monitor 'monitor-1'
+
+----------------------------------------------------------------------------
+
+----
+
+Current Entries          : 2
+
+Flows Added              : 6
+
+Total Flows Terminated   : 4
+
+  Flows Aged             : 2
+
+    Active Timeout       : 1
+
+    Inactive Timeout     : 1
+
+  End of Flow Detected   : 2
+
+  Forced End             : 0
+
+  Flows Aged             : 4
+
+Command History
+
+Release
+
+10.16
+
+10.15
+
+Modification
+
+Command introduced on the 5420 Switch series.
+
+Command introduced on the 6200 Switch series.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+config‐flow‐
+monitor
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show flow record
+
+Syntax
+
+show flow record [<name>]
+
+Public
+
+show flow record 63
+
+Description
+
+Display flow record configuration and status. When no record name is specified, the output of this command
+displays information for all flow records.
+
+The output of this command can indicate the following status types:
+
+•  Accepted
+
+•  Rejected (Internal error: failed to process record)
+
+•  Rejected (Mix of IPv4 and IPv6 match fields is not allowed. Specify match fields of the same IP version
+
+(IPv4 or IPv6))
+
+Parameter
+
+<name>
+
+Examples
+
+NOTE
+
+Description
+
+Name of the flow record.
+
+IPv6 related commands are only applicable to switches that support IPv6
+protocol.
+
+Display the configuration of a flow record named flow-record-1.
+
+switch# show flow record record-1
+
+----------------------------------------------------------------------------
+
+----
+
+Flow record  'record-1'
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : Used for IPv4 traffic analysis
+
+Status                  : Accepted
+
+Match Fields
+
+    ipv4 destination address
+
+    ipv4 protocol
+
+    ipv4 source addressipv4 version
+
+    transport destination port
+
+    transport source port
+
+Collect Fields
+    application name
+counter bytes
+
+    counter packets
+
+    application https URL
+
+Public
+
+show flow record 64
+
+drop ingress-exceptions
+
+Display the information of a specific flow record.
+
+switch# show flow record record-1
+
+----------------------------------------------------------------------------
+
+----
+
+Flow record  'record-1'
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : Used for IPv4 traffic analysis
+
+Status                  : Accepted
+
+Match Fields
+
+    ipv4 destination address
+
+    ipv4 protocol
+
+    ipv4 source address
+
+    ipv4 version
+
+    transport destination port
+
+    transport source port
+
+Collect Fields
+
+    application https url
+
+    counter bytes
+
+    counter packets
+Display information for all flow records
+
+switch# show flow record
+
+----------------------------------------------------------------------------
+
+----
+
+Flow record  'record-1'
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : Used for IPv4 traffic analysis
+Status                  : Accepted
+
+Match Fields
+
+ipv4 destination address
+
+ipv4 protocol
+
+ipv4 source address
+
+ipv4 version
+
+transport destination port
+transport source port
+
+Collect Fields
+
+counter bytes
+
+counter packets
+
+Public
+
+show flow record 65
+
+----------------------------------------------------------------------------
+
+----
+
+Flow record  'record-2'
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : Used for IPv6 traffic analysis
+
+Status                  : Accepted
+
+Match Fields
+
+ipv6 destination address
+
+ipv6 protocol
+
+ipv6 source address
+
+ipv6 version
+
+transport destination port
+
+transport source port
+
+Collect Fields
+
+application name
+
+counter bytes
+
+counter packets
+
+```
+Display information for a specific flow record
+
+switch# show flow record record-3
+
+----------------------------------------------------------------------------
+
+----
+
+Flow record  'record-3'
+
+----------------------------------------------------------------------------
+
+----
+
+Description             : Used for IPv4 traffic analysis
+
+destination address, protocol, transport destination port, and transport
+
+source port.)
+
+Match Fields
+
+ipv4 destination address
+
+ipv4 protocol
+
+ipv4 source address
+
+Collect Fields
+
+counter bytes
+
+counter packets
+Display information with no flow records configured
+
+switch# show flow record
+No flow records configured
+
+Public
+
+show flow record 66
+
+Command History
+
+Release
+
+10.17
+
+10.16
+
+10.15
+
+Command Information
+
+Modification
+
+The output of this command includes drop ingress‐exceptions information fo
+r the 5420 and 6200 Switch series.
+
+Command introduced on the 5420 switch series.
+
+Command introduced on the 6200 Switch series
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show flow-tracking
+
+Syntax
+
+show flow-tracking
+
+Description
+
+Displays flow-tracking and statistics collection configurations and status.
+
+Examples
+
+Display the configuration of role based flow tracking on a 5420 or 6200 Switch series.
+
+switch (config)# show flow-tracking
+
+Flow Tracking Global Configuration
+
+Configuration status            : Enabled
+
+Operational status              : Enabled
+
+Failure Reason                  : NA
+
+UDP Ageout                      : 60  (Seconds)
+TCP Ageout                      : 600 (Seconds)
+
+ICMP Ageout                     : 15  (Seconds)
+
+Interface Flow limit            : None
+
+Tracked Protocols               : TCP, UDP
+
+Public
+
+show flow-tracking 67
+
+Alert Thresholds:
+
+     Aggregate active flows percentage : 50
+
+     Endpoint active flows             : 250
+
+     Endpoint new connection initiated : 50
+
+     Endpoint new connection accepted  : 60
+
+Statistics Collection
+
+  Configuration Status         : Enabled
+
+  Operational Status           : Enabled
+
+  Ingress-only                 : Enabled
+
+  Failure Reason               : NA
+
+Flow Tracking Port Configuration
+
+Interface         App Recognition      IPFIX         Operation Status
+
+-----------        -------------      ----------       ----------
+
+1/1/1              Disabled           Disabled         Disabled
+
+1/1/2              Disabled           Disabled         Disabled
+
+1/1/3              Disabled           Disabled         Disabled
+
+1/1/4              Disabled           Disabled         Disabled
+
+1/1/5              Disabled           Disabled         Disabled
+
+1/1/6              Disabled           Disabled         Disabled
+
+1/1/7              Disabled           Disabled         Disabled
+
+1/1/8              Disabled           Disabled         Disabled
+
+1/1/9              Disabled           Disabled         Disabled
+
+1/1/10             Disabled           Disabled         Disabled
+
+1/1/11             Disabled           Disabled         Disabled
+
+1/1/12             Disabled           Disabled         Disabled
+
+1/1/13             Disabled           Disabled         Disabled
+
+1/1/14             Disabled           Disabled         Disabled
+
+1/1/15             Enabled            Disabled         Enabled
+
+1/1/16             Disabled           Disabled         Disabled
+
+1/1/17             Disabled           Disabled         Disabled
+
+1/1/18             Disabled           Disabled         Disabled
+
+1/1/19             Disabled           Disabled         Disabled
+1/1/20             Disabled           Disabled         Disabled
+
+1/1/21             Disabled           Disabled         Disabled
+
+1/1/22             Disabled           Disabled         Disabled
+
+1/1/23             Disabled           Disabled         Disabled
+
+1/1/24             Disabled           Disabled         Disabled
+
+1/1/25             Disabled           Disabled         Disabled
+
+1/1/26             Disabled           Disabled         Disabled
+
+1/1/27             Disabled           Disabled         Disabled
+
+1/1/28             Disabled           Disabled         Disabled
+switch(config)# show flow-tracking
+
+Flow Tracking Global Configuration
+
+Public
+
+show flow-tracking 68
+
+Configuration status            : Enabled
+
+Operational status              : Enabled
+
+Failure Reason                  : NA
+
+UDP Ageout                      : 30  (Seconds)
+
+TCP Ageout                      : 600 (Seconds)
+
+ICMP Ageout                     : 15  (Seconds)
+
+Interface Flow limit            : None
+
+Tracked Protocols               : TCP, UDP
+
+Statistics Collection
+
+   Configuration Status         : Enabled
+
+   Operational Status           : Enabled
+
+   Ingress-only                 : Enabled
+
+   Failure Reason               : NA
+
+Flow Tracking Port Configuration
+
+Interface       App Recognition    Reflexive ACL         IPFIX
+
+Operation Status
+
+-----------     -----------       ----------------      ----------
+
+----------
+
+1/1/1              Enabled             Disabled           Enabled
+
+Enabled
+
+1/1/2              Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/3              Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/4              Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/5              Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/6              Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/7              Enabled             Disabled           Enabled
+
+Enabled
+1/1/8              Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/9              Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/10             Disabled            Disabled           Disabled
+
+Disabled
+
+1/1/13             Enabled             Disabled           Enabled
+
+Enabled
+
+1/1/14             Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/15             Enabled             Disabled           Disabled
+
+Public
+
+show flow-tracking 69
+
+Enabled
+
+1/1/16             Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/17             Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/18             Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/19             Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/20             Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/21             Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/23             Enabled             Disabled           Disabled
+
+Enabled
+
+1/1/24             Enabled             Disabled           Enabled
+
+Enabled
+
+1/1/28             Disabled            Disabled           Disabled
+
+Disabled
+
+Command History
+
+Release
+
+10.17
+
+10.16
+
+10.15
+
+Command Information
+
+Modification
+
+Added Ingress‐only information for Statistics Collection.
+
+Command introduced on the 5420 switch series.
+
+Command introduced on 6200 Switch Series.
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show tech ipfix
+
+Public
+
+show tech ipfix 70
+
+Syntax
+
+show tech ipfix
+
+Description
+
+Shows the IPFIX configuration settings.
+
+If applicable source IP address or source interface is configured for the IPFIX protocol, that configuration is
+used.
+
+For 6200, 6300,6400,8360,8100 and 9300S Switch Series, If a valid source is configured, the exporter
+sends flows to an external collector using the effective configured source IP address as the source IP address
+of the flow packets. In the context of this application, a valid source IP address is any IP address configured
+in the exporter's VRF namespace.
+
+Examples
+
+The example shows the IPFIX configuration settings.
+
+switch#show tech ipfix
+
+====================================================
+
+Show Tech executed on Tue Apr 11 02:43:06 2023
+
+====================================================
+
+====================================================
+
+[Begin] Feature ipfix
+
+====================================================
+
+*********************************
+
+Command : show flow exporter
+
+*********************************
+
+----------------------------------------------------------------------------
+
+----
+
+Flow exporter 'ipfix'
+
+----------------------------------------------------------------------------
+
+----
+
+Status                  : Accepted
+Export Protocol         : ipfix
+
+Destination Type        : Traffic Insight
+
+Destination             : t1
+
+Transport Configuration
+
+Protocol            : udp
+
+Port                : 4739
+
+----------------------------------------------------------------------------
+
+----
+
+Flow exporter 'V6E1'
+
+----------------------------------------------------------------------------
+
+----
+
+....
+
+Public
+
+show tech ipfix 71
+
+====================================================
+
+[End] Feature ipfix
+
+====================================================
+
+Command History
+
+Release
+
+10.16
+
+10.15
+
+Modification
+
+Command introduced on the 5420 switch series.
+
+Command introduced. on 9300S and 6200 Switch Series
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show ip flow-table-utilization
+
+Syntax
+
+show ip flow-table-utilization
+
+Description
+
+Displays the current IP flow table utilization per linecard (LC), including both the maximum capacity and the
+current number of active flows.
+
+Examples
+
+Configuring the endpoint new connections accepted alert threshold:
+
+switch# show ip flow-table-utilization
+
+Line Modules
+
+=================
+Slot name | flow-table capacity  | flow-count
+----------|----------------------|------------
+
+1/1       | 28672                | 15000
+
+1/3       | 28672                |  5000
+
+Public
+
+show ip flow-table-utilization 72
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show IPv4 flow endpoint statistics
+
+Syntax
+
+show ip flows endpoint <A.B.C.D> [vrf <vrf_name>]
+
+Description
+
+Displays the number of active flows of VRF with name vrf_name, the flows observed in the last 30 seconds,
+and details about new connections initiated and accepted by this endpoint during the same period. If the
+vrf_name is not specified, default VRF active flows are displayed.
+
+Parameter
+
+IPv4 address
+
+Description
+
+Show endpoint statistics for the IPv4 address.
+
+Required
+
+vrf
+
+Display the routes in the VRF.
+
+Optional
+
+vrf_name
+
+Specify the VRF name.
+
+Public
+
+show IPv4 flow endpoint statistics 73
+
+Parameter
+
+Description
+
+Required
+
+NOTE
+
+The output displays the following information:
+
+•  VRF: The specified vrf name.
+
+•  Endpoint address: The specified IPv4 address.
+
+•  Active flows: Number of active flows for the endpoint.
+
+•  Flows seen last 30sec: Number of flows observed in the last 30 seconds.
+
+•  No of new connections (last-30sec):
+
+◦
+
+Initiated: Number of new connections initiated by the endpoint in the
+last 30 seconds.
+
+◦  Accepted: Number of new connections accepted for the endpoint in the
+
+last 30 seconds.
+
+Examples
+
+This example shows the number of active flows of the default VRF:
+
+switch# show ip flows endpoint 192.168.1.1
+
+VRF                               : default
+
+Endpoint address                  : 192.168.1.1
+
+Active flows                      : 10
+
+Flows seen last 30sec             : 20
+
+Number of new connections (last-30sec):
+   Initiated                      : 2
+
+   Accepted                       : 0
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced.
+
+Public
+
+show IPv4 flow endpoint statistics 74
+
+Command Information
+| Platforms | Command context | Authority |     |     |
+| --------- | --------------- | --------- | --- | --- |
+5420 Manager ( #) Administrators or local user group members with execution righ
+ts for this command.
+6200
+
+show IPv6 flow session statistics
+Syntax
+show ipv6 flows endpoint <A.B.C.D> [vrf <vrf_name>]
+Description
+Displays the number of active flows of VRF with name vrf_name, the flows observed in the last 30 seconds,
+and details about new connections initiated and accepted by this endpoint during the same period. If the
+vrf_name is not specified, default VRF active flows are displayed.
+| Parameter |     | Description |     |     |
+| --------- | --- | ----------- | --- | --- |
+Show endpoint statistics for the IPv6 address.
+IPv6 address
+Required
+| vrf |     | Display the routes in the VRF. |     |     |
+| --- | --- | ------------------------------ | --- | --- |
+Optional
+| vrf_name |        | Specify the VRF name. |                                   |     |
+| -------- | ------ | --------------------- | --------------------------------- | --- |
+|          | Public |                       | show IPv6 flow session statistics | 75  |
+
+Parameter
+
+Description
+
+Required
+
+NOTE
+
+The output displays the following information:
+
+•  VRF: The specified vrf name.
+
+•  Endpoint address: The specified IPv6 address.
+
+•  Active flows: Number of active flows for the endpoint.
+
+•  Flows seen last 30sec: Number of flows observed in the last 30 seconds.
+
+•  No of new connections (last-30sec):
+
+◦
+
+Initiated: Number of new connections initiated by the endpoint in the
+last 30 seconds.
+
+◦  Accepted: Number of new connections accepted for the endpoint in the
+
+last 30 seconds.
+
+Examples
+
+This example shows the number of active flows of the specified VRF:
+
+switch# show ipv6 flows endpoint 2001::1 vrf red
+
+VRF                               : red
+
+Endpoint address                  : 2001::1
+
+Active flows                      : 10
+
+Flows seen last 30sec             : 20
+
+Number of new connections (last-30sec):
+   Initiated                      : 2
+
+   Accepted                       : 0
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced.
+
+Public
+
+show IPv6 flow session statistics 76
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Queue Monitoring
+
+AOS-CX provides multiple features that assist with monitoring queuing behavior such as Queue Monitoring.
+
+The Queue Monitoring feature allows the switch to collect queue statistics at specific time intervals,
+including queue depth, and display this information as a queue statistics history. This data provides a history
+of activity for each monitored queue and can be viewed directly on the switch. These aggregate statistics
+can be used to monitor network health, troubleshoot network issues, and identify normal network behavior
+patterns and performance anomalies. The feature is disabled by default, but can be enabled on a maximum
+of 52 interfaces per switch. For more information on enabling this feature, see queue-monitor.
+
+Queue statistics history data can be displayed in the command-line interface as a list or a histogram
+reflecting the last eight hours of queue statistics history, or as a table showing the previous five minutes of
+queue statistics history.
+
+As performance anomalies are identified, the interface queue experiencing the anomaly can further analyzed
+to identify the cause of the behavior. For example, traffic patterns for flows competing for network
+bandwidth can be examined to determine if corrective action is needed to address potential problems.
+
+If no queue depth is specified, the output of the show interface queue-monitor command displays statistics
+for queues with a minimum depth of one kbyte, which includes all queues which have reached a depth
+greater than zero.
+
+Subtopics
+
+Queue statistics history
+Queue depth
+Data retention limits
+Queue monitoring commands
+
+Queue statistics history
+
+Queue monitoring stores collected queue depth data in a time-series database within the switch. This data,
+accessible on the switch for reviewing the queue statistics history, helps with identifying network issues or
+behavior patterns.
+
+Public
+
+Queue Monitoring 77
+
+Queue depth
+
+Queue depth is the memory size required to buffer packets in a queue during congestion. The value changes
+depending on the arrival rate of the packets destined to egress a given queue, and the rate at which that
+queue is able to transmit packets.
+
+Data retention limits
+
+Data retention limits are enforced within the switch by reducing time precision of the stored data within
+specific windows of time. The retention duration for queue statistics data is derived from the frequency of
+the polling interval.
+
+Table 1. Queue monitoring data retention schedule
+Polling interval
+
+Maximum statistic age
+
+1 seconds
+
+5 seconds
+
+10 seconds
+
+30 seconds
+
+60 seconds
+
+8 hours
+
+8 hours
+
+8 hours
+
+8 hours
+
+8 hours
+
+NOTE
+
+The switch has limited storage for retaining information. For longer monitoring
+durations, use an external monitor with the queue monitoring feature to collect
+and store data.
+
+Queue monitoring commands
+
+Subtopics
+
+clear queue-monitor interface
+queue-monitor
+
+Public
+
+Queue depth 78
+
+show interface queue-monitor
+show interface queue-monitor status
+show queue-monitor status
+
+clear queue-monitor interface
+
+Syntax
+
+clear queue-monitor interface [<IFNAME>|<IFRANGE>]
+
+Description
+
+Clear the data collected on an interface since enabling queue monitoring. If no interfaces are specified,
+perform a clear of data collected on all interfaces with queue monitoring enabled.
+
+Parameter
+
+<IFNAME>
+
+Description
+
+Name of the interface.
+
+Format: <MEMBER>/<SLOT>/<PORT>
+
+<IFRANGE>
+
+Range of interfaces.
+
+Format: <MEMBER>/<SLOT>/<PORT>‐<MEMBER>/<SLOT>
+/<PORT>
+
+Examples
+
+Clearing queue monitor data collected on interface 1/1/1:
+
+config)# clear queue-monitor interface 1/1/1
+Warning: clearing collected queue monitor statistics will be reflected
+
+in all CLI sessions, any agents running in the analytics engine, and any
+
+external systems monitoring switch statistics.
+
+Continue (y/n)? y
+Clearing queue monitor data collected on interfaces 1/1/1 and 1/1/2:
+
+config)# clear queue-monitor interface 1/1/1-1/1/2
+
+Warning: clearing collected queue monitor statistics will be reflected
+in all CLI sessions, any agents running in the analytics engine, and any
+
+external systems monitoring switch statistics.
+
+Continue (y/n)? y
+Clearing all queue monitor data collected on all interfaces:
+
+Public
+
+clear queue-monitor interface 79
+
+config)# clear queue-monitor interface
+
+Warning: clearing collected queue monitor statistics will be reflected
+
+in all CLI sessions, any agents running in the analytics engine, and any
+
+external systems monitoring switch statistics.
+
+Continue (y/n)? y
+
+Related Commands
+
+Command
+
+Description
+
+queue‐monitor
+
+This command enables the queue monitoring feature, allowing the switch to coll
+ect queue statistics at 10‐second time intervals. These aggregate statistics ca
+n be used to monitor network health, troubleshoot network issues, and identify
+normal network behavior patterns and performance anomalies. This feature is di
+sabled by default, but can be enabled on a maximum of 52 interfaces per switch
+.
+
+Command History
+
+Release
+
+10.17
+
+Command Information
+
+Modification
+
+Command introduced on 5420, 6200, 6300 and 6400 Switch series.
+
+Platforms
+
+Command context
+
+Authority
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+5420
+
+config
+
+6200 (except f
+or JL724A, JL
+725A, JL726A
+, JL727A, JL7
+28A)
+
+queue-monitor
+
+Public
+
+queue-monitor 80
+
+Syntax
+
+queue-monitor
+
+no queue-monitor
+
+Description
+
+This command enables the queue monitoring feature, allowing the switch to collect queue statistics.
+then display this information as a queue statistics history. These aggregate statistics can be used to
+monitor network health, troubleshoot network issues, and identify normal network behavior patterns and
+performance anomalies. This feature is disabled by default, but can be enabled on a maximum of 52
+interfaces per switch.
+
+Examples
+
+Enabling the queue monitoring feature on interface 1/1/1:
+
+(config)# interface 1/1/1
+
+(config-if)# queue-monitor
+
+Disabling the queue monitoring feature on interface 1/1/1:
+
+(config)# interface 1/1/1
+
+(config-if)# no queue-monitor
+
+Related Commands
+
+Command
+
+Description
+
+show queue‐monitor
+status
+
+This command is used to view the global state of the queue monitor feature. Ou
+tput includes the memory consumed by the feature, the statistics being monito
+red for collection, and the interfaces currently enabled for monitoring.
+
+Command History
+
+Release
+
+10.17
+
+Command Information
+
+Modification
+
+Command introduced on 5420, 6200, 6300 and 6400 Switch series.
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+queue-monitor 81
+
+Platforms
+
+Command context
+
+Authority
+
+6200 (except f
+or JL724A, JL
+725A, JL726A
+, JL727A, JL7
+28A)
+
+show interface queue-monitor
+
+Syntax
+
+show interface {<IFNAME>} queue-monitor
+
+histogram [filter  [since <1-10000> days|hours|minutes|seconds][type {queue-
+
+depth}
+
+            ]
+
+list [filter [since <1-10000> days|hours|minutes|seconds][threshold {kbps
+
+<1-4294967295>}|{kbytes <1-4294967295>}|{packets <1-4294967295>}] [type
+
+{queue-depth [
+
+            ]] [slot <slot-id>]
+
+table [filter [threshold {kbps <1-4294967295>}|{kbytes <1-4294967295>}|
+
+{packets <1-4294967295>}] [type {queue-depth}
+
+            ]]
+
+Description
+
+Display queue statistics history in the CLI as either a list or a histogram, or as a table, showing the previous
+five minutes of queue statistics history.
+
+Parameter
+
+Description
+
+interface [<IFNAME>]
+
+Specifies the name of an Ethernet port or LAG on the switch. If
+the optional <IFNAME> parameter is omitted, the output of this
+command displays all queue statistic data for all interfaces.
+
+Format: <MEMBER>/<SLOT>/<PORT> or lag <ID>
+
+histogram|list|table
+
+Specifies the output format for queue monitor output.
+
+•  histogram ‐ Queue statistics history is presented in histog
+
+•
+
+ram format for the last 8 hours.
+list ‐ Queue statistics history is presented in the list form
+at for the last 8 hours
+
+Public
+
+show interface queue-monitor 82
+
+Parameter
+
+Description
+
+   filter
+
+•  table ‐ Queue statistics history is presented in tabular for
+
+mat for the last 5 minutes.
+
+The list format is able to display all of the collected queue stati
+stics history data when no filters are applied. To limit the inform
+ation displayed in the output of this command, use the filter pa
+rameters to filter the output to the format and data you require.
+
+since <1‐10000>
+days|hours|minutes|seconds
+
+Show events no older than a specified age, measured in second
+s, days, hours or minutes.
+
+type {queue‐depth}
+
+   threshold
+{kbps|kbytes|packets <1‐
+4294967295>}
+
+Examples
+
+Filter queue monitoring data by the specified filter type. If you
+do not specify a filter type, the type defaults to queue‐depth
+. To see filtered output for other statistics types, you must speci
+fy the type.
+
+•  queue‐depth: Show queue depth data.
+
+Show data that exceeds a specified threshold in kilobytes, num
+ber of packets, or kilobits per second.
+
+Displaying the queue statistics history data for all monitored interfaces in list format:
+
+switch# show interface queue-monitor list
+
+Time Range: 8 hours (2023-08-07 09:11:30 to 2023-08-08 17:11:30 (UTC+00:00))
+
+Time                 Interface  Queue  Statistic              Value
+
+----------------------------------------------------------------------------
+
+----
+
+2023-08-08 17:11:10  1/1/8      4      Queue Depth            12345 kbytes
+
+2023-08-08 17:11:10  1/1/9      4      Queue Depth            5432 kbytes
+
+2023-08-08 17:11:20  1/1/8      4      Queue Depth            12345 kbytes
+2023-08-08 17:11:20  1/1/9      4      Queue Depth            5432 kbytes
+
+2023-08-08 17:11:30  1/1/8      4      Queue Depth            12345 kbytes
+
+2023-08-08 17:11:30  1/1/9      4      Queue Depth            5432 kbytes
+The following example displays a portion of output of the show interface 1/1/8 queue-monitor command,
+showing queue statistics history data in tabular format for interface 1/1/8 with a min-depth of 2 kbytes.
+
+switch# show interface 1/1/8 queue-monitor table min-depth kbytes 2
+
+1/1/8 Statistics History
+Collection Interval: 10 seconds
+Time Range: 2023-08-08 17:07:00 to 2023-08-08 17:12:00 (UTC)
+
+Min-Depth Filter: 2 KB
+
+                          Queue Depth - bytes
+
+Public
+
+show interface queue-monitor 83
+
+Time (s)       Q0       Q1       Q2       Q3       Q4       Q5
+
+Q6       Q7
+
+----------------------------------------------------------------------------
+
+----
+
+-300            -        -        -        -        -        -
+
+-        -
+
+-295            -        -        -        -        -        -
+
+-        -
+
+-290            -        -        -        -        -        -
+
+-        -
+
+-285            -        -        -        -        -        -
+
+-        -
+
+-280            -        -        -        -        -        -
+
+-        -
+
+-275            -        -        -        -        -        -
+
+-        -
+
+-270            -        -        -        -        -        -
+
+-        -
+
+-265            -        -        -        -        -        -
+
+-        -
+
+-260            -        -        -        -        -        -
+
+-        -
+
+-255            -        -        -        -        -        -
+
+-        -
+
+-250            -     2078        -        -        -        -
+
+-        -
+
+-245            -     9914        -        -        -        -
+
+-        -
+
+-240            -   171102        -        -        -        -
+
+-        -
+
+-235            -   996262        -        -        -        -
+
+-        -
+-230            -     5444        -        -        -        -
+
+-        -
+
+-225            -        -        -        -        -        -
+
+-        -
+
+-220            -        -        -        -        -        -
+
+-        -
+
+-215            -        -        -        -        -        -
+
+-        -
+
+-210            -        -        -        -        -        -
+
+-        -
+
+-205            -        -        -        -        -        -
+
+Public
+
+show interface queue-monitor 84
+
+-        -
+
+-200            -        -        -        -        -        -
+
+-        -
+
+...
+Displaying the queue statistics history data for interface 1/1/8 in histogram format.
+
+switch(config)# show interface 1/1/8 queue-monitor histogram
+
+1/1/8 Statistics History
+
+Time Range: 2023-08-08 09:12:15 to 2023-08-08 17:12:15 (UTC)
+
+Samples per Queue: 13
+
+                         Count at Depth
+
+Depth (KB)        Q0      Q1      Q2      Q3      Q4      Q5      Q6      Q7
+
+----------------------------------------------------------------------------
+
+0                 13      13      13      13       7      13      13      10
+
+1-64               0       0       0       0       6       0       0       3
+
+65-128             0       0       0       0       0       0       0       0
+
+129-256            0       0       0       0       0       0       0       0
+
+257-512            0       0       0       0       0       0       0       0
+
+513-1024           0       0       0       0       0       0       0       0
+
+1025-2048          0       0       0       0       0       0       0       0
+
+2049-4096          0       0       0       0       0       0       0       0
+
+4097-8192          0       0       0       0       0       0       0       0
+
+8193-16384         0       0       0       0       0       0       0       0
+
+16385-32768        0       0       0       0       0       0       0       0
+
+32769-65536        0       0       0       0       0       0       0       0
+Output of the global show command when queue monitoring is not enabled on any interfaces.
+
+switch(config)# show interface queue-monitor list
+
+Queue monitoring is not enabled on any interfaces.
+Output of the show command when the interface requested does not have queue monitoring enabled.
+
+switch(config)# show interface 1/1/8 queue-monitor table
+
+Interface 1/1/8 does not have queue monitoring enabled.
+Output of the global show command with the list presentation speficied when there is no relevant data to
+show. Note: the table and histogram presentation formats output all enabled interface data.
+
+switch(config)# show interface queue-monitor list
+
+Enabled interfaces have not collected any data.
+Output of the show command for an interface with the list presentation specified but there is no relevant
+data to show.
+
+switch(config)# show interface 1/1/8 queue-monitor list
+Interface 1/1/8 has not collected any data.
+
+Public
+
+show interface queue-monitor 85
+
+Related Commands
+
+Command
+
+Description
+
+queue‐monitor
+
+This command enables the queue monitoring feature, allowing the switch to coll
+ect queue statistics at 10‐second time intervals. These aggregate statistics ca
+n be used to monitor network health, troubleshoot network issues, and identify
+normal network behavior patterns and performance anomalies. This feature is di
+sabled by default, but can be enabled on a maximum of 52 interfaces per switch
+.
+
+Command History
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+Operator ( > ) or Manage
+r ( # )
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+5420
+
+6200 (except f
+or JL724A, JL
+725A, JL726A
+, JL727A, JL7
+28A)
+
+show interface queue-monitor status
+
+Syntax
+
+show interface {<IFNAME> | <IFRANGE>} queue-monitor status
+
+Description
+
+Displays the queue monitoring status for a specific interface or range of interfaces. If no interface is
+specified, the command will display the queue monitoring status for all interfaces configured.
+
+Parameter
+
+Description
+
+{<IFNAME> | <IFRANGE>}
+
+Use the queue‐monitor status parameters to show whether t
+he feature is enabled or disabled, and information about memor
+y consumption and monitored interfaces. Include the optional <I
+FNAME> parameter to filter the output of this command to sho
+
+Public
+
+show interface queue-monitor status 86
+
+Parameter
+
+Description
+
+w data for just the specified interface, or include both the <IFN
+AME > parameter and the additional <IFRANGE> parameter als
+o to view data for a range of interfaces. If no interface is specifi
+ed, the command will display the queue monitor status for all in
+terfaces that have queue monitoring configured.
+
+Examples
+
+Showing queue monitoring status for interface 1/1/1 when queue monitoring is not configured on that
+interface.
+
+switch# show interface 1/1/1 queue-monitor status
+
+Interface 1/1/1 does not have queue monitoring enabled.
+Showing the queue monitoring status for interface 1/1/1 when queue monitoring is enabled on that
+interface.
+
+switch# show interface 1/1/1 queue-monitor status
+
+Interface 1/1/1
+
+Status               : Enabled
+
+Monitored Statistics : queue-depth
+
+Showing the queue monitoring status for a range of interfaces when queue monitoring is enabled on those
+interfaces.
+
+switch# show interface 1/1/1-1/1/2 queue-monitor status
+
+Interface 1/1/1
+
+Status               : Enabled
+
+Monitored Statistics : queue-depth
+
+Interface 1/1/2
+Status               : Enabled
+
+Monitored Statistics : queue-depth
+
+Showing the queue monitoring status for all interfaces that have queue monitoring enabled, but the
+interface does not support any statistics.
+
+switch# show interface queue-monitor status
+Interface 1/1/1
+
+Status               : Blocked (No queue statistics supported for
+
+monitoring)
+
+Public
+
+show interface queue-monitor status 87
+
+Interface 1/1/2
+
+Status               : Blocked (No queue statistics supported for
+
+monitoring)
+
+Interface 1/1/3 does not have queue monitoring enabled.
+Showing the queue monitoring status for all interfaces where queue monitoring is enabled on interface
+1/1/1.
+
+switch# show interface queue-monitor status
+
+Interface 1/1/1
+
+Status               : Enabled
+
+Monitored Statistics : queue-depth
+
+Interface 1/1/2 does not have queue monitoring enabled.
+
+Interface 1/1/3 does not have queue monitoring enabled.
+Showing the queue monitoring status for all interfaces when the feature pack is invalid and queue
+monitoring is configured only on interface 1/1/1.
+
+switch# show interface queue-monitor status
+
+Interface 1/1/1
+
+Status               : Blocked (Invalid feature pack)
+
+Interface 1/1/2 does not have queue monitoring enabled.
+
+Interface 1/1/3 does not have queue monitoring enabled.
+Showing the queue monitoring status for interface 1/1/1 when the feature pack is invalid and queue
+monitoring is configured on that interface.
+
+switch# show interface 1/1/1 queue-monitor status
+
+Interface 1/1/1
+
+Status               : Blocked (Invalid feature pack)
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200 (except f
+or JL724A, JL
+725A, JL726A
+
+Operator ( > ) or Manage
+r ( # )
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+Public
+
+show interface queue-monitor status 88
+
+Platforms
+
+Command context
+
+Authority
+
+, JL727A, JL7
+28A)
+
+show queue-monitor status
+
+Syntax
+
+show queue-monitor status
+
+Description
+
+Displays the global state of the queue monitoring feature. The output includes the global enable/disable
+status, the memory consumed by the feature, the statistics being collected, and the interfaces currently
+enabled for monitoring.
+
+Examples
+
+Showing queue monitoring status when queue monitoring is not enabled on any interfaces.
+
+switch# show queue-monitor status
+
+Feature Status           : Running
+
+Memory Consumption       : 0 kbytes
+
+Monitored Interfaces/Max : 0/52
+Showing the queue monitoring status when queue monitoring is enabled on interface 1/1/1.
+
+switch# show queue-monitor status
+
+Feature Status           : Running
+
+Memory Consumption       : 184 kbytes
+
+Polling Interval         : 10 seconds
+
+Data Retention Duration  : 8 hours
+Monitored Interfaces/Max : 1/52
+
+Monitored Interfaces     : 1/1/1
+
+Related Commands
+
+Command
+
+Description
+
+queue‐monitor
+
+This command enables the queue monitoring feature, allowing the switch to coll
+ect queue statistics at 10‐second time intervals. These aggregate statistics ca
+n be used to monitor network health, troubleshoot network issues, and identify
+normal network behavior patterns and performance anomalies. This feature is di
+
+Public
+
+show queue-monitor status 89
+
+Command
+
+Description
+
+sabled by default, but can be enabled on a maximum of 52 interfaces per switch
+.
+
+Command History
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+Operator ( > ) or Manage
+r ( # )
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+5420
+
+6200 (except f
+or JL724A, JL
+725A, JL726A
+, JL727A, JL7
+28A)
+
+Congestion Event Detection
+
+The Congestion Event Detection feature is an extension of Queue Monitoring that allows users to configure
+alert thresholds for queue depth, queue transmit rate, and queue drops. Alerts can be viewed on-switch and
+can also be sent to the switch event log on a selective basis.
+
+Congestion Event Detection is supported on 8325, 8325H, 8325P, 9300, 9300S, 10000, and 10040 switch
+series. This feature enables users to configure queue statistics thresholds which are actively checked by
+the switch on interfaces where monitoring and thresholds are applied. This mechanism leverages queue
+monitoring as the source of periodic queue statistics samples for comparison against the configured
+thresholds. If a statistic has crossed a threshold, information about the occurrence is saved within the switch
+and an optional action can also be taken at the time of the occurrence. Accumulated occurrences (events)
+can be viewed on the switch through the CLI or requested through the REST API interface.
+
+Subtopics
+
+Using collected data
+Congestion event detection commands
+
+Using collected data
+
+Public
+
+Congestion Event Detection 90
+
+Queue monitoring provides the ability to look into switch congestion-related performance issues and identify
+when problems have occurred. The methods available for reviewing performance issues are:
+
+•  Congestion events
+
+•  Per-interface congestion histograms
+
+•  Per-interface congestion-detailed view
+
+As anomalies are identified, the interface queue that experienced the anomaly is the starting point for
+identifying the cause of the behavior. Examine traffic patterns for flows competing for network bandwidth to
+determine if corrective action is needed to address potential problems.
+
+Congestion event detection commands
+
+Subtopics
+
+apply congestion-event profile
+congestion-event profile
+
+apply congestion-event profile
+
+Syntax
+
+apply congestion-event profile [<NAME>]
+
+no apply congestion-event profile [<NAME>]
+
+Description
+
+Applies a congestion event profile to an interface.
+
+The no form removes the congestion event profile from the interface.
+
+Parameter
+
+<NAME>
+
+Usage
+
+Description
+
+Specifies the name of a congestion event profile.
+
+Range: 1 to 64 alphanumeric characters, including period (.), un
+derscore (_), and hyphen (‐).
+
+Apply the congestion event profile to the interface to begin the process of actively checking the monitored
+queue statistics for congestion events based on the thresholds configured in the applied congestion event
+
+Public
+
+Congestion event detection commands 91
+
+profile. User-specified congestion event profiles and profile entries may be modified and deleted while
+applied on an interface. If a congestion event profile or entry is modified while applied on an interface, any
+ongoing event occurrences will end immediately.
+
+Examples
+
+Applying congestion event profile, prof1, to an interface where the queues on the interface have a
+monitoring source:
+
+switch(config-if)# apply congestion-event profile prof1
+
+Applying non-existent congestion event profile, prof22, to an interface:
+
+switch(config-if)# apply congestion-event profile prof22
+
+Profile prof22 does not exist.
+Applying congestion event profile, prof1, to an interface where the queues on the interface do not have a
+queue data monitoring source. Without a source for queue statistics, no congestion event threshold checking
+will be performed.
+
+switch(config-if)# apply congestion-event profile prof1
+
+Warning: Queue monitoring must also be enabled using the 'queue-monitor'
+
+command for congestion events to be detected.
+Removing any congestion event profile from an interface.
+
+switch(config-if)# no apply congestion-event profile
+
+Removing congestion event profile, prof1, from an interface:
+
+switch(config-if)# no apply congestion-event profile prof1
+
+Removing congestion event profile, prof2, from an interface where congestion event profile, prof1, is
+currently applied.
+
+switch(config-if)# no apply congestion-event profile prof2
+
+The profile to remove does not match the currently configured profile.
+
+Command History
+
+Release
+
+10.16
+
+Modification
+
+Command introduced
+
+Public
+
+apply congestion-event profile 92
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+congestion-event profile
+
+Syntax
+
+congestion-event profile <NAME>
+
+no congestion-event profile <NAME>
+
+Description
+
+Creates a new congestion event profile and switches to the config-cng-prof context for the profile.
+
+The no form deletes the profile and removes it from all applied interfaces.
+
+NOTE
+If the specified profile already exists, this command switches to the config-cng-
+prof context for the named profile.
+
+Parameter
+
+<name>
+
+Usage
+
+Description
+
+Name of the congestion event profile, up to 64 characters.
+
+A congestion event profile contains zero or more congestion event entries that specify the thresholds
+to use for identifying conditions of interest that should be saved as an event occurrence. Use show
+congestion-event profile [NAME] to view the status of all congestion event profiles or their settings.
+
+Examples
+
+Creating a congestion-event profile named prof1:
+
+switch(config)# congestion-event profile prof1
+
+Deleting a congestion event profile named prof1:
+
+Public
+
+congestion-event profile 93
+
+switch(config)# no congestion-event profile prof1
+
+Creating a congestion event profile with an invalid name:
+
+switch(config)# congestion-event profile prof##
+
+Invalid name. Please enter a string of up to 64 alphanumeric,
+
+underscore, hyphen, and period characters.
+
+Command History
+
+Release
+
+10.18
+
+10.16
+
+Modification
+
+Command introduced on the 10040 Switch series
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+IP Flow Path Trace
+
+IP Flow Path Trace (flowtraced) feature helps to trace the complete path taken by an Application Flow while
+traversing from Source device to Destination device. There is a new dedicated daemon (flowtraced) created
+to support the feature. A new proprietary UDP protocol is designed to handle the feature requirements.
+These CPU generated packets traverse through the network and collect all the necessary telemetry
+information from each of the HPE ANW OS-CX devices traversed where flow path trace is supported.
+All the information collected from each of the device traversed is stored in
+
+the payload as TLVs.
+
+NOTE
+IP Flow Path Trace is supported on 5420, 6200, 6300, 6400, 8360 and 8100
+Switch Series.
+
+Subtopics
+
+Limitations, Conflicts or Exclusions
+
+Public
+
+IP Flow Path Trace 94
+
+IP Flow Path Trace commands
+
+Limitations, Conflicts or Exclusions
+
+•  Platform should support Forwarding Info infra to fetch the nexthop and interface details.
+
+•  Traffic Insight feature needs to be running on all devices in the path to match on the Policy/ACL drop
+matches. If Traffic Insight is not supported on the devices, then the Flow drop will not be detected.
+
+•
+
+If Traffic Insight feature is not supported or enabled along with Application recognition,Flow
+Tracking,IPFix, TI with AppFlow monitor on the first-hop device, then the flow trace query should have
+the complete 5 tuple information. Partial query having only the Client IP and destination (AppName,
+DomainName) will result in lookup failure.
+
+•  Client-Insight ARPtoGW needs to be enabled on the first Access switch if acting as an L2 device to make
+
+sure that the MAC-IP association of the GW are available.
+
+•  Client-IP-Tracker needs to be enabled on the first Access switch if acting as an L2 device to make sure
+
+that the MAC-IP association of the Client/Source are available.
+
+•
+
+If the Clients have static IPs, the gateway-ip needs to be provided in the flow trace query.
+
+•  The feature sends out proprietary packets using UDP Source L4 Port set to 55000 and Destination L4
+
+Port set to 55001, which are private ports as per IANA.
+
+•
+
+•
+
+In case of Flow Trace capability unaware devices present on the path, the pathtrace post that device
+could result in an incorrect path.
+
+If the last-hop device IP is not provided along with the 5-tuple query, then packet would get leaked to
+the destination device if the last hop switch is not Flow Trace capable.
+
+•  The MAC and Routing tables may be constantly changing. The egress port received is valid for that
+
+snapshot in time. It may not remain the same in the future.
+
+•  This feature is not applicable for broadcast, multicast or unknown unicast packets.
+
+•
+
+IPv6 support is not provided.
+
+•  Below drops are not captured in current release:
+
+◦  GBP Policy drops
+
+◦  QoS drops
+
+◦  Per-Hop latency
+
+◦  Path Latency
+
+Public
+
+Limitations, Conflicts or Exclusions 95
+
+◦  GBP relay issues
+
+◦  PBR drops
+
+•  Support for UBT, IPSEC or GRE tunnels is not present.
+
+•  Periodic probes for the 5-tuple query is not supported.
+
+•  Number of non-flowtrace capable devices in the path (applicable for L3 only).
+
+•  Automatic Reverse Flow Trace is not supported.
+
+•
+
+If Application provided is not active in TI for the provided source IP, then the flow trace query will fail.
+
+•
+
+If destination details are not provided, then the flow trace query will fail.
+
+•  Uses IP exception CoPP class which can be updated while executing the flowtrace query.
+
+•
+
+If the ARP table in case of L3 or the CIPT/CIARPGW table in case of L2 does not have the MAC-IP
+binding on the first-hop device, then the query is not initiated and failed.
+
+•  LLDP neighbor information is used to figure out if the adjacent device is a Flow Trace capable or not. So
+all the devices in the network need to have LLDP enabled to make sure that the device classification is
+correct.
+
+•
+
+If the TLV packet payload increases above the MTU of the egress interface, the flow trace will be
+stopped on that device and a partial trace information will be sent back to the initiating device. Each
+node will add multiple TLV information depending on the attributes getting collected.
+
+•
+
+It is advisable to have the MTU in the network to be jumbo capable to make sure the flow trace is
+complete especially when there are more than 7-8 nodes between the source and destination device.
+
+IP Flow Path Trace commands
+
+Subtopics
+
+IP Flow Path Trace
+
+IP Flow Path Trace
+
+Syntax
+
+flowtrace {source-ip-address <IP-ADDR>} {destination-type <ipv4|domainname|
+
+appname> destination <string>}
+
+Public
+
+IP Flow Path Trace commands 96
+
+[source-l4-port <L4-PORT> destination-l4-port <L4-PORT>] [transport-
+
+protocol <PROTOCOL>]
+
+[vrf <VRF-NAME>] [last-hop-device-ip <IP-ADDR>] [gateway-ip <IP-ADDR>]
+
+Description
+
+This command is used to get the complete flow path trace of the 5 tuple query which is initiated from the
+CLI. The Source IP and the Destination details are mandatory for the command to initiate the query. The
+other fields are optional parameters. If last-hop-device-ip is not provided, then the proprietary packets will
+traverse until the last hop, HPE ANW OS-CX, where flow path trace is supported, or until the destination
+device, in case the device before destination does not support flow path trace. The gateway-ip is also
+optional. This is useful especially when the first-hop device is an L2 device to get the next-hop MAC details
+needed for forwarding info lookup.
+
+NOTE
+
+The flow path trace command does not validate the transport protocol of the
+flows and provides output using the user-specified protocol number instead of
+verifying the actual transport protocol.
+
+Parameter
+
+IP‐ADDR
+
+L4‐PORT
+
+PROTOCOL
+
+VRF‐NAME
+
+Description
+
+Specify the IPv4 address (A.B.C.D).
+
+Required
+
+Specify the L4 Port (1‐65535).
+
+Optional
+
+Specify the transport protocol number (1‐255)
+
+Optional
+
+Specify the VRF.
+
+Optional
+
+DOMAIN‐NAME
+
+Specify the Domain Name.
+
+Optional
+
+APP‐NAME
+
+Specify the Application Name.
+
+Optional
+
+Examples
+
+This example shows the complete Flow Path trace successful until the last-hop-device:
+
+Public
+
+IP Flow Path Trace 97
+
+switch# flowtrace source-ip-address 50.0.0.5 destination-type ipv4
+
+destination 80.0.0.2 transport-protocol 6 source-l4-port 23456
+
+destination-l4-port 34567 vrf default last-hop-device-ip 60.0.0.1
+
+IP Flow Trace Summary:
+
+----------------------
+
+src_ip      : 50.0.0.5                   dst_ip      : 80.0.0.2
+
+src_port    : 23456                      dst_port    : 34567
+
+protocol    : 6
+
+----------------------------------------------------------------------------
+
+----
+
+PathNode  1 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXAL
+
+System MAC         : 90:aa:aa:aa:aa:80          Egress Subnet      : NA
+
+Ingress Interface  : 1/1/43                     Egress Interface   : 1/1/45
+
+Ingress VLAN       : 10                         Egress VLAN        : 10
+
+Flow Status        : Forwarded
+
+PathNode  2 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXBL
+
+System MAC         : f8:bb:bb:bb:bb:00          Egress Subnet      : ECMP
+
+70.0.0.0/24
+
+Ingress Interface  : 1/3/47                     Egress Interface   : 1/5/47
+
+Ingress VLAN       : 10                         Egress VLAN        : 20
+
+Flow Status        : Forwarded
+
+PathNode  3 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXCL
+
+System MAC         : f8:cc:cc:cc:cc:00          Egress Subnet      :
+
+60.0.0.0/24
+
+Ingress Interface  : 1/6/3                      Egress Interface   : lag20-
+
+>1/3/2
+Ingress VLAN       : 20                         Egress VLAN        : 30
+
+Flow Status        : Forwarded
+
+PathNode  4 :
+
+Device Type        : Last_Hop_Device            Device ID          :
+
+SGXXXXXXDL
+
+System MAC         : 90:dd:dd:dd:dd:00          Egress Subnet      :
+
+80.0.0.0/24
+
+Ingress Interface  : 1/2/2                      Egress Interface   : 1/1/1
+
+Ingress VLAN       : 30                         Egress VLAN        : 40
+
+Flow Status        : Forwarded
+In this example the flow Path trace failed because of a Policy drop in an intermediate device:
+
+Public
+
+IP Flow Path Trace 98
+
+switch# flowtrace source-ip-address 50.0.0.5 destination-type ipv4
+
+destination 80.0.0.2 transport-protocol 6 source-l4-port 23456
+
+destination-l4-port 34567 vrf default last-hop-device-ip 60.0.0.1
+
+IP Flow Trace Summary:
+
+----------------------
+
+src_ip      : 50.0.0.5                   dst_ip      : 80.0.0.2
+
+src_port    : 23456                      dst_port    : 34567
+
+protocol    : 6
+
+----------------------------------------------------------------------------
+
+----
+
+PathNode  1 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXAL
+
+System MAC         : 90:aa:aa:aa:aa:80          Egress Subnet      : NA
+
+Ingress Interface  : 1/1/43                     Egress Interface   : 1/1/45
+
+Ingress VLAN       : 10                         Egress VLAN        : 10
+
+Flow Status        : Forwarded
+
+PathNode  2 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXBL
+
+System MAC         : f8:bb:bb:bb:bb:00          Egress Subnet      : ECMP
+
+70.0.0.0/24
+
+Ingress Interface  : 1/3/47                     Egress Interface   : 1/5/47
+
+Ingress VLAN       : 10                         Egress VLAN        : 20
+
+Flow Status        : Forwarded
+
+PathNode  3 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXCL
+
+System MAC         : f8:cc:cc:cc:cc:00          Egress Subnet      : ECMP
+
+70.0.0.0/24
+
+Ingress Interface  : 1/3/47                     Egress Interface   : 1/5/47
+
+Ingress VLAN       : 10                         Egress VLAN        : 20
+Flow Status        : Dropped
+
+Drop Reason:
+
+Policy : testPolicy1
+
+Class  : testClass1
+
+RuleID : 30
+This example shows Flow Path trace via an intermediate Non-Flow trace capable device.
+
+switch# flowtrace source-ip-address 50.0.0.5 destination-type ipv4
+destination 80.0.0.2 transport-protocol 6 source-l4-port 23456
+
+destination-l4-port 34567 vrf default last-hop-device-ip 60.0.0.1
+
+IP Flow Trace Summary:
+
+----------------------
+
+Public
+
+IP Flow Path Trace 99
+
+src_ip      : 50.0.0.5                   dst_ip      : 80.0.0.2
+
+src_port    : 23456                      dst_port    : 34567
+
+protocol    : 6
+
+----------------------------------------------------------------------------
+
+----
+
+PathNode  1 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXAL
+
+System MAC         : 90:aa:aa:aa:aa:80          Egress Subnet      : NA
+
+Ingress Interface  : 1/1/43                     Egress Interface   : 1/1/45
+
+Ingress VLAN       : 10                         Egress VLAN        : 10
+
+Flow Status        : Forwarded
+
+PathNode  2 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXBL
+
+System MAC         : f8:bb:bb:bb:bb:00          Egress Subnet      : ECMP
+
+70.0.0.0/24
+
+Ingress Interface  : 1/3/47                     Egress Interface   : 1/5/47
+
+Ingress VLAN       : 10                         Egress VLAN        : 20
+
+Flow Status        : Forwarded
+
+PathNode  3 :
+
+Device Type        : NonFlowTrace_Capable       Device ID          :
+
+SGXXXXXXCL
+
+System MAC         : f8:cc:cc:cc:cc:00
+
+Flow Status        : Forwarded
+
+PathNode  4 :
+
+Device Type        : Last_Hop_Device            Device ID          :
+
+SGXXXXXXDL
+
+System MAC         : 90:dd:dd:dd:dd:00          Egress Subnet      :
+
+80.0.0.0/24
+
+Ingress Interface  : 1/2/2                      Egress Interface   : 1/1/1
+
+Ingress VLAN       : 30                         Egress VLAN        : 40
+Flow Status        : Forwarded
+This example shows a successful complete Flow Path trace for an Application Based query:
+
+switch# flowtrace source-ip-address 10.0.0.10 destination-type app_name
+
+destination ssh
+
+IP Flow Trace Summary:
+
+----------------------
+
+src_ip      : 10.0.0.10                  dst_ip      : 60.0.0.2
+src_port    : 23456                      dst_port    : 22
+
+protocol    : 6
+
+ app_name    : ssh
+
+----------------------------------------------------------------------------
+
+----
+
+Public
+
+IP Flow Path Trace 100
+
+PathNode  1 :
+
+Device Type        : FlowTrace_Capable         Device ID          :
+
+SGXXXXXXAL
+
+System MAC         : 90:ea:ea:ee:aa:50         Egress Subnet      : NA
+
+Ingress Interface  : 1/1/1                     Egress Interface   : 1/1/48
+
+Ingress VLAN       : 10                        Egress VLAN        : 10
+
+Flow Status        : Forwarded
+
+PathNode  2 :
+
+Device Type        : FlowTrace_Capable         Device ID          :
+
+SGXXXXXXBL
+
+System MAC         : f8:bb:bb:bb:bb:00         Egress Subnet      :
+
+70.0.0.0/24
+
+Ingress Interface  : 1/1/47                    Egress Interface   : 1/5/47
+
+Ingress VLAN       : 10                        Egress VLAN        : 20
+
+Flow Status        : Forwarded
+
+PathNode  3 :
+
+Device Type        : Last_Hop_Device           Device ID          :
+
+SGXXXXXXCL
+
+System MAC         : f8:cc:cc:cc:cc:00         Egress Subnet      :
+
+60.0.0.0/24
+
+Ingress Interface  : 1/6/3                     Egress Interface   : 1/6/6
+
+Ingress VLAN       : 20                        Egress VLAN        : 30
+
+Flow Status        : Forwarded
+This example shows a successful complete Flow Path trace for a VxLAN based topology:
+
+switch# flowtrace source-ip-address 10.0.0.10 destination-type app_name
+
+destination ssh
+
+IP Flow Trace summary:
+
+----------------------
+
+src_ip      : 10.0.0.10                  dst_ip      : 60.0.0.2
+
+src_port    : 23456                      dst_port    : 22
+
+protocol    : 6
+
+----------------------------------------------------------------------------
+
+----
+
+PathNode  1 :
+
+Device Type        : FlowTrace_Capable          Device ID          :
+
+SGXXXXXXAL
+
+System MAC         : 90:aa:aa:aa:aa:80          Egress Subnet      : NA
+
+Ingress Interface  : 1/1/43                     Egress Interface   : 1/1/45
+
+Ingress VLAN       : 10                         Egress VLAN        : 10
+
+Flow Status        : Forwarded
+
+PathNode 2:
+
+Device Type    : Tunnel_Entry_Device    Device ID
+
+   : SGXXXXXXBL
+
+System MAC         : BB:A4:7D:29:C4:50          Egress IP          :
+
+Public
+
+IP Flow Path Trace 101
+
+30.0.0.1
+
+Ingress Interface  : 1/1/10                     Egress Interface   : 1/1/12
+
+Egress VLAN        : 30                         Flow Status        :
+
+Forwarded
+
+PathNode 3:
+
+Device Type        : Flow_Trace Capable         Device ID          :
+
+SGXXXXXXCL
+
+System MAC         : CC:A4:7D:29:C4:50          Egress IP          :
+
+40.0.0.1
+
+Ingress Interface  : 1/1/13                     Egress Interface   : 1/1/15
+
+Egress VLAN        : 40                         Flow Status        :
+
+Forwarded
+
+PathNode 4:
+
+Device Type        : Tunnel_End_Device          Device ID          :
+
+SGXXXXXXDL
+
+System MAC         : DD:A4:7D:29:C4:50          Egress IP          :
+
+50.0.0.1
+
+Ingress Interface  : 1/1/4                      Egress Interface   : 1/1/5
+
+Egress VLAN        : 30                         Flow Status        :
+
+Forwarded
+
+PathNode 5:
+
+Device Type        : Last_Hop_Device            Device ID          :
+
+SGXXXXXXEL
+
+System MAC         : EE:A4:7D:29:C4:60          Egress IP          :
+
+60.0.0.1
+
+Ingress Interface: 1/1/20                       Egress Interface   : 1/1/21
+
+Egress VLAN: 50                                 Flow Status        :
+
+Forwarded
+This example shows an error due to a missing Source IP:
+
+switch# flowtrace destination-type ipv4 destination 50.0.0.50
+
+transport-protocol 6 source-l4-port 23456 destination-l4-port 34567
+
+vrf default last-hop-device-ip 50.0.0.1
+
+Missing Required Parameter Source IP
+This example shows an error since the there is no active Application:
+
+switch# flowtrace source-ip-address 100.0.0.10 destination-type appname
+
+destination ssh
+
+No active session to the 'ssh' application from source 100.0.0.10
+This example shows an error since Forwarding Info infra is not successful
+
+switch# flowtrace source-ip-address 10.0.0.10 destination-type ipv4
+
+destination 50.0.0.50 transport-protocol 6 source-l4-port 23456
+
+destination-l4-port 34567 vrf default last-hop-device-ip 50.0.0.1
+
+Forwarding-info lookup was not successful
+
+Public
+
+IP Flow Path Trace 102
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+gRPC network management interface
+
+gRPC is a RPC framework developed by Google to create distributed systems. This protocol allows a client
+running on one system to call the services defined in a remote server as a local server.
+
+The gRPC Network Management Interface (gNMI) feature provides secure, high-performance, standards-
+based network management and gRPC-based access to network device configuration and operational data.
+Using industry-standard OpenConfig models, gNMI enables the building of modern network automation and
+monitoring solutions.
+
+gNMI is implemented as an HTTP/2 server supporting encrypted communication and role-based access
+control. It allows network management systems to interact with the device for configuration and telemetry
+using gRPC, supporting VRF-aware access and role-based control.
+
+gNMI supports access over SVIs, loopback, and data ports.
+
+gNMI allows for the following:
+
+•  Streaming of real-time telemetry data from switches
+
+•  Monitoring of interface statistics, system performance, and hardware health
+
+•
+
+Integration with modern network management platforms
+
+•
+
+Implementation of event-driven network automation
+
+Refer to gNMI commands for information on enabling and configuring gNMI.
+
+gNMI commands
+
+crypto pki application gnmi certificate
+
+Public
+
+gRPC network management interface 103
+
+Syntax
+
+crypto pki application gnmi certificate <CERT-NAME>
+
+Description
+
+Configures a certificate for the gNMI server. local-cert is used by default. For more details, refer to the
+[Public Key Infrastructure guide] (./Functionality_Guide_PKI.md)
+
+Parameter
+
+Description
+
+Specifies the certificate name.
+
+<CERT‐NAME>
+
+Examples
+
+Configure sign-cert for the gNMI server:
+
+switch(config)# crypto pki application gnmi certificate sign-cert
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+gnmi vrf
+
+Syntax
+
+gnmi vrf <VRF NAME>
+no gnmi vrf <VRF NAME>
+
+Public
+
+gRPC network management interface 104
+
+Description
+
+Enables the gNMI server on a given VRF. gNMI can be enabled on multiple VRFs simultaneously.
+
+NOTE
+
+There is a maximum of 30 gNMI subscriptions per request and a maximum of
+9 concurrent streams per switch. These are system-wide limits shared among all
+authenticated users regardless of connection method (local or remote).
+
+The no form of this command removes the configuration.
+
+Disabling the gNMI server on a VRF immediately closes any active streams.
+
+Parameter
+
+Description
+
+Specifies the VRF name.
+
+<VRF NAME>
+
+Examples
+
+Enable the gNMI server on VRF mgmt, this allows access to the gNMI server from the OOBM port in the
+"management VRF":
+
+switch(config)# gnmi vrf mgmt
+
+Removing the configuration of gNMI server on mgmt:
+
+switch(config)# no gnmi vrf mgmt
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+gRPC network management interface 105
+
+show gnmi
+
+Syntax
+
+show gnmi
+
+Description
+
+Displays the current gNMI configuration.
+
+Examples
+
+Display the current gNMI configuration:
+
+switch(config)# show gmni
+
+gNMI Configuration
+
+----------------------------------------------------------
+
+VRF                  : mgmt, default
+
+Access mode          : read-only
+
+Global stream limit  : 9
+
+Command History
+
+Release
+
+10.17
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+config
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+diag-dump
+
+Syntax
+
+diag-dump gnmi basic
+
+Description
+
+Provides detailed service status information for gNMI and nginx-configurator daemon.
+
+Examples
+
+Showing feature information:
+
+Public
+
+gRPC network management interface 106
+
+=========================================================================
+
+[Start] Feature gnmi Time : Thu Jun 26 14:30:13 2025
+
+=========================================================================
+
+-------------------------------------------------------------------------
+
+[Start] Daemon nginx-configurator
+
+-------------------------------------------------------------------------
+
+gNMI nginx VRF service status dump:
+
+----------------------------------------------------------------------------
+
+------
+
+| VRF                              | LoadState    | ActiveState |
+
+SubState        |
+
+----------------------------------------------------------------------------
+
+------
+
+| VRF_2                            | loaded       | active      |
+
+running         |
+
+----------------------------------------------------------------------------
+
+------
+
+-------------------------------------------------------------------------
+
+[End] Daemon nginx-configurator
+
+-------------------------------------------------------------------------
+
+=========================================================================
+
+[End] Feature gnmi
+
+=========================================================================
+
+Diagnostic-dump captured for feature gnmi
+
+Command History
+
+Release
+
+Modification
+
+10.17.1000
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+gRPC network management interface 107
+
+debug nginxconfigurator
+
+Syntax
+
+debug nginxconfigurator <all|gnmi> all severity <level>
+
+Description
+
+Enables nginx configurator and YANG resolver debug logs.
+
+Examples
+
+Enabling nginx configurator and YANG resolver debug logs:
+
+switch# debug nginxconfigurator all severity debug
+
+switch# debug yang all severity debug
+Reviewing debug logs:
+
+switch(config)# show debug buffer module nginxconfigurator
+
+switch(config)# show debug buffer module yang-resolver
+
+Command History
+
+Release
+
+Modification
+
+10.17.1000
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show tech
+
+Syntax
+
+show tech gnmi
+
+Description
+
+Provides configuration, logs, and status information relevant to the gNMI HTTP/2 server.
+
+Public
+
+gRPC network management interface 108
+
+Examples
+
+Showing gNMI configuration information:
+
+switch# show tech gnmi
+
+====================================================
+
+Show Tech executed on Thu Jun 26 14:30:33
+
+2025========================================================================
+
+================================
+
+Begin] Feature gnmi
+
+ ====================================================
+
+ *********************************
+
+Command : show gnmi
+
+*********************************
+
+gNMI Configuration
+
+----------------------------
+
+VRF                    : mgmt, default
+
+Access mode            : read-only
+
+Max streams globally   : 9
+
+*********************************
+
+Command : diag-dump gnmi basic
+
+*********************************
+
+=========================================================================
+
+[Start] Feature gnmi Time : Thu Jun 26 14:30:33 2025
+
+=========================================================================
+
+-------------------------------------------------------------------------
+
+[Start] Daemon nginx-configurator
+
+-------------------------------------------------------------------------
+
+gNMI nginx VRF service status dump:
+
+----------------------------------------------------------------------------
+
+------
+
+| VRF                              | LoadState    | ActiveState |
+SubState        |
+
+----------------------------------------------------------------------------
+
+------
+
+| VRF_2                            | loaded       | active      |
+
+running         |
+
+----------------------------------------------------------------------------
+
+------
+
+-------------------------------------------------------------------------
+
+[End] Daemon nginx-configurator
+
+-------------------------------------------------------------------------
+
+=========================================================================
+
+Public
+
+gRPC network management interface 109
+
+[End] Feature gnmi
+
+=========================================================================
+
+Command History
+
+Release
+
+Modification
+
+10.17.1000
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Boot commands
+
+Subtopics
+
+Boot commands
+
+Boot commands
+
+Subtopics
+
+boot set-default
+boot system
+show boot-history
+
+boot set-default
+
+Public
+
+Boot commands 110
+
+Syntax
+
+boot set-default {primary | secondary}
+
+Description
+
+Sets the default operating system image to use when the system is booted.
+
+Parameter
+
+primary
+
+secondary
+
+Example
+
+Description
+
+Selects the primary network operating system image.
+
+Selects the secondary network operating system image.
+
+Selecting the primary image as the default boot image:
+
+switch# boot set-default primary
+
+Default boot image set to primary.
+
+NOTE
+
+For more information on features that use this command, refer to the
+Fundamentals Guide or the Monitoring Guide for your switch model.
+
+Command History
+
+Release
+
+10.07 or earlier
+
+Command Information
+
+Platforms
+
+All platforms
+
+boot system
+
+Modification
+
+‐‐
+
+Command context
+
+Authority
+
+Manager ( # )
+
+Administrators or local user group
+members with execution rights for
+this command.
+
+Public
+
+boot system 111
+
+Syntax
+
+boot system [primary | secondary | serviceos]
+
+Description
+
+Reboots all modules on the switch. By default, the configured default operating system image is used.
+Optional parameters enable you to specify which system image to use for the reboot operation and for
+future reboot operations.
+
+Parameter
+
+primary
+
+secondary
+
+serviceos
+
+Usage
+
+Description
+
+Selects the primary operating system image for this reboot and
+sets the configured default operating system image to primary
+for future reboots.
+
+Selects the secondary operating system image for this reboot a
+nd sets the configured default operating system image to secon
+dary for future reboots.
+
+Selects the service operating system for this reboot. Does not c
+hange the configured default operating system image. The ser
+vice operating system acts as a standalone bootloader and rec
+overy OS for switches running the AOS-CX operating system an
+d is used in rare cases when troubleshooting a switch.
+
+This command reboots the entire system. If you do not select one of the optional parameters, the system
+reboots from the configured default boot image.
+
+You can use the show images command to show information about the primary and secondary system
+images.
+
+Choosing one of the optional parameters affects the setting for the default boot image:
+
+•
+
+If you select the primary or secondary optional parameter, that image becomes the configured default
+boot image for future system reboots. The command fails if the switch is not able to set the operating
+system image to the image you selected.
+You can use the boot set-default command to change the configured default operating system image.
+
+•
+
+If you select serviceos as the optional parameter, the configured default boot image remains the same,
+and the system reboots all management modules with the service operating system.
+
+If the configuration of the switch has changed since the last reboot, when you execute the boot system
+command you are prompted to save the configuration and you are prompted to confirm the reboot
+operation.
+
+Saving the configuration is not required. However, if you attempt to save the configuration and there is an
+error during the save operation, the boot system command is aborted.
+
+Public
+
+boot system 112
+
+Examples
+
+Rebooting the system from the configured default operating system image:
+
+switch# boot system
+
+Do you want to save the current configuration (y/n)? y
+
+The running configuration was saved to the startup configuration.
+
+This will reboot the entire switch and render it unavailable
+
+until the process is complete.
+
+Continue (y/n)? y
+
+The system is going down for reboot.
+
+The system is going down for reboot.
+Rebooting the system from the secondary operating system image, setting the secondary operating system
+image as the configured default boot image:
+
+switch# boot system secondary
+
+Default boot image set to secondary.
+
+Do you want to save the current configuration (y/n)? n
+
+This will reboot the entire switch and render it unavailable
+
+until the process is complete.
+
+Continue (y/n)? y
+
+The system is going down for reboot.
+Canceling a system reboot:
+
+switch# boot system
+
+Do you want to save the current configuration (y/n)? n
+
+This will reboot the entire switch and render it unavailable
+
+until the process is complete.
+
+Continue (y/n)? n
+
+Reboot aborted.
+
+switch#
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+boot system 113
+
+show boot-history
+
+Syntax
+
+show boot-history [all|{vsf member <1-10>}]
+
+Description
+
+Shows boot history information. When no parameters are specified, shows the most recent information about
+the current boot operation, and the three previous boot operations for the switch. When the all parameter is
+specified, the output of this command shows the boot information for the active management module.
+
+.
+
+NOTE
+
+To view boot-history on a standby, the command must be sent on the conductor
+console.
+
+Parameter
+
+all
+
+Description
+
+Optional. Shows boot information for the active management m
+odule.
+
+vsf member <1‐10>
+
+Optional. Display boot history for the specified VSF member
+
+Usage
+
+This command displays the boot-index, boot-ID, and up time in seconds for the current boot. If there is a
+previous boot, it displays boot-index, boot-ID, reboot time (based on the time zone configured in the system)
+and reboot reasons. Previous boot information is displayed in reverse chronological order.
+
+The output of this command includes the following information:
+
+Parameter
+
+Index
+
+Boot ID
+
+Description
+
+The position of the boot in the history file. Range: 0 to 3.
+
+A unique ID for the boot . A system‐generated 128‐bit strin
+g.
+
+Current Boot, up for
+
+<time>
+
+For the current boot, the show boot‐history command shows
+the number of seconds the module has been running on the cur
+rent software.
+
+Public
+
+show boot-history 114
+
+Parameter
+
+Description
+
+<Timestamp>: boot reason
+
+For previous boot operations, the show boot‐history comma
+nd shows the time at which the operation occurred and the rea
+son for the boot. The reason for the boot is one of the following
+values:
+
+•  <DAEMON‐NAME> crash: The daemon identified by <DA
+
+EMON‐NAME> caused the module to boot.
+
+•  Kernel crash: The operating system software associated wit
+
+h the module caused the module to boot.
+
+•  Uncontrolled reboot: The reason for the reboot is not kno
+
+wn.
+
+•  Reboot requested through database: The reboot occurre
+d because of a request made through the CLI or other API.
+
+Table 1. Description of reboots handled through the database
+Boot History String
+
+Description
+
+Reboot requested by user
+
+Reset button pressed
+
+A user requested a switch reboot through the CLI or
+web UI.
+
+The switch detected a short‐press of the reset but
+ton
+
+Backplane fault
+
+A backplane fault occurred.
+
+Configuration change
+
+A configuration change resulted in a reboot.
+
+Configuration version migration
+
+A configuration version migration occurred which re
+quired a reboot.
+
+Console error
+
+Fabric fault
+
+The console failed to start.
+
+A fabric fault occurred.
+
+All line modules faulted
+
+A zero line card condition occurred.
+
+Redundancy switchover requested
+
+A user requested a redundancy switchover.
+
+Redundant Management communication timeout
+
+The standby management module has taken over fro
+m an unresponsive active management module.
+
+Public
+
+show boot-history 115
+
+Boot History String
+
+Description
+
+Redundant Management election timeout
+
+Critical service fault (error)
+
+A failure to elect a standby management module in t
+he allotted time.
+
+A daemon critical to switch operation has stopped fu
+nctioning. An extra error string may be present to d
+escribe the error in detail.
+
+VSF autojoin renumber
+
+Reset triggered by VSF autojoin.
+
+VSF member renumbered
+
+A user requested a renumber of a VSF member.
+
+VSF switchover requested
+
+A user requested a VSF switchover.
+
+VSX software update
+
+Reset triggered by a VSX software update.
+
+Chassis critical temperature
+
+Chassis operating temperature exceeded.
+
+Chassis low critical temperature
+
+Chassis temperature below the minimum operating t
+hreshold.
+
+Chassis insufficient fans
+
+Insufficient fans to cool the chassis.
+
+Chassis unsupported PSUs/fans
+
+Unsupported or misconfigured PSUs or system fans.
+
+Management module critical temperature
+
+ISSU SMM update
+
+ISSU switchover
+
+ISSU aborted
+
+Management module operating temperature exceed
+ed.
+
+Standby management module reboot triggered by a
+n In‐Service Software Upgrade (ISSU).
+
+Redundancy switchover triggered by an In‐Service
+Software Upgrade.
+
+Standby management module reset triggered by fail
+ure during an In‐Service Software Upgrade.
+
+Rollback timer expired
+
+Reset triggered by the ISSU rollback timer expiring.
+
+Examples
+
+Showing the boot history of the active management module:
+
+switch# show boot-history
+Management module
+
+=================
+
+Index : 2
+
+Boot ID : c34a2c2499004a02bbeeff4992e1fdbd
+
+Public
+
+show boot-history 116
+
+Current Boot, up for 1 days 13 hrs 13 mins 27 secs
+
+Index : 1
+
+Boot ID : bfba9bc486304e57904ac717a0ccbdcd
+
+02 Sep 23 02:55:33 : CPU request reset with 0x20201, Version:
+
+FL.10.14.0000-1619-ga9ec1805bd442~dirty
+
+02 Sep 23 02:55:33 : Switch boot count is 2
+
+Index : 0
+
+Boot ID : a88a71b7ca9a4574af7e3b811ddfdc7e
+
+02 Sep 23 02:49:26 : Reboot requested by user, Version: FL.10.14.0000-1619-
+
+ga9ec1805bd442~dirty
+
+02 Sep 23 02:50:02 : Switch boot count is 1
+
+Index : 3
+
+Boot ID : f00ba10c8c44457f83fee303d014a89a
+
+25 Aug 23 10:27:42 :  Power on reset with 0x1, Version: FL.10.14.0000-1465-
+
+g9df95249d06b0~dirty
+
+25 Aug 23 10:28:18 :  Switch boot count is 3
+
+25 Aug 23 10:29:02 :  Primary overtemperature fault detected with 0x2 in
+
+PSU 1/1
+Showing the boot history of the active management module and all line modules:
+
+switch#
+
+Management module
+
+=================
+
+Index : 3
+
+Boot ID : f1bf071bdd04492bbf8439c6e479d612
+
+Current Boot, up for 22 hrs 12 mins 22 secs
+
+Index : 2
+
+Boot ID : edfa2d6598d24e989668306c4a56a06d
+
+07 Aug 18 16:28:01 : Reboot requested through database
+
+Index : 1
+
+Boot ID : 0bda8d0361df4a7e8e3acdc1dba5caad
+
+07 Aug 18 14:08:46 : Reboot requested through database
+
+Index : 0
+
+Boot ID : 23da2b0e26d048d7b3f4b6721b69c110
+
+07 Aug 18 13:00:46 : Reboot requested through database
+
+Line module 1/1
+
+=================
+
+Index : 3
+
+10 Aug 17 12:45:46 : dune_agent crashed
+
+...
+
+Management module
+
+=================
+
+Index : 3
+
+Boot ID : f1bf071bdd04492bbf8439c6e479d612
+
+Public
+
+show boot-history 117
+
+Current Boot, up for 22 hrs 12 mins 22 secs
+
+Index : 2
+
+Boot ID : edfa2d6598d24e989668306c4a56a06d
+
+07 Aug 18 16:28:01 : Reboot requested through database
+
+Index : 1
+
+Boot ID : 0bda8d0361df4a7e8e3acdc1dba5caad
+
+07 Aug 18 14:08:46 : Reboot requested through database
+
+Index : 0
+
+Boot ID : 23da2b0e26d048d7b3f4b6721b69c110
+
+07 Aug 18 13:00:46 : Reboot requested through database
+
+Line module 1/1
+
+=================
+
+Index : 3
+
+10 Aug 17 12:45:46 : dune_agent crashed
+
+...
+
+switch# show boot-history
+
+Management module
+
+=================
+
+Index : 2
+
+Boot ID : a61ad00d10864c748bc7893a5d4af2e4
+
+15 Dec 23 19:02:02 : Power on reset with 0x1, Version: FL.10.13.1000AF
+
+15 Dec 23 19:02:02 : Switch boot count is 0
+
+15 Dec 23 19:02:17 : PSU 1/1: Fault detected
+
+Index : 1
+
+Boot ID : 30d831bbfdfa425baf50a629ee01b185
+
+15 Dec 23 19:01:58 : Power on reset with 0x1, Version: FL.10.13.1000AF
+
+15 Dec 23 19:01:58 : Switch boot count is 0
+The following example displays the boot history for the VSF member 2.
+
+switch# show boot-history vsf member 2
+
+Member-2
+
+=========
+
+Index : 0
+
+Boot ID : df99026c194a44f1944a3e7685fb4d90
+
+Current Boot, up for 3 hrs 31 mins 39 secs
+
+Index : 3
+
+Boot ID : 7bf4104903fe4ad1ba4bce40e8099c76
+
+10 Aug 17 10:02:24 : Reboot requested through database
+
+10 Aug 17 10:02:13 : Switch boot count is 2
+
+Public
+
+show boot-history 118
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+External storage
+
+The switch has limited capacity to store data, collected by switch features and protocols. You can provide
+virtually unlimited storage capacity by adding user-supplied external storage volumes. Supported volume
+types and storage protocols include: NFSv3, NFSv4, and SCP (sshfs).
+
+One application of external storage is the saving and restoring of DHCP lease files over SCP or NFS network
+attached storage systems. SCP file system protocol uses a user mode process to emulate a network file
+system. The key advantage is packet level encryption and simple configuration. The key disadvantage is
+slow performance.
+
+You can set up external storage volume credentials and then enable it. A storage management process acts
+on your requests by enabling the storage volume using the requested storage protocol. You can disable the
+external storage volume or set it up but leave it disable.
+
+The feature maintains storage volume state. The states are: *disabled* (down), *connecting* (establishing
+connection), *operational* (up), and *unaccessible* (unavailable).
+
+If a storage volume is unavailable, the system attempts to reconnect periodically. Multiple volumes could
+connect concurrently. If one connection times out the others can connect immediately.
+
+The system supports server connection through data and management ports.
+
+Data port support requires server IP address on a default VRF.
+
+Once a storage volume is enabled, applications can use the volume to store retrieve and delete files and
+directories.
+
+Subtopics
+
+External storage commands
+
+Public
+
+External storage 119
+
+External storage commands
+
+Subtopics
+
+address
+directory
+disable
+enable
+external-storage
+password (external-storage)
+show external-storage
+show running-config external-storage
+type
+username
+vrf
+
+address
+
+Syntax
+
+address {<IPV4-ADDR> | <IPV6-ADDR> | hostname <HOSTNAME>}
+
+no address {<IPV4-ADDR> | <IPV6-ADDR> | hostname <HOSTNAME>}
+
+Description
+
+Specifies the NAS IP address or hostname.
+
+The no form of this command deletes an IP address or hostname.
+
+Parameter
+
+Description
+
+Specifies the NAS server IPv4 address, Global.
+
+<IPV4‐ADDR>
+
+<IPV6‐ADDR>
+
+Specifies the IPv6 address of the NAS server.
+
+Specifies the hostname of the NAS server. String.
+
+Public
+
+External storage commands 120
+
+Description
+
+Parameter
+
+<HOSTNAME>
+
+Examples
+
+Creating the logfiles storage volume with IP address 10.1.1.1:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# address 10.1.1.1
+
+Deleting an external storage volume named logfiles:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# no address 10.1.1.1
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐
+external‐
+storage‐
+<VOLUME‐NAME>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+directory
+
+Syntax
+
+directory <DIRECTORY-NAME>
+
+no directory <DIRECTORY-NAME>
+
+Public
+
+directory 121
+
+Description
+
+Selects an existing directory on the external storage volume.
+
+The no form of this command clears a directory of an external storage volume.
+
+Parameter
+
+Description
+
+Specifies the external storage directory for mapping the volume
+.
+
+<DIRECTORY‐NAME>
+
+Examples
+
+Creating a volume named logfiles that is mapped under /home on the server:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# directory /home
+
+Clearing the directory /home:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# no directory /home
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐
+external‐
+storage‐
+<VOLUME‐NAME>
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+Public
+
+directory 122
+
+disable
+
+Syntax
+
+disable
+
+no disable
+
+Description
+
+Disables the external storage volume.
+
+The no form of this command enables the external storage volume. This is identical to the  enable
+command.
+
+Examples
+
+Disabling a volume named logfiles:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# disable
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐
+external‐
+storage‐
+<VOLUME‐NAME>
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+enable
+
+Public
+
+disable 123
+
+Syntax
+
+enable
+
+no enable
+
+Description
+
+Enables the external storage volume.
+
+The no form of this command disables the external storage volume. This is identical to the  disable
+command.
+
+Examples
+
+Creating and then enabling a volume named logfiles:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# enable
+
+Disables the external storage volume:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# disable
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐
+external‐
+storage‐
+<VOLUME‐NAME>
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+Public
+
+enable 124
+
+external-storage
+
+Syntax
+
+external-storage <VOLUME-NAME>
+
+no external-storage <VOLUME-NAME>
+
+Description
+
+Creates or updates an external storage volume.
+
+The no form of this command deletes an external storage volume.
+
+Examples
+
+Creating the logfiles storage volume:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)#
+Deleting the logfiles storage volume:
+
+switch(config)# no external-storage logfiles
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+password (external-storage)
+
+Public
+
+external-storage 125
+
+Syntax
+
+password [{plaintext | ciphertext} <PASSWORD>]
+
+no password {plaintext | ciphertext} <PASSWORD>
+
+Description
+
+Sets the password for network attached storage server login.
+
+The no form of this command clears the password for network attached storage server login.
+
+Parameter
+
+Description
+
+{ciphertext | plaintext}
+
+Selects the password format.
+
+Specifies the password.
+
+<PASSWORD>
+
+NOTE
+
+When the password is not provided on the com
+mand line, plaintext password prompting occurs
+upon pressing Enter. The entered password cha
+racters are masked with asterisks.
+
+Examples
+
+Creating a volume named logfiles with password Xj#9:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# password plaintext Xj#9
+
+Creating a volume named bak1 with a prompted plaintext password:
+
+switch(config)# external-storage bak1
+
+switch(config-external-storage-bak1)# password
+
+Enter the NAS server password: **********
+
+Re-Enter the NAS server password: **********
+
+Clearing the password for volume logfiles:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# no password plaintext Xj#9
+
+Public
+
+password (external-storage) 126
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐
+external‐
+storage‐
+<VOLUME‐NAME>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show external-storage
+
+Syntax
+
+show external-storage [<VOLUME-NAME>]
+
+Description
+
+Shows external storage configuration and state for all volumes or for a specified volume.
+
+Parameter
+
+Description
+
+Specifies the external storage volume name that the show com
+mand will use.
+
+<VOLUME‐NAME>
+
+Examples
+
+switch# show external-storage
+----------------------------------------------------------------------------
+
+--------
+
+           Address      VRF      Username      Type       Directory
+
+State
+
+Public
+
+show external-storage 127
+
+----------------------------------------------------------------------------
+
+--------
+
+nfsvol     10.1.1.1     nas      ---           NFSv3      /home
+
+operational
+
+nfsfiles   20.1.1.1     nas      netstorage    NFSv4      /netstor
+
+disabled
+
+scpdev     nasserver    nas      scpstor       SCP        /scp
+
+unaccessible
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show running-config external-storage
+
+Syntax
+
+show running-config external-storage
+
+Description
+
+Shows the running configuration of the external storage.
+
+Examples
+
+switch# show running-config external-storage
+
+external-storage nfsvol
+      address   10.1.1.1
+      vrf       nas
+
+      type      nfsv4
+
+      directoty /home
+
+      enable
+
+Public
+
+show running-config external-storage 128
+
+external-storage scpdev
+
+      address   30.1.1.1
+
+      vrf       nas
+
+      username  switchuser
+
+      password  ciphertext xxx
+
+      type      scp
+
+      directoty /home
+
+      enable
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+type
+
+Syntax
+
+type {nfsv3 | nfsv4 | scp}
+
+no type {nfsv3 | nfsv4 | scp}
+
+Description
+
+Sets the network attached storage access type for reaching the external storage volume.
+
+The no form of this command deletes an external storage volume.
+
+Parameter
+
+nfsv3
+
+nfsv4
+
+Description
+
+Specifies the NFSv3 network access protocol.
+
+Specifies the NFSv4 network access protocol.
+
+Public
+
+type 129
+
+Parameter
+
+scp
+
+Examples
+
+Description
+
+Specifies the SCP network access protocol.
+
+Creating the logfiles volume using NFSV4:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# type nfsv4
+
+Clearing the external storage access type:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# no type nfsv4
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐
+external‐
+storage‐
+<VOLUME‐NAME>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+username
+
+Syntax
+
+username <USER-NAME>
+
+no username <USER-NAME>
+
+Public
+
+username 130
+
+Description
+
+Sets the username for logging in to a network attached storage server.
+
+The no form of this command clears a username.
+
+Parameter
+
+Description
+
+Specifies the username.
+
+<USER‐NAME>
+
+Examples
+
+Creating a volume named logfiles with the user name nassuser:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# username nasuser
+
+Clearing the user name nasuser from accessing the logfiles volume:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# no username nasuser
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐
+external‐
+storage‐
+<VOLUME‐NAME>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+username 131
+
+vrf
+
+Syntax
+
+vrf <VRF-NAME>
+
+no vrf <VRF-NAME>
+
+Description
+
+Setting a VRF to reach network attached storage.
+
+The no form of this command clears access of a VRF to network attached storage.
+
+Parameter
+
+Description
+
+Specifies the VRF name.
+
+<VRF‐NAME>
+
+Examples
+
+Creating the logfiles volume and setting a VRF named nas to access the network attached storage:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# vrf nas
+
+Clearing access of a VRF named nas to the network attached storage:
+
+switch(config)# external-storage logfiles
+
+switch(config-external-storage-logfiles)# no vrf nas
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Public
+
+vrf 132
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐
+external‐
+storage‐
+<VOLUME‐NAME>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+IP-SLA
+
+The IP Service Level Agreement (IP-SLA) is a feature that enables the measuring of network performance
+between two nodes in a network for different service level agreement parameters such as round-trip time
+(RTT), one-way delay, jitter, reachability, packet loss, and voice quality scores. These two nodes can span
+across area in access, distribution or core inside a LAN as well as across WAN between core to core or core to
+Data Centre switches. This feature helps you measure the SLA for different protocols or applications such as
+UDP echo, UDP jitter (for voice and video), TCP connect, HTTP, and ICMP echo. This guide provides details
+for managing and monitoring different types of IP-SLAs.
+
+Subtopics
+
+IP-SLA guidelines
+Limitations with VoIP SLAs
+IP-SLA commands
+
+IP-SLA guidelines
+
+•  AOS-CX supports only SLA configuration through CLI and thresholds can be configured using NAE
+
+agents using WebUI/REST.
+
+•  AOS-CX supports only forever tests. On-demand tests are not supported.
+
+•  Maximum sessions: IP-SLA source 50, IP-SLA responder 8.
+
+•  NAE can effectively monitor a maximum of 300 parameters, reducing the maximum supported session
+
+by 300.
+
+•  NAE supports only syslog.
+
+Public
+
+IP-SLA 133
+
+•  NAE agents must be triggered for each IP-SLA test on every switch.
+
+•
+
+If multiple IP addresses are received for a DNS query, DNS works with the first resolved IP.
+
+•  When the DNS server IP is not explicitly configured, the system automatically uses the first DNS server
+
+available in its default configuration.
+
+•  The source interface/IP option is not applicable for SLAs configured on 'mgmt' VRF, as it has only one
+
+interface.
+
+•  A system time change because of NTP or a manual change causes an incorrect calculation.
+
+•  There is no interoperability of UDP echo SLA between AOS-CX and FlexFabric switches.
+
+•  Source IP and source port combination must be unique across SLA sessions in a same switch.
+
+•  Do not use the same source port across the source and responder sessions in a switch.
+
+•  The configuration of history results is limited to a maximum of 8 IP-SLA sessions. This means that you
+can enable and store historical performance data, such as response times and availability, for up to 8
+individual IP SLA sessions at any given time.
+
+•  NTP synchronization is a must for SLA types involving one-way delay such as UDP jitter VoIP.
+
+•
+
+It is mandatory to set default CoPP to the maximum value when UDP jitter SLA is enabled. Otherwise,
+100% packet loss can be seen and UDP jitter SLA probes will result in failure:
+copp-policy default
+
+     class hypertext priority 6 rate 50000 burst 64
+
+     default-class priority 6 rate 99999 burst 9999
+
+Limitations with VoIP SLAs
+
+•  A maximum of 80 concurrent VoIP SLAs can be scheduled in a 20 second slot.
+
+•  A single VoIP probe takes 20 seconds to complete.
+
+•  The default and minimum probe interval for VoIP SLA is 120 seconds.
+
+•  SLAs scheduled in the same slot, periodically sends 1000 probe packets for 120 seconds in 20 second
+
+intervals.
+
+•  Default 120 second probe interval is divided in to 6 slots of 20 seconds to avoid synchronization of all
+
+configured VoIP SLAs sending probes at the same time.
+
+Public
+
+Limitations with VoIP SLAs 134
+
+•  SLAs started at the same time exceeding the concurrent limit of 80 must wait for the next 20 second
+
+VoIP slot to open before moving to ‘running’ state.
+
+•  The maximum number of VoIP SLAs supported is 80 X 6 slots = 480 SLAs.
+
+•  SLAs exceeding 480 will continue to remain in the 'waiting for VoIP slot' until any slot is freed by
+
+stopping the running SLA.
+
+•  To avoid high RTT, a single switch with more than 20 SLAs should not have single responder SLA.
+
+•  When IP is received dynamically (e.g. using DHCP) for interfaces other than management interface,
+
+IPSLA source or responder has to be configured only using interface name.
+
+IP-SLA commands
+
+Subtopics
+
+https
+ip-sla responder
+show ip-sla all
+show ip-sla responder
+show ip-sla
+
+https
+
+Syntax
+
+https {get | raw} <URL> [history-interval <HISTORY-INTERVAL>] [cache
+
+disable] [name-server {<IPV4-ADDR-DNS-SERVER>|<IPV6-ADDR-DNS-SERVER>}]
+
+[probe-interval <PROBE-INTERVAL>] [proxy <PROXY-URL>] [source {<IPV4-ADDR>|
+
+<IPV6-ADDR>|IFNAME>}] [source-port <SOURCE-PORT-NUM>] [version <VERSION-
+
+NUMBER>] [http-raw-request <RAW-PAYLOAD>]
+
+no https {get | raw} <URL> [history-interval <HISTORY-INTERVAL>] [cache
+
+disable] [name-server {<IPV4-ADDR-DNS-SERVER>|<IPV6-ADDR-DNS-SERVER>}]
+
+[probe-interval <PROBE-INTERVAL>] [proxy <PROXY-URL>] [source {<IPV4-ADDR>|
+
+<IPV6-ADDR>|IFNAME>}] [source-port <SOURCE-PORT-NUM>] [version <VERSION-
+
+NUMBER>] [http-raw-request <RAW-PAYLOAD>]
+
+Description
+
+Configures HTTPS as the IP-SLA test mechanism. Requires destination URL and type of HTTPS request
+(get/raw).
+
+Public
+
+IP-SLA commands 135
+
+The no form of this command removes the configuration.
+
+NOTE
+
+For HTTPS IP-SLA sessions, it is not required to install a certificate on the switch.
+
+Parameter
+
+{get | raw}
+
+<URL>
+
+Description
+
+Selects HTTPS request type as get or raw where the system will
+generate or provide HTTPS payload.
+
+Specifies HTTPS URL address of syntax. https://<HOST NAME/
+IP‐ADDRESS>:<PORT>/<PATH>.
+
+history‐interval <HISTORY‐
+INTERVAL>
+
+Configures the history interval for the IP‐SLA. Set the history i
+nterval to minimum of two times the probe‐interval for the SL
+A. Range: 60 to 7200.
+
+cache disable
+
+Selects cache option for the HTTPS server. By default the optio
+n is enabled.
+
+name‐server {<IPV4‐ADDR‐
+DNS‐SERVER>|<IPV6‐ADDR‐DNS‐
+SERVER>}
+
+probe‐interval <PROBE‐
+INTERVAL>
+
+Specifies the IPv4 address of DNS server.
+
+Specifies the probe interval in seconds. Range: 30 to 604800.
+
+proxy <PROXY‐URL>
+
+Specifies the probe interval in seconds. Range: 30 to 604800.
+
+source {<IPV4‐ADDR>|<IPV6‐
+ADDR>|IFNAME>}
+
+Selects the source, either an IPv4 address, an IPv6 address, or h
+ostname for SLA probes.
+
+source‐port <SOURCE‐PORT‐
+NUM>
+
+version <VERSION‐NUMBER>
+
+Specifies the value of the source port for the IP‐SLA probes.
+
+Specifies the source interface to use for sending IP‐SLA pro
+bes.
+
+https‐raw‐request <RAW‐
+PAYLOAD>
+
+Specifies the HTTPS raw request. String.
+
+Examples
+
+Configuring HTTPS get with parameters:
+
+Public
+
+https 136
+
+switch(config-ipsla-1)# https get https://device.arubanetworks.com/root/
+
+home.html
+
+Configuring HTTPS raw with parameters:
+
+switch(config-ipsla-1)# https raw https://device.arubanetworks.com/root/
+
+home.html raw-request “GET /en/US/hmpgs/index.html”
+
+Removing the HTTPS raw:
+
+switch(config-ipsla-1)# no https raw https://device.arubanetworks.com/root/
+
+home.html raw-request “GET /en/US/hmpgs/index.html”
+
+Command History
+
+Release
+
+10.16.1000
+
+Modification
+
+Added new parameters history‐interval. Also, IPv6 addresses can be used.
+
+10.12.1000
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐ip‐sla‐
+<IP‐SLA‐NAME>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+ip-sla responder
+
+Syntax
+
+ip-sla responder <SLA-NAME> (udp-echo | tcp-connect | udp-jitter-voip)
+
+[<PORT-NUM>] [source {<SOURCE-IPV4-ADDR>|<SOURCE-IPV6-ADDR>|<IFNAME>}] [vrf
+<VRF-NAME>] [ipv6]
+
+no ip-sla responder <SLA-NAME> (udp-echo | tcp-connect | udp-jitter-voip)
+
+[<PORT-NUM>] [source {<SOURCE-IPV4-ADDR>|<SOURCE-IPV6-ADDR>|<IFNAME>}] [vrf
+
+<VRF-NAME>] [ipv6]
+
+Public
+
+ip-sla responder 137
+
+Description
+
+Selects the IP-SLA responder. The responder can be configured for udp-echo, tcp-connect, udp-jitter-voip
+type. It requires the SLA name, SLA type, and port number as arguments.
+
+The no form of this command removes the IP-SLA responder.
+
+Parameter
+
+Description
+
+Specifies the IP‐SLA responder name. Length: 1 to 64 chara
+cters.
+
+<SLA‐NAME>
+
+udp‐echo
+
+tcp‐connect
+
+Enables responder for udp‐echo probes.
+
+Selects TCP connect as the IP‐SLA test mechanism.
+
+udp‐jitter‐voip
+
+Selects VOIP jitter as the IP‐SLA test mechanism.
+
+Specifies the port number to listen for IP‐SLA probes. Range:
+1 to 65535.
+
+<PORT‐NUM>
+
+source {<SOURCE‐IPV4‐
+ADDR>|<SOURCE‐IPV6‐ADDR>|
+<IFNAME>}
+
+Selects the source IPv4 or IPv6 address for SLA probes or the s
+ource interface to use for sending IP‐SLA probes.
+
+vrf <VRF‐NAME>
+
+Specifies the name of the VRF to use.
+
+ipv6
+
+Usage
+
+Configures IPv6 responder. This keyword is required if an IPv6
+address is being used by the source interface or VRF. By defaul
+t, it will be considered as an IPv4 address.
+
+The IPv6 keyword is required if an IPv6 address is being used by the source interface or VRF. Otherwise, by
+default, it will be considered as an IPv4 address.
+
+Examples
+
+Configuring IP-SLA responder for udp-echo:
+
+switch(config)# ip-sla responder SLA1 udp-echo 8000 source 2.2.2.2
+
+Configuring IP-SLA responder with IPv6:
+
+Public
+
+ip-sla responder 138
+
+switch(config)#ip-sla responder SLA1 udp-echo 8000 source 1/1/1 ipv6
+
+Configuring IP-SLA responder for udp-jitter-voip:
+
+switch(config)#ip-sla responder SLA1 udp-jitter-voip 1025 vrf <VRF>
+
+Disabling IP-SLA responder:
+
+switch(config)# no ip-sla responder SLA1 udp-echo 8000 source 2.2.2.2
+
+Command History
+
+Release
+
+10.15
+
+Modification
+
+Added ipv6 parameter.
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show ip-sla all
+
+Syntax
+
+show ip-sla all
+
+Description
+
+Shows all ip-sla source configuration and status.
+
+Examples
+
+Showing results for ip-sla all:
+
+switch# show ip-sla all
+
+SLA Name                  : 2 (non-persistent)
+
+Status                    : running
+
+Public
+
+show ip-sla all 139
+
+SLA Type                  : udp-echo
+
+VRF                       : default
+
+Source IP                 :
+
+Source Interface          :
+
+Domain Name Server        :
+
+Payload Size              : 28
+
+TOS                       : 0
+
+Probe Interval(seconds)   : 60
+
+History Interval(seconds) : 0
+
+Timeout Interval(seconds) : 45
+
+IP-SLA session status
+
+IP-SLA Name                          : 2 (non-persistent)
+
+IP-SLA Type                          : udp-echo
+
+Destination Host Name/IP Address     : 10.1.1.2
+
+Destination Port                     : 8888
+
+Source IP Address/IFName             :
+
+Source Port                          :
+
+Status                               : running
+
+IP-SLA Session Cumulative Counters
+
+Total Probes Transmitted             : 10
+
+Probes Timed-out                     : 10
+
+Bind Error                           : 0
+
+Destination Address Unreachable      : 0
+
+DNS Resolution Failures              : 0
+
+Reception Error                      : 0
+
+Transmission Error                   : 0
+
+Operational Status                   : down
+
+IP-SLA Latest Probe Results
+
+Last Probe Time                      :
+
+Packets Sent                         : 1
+
+Packets Received                     : 0
+
+Packet Loss in Test                  : 100%
+Minimum RTT(ms)                      :
+
+Maximum RTT(ms)                      :
+
+Average RTT(ms)                      :
+
+DNS RTT(ms)                          :
+
+----------------------------------------------------------------------------
+
+--
+
+SLA Name                  : echo-udp-sess2 (non-persistent)
+
+Status                    : running
+
+SLA Type                  : udp-echo
+
+VRF                       : default
+
+Source IP                 :
+
+Public
+
+show ip-sla all 140
+
+Source Interface          :
+
+Domain Name Server        :
+
+Payload Size              : 28
+
+TOS                       : 0
+
+Probe Interval(seconds)   : 60
+
+History Interval(seconds) : 0
+
+Timeout Interval(seconds) : 45
+
+IP-SLA session status
+
+IP-SLA Name                          : echo-udp-sess2 (non-persistent)
+
+IP-SLA Type                          : udp-echo
+
+Destination Host Name/IP Address     : 100.1.1.2
+
+Destination Port                     : 8888
+
+Source IP Address/IFName             :
+
+Source Port                          :
+
+Status                               : running
+
+IP-SLA Session Cumulative Counters
+
+Total Probes Transmitted             : 10
+
+Probes Timed-out                     : 0
+
+Bind Error                           : 0
+
+Destination Address Unreachable      : 0
+
+DNS Resolution Failures              : 4
+
+Reception Error                      : 0
+
+Transmission Error                   : 0
+
+Operational Status                   : Up
+
+IP-SLA Latest Probe Results
+
+Last Probe Time                      :
+
+Packets Sent                         : 1
+
+Packets Received                     : 1
+
+Packet Loss in Test                  : 0.0000%
+
+Minimum RTT(ms)                      :
+
+Maximum RTT(ms)                      :
+
+Average RTT(ms)                      :
+DNS RTT(ms)                          :
+
+----------------------------------------------------------------------------
+
+--
+Showing results for non-configured ip-sla all:
+
+switch# show ip-sla all
+
+IPSLA source is not configured
+
+Public
+
+show ip-sla all 141
+
+Command History
+
+Release
+
+Modification
+
+10.16.1000
+
+Updated to display history interval.
+
+10.12.1000
+
+Updated to display https as an IP‐SLA type.
+
+10.07 or earlier
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show ip-sla responder
+
+Syntax
+
+show ip-sla responder <SLA-NAME> [initiator {<SOURCE-IPV4-ADDR>|<SOURCE-
+
+IPV6-ADDR>}] [<SOURCE-PORT-NUM>] [results]
+
+Description
+
+Shows the given IP-SLA responder configuration and operation status.
+
+Parameter
+
+Description
+
+Specifies the SLA name.
+
+<SLA‐NAME>
+
+initiator {<SOURCE‐IPV4‐
+ADDR>|<SOURCE‐IPV6‐ADDR>}
+
+<SOURCE‐PORT‐NUM>
+
+Selects the source IPv4 or IPv6 address for SLA probes to use.
+
+Configures the source port for the IP‐SLA test. Range: 1 to 65
+535.
+
+Public
+
+show ip-sla responder 142
+
+Parameter
+
+results
+
+Examples
+
+Description
+
+Displays the statistics for a given source IP and port.
+
+Showing IP-SLA responder configuration:
+
+switch# show ip-sla responder SLA3
+
+    SLA Name            : SLA3
+
+    IP-SLA Type         : Udp-echo
+
+    VRF                 : Default
+
+    Responder Port      : 8000
+
+    Responder IP        : 2.2.2.3
+
+    Responder Interface : 1/1/1
+
+    Responder Status    : Running
+Showing IP-SLA responder with initiator and results parameters:
+
+switch# show ip-sla responder SLA1 initiator 2.2.2.1 8000 results
+
+IP-SLA Type         : Udp-echo
+
+VRF Name            : Default
+
+Source IP           : 2.2.2.1
+
+Source Port         : 8000
+
+Responder Port      : 8888
+
+Responder IP        : 2.2.2.3
+
+Responder Interface :
+
+Responder Status    : Running
+
+Packets Received    : 2
+
+Packets Sent        : 2
+
+Command History
+
+Release
+
+Modification
+
+10.16.1000
+
+Added new parameters: initiator and results.
+
+10.07 or earlier
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+Operator ( > ) or Manage
+r ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+show ip-sla responder 143
+
+Platforms
+
+Command context
+
+Authority
+
+6200
+
+show ip-sla
+
+Syntax
+
+show ip-sla <SLA-NAME> [{results |  history-results}]
+
+Description
+
+Shows the given IP-SLA source configuration and status.
+
+Parameter
+
+Description
+
+Specifies the SLA name.
+
+<SLA‐NAME>
+
+results
+
+Displays the statistics calculated for an SLA type.
+
+history‐results
+
+Displays the history statistics calculated for the SLA ID.
+
+Examples
+
+Showing results for ip-sla:
+
+switch# show ip-sla xyz results
+
+IP-SLA session status
+IP-SLA Name                     : xyz
+
+IP-SLA Type                     : tcp-connect
+
+Destination Host Name/IP Address: 2.2.2.1
+
+Destination Port                : 8888
+
+Source IP Address/IFName        : 2.2.2.2
+
+Source Port                     : 5555
+
+Status                          : running
+
+IP-SLA session cumulative counters
+
+Total Probes Transmitted        : 1
+
+Probes Timed-out                : 0
+
+Bind Error                      : 0
+
+Destination Address Unreachable : 0
+
+Public
+
+show ip-sla 144
+
+DNS Resolution Failures         : 0
+
+Reception Error                 : 0
+
+Transmission Error              : 0
+
+IP-SLA Latest Probe Results
+
+Last Probe Time                 : 2018 Jul 13 02:00:35
+
+Packets Sent                    : 1
+
+Packets Received                : 1
+
+Packet Loss in Test             : 0.0000%
+
+Minimum RTT(ms)                 : 12
+
+Maximum RTT(ms)                 : 12
+
+Average RTT(ms)                 : 12
+
+DNS RTT(ms)                     : 0
+
+TCP RTT(ms)                     : 12
+Showing history results for ip-sla:
+
+switch# sh ip-sla abcd history-results
+
+IP-SLA Name: abcd Session Details =============== IP-SLA Type : tcp-connect Status : running
+Probe Interval(seconds) : 30 History Interval(seconds) : 600 Source Port : 3000 Destination Port :
+4000 Source IP Address : 10.0.0.1 Dest Host Name/IP Address : 10.0.0.2 History Probe Results
+===================== Packet Stats ------------ Probes Transmitted : 4 Packets Sent : 4 Packets
+Received : 4 Loss Percentage : 0.0000% Error Stats ----------- Transmission Errors : 0 Reception Errors :
+0 Bind Errors : 0 Dest. Unreachable : 0 Probes Timed-Out : 0 DNS Resolution Failures : 0 Probe RTT Stats
+--------------- Min RTT(ms) : 0 Max RTT(ms) : 0 Avg RTT(ms) : 0 DNS RTT Stats ------------- Min RTT(ms) :
+Max RTT(ms) : Avg RTT(ms) :
+
+Command History
+
+Release
+
+10.16.1000
+
+Modification
+
+Added new parameter history‐results. Updated to display history interval.
+
+10.12.1000
+
+Updated to display https as an IP‐SLA type.
+
+10.07 or earlier
+
+Command introduced.
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+show ip-sla 145
+
+L1-100Mbps downshift
+
+The speed downshift feature allows the user to link-up at sub-optimal speeds when failing to link-up at
+the highest advertised speed. There are fixed number of link attempts made to establish link at highest
+advertised speed and when all of them fail and attempt is made to link-up at a lower possible speed.
+
+This feature requires underlying PHY to have support for the same and hence capability is only added to
+select set of ports. If a link cannot be established at the highest common denominator within a set number of
+link attempts, the PHY advertises the next highest speed using auto-negotiation.
+
+Subtopics
+
+Limitations with speed downshift
+L1-100Mbps downshift commands
+
+Limitations with speed downshift
+
+•  Link up may be delayed as certain number of retries are done to establish the link at highest advertise
+
+speeds by both link partners before downshifting.
+
+•  Link may be established at sub-optimal speed.
+
+L1-100Mbps downshift commands
+
+Subtopics
+
+downshift enable
+show interface
+show interface downshift-enable
+show running-config interface
+
+downshift enable
+
+Syntax
+
+downshift-enable
+no downshift-enable
+
+Public
+
+L1-100Mbps downshift 146
+
+Description
+
+Enables/disables automatic speed downshift on an interface that supports downshift, generally 1GBASE-T
+ports. When enabled, downshift allows an interface to link at a lower advertised speed when unable to
+establish a stable link at the maximum speed. Downshifting only applies to physical interfaces that are
+not members of a LAG and is only available when auto-negotiation is enabled. When only one speed is
+advertised, downshift will not be triggered.
+
+Examples
+
+switch(config-if)# interface 1/1/1
+
+switch(config-if)# downshift-enable
+
+Warning: this is a non-standard mode for use only when standards-based
+
+auto-negotiation is not able to establish a stable link. Enabling this
+
+may cause the port to link at a lower than expected speed and should
+
+not be used on ports that are members of a LAG. Support calls may require
+
+this feature to be disabled
+
+Continue (y/n)?
+
+switch(config-if)#
+
+When automatic downshift is enabled:
+
+switch(config-if)# show running-config interface
+
+interface 1/1/1
+
+    downshift-enable
+
+Disabling automatic speed downshift:
+
+switch(config-if)# interface 1/1/1
+
+switch(config-if)# no downshift-enable
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+downshift enable 147
+
+show interface
+
+Syntax
+
+show interface [<IFNNAME>|<IFRANGE>] [brief | physical]
+
+show interface [<IFNNAME>|<IFRANGE>] [extended [non-zero] | [human-
+
+readable]]
+
+show interface [<IFNNAME>] monitor [human-readable]
+
+show interface [lag | loopback | tunnel | vlan ] [<ID>] [brief]
+
+show interface lag [<LAG-ID>] [extended [non-zero] | [human-readable]]
+
+show interface lag [<LAG-ID>] monitor [human-readable]
+
+Description
+
+Shows active configurations and operational status information for interfaces.
+
+Parameter
+
+Description
+
+Specifies a interface name.
+
+<IFNAME>
+
+<IFRANGE>
+
+brief
+
+physical
+
+extended
+
+Specifies the port identifier range.
+
+Shows brief info in tabular format.
+
+Shows the physical connection info in tabular format.
+
+Shows additional statistics, including the tx filtered and rx filte
+red counters.
+
+•  Rx filter packets are protocol packets received when the p
+
+rotocol is disabled on the switch and there is only one port i
+n the VLAN. Protocols include OSPF, PIM, RIP, LACP, and LL
+DP.
+
+•  An example of a Tx filtered packet would be a multicast pac
+
+ket being filtered from going out of the ingress port.
+
+Public
+
+show interface 148
+
+Parameter
+
+human‐readable
+
+Description
+
+Shows statistics rounded to the nearest power of 1000, for exa
+mple, 1K, 345M, 2G. This is available only in the CLI interface o
+utput.
+
+Shows only non zero statistics.
+
+Shows LAG interface information.
+
+Continuously monitor interface statistics.
+
+Shows loopback interface information.
+
+Shows tunnel interface information.
+
+Shows VLAN interface information.
+
+Specifies the LAG number. Range: 1‐256
+
+Specifies the LOOPBACK number. Range: 0‐255
+
+Specifies the tunnel ID. Range: 1‐255
+
+Specifies the VLAN ID. Range: 1‐4094
+
+Shows the VXLAN interface information.
+
+Specifies the VXLAN interface identifier. Default: 1
+
+non‐zero
+
+LAG
+
+monitor
+
+LOOPBACK
+
+TUNNEL
+
+VLAN
+
+<LAG‐ID>
+
+<LOOPBACK‐ID>
+
+<TUNNEL‐ID>
+
+<VLAN‐ID>
+
+VXLAN
+
+<VXLAN‐ID>
+
+Examples
+
+switch# show interface 1/1/1
+
+Interface 1/1/1 is up
+
+Public
+
+show interface 149
+
+Admin state is up
+
+Link state: up for 2 days (since Sun Jun 21 05:30:22 UTC 2020)
+
+Link transitions: 1
+
+Description: backup data center link
+
+Hardware: Ethernet, MAC Address: 70:72:cf:fd:e7:b4
+
+MTU 1500
+
+Type 1GbT
+
+Full-duplex
+
+qos trust none
+
+Speed 1000 Mb/s
+
+Auto-negotiation is on
+
+Flow-control: off
+
+Error-control: off
+
+                Energy-Efficient Ethernet is enabled
+
+                MDI mode: MDIX
+
+L3 Counters: Rx Enabled, Tx Enabled
+
+Rate collection interval: 300 seconds
+
+Rates                           RX                   TX        Total (RX+TX)
+
+------------- -------------------- -------------------- --------------------
+
+Mbits / sec                   0.00                 0.00                 0.00
+
+KPkts / sec                   0.00                 0.00                 0.00
+
+Unicast                       0.00                 0.00                 0.00
+
+Multicast                     0.00                 0.00                 0.00
+
+Broadcast                     0.00                 0.00                 0.00
+
+Utilization %                 0.00                 0.00                 0.00
+
+Statistics                      RX                   TX                Total
+
+------------- -------------------- -------------------- --------------------
+
+Packets                          0                    0                    0
+
+Unicast                          0                    0                    0
+
+Multicast                        0                    0                    0
+
+Broadcast                        0                    0                    0
+
+Bytes                            0                    0                    0
+Jumbos                           0                    0                    0
+
+Dropped                          0                    0                    0
+
+Filtered                         0                    0                    0
+
+Pause Frames                     0                    0                    0
+
+L3 Packets                       0                    0                    0
+
+L3 Bytes                         0                    0                    0
+
+Errors                           0                    0                    0
+
+CRC/FCS                          0                  n/a                    0
+
+Collision                      n/a                    0                    0
+
+Runts                            0                  n/a                    0
+
+Public
+
+show interface 150
+
+Giants                           0                  n/a                    0
+
+Other                            0                    0                    0
+Showing information when interface 1/1/1 is configured:
+
+MDI mode: MDIX
+
+VLAN Mode: native-untagged
+
+Native VLAN: 1
+
+Allowed VLAN List: all
+
+Rate collection interval: 300 seconds
+
+Rates                           RX                   TX        Total (RX+TX)
+
+------------- -------------------- -------------------- --------------------
+
+Mbits / sec                   0.00                 0.00                 0.00
+
+KPkts / sec                   0.00                 0.00                 0.00
+
+Unicast                       0.00                 0.00                 0.00
+
+Multicast                     0.00                 0.00                 0.00
+
+Broadcast                     0.00                 0.00                 0.00
+
+Utilization %                 0.00                 0.00                 0.00
+
+Statistics                      RX                   TX                Total
+
+------------- -------------------- -------------------- --------------------
+
+Packets                          0                    0                    0
+
+Unicast                          0                    0                    0
+
+Multicast                        0                    0                    0
+
+Broadcast                        0                    0                    0
+
+Bytes                            0                    0                    0
+
+Jumbos                           0                    0                    0
+
+Dropped                          0                    0                    0
+
+Filtered                         0                    0                    0
+
+Pause Frames                     0                    0                    0
+
+Errors                           0                    0                    0
+
+CRC/FCS                          0                  n/a                    0
+
+Collision                      n/a                    0                    0
+
+Runts                            0                  n/a                    0
+
+Giants                           0                  n/a                    0
+Showing information when the interface is currently linked at a downshifted speed:
+
+switch(config-if)# show interface 1/1/1
+
+Interface 1/1/1 is up
+
+...
+
+Auto-negotiation is on with downshift active
+Showing information when the interface is currently linked with energy-efficient-ethernet negotiated:
+
+switch(config-if)# show interface 1/1/1
+
+Interface 1/1/1 is up
+
+...
+
+Energy-Efficient Ethernet is enabled and active
+
+Public
+
+show interface 151
+
+switch(config-if)# show interface 1/1/1
+
+Interface 1/1/1 is down
+
+Admin state is up
+
+State information: Disabled by VSX
+
+Link state: down for 3 days (since Tue Mar 16 05:20:47 UTC 2021)
+
+Link transitions: 0
+
+Description:
+
+Hardware: Ethernet, MAC Address: 04:09:73:62:90:e7
+
+MTU 1500
+
+Type SFP+DAC3
+
+Full-duplex
+
+qos trust none
+
+Speed 0 Mb/s
+
+Auto-negotiation is off
+
+Flow-control: off
+
+Error-control: off
+
+VLAN Mode: native-untagged
+
+Native VLAN: 1
+
+Allowed VLAN List: 1502-1505
+
+Rate collection interval: 300 seconds
+
+Rate                               RX                   TX        Total
+
+(RX+TX)
+
+---------------- -------------------- --------------------
+
+--------------------
+
+Mbits / sec                      0.00                 0.00
+
+0.00
+
+KPkts / sec                      0.00                 0.00
+
+0.00
+
+Unicast                          0.00                 0.00
+
+0.00
+
+Multicast                        0.00                 0.00
+
+0.00
+Broadcast                        0.00                 0.00
+
+0.00
+
+Utilization                      0.00                 0.00
+
+0.00
+
+Statistic                          RX                   TX
+
+Total
+
+---------------- -------------------- --------------------
+
+--------------------
+
+Packets                             0
+
+0                    0
+
+Unicast                             0
+
+Public
+
+show interface 152
+
+0                    0
+
+Multicast                           0
+
+0                    0
+
+Broadcast                           0
+
+0                    0
+
+Bytes                               0
+
+0                    0
+
+Jumbos                              0
+
+0                    0
+
+Dropped                             0
+
+0                    0
+
+Pause Frames                        0
+
+0                    0
+
+Errors                              0
+
+0                    0
+
+CRC/FCS                             0
+
+n/a                    0
+
+Collision                         n/a
+
+0                    0
+
+Runts                               0
+
+n/a                    0
+
+Giants                              0
+
+n/a                    0
+Showing information when the interface is configured with EEE and the EEE has auto-negotiated:
+
+switch(config-if)# show interface 1/1/1 physical
+
+----------------------------------------------------------------------------
+
+----------------------------------------------------------------
+
+                            Link    Admin         Speed           Flow-
+
+Control          EEE       PoE Power                      Port
+
+Port        Type           Status   Config   Status | Config    Status |
+
+Config   Status | Config  (Watts)    State Information  Description
+
+----------------------------------------------------------------------------
+
+----------------------------------------------------------------
+
+1/1/1       1GbT           up       up       1G       auto      off
+
+off      on       on       --        10M/100M/1G        --
+Showing the monitor information:
+
+NOTE
+In monitor mode, the CLI refreshes data automatically until it is exited by
+entering q. Pressing ? opens the help menu to display which options are available
+in this context.
+
+Public
+
+show interface 153
+
+Interface 1/1/1 is up
+
+Rate                               RX                   TX        Total
+
+(RX+TX)
+
+---------------- -------------------- --------------------
+
+--------------------
+
+MBits / sec                  30196.43             30196.43
+
+60392.85
+
+MPkts / sec                  58977.39             58977.40
+
+117954.79
+
+Unicast                          0.00                 0.00
+
+0.00
+
+Multicast                    58977.39             58977.40
+
+117954.79
+
+Broadcast                        0.00                 0.00
+
+0.00
+
+Utilization %                   75.49                75.49
+
+150.98
+
+Statistic                          RX                   TX        Total
+
+(RX+TX)
+
+---------------- -------------------- --------------------
+
+--------------------
+
+Packets                    4756527649           4756527865
+
+9513055514
+
+Unicast                             0
+
+0                    0
+
+Multicast                  4756527649           4756527865
+
+9513055514
+
+Broadcast                           2
+
+0                    2
+
+Bytes                    304417778668         304417795428
+
+608835574096
+
+Jumbos                              0
+0                    0
+
+Dropped                             0          19028847730
+
+19028847730
+
+Pause Frames                        0
+
+0                    0
+
+Errors                              0
+
+0                    0
+
+CRC/FCS                             0
+
+n/a                    0
+
+help: ?, quit: q
+
+Help for Interface Monitor
+
+Public
+
+show interface 154
+
+h  Toggle human-readable mode
+
+c  Clear interface statistics
+
+Does not apply to rates
+
+Arrows, PgUp, PgDn, Home, End
+
+Navigate interface statistics
+
+Delay: 2
+
+help: ?, quit: q
+Showing the output for interface 1/1/1 in human-readable format:
+
+NOTE
+In human-readable format, the < 1 symbol for Utilization indicates that the
+amount of packets is between zero and one. This is true in cases where the
+number of bytes increases but the number of packets and the Utilization value is
+not displayed even in the normal output, where the human-readable parameter is
+not included in the command.
+
+switch(config-if)# show interface 1/1/1 human-readable
+
+Interface 1/1/1 is up
+
+Rate                               RX                   TX        Total
+
+(RX+TX)
+
+---------------- -------------------- --------------------
+
+--------------------
+
+Bits / sec                         3M
+
+3M                   6M
+
+Pkts / sec                        316                  316
+
+633
+
+Unicast                           319                  319
+
+638
+
+Multicast                           0
+
+0                    0
+
+Broadcast                           0
+
+0                    0
+Utilization %                     < 1                  < 1
+
+< 1
+
+Statistic                          RX                   TX
+
+Total
+
+---------------- -------------------- --------------------
+
+--------------------
+
+Packets                          577K
+
+577K                   1M
+
+Unicast                          577K
+
+577K                   1M
+
+Multicast                           0
+
+51                   51
+
+Public
+
+show interface 155
+
+Broadcast                           0
+
+15                   15
+
+Bytes                            744M
+
+745M                   1G
+
+Jumbos                              0
+
+0                    0
+
+Dropped                             0
+
+0                    0
+
+Filtered                            0
+
+0                    0
+
+Pause Frames                        0
+
+0                    0
+
+Errors                              0
+
+0                    0
+
+CRC/FCS                             0
+
+n/a                    0
+
+Collision                         n/a
+
+0                    0
+
+Runts                               0
+
+n/a                    0
+
+Giants                              0
+
+n/a                    0
+Showing information about extended counters:
+
+NOTE
+The output of the  show interface extended  command varies
+depending on the switch model and configuration.
+
+switch(config-if)# show interface 1/1/17 extended
+
+-------------------------------------------------------------------
+
+Interface 1/1/17
+
+-------------------------------------------------------------------
+
+Statistics                                     Value
+
+-------------------------------------------------------------------
+
+Dot1d Tp Port In Frames                        547
+
+Dot1d Tp Port Out Frames                       608
+
+Dot3 In Pause Frames                           0
+
+Dot3 Out Pause Frames                          0
+
+Ethernet Stats Broadcast Packets               19
+
+Ethernet Stats Bytes                           40162
+
+Ethernet Stats Packets                         342
+
+...
+
+-------------------------------------------------------------------
+
+Public
+
+show interface 156
+
+Error-Statistics                               Value
+
+-------------------------------------------------------------------
+
+Dot1d Base Port MTU Exceeded Discards          0
+
+Dot3 Control In Unknown Opcodes                0
+
+Dot3 Stats Alignment Errors                    0
+
+Dot3 Stats FCS Errors                          0
+
+Dot3 Stats Frame Too Longs                     0
+
+Dot3 Stats Internal Mac Transmit Errors        0
+
+Ethernet RX Oversize Packets                   0
+
+...
+Showing interface link-status:
+
+switch# show interface link-status
+
+-------------------------------------------------------------
+
+Port           Type           Physical    Link         Last
+
+                              Link State  Transitions  Change
+
+-------------------------------------------------------------
+
+1/1/1          1G-BT          down        0            --
+
+1/1/2          1G-BT          up          1            1 minute ago (Fri
+
+Mar 09 12:36:56 UTC 2018)
+
+1/1/3          1G-BT          up          1            1 minute ago (Fri
+
+Mar 09 12:36:56 UTC 2018)
+
+1/1/4          --             down        0            --
+
+1/1/5          --             down        0            --
+Showing interface loopback 1 link-status:
+
+-------------------------------------------------------------
+
+                              Physical    Link         Last
+
+Port           Type           Link State  Transitions  Change
+
+-------------------------------------------------------------
+
+loopback1      --             up          --           --
+Showing interface 1/1/2-1/1/3 link-status:
+
+-------------------------------------------------------------
+
+                              Physical    Link         Last
+
+Port           Type           Link State  Transitions  Change
+
+-------------------------------------------------------------
+
+1/1/2          1G-BT          up          1            1 minute ago (Fri
+
+Mar 09 12:36:56 UTC 2018)
+
+1/1/3          1G-BT          up          1            1 minute ago (Fri
+Mar 09 12:36:56 UTC 2018)
+Showing interface link-status:
+
+switch# show interface link-status
+
+-------------------------------------------------------------------------
+
+Public
+
+show interface 157
+
+Port           Type            Physical    Link        Link Flaps  Last
+
+                               Link State  Transitions Ignored     Change
+
+-------------------------------------------------------------------------
+
+1/1/1          1G-BT           down        0           0           --
+
+1/1/2          1G-BT           up          1           0           1 minute
+
+ago (Fri Mar 09 12:36:56 UTC 2018)
+
+1/1/3          1G-BT           up          1           0           1 minute
+
+ago (Fri Mar 09 12:36:56 UTC 2018)
+
+1/1/4          --              down        0           0           --
+
+1/1/5          --              down        0           0           --
+Showing state information when interface is blocked:
+
+8360(config-if)# show interface 1/1/1
+
+Interface 1/1/1 is up (Blocked)
+
+Admin state is up
+
+State information: Blocked by UDLD
+
+Link state: up for 1 minute (since Mon Jun 10 09:25:27 UTC 2024)
+
+Link transitions: 1
+
+Description:
+
+Persona:
+
+Hardware: Ethernet, MAC Address: 00:fd:45:67:85:91
+
+MTU 1500
+
+Type 10G-LR / 10G SFP+ LR
+
+Full-duplex
+
+qos trust none
+
+Speed 10000 Mb/s
+
+Auto-negotiation is off
+
+Flow-control: off
+
+Error-control: off
+
+VLAN Mode: access
+
+Access VLAN: 1
+
+Rate collection interval: 300 seconds
+
+Rate                               RX                   TX        Total
+
+(RX+TX)
+
+---------------- -------------------- --------------------
+
+--------------------
+
+Mbits / sec                      0.00                 0.00
+
+0.00
+
+KPkts / sec                      0.00                 0.00
+
+0.00
+
+Unicast                          0.00                 0.00
+
+0.00
+
+Multicast                        0.00                 0.00
+
+0.00
+
+Public
+
+show interface 158
+
+Broadcast                        0.00                 0.00
+
+0.00
+
+Utilization %                    0.00                 0.00
+
+0.00
+
+Statistic                          RX                   TX
+
+Total
+
+---------------- -------------------- --------------------
+
+--------------------
+
+Packets                            15
+
+15                   30
+
+Unicast                            12
+
+12                   24
+
+Multicast                           3
+
+3                    6
+
+Broadcast                           0
+
+0                    0
+
+Bytes                            1350                 1350
+
+2700
+
+Jumbos                              0
+
+0                    0
+
+Dropped                             0
+
+0                    0
+
+Pause Frames                        0
+
+0                    0
+
+Errors                              0
+
+0                    0
+
+CRC/FCS                             0
+
+n/a                    0
+
+Collision                         n/a
+
+0                    0
+
+Runts                               0
+
+n/a                    0
+Giants                              0
+
+n/a                    0
+
+Command History
+
+Release
+
+10.15
+
+10.11
+
+Modification
+
+Added state information when port goes into down state.
+
+Added  monitor  parameter.
+
+Public
+
+show interface 159
+
+| Release |     | Modification |     |             |     |     |
+| ------- | --- | ------------ | --- | ----------- | --- | --- |
+| 10.10   |     | Added        |     |  parameter. |     |     |
+human‐readable
+| 10.07 or earlier |     | ‐‐  |     |     |     |     |
+| ---------------- | --- | --- | --- | --- | --- | --- |
+Command Information
+| Platforms | Command context |     | Authority |     |     |     |
+| --------- | --------------- | --- | --------- | --- | --- | --- |
+All platforms Operator (>) or Manage Operators or Administrators or local user group members with
+r (#) execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+show interface downshift-enable
+Syntax
+show interface [<IFNNAME>|<IFRANGE>] downshift-enable
+Description
+Displays speed downshift information, including the interface speed status and configuration.
+| Parameter |     |     | Description |     |     |     |
+| --------- | --- | --- | ----------- | --- | --- | --- |
+Specifies a interface name.
+
+<IFNAME>
+
+Specifies the port identifier range.
+
+<IFRANGE>
+
+Examples
+Showing automatic downshift information:
+switch(config-if)# show interface downshift-enable
+-------------------------------------------------
+|     | Public |     |     |     | show interface downshift-enable | 160 |
+| --- | ------ | --- | --- | --- | ------------------------------- | --- |
+
+Downshift              Speed
+
+Port      Enabled | Active    Status   | Config
+
+-------------------------------------------------
+
+1/1/1     yes       yes       100M-FDx   auto
+
+1/1/2     yes       no        1G         auto
+
+1/1/3     yes       no        100M-FDx   100M-FDx
+
+1/1/4     no        no        --         auto
+Showing automatic downshift information on per interface:
+
+switch(config-if)# show interface 1/1/2 downshift-enable
+
+-------------------------------------------------
+
+              Downshift              Speed
+
+Port      Enabled | Active    Status   | Config
+
+-------------------------------------------------
+
+1/1/2     yes       no        1G         auto
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+show running-config interface
+
+Syntax
+
+show running-config interface [<IFNNAME>|<IFRANGE>]
+show running-config interface [lag | loopback | tunnel | vlan ] [<ID>]
+
+Description
+
+Displays active configurations of various switch interfaces.
+
+Public
+
+show running-config interface 161
+
+Parameter
+
+Description
+
+Specifies a interface name.
+
+<IFNAME>
+
+<IFRANGE>
+
+LAG
+
+LOOPBACK
+
+TUNNEL
+
+VLAN
+
+<LAG‐ID>
+
+<LOOPBACK‐ID>
+
+<TUNNEL‐ID>
+
+<VLAN‐ID>
+
+VXLAN
+
+<VXLAN‐ID>
+
+Specifies the port identifier range.
+
+Specifies LAG interface information
+
+Specifies loopback interface information.
+
+Specifies tunnel interface information.
+
+Specifies VLAN interface information.
+
+Specifies the LAG number. Range: 1‐256.
+
+Specifies the LOOPBACK number. Range: 0‐255.
+
+Specifies the tunnel ID. Range: 1‐255.
+
+Specifies the VLAN ID. Range: 1‐4094.
+
+Specifies the VXLAN interface information.
+
+Specifies the VXLAN interface identifier. Default: 1.
+
+Public
+
+show running-config interface 162
+
+Examples
+
+Showing 1/1/2 interface configuration:
+
+switch(config-if)# show running-config interface 1/1/2
+
+interface 1/1/2
+
+   no shutdown
+
+   description DC-23
+
+   exit
+Showing loopback interfaces configured:
+
+switch(config-if)# show running-config interface loopback
+
+interface loopback 1
+
+    description lb interface 1
+
+    exit
+
+interface loopback 2
+
+    description lb interface 2
+
+    exit
+Showing loopback interfaces not configured:
+
+switch(config-if)# show running-config interface loopback
+
+No loopback interfaces configured.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+Mirroring
+
+Mirroring allows you to replicate all traffic arriving and/or leaving the selected system interfaces. This data
+can be used for collection or analysis.
+
+Public
+
+Mirroring 163
+
+The traffic replicated using mirroring can be sent to a separate interface on the same switch as the traffic
+source for analysis or inspection. Such a collection of interfaces and settings is called a mirror session.
+
+A mirror session can be configured with many traffic sources but only a single output, or destination. In the
+initial configuration, the mirror session is disabled. You have enable the feature to start the replication.
+
+CAUTION
+
+Care must be taken in choosing the number and rates of sources to avoid
+over-saturating a session destination. A mirror session with multiple 10G sources
+can overwhelm a single 10G destination and important data may be lost.
+
+This version of AOS-CX support the following mirror capabilities:
+
+•  Support for a VLAN as source for a mirror session
+
+•  Ability for a given Mirror source in one session to act as source in another Mirror Session
+
+•  Support for a Layer 2/bridged Link Aggregation Group (LAG) as Session destination
+
+•  Support for a Layer 3/Route-only Link Aggregation Group (LAG) as Session destination
+
+NOTE
+
+The following interface types are not supported as mirror source or destination:
+
+•  Management
+
+•  Persona
+
+•  Loopback
+
+•  VxLAN
+
+•  Subinterfaces
+
+Hit Count Behavior for Policy Mirroring Actions
+
+When using classifier policies with mirroring actions, it is important to note that packets mirrored via these
+policy actions will have their hit counts recorded within the Policy hit counts. These packets will not be
+recorded as output packets in the Mirror Session statistics, except in the case of Mirror-to-CPU sessions.
+This distinction means that traffic metrics for packets mirrored via Policy Actions should be obtained from
+Policy hit counts, as these packets will not appear in the Mirror Session output statistics.
+
+Mirroring and CoPP
+
+When configuring a Mirror Session with the destination set to the CPU, it is important to understand how
+mirrored traffic interacts with Control Plane Policing (CoPP).
+
+Control plane packets that are already destined for the switch (for example, routing protocol packets and
+management traffic) will be processed by their respective CoPP classes. These packets will still be mirrored
+
+Public
+
+Mirroring 164
+
+to the CPU as part of the Mirror-to-CPU session, but they will not be counted under the Mirror-to-CPU CoPP
+class. The Mirror-to-CPU CoPP class is specifically designed to manage dataplane traffic that is mirrored to
+the CPU. Any control plane traffic mirrored to the CPU will bypass this class and be handled by the CoPP
+class corresponding to its original purpose (e.g., OSPF, BGP, or ARP). Administrators should account for this
+distinction when analyzing traffic mirrored to the CPU.
+
+For example, if a mirror session is configured to mirror all traffic from a source interface to the CPU, and
+that interface receives OSPF packets, the OSPF packets will be mirrored to the CPU. these packets will be
+processed by the OSPF CoPP class, not the Mirror-to-CPU CoPP class.
+
+Subtopics
+
+Mirror statistics
+Classifier policies and mirroring sessions
+VLAN as a source
+Mirroring commands
+
+Mirror statistics
+
+Mirror statistics are reset for a Mirror-to-CPU session when an interface is added or removed from a LAG
+that is a source interface in the Mirror session and during a failover.
+
+Classifier policies and mirroring sessions
+
+About this task
+
+Network traffic can be mirrored to a destination interface in two ways:
+
+•  Using a mirroring session alone.
+
+•  Using Classifier Policies with mirror actions in conjunction with a mirroring session.
+
+Basic mirroring sessions provide coarse control over the type of traffic mirrored from a source: all received,
+all transmitted, or both. However, a traffic class within a Classifier Policy applied to a source can provide
+much finer grained control of mirrored traffic. For example, a policy can match on many different aspects
+of the Ethernet or IPv4 or IPv6 header information in each frame or packet received or transmitted on an
+interface.
+
+The steps to configure a policy and class with a mirror action are the following:
+
+Procedure
+
+1.  Configuring a mirroring session with a destination interface.
+
+2.  Enabling the mirroring session.
+
+Public
+
+Mirror statistics 165
+
+3.  Configuring the Classifier Policy, specifying the mirroring session ID in the mirror action.
+
+Results
+
+If the packets being mirrored are received from a VLAN that is not allowed on the mirror destination, the
+mirrored packets would be dropped at the mirror destination interface. When the mirrored packets are
+dropped at the destination, the mirror output packet and byte count will increment, however the packets will
+not be received at the mirror destination.
+
+The mirror destination port among the active mirror sessions must be unique. That is, if an interface is
+configured as a source or destination in an active mirror session, the same port cannot be used as a
+destination in another active mirror session.
+
+Scenario 1
+
+Scenario 2
+
+VLAN as a source
+
+About this task
+
+AOS-CX allows configuration of VLAN as a mirroring source. When a VLAN source is configured in the 'rx'
+direction, all packets are mirrored as they are received in the switch. When a VLAN source is configured in 'tx'
+direction, all packets are mirrored as they are transmitted out of the switch.
+
+More than one source VLAN can be configured in a mirror session. Each such VLAN may specify its own
+direction.
+
+There is a limit of 1024 source VLANs in each direction of a given mirror session.
+
+Same VLANs can be configured as a mirror source for multiple sessions.
+
+NOTE
+
+When changing a source VLAN in an enabled mirror session (that is, adding,
+changing direction, or removing), mirrored packets being transmitted out the
+mirror destination port from other mirror sources may be briefly interrupted
+during the reconfiguration.
+
+Direction of an existing source VLAN can be updated in one of two ways:
+
+Procedure
+
+1.  Reenter the  source vlan  command with the new preferred direction.
+
+2.  Use the  no  form of the command with a direction (rx or tx) to selectively remove the specified
+direction. Specifying the last remaining direction for that VLAN will remove the VLAN from the
+configuration entirely.
+
+Public
+
+VLAN as a source 166
+
+Results
+
+For packets bridged through the switch:
+
+If the mirror is configured in 'both' direction, two copies of packets are mirrored, otherwise one copy of the
+packet will be mirrored.
+
+For routed packets:
+
+•
+
+•
+
+If the mirror is configured in the 'rx' direction, packets are mirrored in the pre-routed form with the
+destination MAC address as the switch address.
+
+If the mirror is configured in the 'tx' direction, packets are mirrored in the post-routed form with the
+source MAC as the switch address. Destination MAC is the nexthop gateway or station.
+
+•
+
+If the mirror is configured in the 'both' direction, one copy of the packet will be mirrored.
+
+Control plane packets generated by the switch's CPU are processed both in the ingress and the egress
+packet processing pipeline. The following are the behaviors for mirroring with VLAN as source:
+
+•
+
+If the mirror is configured in the 'rx' or 'tx' direction, the packets are mirrored to the mirror destination.
+
+•
+
+If the mirror is configured in the 'both' direction, two copies of the packets are mirrored to the mirror
+destination.
+
+Mirroring commands
+
+Subtopics
+
+clear mirror
+clear mirror endpoint
+comment
+copy tcpdump-pcap
+copy tshark-pcap
+destination cpu
+destination interface
+destination tunnel
+diagnostic
+diag utilities tcpdump
+disable
+enable
+mirror endpoint
+mirror session
+show mirror
+show mirror endpoint
+shutdown
+
+Public
+
+Mirroring commands 167
+
+source
+source interface
+source vlan
+
+clear mirror
+
+Syntax
+
+clear mirror [all | <SESSION-ID>]
+
+Description
+
+Clears the mirror statistics for all configured mirror sessions or a specified session
+
+Description
+
+Specifies all configured sessions.
+
+Specifies a numeric identifier for the session. Range: 1 to 4
+
+Parameter
+
+all
+
+<SESSION‐ID>
+
+Examples
+
+Clearing mirror statistics for all configured mirror sessions:
+
+switch# clear mirror all
+
+Clearing mirror statistics for mirror session 1:
+
+switch# clear mirror 1
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Public
+
+clear mirror 168
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+clear mirror endpoint
+
+Syntax
+
+clear mirror endpoint [<NAME>]
+
+Description
+
+Clears mirror endpoint statistics for all configured mirror endpoints. The optional parameter can be added to
+clear a specific mirror endpoint.
+
+Parameter
+
+Description
+
+Specifies name of the mirror endpoint instance to be cleared.
+
+<NAME>
+
+Examples
+
+Clearing statistics for all configured mirror endpoints:
+
+switch# clear mirror endpoint
+
+Clearing mirror statistics for mirror endpoint test:
+
+switch# clear mirror endpoint test
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Public
+
+clear mirror endpoint 169
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+comment
+
+Syntax
+
+comment <COMMENT>
+
+no comment
+
+Description
+
+Specifies a comment for the mirroring session.
+
+When used in mirror endpoint command context, specifies a comment for the mirror endpoint.
+
+The no form of this command removes the comment.
+
+Parameter
+
+Description
+
+A comment string of up to 64 characters composed of letters, n
+umbers, underscores, dashes, spaces, and periods.
+
+<COMMENT>
+
+Usage
+
+Comments are optional and can be added or removed at any time without affecting the state of the
+mirroring session.
+
+Adding a comment to a session that already has a comment replaces the existing comment.
+
+Examples
+
+Adding a comment to a mirror session:
+
+switch(config-mirror-3)# comment This Mirror will be removed during next
+
+maintenance window
+
+Removing the comment from mirror session 3:
+
+Public
+
+comment 170
+
+switch(config-mirror-3)# no comment
+
+Adding a comment to a mirror endpoint:
+
+switch(config-mirror-endpoint-test)# comment Monitor endpoint traffic
+
+Replacing the existing comment for mirror endpoint:
+
+switch(config-mirror-endpoint-test)# comment Monitor statistics on each
+
+endpoint interfaces
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config‐mirror‐
+<SESSION‐ID>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+copy tcpdump-pcap
+
+Syntax
+
+copy tcpdump-pcap <FILE-NAME> <REMOTE-URL>
+
+Description
+
+Saves packet capture files to external storage.
+
+Parameter
+
+Description
+
+Specifies the packet capture file to save.
+
+Public
+
+copy tcpdump-pcap 171
+
+Description
+
+Specifies the external storage to which the packet capture file w
+ill be saved.
+
+Parameter
+
+<FILE‐NAME>
+
+<REMOTE‐URL>
+
+Usage
+
+Only four files can be saved at any point on the switch. Packet capture files are not saved after a failover or
+reboot. View a list of saved files using diag utilities list-files.
+
+Examples
+
+Saving my_capture_file.pcap to sftp://root@10.0.0.2/file.pcap:
+
+switch# copy tcpdump-pcap my_capture_file.pcap sftp://root@10.0.0.2/
+
+file.pcap
+
+root@10.0.0.2's passowrd:
+
+Connected to 10.0.0.2.
+
+sftp > put my_capture_file.pcap file.pcap
+
+Uploading my_capture_file.pcap to /root/file.pcap
+
+my_capture_file.pcap                              100%   156   219.8KB/s
+
+00:00
+
+Copied successfuly.
+
+Command History
+
+Release
+
+10.08
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+copy tcpdump-pcap 172
+
+copy tshark-pcap
+
+Syntax
+
+copy tshark-pcap <REMOTE-URL> [vrf <VRF-NAME>]
+
+Description
+
+Copies the tshark capture data to a file on a TFTP or SFTP server.
+
+Parameter
+
+Description
+
+<REMOTE‐URL>
+
+Specifies the capture file on a remote TFTP or SFTP server. The
+URL syntax is:
+
+{tftp:// | sftp://<USER>@} {<IP>|<HOST>} [:<PORT>] [;blocksi
+ze=<SIZE>]/<FILE>
+
+vrf <VRF‐NAME>
+
+Specifies the name of a VRF. Default: default.
+
+Example
+
+Copying the capture data to a file on SFTP server 10.0.0.2:
+
+switch# copy tshark-pcap sftp://root@10.0.0.2/file.pcap
+
+root@10.0.0.2's password:
+
+Connected to 10.0.0.2.
+
+sftp> put packets.pcap file.pcap
+
+Uploading packets.pcap to /root/file.pcap
+
+packets.pcap                                  100%  156   219.8KB/s   00:00
+
+Copied successfully.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+copy tshark-pcap 173
+
+Platforms
+
+Command context
+
+Authority
+
+6200
+
+destination cpu
+
+Syntax
+
+destination cpu
+
+no destination cpu
+
+Description
+
+The command causes the mirror session to transmit mirrored packets to the switch CPU. This destination
+may be configured for multiple sessions, however only one such configured session may be active at a given
+time.
+
+The diagnostic utility Tshark may be used to view and capture packets transmitted to the CPU through
+this route. Ctrl+C must be entered to terminate a Tshark capture session. More details can be found in the
+Supportability Guide.
+
+The no form of this command will immediately stops mirroring traffic to the CPU, but will not remove any
+sources from the mirror configuration.
+
+Examples
+
+Configuring a mirror session with CPU as the destination.
+
+switch# config
+
+switch(config)# mirror session 1
+
+switch(config-mirror-1)# destination cpu
+
+Removing the destination entirely.
+
+switch(config-mirror-1)# no destination cpu
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Public
+
+destination cpu 174
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐mirror‐
+<SESSION‐ID>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+destination interface
+
+Syntax
+
+destination interface {<INTERFACE-ID>|<LAG-NAME>}
+
+no destination interface {<INTERFACE-ID>|<LAG-NAME>}
+
+Description
+
+Configures the specified interface as the destination of the mirrored traffic.
+
+The no form of this command immediately disables the mirroring session and removes the specified
+destination interface from the configuration.
+
+Parameter
+
+Description
+
+Specifies a interface. Format:  member/slot/port .
+
+<INTERFACE‐ID>
+
+<LAG‐NAME>
+
+Usage
+
+Specifies a LAG (link aggregation group) identifier.
+
+Configuring a different destination interface in an enabled mirroring session causes all mirrored traffic to
+use the new destination interface. This action might cause a temporary suspension of mirrored source traffic
+during the reconfiguration. Mirroring traffic to a LAG destination with a device running LACP attached to the
+destination will cause the LAG link to flap if LACP packets are part of the mirrored traffic source.
+
+Public
+
+destination interface 175
+
+Examples
+
+Configuring a mirroring session and adding an interface as a destination:
+
+switch(config)# mirror session 1
+
+switch(config-mirror-1)# destination interface 1/1/1
+
+Replacing the existing destination with different interface:
+
+switch(config-mirror-1)# destination interface 1/1/12
+
+Removing a destination:
+
+switch(config-mirror-1)# no destination interface 1/1/12
+
+Destination interface limit per mirror session (4 possible sess
+ions)
+
+64
+
+64
+
+1
+
+Switch
+
+5420
+
+6200
+
+10040
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config‐mirror‐
+<SESSION‐ID>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+destination tunnel
+
+Public
+
+destination tunnel 176
+
+Syntax
+
+destination tunnel <TUNNEL-IPV4-ADDR> source <SOURCE-IPv4-ADDR>
+
+   dscp <DSCP-VALUE> vrf <VRF-NAME> id <SPAN-ID>
+
+no destination tunnel
+
+destination tunnel <TUNNEL-IPV4> source <SOURCE-IPv4-ADDR>
+
+   dscp <DSCP-VALUE> vrf <VRF-NAME>
+
+no destination tunnel
+
+Description
+
+Specifies the tunnel where all mirrored traffic for the session is transmitted. Only one tunnel destination is
+allowed per session.
+
+You may configure multiple mirror sessions with the same source/destination IP address pair, however, only
+one of those sessions sharing the same source/destination IP address pair can be enabled at a given time.
+
+ERSPAN is not supported leaving the switch by the OOB port. If VRF management is configured for an
+ERSPAN session, the session will be in "mirror_err_tunnel_oob_port_not_supported" operation status.
+
+ERSPAN is not supported leaving the switch encapsulated within another tunnel (e.g. GRE IPv4).
+When the path to the destination IP address will leave via a tunnel, the session will be in
+"tunnel_route_resolution_not_populated" operation status.
+
+NOTE
+
+The interface/LAG used to transmit ERSPAN packets should not be a source in
+the same mirror session.
+
+The no form of this command will cease the use of the tunnel and disable the session.
+
+Parameter
+
+Description
+
+<TUNNEL‐IPV4‐ADDR>
+
+<SOURCE‐IPv4‐ADDR>
+
+<DSCP‐VALUE>
+
+Specifies the tunnel address in IPv4 format (x.x.x.x), where x is
+a decimal number from 0 to 255.
+
+Specifies the source address in IPv4 format (x.x.x.x), where x is
+a decimal number from 0 to 255.
+
+Specifies the DSCP value to be carried within the DS field of E
+RSPAN packet header. Range: 0 to 63. Default: 0.
+
+Public
+
+destination tunnel 177
+
+Parameter
+
+Description
+
+Specifies a VRF name. Default: default.
+
+<VRF‐NAME>
+
+Examples
+
+Creating a Mirror Session and adding tunnel destination, source, dscp, and VRF:
+
+switch# config
+
+switch(config)# mirror session 1
+
+switch(config-mirror-1)# destination tunnel 1.1.1.1 source 2.2.2.2 dscp 10
+
+vrf default
+
+Replacing the existing tunnel destination:
+
+switch(config-mirror-1)# destination tunnel 11.12.13.14 source 2.2.2.2 dscp
+
+10 vrf default
+
+Replacing the existing destination with a different DSCP value:
+
+switch(config-mirror-1)# destination tunnel 11.12.13.14 source 2.2.2.2 dscp
+
+2 vrf default
+
+Removing the destination:
+
+switch(config-mirror-1)# no destination tunnel
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐mirror‐
+<SESSION‐ID>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+destination tunnel 178
+
+diagnostic
+
+Syntax
+
+diagnostic
+
+diag utilities tshark [file]
+
+diag utilities tshark [delete-file]
+
+Description
+
+Captures packets from a mirror-to-cpu session, and save the most recent 32MB to pcap file which can then
+be copied and analyzed. When capturing a mirror-to-cpu session to a file, packets will not be dumped to the
+console.
+
+NOTE
+The  diagnostic  command must be entered prior to the  diag utiliti
+es tshark  command.
+
+Use the delete-file form of this command to delete the most recent capture file.
+
+Since file and delete-file are optional, the behavior of the base command diag utilities tshark does not
+save anything to a file, and instead dumps the tshark session to the console until CTRL + c is entered.
+
+Parameter
+
+file
+
+Description
+
+Saves captured packets to a temporary file.
+
+delete‐file
+
+Deletes the most recent captured file.
+
+Example
+
+Performing diagnostic:
+
+switch# diagnostic
+
+switch# diagnostic utilities tshark file
+
+Inspecting traffic mirrored to the CPU until Ctrl-C is entered
+
+^CEnding traffic inspection.
+
+Public
+
+diagnostic 179
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+diag utilities tcpdump
+
+Syntax
+
+diag utilities tcpdump [command <TEXT> | delete file <FILE-NAME> | list-
+
+files |
+
+  vrf <VRF-NAME> | count <COUNT-NUM> | proto <PROTO-NUM> | host-ip <IP-
+
+ADDR> | source-ip
+
+  <IP-ADDR> | destination-ip <IP-ADDR> | host-port <PORT> | source-port
+
+<PORT> |
+
+  destination-port <PORT> | verbosity <LEVEL> | print <DATA> | ethernet-
+
+type <ETH-NUM>]
+
+Description
+
+Captures traffic received or transmitted over a network.
+
+Parameter
+
+Description
+
+command <TEXT>
+
+Captures packets based on a specified tcpdump command strin
+g.
+
+delete file <FILE‐NAME>
+
+Deletes specified tcpdump list files.
+
+list‐files
+
+Lists all the tcpdump capture files saved on the device.
+
+Public
+
+diag utilities tcpdump 180
+
+Parameter
+
+Description
+
+vrf <VRF‐NAME>
+
+Captures packets on the specified VRF. If no VRF is named, the
+default is used.
+
+count <COUNT‐NUM>
+
+Runs the tcpdump command until the specified number of pac
+kets are captured. Range: 1‐2147483647.
+
+proto <PROTO‐NUM>
+
+Captures packets of a particular type based on IP protocol num
+ber. Range: 0‐255.
+
+host‐ip <IP‐ADDR>
+
+Captures packets matching with the source or destination IP ad
+dress.
+
+source‐ip <IP‐ADDR>
+
+Captures packets from the specified IP address.
+
+destination‐ip <IP‐ADDR>
+
+Captures packets sent to the specified IP address.
+
+host‐port <PORT>
+
+Captures packets matching with the source or destination port.
+
+source‐port <PORT>
+
+Captures packets from the specified IP port.
+
+destination‐port <PORT>
+
+Captures packets sent to the specified IP port.
+
+verbosity <LEVEL>
+
+Captures packets of the specified verbosity. Range: level1‐l
+evel4. If no verbosity is specified, the default is level1.
+
+print <DATA>
+
+Captures the data of each packet. The maximum is 262144 by
+tes
+
+ethernet‐type <ETH‐NUM>
+
+Captures packets based on the particular ethernet type. Range:
+0‐65535.
+
+Usage
+
+•  When using the command option, the only traffic captured will be packets that have been mirrored to
+
+the CPU.
+
+•  When using the command option, command line sanitization is performed to prevent options that may
+
+cause harm or security issues. The following options are blocked:
+
+◦  -i/--interface
+
+◦  -Z
+
+Public
+
+diag utilities tcpdump 181
+
+◦  -B/--buffer-size
+
+◦  -C
+
+◦  -W
+
+◦  -Z/--relinquish privileges
+
+•  Non-word operators such as "&" or "|" are not allowed. Use boolean keywords such as "and," "or," and
+
+"not."
+
+•  When using command -r to read a file, do not provide any directory path characters. Use list-files
+
+command to get the list of file names currently saved on the device, and then use those file names.
+
+•  A total of four files can be saved at any given point on the device. Packet capture files are not saved
+
+after a failover or reboot, but can be saved to external storage using the copy tcpdump-pcap command.
+
+Examples
+
+Inspecting traffic mirrored to the CPU via tcpdump and saving the output to my_capture_file.pcap:
+
+switch# diag utilities tcpdump command -c 2 -x -w my_capture_file.pcap
+
+Inspecting traffic mirrored to the CPU via tcpdump until Ctrl-C is entered.
+
+2 packets captured
+
+2 packets received by filter
+
+0 packets dropped by kernel
+
+Ending traffic capture.
+Listing saved capture files:
+
+switch# diag utilities tcpdump list-files
+
+my_capture_file.pcap
+Reading my_capture_file.pcap:
+
+switch# diag utilities tcpdump command -r my_capture_file.pcap
+
+reading from file /tmp/tcpdump/my_capture_file1.pcap, link-type EN10MB
+
+(Ethernet)
+  1  11:59:34.047867 IP6 localhost.40318 > localhost.ntp: NTPv2, Reserved,
+
+length 12
+
+        0x0000:  0000 0304 0006 0000 0000 0000 0000 86dd  ................
+
+        0x0010:  600a 7e47 0014 1140 0000 0000 0000 0000  `.~G...@........
+
+        0x0020:  0000 0000 0000 0001 0000 0000 0000 0000  ................
+
+        0x0030:  0000 0000 0000 0001 9d7e 007b 0014 0027  .........~.{...'
+
+        0x0040:  1601 0001 0000 0000 0000 0000            ............
+
+  2  11:59:34.047915 IP6 localhost.ntp > localhost.40318: NTPv2, Reserved,
+
+length 12
+
+        0x0000:  0000 0304 0006 0000 0000 0000 0000 86dd  ................
+
+        0x0010:  6b8d 23c5 0014 1140 0000 0000 0000 0000  k.#....@........
+
+        0x0020:  0000 0000 0000 0001 0000 0000 0000 0000  ................
+
+Public
+
+diag utilities tcpdump 182
+
+0x0030:  0000 0000 0000 0001 007b 9d7e 0014 0027  .........{.~...'
+
+        0x0040:  d681 0001 c016 0000 0000 0000
+Removing my_capture_file.pcap:
+
+switch# diag utilities tcpdump delete-file my_capture_file.pcap
+
+Successfully removed file
+
+Command History
+
+Release
+
+10.08
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Manager ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+disable
+
+Syntax
+
+disable
+
+Description
+
+Disables the mirroring session specified by the current command context.
+
+Usage
+
+By default, mirroring sessions are disabled.
+
+When a mirroring session is disabled, the show mirror command for that session ID shows an Admin Status
+of disable and an Operation Status of disabled.
+
+Example
+
+Disabling a mirroring session:
+
+Public
+
+disable 183
+
+switch(config)# mirror session 3
+
+switch(config-mirror-3)# disable
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config‐mirror‐
+<SESSION‐ID>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+enable
+
+Syntax
+
+enable
+
+Description
+
+Enables the mirroring session for the current command context.
+
+Usage
+
+By default, mirroring sessions are disabled.
+
+When a mirroring session is enabled, the show mirror command for that session ID shows an Admin Status
+of enable and an Operation Status of enabled.
+
+If sFlow is enabled on an interface and a mirroring session specifies the same interface as the source of
+received traffic (the source is configured with a direction of
+
+rx
+or
+
+both
+):
+
+Public
+
+enable 184
+
+•  The attempt to enable the mirroring session fails and an error is returned.
+
+NOTE
+
+When adding, removing, or changing the configuration of a source interface in
+an enabled mirroring session, packets from other mirror sources using the same
+destination interface might be interrupted.
+
+Example
+
+Configuring and enabling a mirroring session:
+
+switch(config)# mirror session 3
+
+switch(config-mirror-3)# source interface 1/1/2 rx
+
+switch(config-mirror-3)# destination interface 1/1/3
+
+switch(config-mirror-3)# comment Monitor router port ingress-only traffic
+
+switch(config-mirror-3)# enable
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config‐mirror‐
+<SESSION‐ID>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+mirror endpoint
+
+Syntax
+
+mirror endpoint <NAME>
+
+no mirror endpoint <NAME>
+
+Public
+
+mirror endpoint 185
+
+Description
+
+Creates the specified mirror endpoint or enters its context if it already exists. The specifics of a mirror
+endpoint are created or altered while in the mirror endpoint context and the mirror endpoint is enabled or
+disabled from this context. It may be possible to support different encapsulations by different ASICs. For
+example, UDP for PVOS compatibility. Termination of GRE encapsulation is also supported.
+
+The no form of this command removes an existing mirror endpoint. An enabled mirror endpoint is
+automatically disabled first before removal.
+
+Parameter
+
+Description
+
+Specifies mirror endpoint name.
+
+<NAME>
+
+Examples
+
+Creating a mirror endpoint named test :
+
+switch(config)# mirror endpoint test
+
+Deleting mirror endpoint named test:
+
+switch(config)# no mirror endpoint test
+
+Configuring a mirror endpoint named test :
+
+6100(config)# mirror endpoint test
+
+6100(config-mirror-endpoint-test)#
+
+6100(config-mirror-endpoint-test)# destination
+
+  interface  Specify interfaces to send traffic
+
+6100(config-mirror-endpoint-test)# destination interface
+
+  IFNAMELIST  An interface, a range or a comma seperated list of interfaces
+
+6100(config-mirror-endpoint-test)# destination interface 1/1/3
+
+  <cr>
+
+6100(config-mirror-endpoint-test)# destination interface 1/1/3
+
+6100(config-mirror-endpoint-test)#
+
+6100(config-mirror-endpoint-test)# source 1.1.1.1 destination 1.1.1.2 id 1
+
+Public
+
+mirror endpoint 186
+
+vrf default
+
+6100(config-mirror-endpoint-test)#
+
+NOTE
+
+Only physical ports can be configured as interface for mirror-endpoint
+destination. LAG port is not supported as interface for mirror-endpoint
+destination.
+
+NOTE
+
+The maximum allowed number of destination interfaces for both mirror-session
+and mirror-endpoint is 1.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+mirror session
+
+Syntax
+
+mirror session <SESSION-ID>
+
+no mirror session <SESSION-ID>
+
+Description
+
+Creates a mirroring session configuration context or enters an existing mirroring session configuration
+context.
+
+From this context, you can enter commands to configure and enable or disable the mirroring session.
+
+Public
+
+mirror session 187
+
+The no form of this command removes an existing mirroring session from the configuration.
+
+Parameter
+
+Description
+
+Specifies the session identifier. Range: 1 to 4
+
+<SESSION‐ID>
+
+Examples
+
+switch(config)# mirror session 1
+
+switch(config-mirror-1)#
+
+switch(config)# mirror session 3
+
+switch(config-mirror-3)#
+
+switch(config)# no mirror session 1
+
+switch(config)#
+
+NOTE
+
+When configuring mirroring via the command-line interfacde, not all
+configuration errors will result in an immediate error message. After making
+configuration changes, always check the operation status of your mirror sessions
+using the show mirror command.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+show mirror
+
+Public
+
+show mirror 188
+
+Syntax
+
+show mirror [<SESSION-ID>]
+
+Description
+
+Shows information about mirroring sessions. If  <SESSION-ID>  is not specified, then the command
+shows a summary of all configured mirroring sessions. If  <SESSION-ID>  is specified, then the command
+shows detailed information about the specified mirroring session.
+
+Parameter
+
+Description
+
+Specifies the session identifier. Range: 1 to 4
+
+<SESSION‐ID>
+
+Usage
+
+Information in the Admin Status column of the command output indicates the configured status. The admin
+status is one of the following values:
+
+•  enable: The mirroring session is enabled.
+
+•  disable: The mirroring session has been configured but not yet enabled, or has been disabled.
+
+Information in the Operation Status colum indicates the status of the mirroring session. Operation status is
+one of the following values:
+
+•  dest_doesnt_exist:The configured destination interface is not found in the system. The mirroring
+
+session cannot be enabled.
+
+•  destination_shutdown: The mirroring session is enabled, but the destination interface is shut down.
+
+No traffic can be monitored.
+
+•  disabled: The mirroring session is disabled and is not in an error condition.
+
+•  enabled: The mirroring session is enabled.
+
+•  external/driver_error: An internal ASIC hardware error occurred.
+
+•  hit_active_sessions_capacity: The mirroring session could not be enabled because the maximum
+
+number of supported mirroring sessions are already enabled.
+
+•
+
+internal_error: An invalid parameter was passed to the ASIC software layer.
+
+•  no_dest_configured: The mirroring session does not have a destination interface configured.
+
+Public
+
+show mirror 189
+
+•  no_name_configured: A software error occurred. The mirroring session does not have a session ID in its
+
+configuration.
+
+•  null_mirror: A software error occurred. The session object reference is invalid.
+
+•  out_of_memory: The system is out of memory, reboot recommended.
+
+•  tunnel_route_resolution_not_populated: If the destination tunnel IP address is not reachable.
+
+•  unknown_error: An unexpected error occurred.
+
+Examples
+
+Showing summary information about all configured mirroring sessions:
+
+switch# show mirror
+
+ID  Admin Status  Operation Status
+
+--- ------------- ----------------------------------------------------
+
+1   enable        enabled
+
+2   disable       disabled
+
+3   disable       disabled
+
+4   enable        internal_error
+Showing detailed information about a single mirroring session:
+
+switch# show mirror 3
+
+ Mirror Session: 3
+
+ Admin Status: disable
+
+ Operation Status: disabled
+
+ Comment: Monitor router port ingress-only traffic
+
+ Source: interface 1/1/2 rx
+
+ Destination: interface 1/1/3
+
+switch#
+Show the details of mirror session 1 with an empty LAG as destination:
+
+switch: show mirror 1
+
+Admin Status: enable
+
+Operation Status: dest_doesnt_exist
+
+Source: interface 1/1/1 rx
+
+Source: interface tx none
+
+Destination: interface lag1
+
+Output Packets: 0
+
+Output Bytes: 0
+Show the details of mirror session 1 with a LAG and a LAG member of same LAG as sources. In this scenario,
+traffic received on all LAG member interfaces is mirrored, is it is not necessary to define 1/1/1 as a source
+since it is already part of LAG1; this does not impact the mirror output packet or byte counters.
+
+switch: show mirror 1
+
+Admin Status: enable
+
+Public
+
+show mirror 190
+
+Operation Status: enabled
+
+Source: interface 1/1/1 rx
+
+Source: interface lag1 rx
+
+Destination: interface 1/1/2
+
+Output Packets: 0
+
+Output Bytes: 0
+Showing the details of mirror session 1 for a mirror configuration enabled with invalid interface which is not
+part of a lag:
+
+switch# show mirror 1
+
+Mirror Session: 1
+
+Admin Status: enable
+
+Operation Status: disabled
+
+Source: interface 1/1/1 (unknown lag) both
+
+Destination: cpu
+
+Output Packets: 0
+
+Output Bytes: 0
+Certain configurations can cause this condition while the mirror source configuration remains unchanged:
+
+1.  Removing of a port from a LAG (Link Aggregation Group).
+
+2.  Port split or unsplit operations that result in LAG membership removal.
+
+To recover from this issue, unconfigure the affected interface (previously part of a LAG), or restore the LAG
+membership configuration.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+Operator ( > ) or Manage
+r ( # )
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+Public
+
+show mirror 191
+
+show mirror endpoint
+
+Syntax
+
+show mirror endpoint [<NAME>]
+
+Description
+
+Shows a list of all configured mirror endpoints, their Admin Status and their Operation Status.
+
+The optional parameter will display the details of the specified mirror endpoint if it exists.
+
+Parameter
+
+Description
+
+Specifies name of the mirror endpoint instance to be displayed.
+
+<NAME>
+
+Examples
+
+Showing a summary of all configured mirror endpoints on the switch:
+
+switch# show mirror endpoint
+
+Name    Admin Status   Operation Status
+
+-----  -------------- ----------------------------------------------------
+
+test    enable         enabled
+
+monitor disable        disabled
+Showing the details of enabled mirror endpoint test:
+
+switch# show mirror endpoint test
+
+Mirror Endpoint: audit
+
+Admin Status: enable
+
+Operation Status: enabled
+
+Comment: Mirror Endpoint Audit
+
+Type: gre
+
+Tunnel: source 1.1.1.1 destination 1.1.1.2 id 1 vrf default
+
+Interface: 1/1/3
+
+Output Packets: 123456789
+
+Output Bytes: 0
+
+NOTE
+"Output Packets" in "show mirror endpoint [name]" is only supported for
+statistics.
+
+"Output Bytes" in "show mirror endpoint [name]" is not supported due to ASIC
+limitation.
+
+Public
+
+show mirror endpoint 192
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+shutdown
+
+Syntax
+
+shutdown
+
+no shutdown
+
+Description
+
+Enables mirror endpoint from its default disabled state. To verify the mirror endpoint was successfully
+activated, run the show mirror endpoint NAME command and verify that the Admin Status and
+Operational Status has changed from disabled to enabled. If the status value remains disabled, consult
+the system logs to determine the reason for activation failure. To disable the mirror endpoint, first disable
+the remote mirror session on the switch that's originating the data. Next, use the  shutdown  command to
+disable the mirror endpoint.
+
+Examples
+
+Enabling a mirror endpoint:
+
+switch(config)# mirror endpoint test
+
+switch(config-mirror-endpoint-test)# no shutdown
+
+Disabling a mirror endpoint:
+
+Public
+
+shutdown 193
+
+switch(config)# mirror endpoint test
+
+switch(config-mirror-endpoint-test)# shutdown
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+source
+
+Syntax
+
+source <SOURCE-IP> destination <DESTINATION-IP> id <1-4294967295> [vrf
+
+<VRF_NAME>] [type {gre}]
+
+no source
+
+Description
+
+Configures tunnel parameters of the mirror endpoint. Configuring a tunnel parameter to a mirror endpoint
+will replace the existing configuration. By default the VRF is default, users can also explicitly provide a
+custom VRF. The default tunnel type is considered to be GRE and users also have the option to explicitly
+give type as GRE.
+
+The no form removes the tunnel parameters of the mirror endpoint.
+
+Parameter
+
+Description
+
+Specifies L3 encapsulated IPv4 source in the form A.B.C.D.
+
+<SOURCE‐IP>
+
+Public
+
+source 194
+
+Parameter
+
+Description
+
+Specifies L3 encapsulated IPv4 destination in the form A.B.C.D.
+
+<DESTINATION‐IP>
+
+id
+
+Specifies tunnel identifier from the encapsulated packet.
+
+Specifies the name of VRF for which the tunnel belongs to.
+
+<VRF_NAME>
+
+Examples
+
+Configuring a tunnel parameter to a mirror endpoint:
+
+switch(config-mirror-endpoint-test)# source 1.1.1.1 destination 7.7.7.7 id
+
+1 vrf default type gre
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+source interface
+
+Syntax
+
+source interface {<PORT-NUM> | <LAG-NAME>} [<DIRECTION>]
+
+no source interface {<PORT-NUM> | <LAG-NAME>} [<DIRECTION>]
+
+Public
+
+source interface 195
+
+Description
+
+Configures the specified interface (either an Ethernet port or a LAG) as a source of traffic to be mirrored.
+
+The no form of this command ceases mirroring traffic from the specified source interface and removes the
+source interface from the mirroring session configuration.
+
+Parameter
+
+Description
+
+<PORT‐NUM>
+
+<LAG‐NAME>
+
+<DIRECTION>
+
+Specifies a physical port on the switch. Use the format membe
+r/slot/port (for example, 1/3/1).
+
+Specifies the identifier for the LAG (link aggregation group).
+
+Selects the direction of traffic to be mirrored from this source in
+terface. There is no default for this parameter. Valid values are t
+he following:
+
+•  both: Mirror both transmitted and received packets.
+•  rx: Mirror only received packets.
+•  tx: Mirror only transmitted packets.
+
+Usage
+
+There is a limit of source interfaces in each direction of a given mirror session:
+
+Switch
+
+5420
+
+6200
+
+10040
+
+Source interface limit per mirror session (4 possibl
+e sessions)
+
+64
+
+64
+
+128
+
+Public
+
+source interface 196
+
+However, there is a practical limit to the amount of traffic that a mirror destination can transmit. For example,
+mirroring session with multiple 10G sources can overwhelm a single 10G destination.
+
+NOTE
+
+When adding, removing, or changing the configuration of a source port in an
+enabled mirroring session, packets from other mirror sources using the same
+destination port might be interrupted.
+
+Examples
+
+Configuring a mirrored traffic source interface:
+
+switch(config-mirror-1)# source interface
+
+  LAG-NAME      Enter a LAG name. For example, lag10
+
+  PORT-NUM      Enter a port number
+Creating a mirroring session and configuring a source interface to mirror both transmitted and received
+packets:
+
+switch(config)# mirror session 1
+
+switch(config-mirror-1)# source interface 1/1/1 both
+
+Creating a second mirroring session and configuring two source interfaces. One port mirroring only
+transmitted packets and the other mirroring both transmitted and received packets:
+
+switch(config)# mirror session 2
+
+switch(config-mirror-2)# source interface 1/1/3 tx
+
+switch(config-mirror-2)# source interface 1/2/1 both
+
+Removing the first source interface:
+
+switch(config-mirror-2)# no source interface 1/2/3
+
+Configuring a source interface to mirror received packets only:
+
+switch(config-mirror-3)# source interface 1/1/2 rx
+
+Configuring a source interface to mirror both transmitted and received packets:
+
+switch(config-mirror-1)# source interface 1/1/1 both
+
+Configuring a LAG as source interface to mirror both transmitted and received packets:
+
+switch(config-mirror-4)# source interface lag1 both
+
+Stopping the mirroring of received packets from a configured source interface:
+
+switch(config-mirror-4)# no source interface lag1 rx
+
+Public
+
+source interface 197
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config‐mirror‐
+<SESSION‐ID>
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+source vlan
+
+Syntax
+
+source vlan <VLAN-NUM> {rx | tx | both}
+
+no source vlan <VLAN-NUM> {rx | tx | both}
+
+Description
+
+Mirroring with VLAN as a source is supported in the following traffic directions:
+
+•  both - traffic received and transmitted
+
+•  rx - only received traffic
+
+•  tx - only transmitted traffic
+
+More than one source VLAN can be configured in a mirror session. Each such VLAN may specify its own
+direction.
+
+Public
+
+source vlan 198
+
+There is a limit of 1024 source VLANs for a given mirror session. There is also a limit of 4096 source VLANs
+across all mirror sessions.
+
+NOTE
+
+When changing a source VLAN in an enabled mirror session (i.e. adding, changing
+direction, or removing) mirrored packets being transmitted out of the mirror
+destination port from other mirror sources may be briefly interrupted during the
+reconfiguration.
+
+Direction of an existing source VLAN can be updated in one of two ways.
+
+•  Reenter the source vlan <VLAN-NUM> <direction> command with the new preferred direction.
+
+•  Use the no source vlan <VLAN-NUM> <direction> form of the command with a direction (rx or tx) to
+
+selectively remove the specified direction.
+
+Specifying the last remaining direction for that VLAN will remove the VLAN from the configuration entirely.
+
+Mirroring allows configuration of VLAN as a source. When VLAN source is configured in the rx direction, all
+packets are mirrored as they are received in the switch. When VLAN source is configured in tx direction, all
+packets are mirrored as they are transmitted out of the switch.
+
+For packets bridged through the switch:
+
+•
+
+If the mirror is configured in 'both' direction, two copies of packets are mirrored, otherwise one copy of
+the packet will be mirrored.
+
+For routed packets:
+
+•
+
+•
+
+If the mirror is configured in rx direction, packets are mirrored in the pre-routed form with the
+Destination MAC address as the switch address.
+
+If the mirror is configured in tx direction, packets are mirrored in post-routed form with the source MAC
+as the switch address. Destination MAC is the nexthop gateway or station.
+
+•
+
+If the mirror is configured in both direction, one copy of the packet will be mirrored.
+
+Control plane packets generated by the switch's CPU are processed both in theingress and the egress packet
+processing pipeline. The following are the behavior for mirroring with VLAN as source:
+
+•
+
+If the mirror is configured in the rx or tx direction, the packets are mirrored to the mirror destination.
+
+•
+
+If the mirror is configured in the both direction, two copies of the packets are mirrored to the mirror
+destination.
+
+The no form command will cease mirroring traffic from the specified source VLAN and remove the source
+from the mirror configuration.
+
+Public
+
+source vlan 199
+
+Parameter
+
+VLAN‐NUM
+
+direction
+
+Examples
+
+Description
+
+Selects the VLAN number.
+
+Specifies the direction of mirroring. tx (transmit), rx (receive), o
+r both.
+
+Creating a mirror session and adding a VLAN as a source of traffic in both directions on that port:
+
+switch# configure terminal
+
+switch(config)# mirror session 1
+
+switch(config-mirror-1)# source vlan 10 both
+
+Creating a mirror session and adding two VLANs as sources of traffic:
+
+directions:
+
+switch# configure terminal
+
+switch(config)# mirror session 2
+
+switch(config-mirror-2)# source vlan 10 tx
+
+switch(config-mirror-2)# source vlan 20 both
+
+Configuring the source in session 2 to receive by specifying the source interface configuration:
+
+switch(config-mirror-2)# source vlan 10 rx
+
+Removing the first source interface in session 2 entirely, and removing the transmit direction from the other
+so that mirroring only occurs in the receive direction:
+
+switch(config-mirror-2)# source vlan 10 rx
+
+switch(config-mirror-2)# source vlan 20 tx
+
+switch(config-mirror-2)# source vlan 2000 rx
+
+The maximum number of source VLANs per mirror session is 1024 in each
+
+direction
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Public
+
+source vlan 200
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Monitoring a device using SNMP
+
+Configuring SNMP: Refer to the SNMP/MIB Guide for information on how to add SNMP so a device can be
+monitored from a network management system (NMS).
+
+Configuring an SNMP trap receiver: Refer to the SNMP/MIB Guide and specific information about the  sho
+w snmp trap  command to enable SNMP traps.
+
+Power-over-Ethernet
+
+•  The Power-over-Ethernet (PoE) subsystem manages power supplied to devices using standard Ethernet
+data cables. A Power Sourcing Equipment (PSE) supplies DC power as well as Ethernet connectivity
+to a Powered Device (PD) using a standard Ethernet cable. The maximum current depends on the PD
+Requested Class.
+
+•  A PoE subsystem contains two parts : a PSE and PD. A Power Sourcing Equipment (PSE) is a device that
+provides power through a standard Ethernet cable. A PoE capable switch functions as PSE. All Aruba
+PoE switches are considered as PSEs. A PD is a device powered by a PSE. Examples of PD are VoIP
+phones, Wireless APs, and IP cameras.
+
+•  When a PD or any network cable is connected to a PSE port, the PSE applies a detection voltage and
+measures the resistance value of the PD. If resistance is within IEEE 802.3 standard values (23 - 26k
+ohm), the connected device is treated as PD and classification begins. For legacy devices to be detected,
+you must enable prestandard detection on the switch.
+
+•  PDs are divided into different types and classes based on PD power requirements. The power supplied
+by the PSE is higher than the power PD draws to accommodate for the line losses that can result with
+the use of the standard maximum length cable(100m).
+
+◦  Type 1: PSE can supply maximum of 15.4W, and PD can draw a maximum of 13W.
+
+◦  Type 2: PSE can supply maximum of 30W, and PD can draw a maximum of 25.5W.
+
+Public
+
+Monitoring a device using SNMP 201
+
+◦  Type 3: PSE can supply maximum of 60W, and PD can draw a maximum of 51W.
+
+◦  Type 4: PSE can supply maximum of 90W, and PD can draw a maximum of 71W.
+
+•  Classes of PD:
+
+◦  Class 0: Type1 PD, it can draw a maximum of 13W.
+
+◦  Class 1: Type1 PD, it can draw a maximum of 3.84W.
+
+◦  Class 2: Type1 PD, it can draw a maximum of 6.49W.
+
+◦  Class 3: Type1 PD, it can draw a maximum of 13W.
+
+◦  Class 4: Type2 PD, it can draw a maximum of 25.5W.
+
+◦  Class 5: Type3 PD, it can draw a maximum of 40W.
+
+◦  Class 6: Type3 PD, it can draw a maximum of 51W.
+
+◦  Class 7: Type4 PD, it can draw a maximum of 62W.
+
+◦  Class 8: Type4 PD, it can draw a maximum of 71.3W.
+
+•
+
+IEEE 802.3bt introduced 4-Pair PoE as a means of supplying higher power to PDs that need more than
+the current 25.5W supplied by IEEE 802.3at. To increase the available power without damaging the
+Ethernet cable, the standard introduced the ability to use all four pairs within the Ethernet cable instead
+of the two pairs used by previous standards (802.3at, 802.3af).
+
+•  Supported protocols:
+
+◦  Compatibility with IEEE 802.3af, 802.3at, 802.3bt and prestandard.
+
+◦  Long first class event supported on Type 3-4 PSE.
+
+◦  Support for Single Signature (SS) Type 0-6 and Dual Signature (DS) Type 0-4 PDs.
+
+◦  Multi-Event classification permits mutual ID of SS Class 0-6 and DS Class 0-4.
+
+◦  Support LLDP Data Link Layer (DLL) Type 1-2 extension 12-octet TLV and Type 3-4 extension
+
+29-octet TLV.
+
+◦  Default PSE assigned class delivers the maximum PSE capable power at initial power up based on
+
+PD requested class.
+
+Public
+
+Power-over-Ethernet 202
+
+•  Always-on PoE is a feature that provides the ability for a switch to continue to provide power across user
+initiated reboots through software. Always-on PoE is enabled by default and no additional configuration
+is needed.
+
+NOTE
+
+PDs only remain powered, no data transfer or PoE power negotiation can occur
+until the switch has completely booted up and in normal operation. PD faults
+occurring prior to full switch boot up will result in PoE power removal and restart
+the detection process only after switch returns to normal operation.
+
+Subtopics
+
+PoE commands
+
+PoE commands
+
+All PoE configuration commands except quick-poe, threshold configuration and always-on poe
+configuration are entered at the config-if context. The PoE threshold command is used at the system
+level whereas the always-on poe and power-over-ethernet quick-poe commands are set at the slot level.
+These commands can only be configured in the global configuration context.
+
+Subtopics
+
+lldp dot3 poe
+lldp med poe
+power-over-ethernet
+power-over-ethernet allocate-by
+power-over-ethernet always-on
+power-over-ethernet assigned-class
+power-over-ethernet pre-std-detect
+power-over-ethernet priority
+power-over-ethernet quick-poe
+power-over-ethernet threshold
+power-over-ethernet trap
+show lldp local
+show lldp neighbor
+show power-over-ethernet
+
+lldp dot3 poe
+
+Public
+
+PoE commands 203
+
+Syntax
+
+lldp dot3 poe
+
+no lldp dot3 poe
+
+Description
+
+Enables 802.3 TLV list in LLDP to advertise for Power over Ethernet Data Link Layer Classification. LLDP
+dot3 TLV is by default enabled for PoE.
+
+The no form of this command disables 802.3 TLV list in LLDP.
+
+Examples
+
+Enabling 802.3 TLV list in LLDP:
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# lldp dot3 poe
+
+Disabling 802.3 TLV list in LLDP:
+
+switch(config-if)# no lldp dot3 poe
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+lldp med poe
+
+Syntax
+
+lldp med poe [priority-override]
+
+no lldp med poe [priority-override]
+
+Public
+
+lldp med poe 204
+
+Description
+
+Enables MED TLV list in LLDP to advertise for Power over Ethernet Data Link Layer Classification. Also
+enables the lldp-MED TLV priority to override user configured port priority for Power over Ethernet. When
+both dot3 and MED are enabled, dot 3 will take precedence. MED TLV is by default enabled for PoE. Priority
+over-ride is by default disabled.
+
+The no form of this command disables MED TLV list in LLDP.
+
+Parameter
+
+Description
+
+[priority‐override]
+
+System defined name of the interface.
+
+Examples
+
+Enabling and disabling LLDP MED PoE:
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# lldp med poe
+
+switch(config-if)# no lldp med poe
+
+Enabling and disabling LLDP MED PoE priority override:
+
+switch(config-if)# lldp med poe priority-override
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+power-over-ethernet
+
+Public
+
+power-over-ethernet 205
+
+Syntax
+
+power-over-ethernet
+
+no power-over-ethernet
+
+Description
+
+Enables per-interface power distribution. Per-port power is enabled by default with priority low. PoE cannot
+be disabled for individual ports when Quick PoE is enabled for the entire switch or line module.
+
+The no form of this command disables per-interface power distribution.
+
+Examples
+
+Enabling per-interface power distribution:
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# power-over-ethernet
+
+Disabling per-interface power distribution:
+
+switch(config-if)# no power-over-ethernet
+
+Showing Quick PoE enabled:
+
+switch(config)# power-over-ethernet quick-poe 1/1
+
+switch(config)# no power-over-ethernet
+
+Interface PoE cannot be disabled when Quick PoE is enabled.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+power-over-ethernet 206
+
+power-over-ethernet allocate-by
+
+Syntax
+
+power-over-ethernet allocate-by {usage | class}
+
+no power-over-ethernet allocate-by {usage | class}
+
+Description
+
+Configures the power allocation method. Power allocation method is initially based on usage. PSE Allocated
+power value will change to LLDP negotiated power if and when LLDP exchange takes place between PSE
+and PD. When there is no LLDP negotiation, PSE Allocated Power Value will be the actual instantaneous
+power draw and reserve power based on actual consumption. In allocate-by class, power allocation is based
+on PD requested class and PSE allocated power value will be the LLDP negotiated power when LLDP
+exchange takes place between PSE and PD. When there is no LLDP negotiation, PSE Allocate Power will be
+based on PD class. Reserve power is based on PD Class. By default, power allocation is by usage.
+
+The power allocation method can be changed on an interface through port-access (User roles or RADIUS).
+An allocation method when configured through port-access will replace the user configured method.
+
+The no form of this command resets the action to default.
+
+Parameter
+
+usage
+
+class
+
+Usage
+
+Description
+
+Configures the usage‐based allocation method.
+
+Configures the class‐based allocation method.
+
+If you enable pd-class-override for an interface, the allocate-by configuration of that interface will be
+automatically changed to class. However, if you change the allocation method to usage when pd-class-
+override is still enabled, you will receive an error message stating that "The power allocation method cannot
+be changed when pd-class-override is enabled."
+
+To remove pd-class-override, you can use the no power-over-ethernet pd-class-override command . It is
+important to note that pd-class-override requires the allocation method to be set to class and is enforced
+when configured through CLI. However, if you override the allocation method to usage via port-access,
+pd-class-override will not be in effect. Therefore, it is recommended that you do not override the allocation
+method to usage through port-access on interfaces configured with pd-class-override.
+
+Examples
+
+Configuring the power allocation method:
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# power-over-ethernet allocate-by usage
+
+switch(config-if)# power-over-ethernet allocate-by class
+
+Public
+
+power-over-ethernet allocate-by 207
+
+Resetting power allocation method:
+
+switch(config-if)# no power-over-ethernet allocate-by class
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+power-over-ethernet always-on
+
+Syntax
+
+power-over-ethernet always-on <MODULE-ID>
+
+no power-over-ethernet always-on <MODULE-ID>
+
+Description
+
+Always-on PoE is a feature that provides the ability to the switch to continue to provide power across a soft
+reboot. It is applicable only to the interfaces which were connected and delivering before the soft reboot.
+Also, power will not be delivered if power to the switch is interrupted. This command enables or disables the
+always-on PoE feature at the switch or the slot level. By default, always-on PoE is enabled at the switch or
+the slot level.
+
+The no form of this command disables power distribution on soft reboot.
+
+Parameter
+
+Description
+
+Module number to apply always‐on PoE configuration.
+
+Public
+
+power-over-ethernet always-on 208
+
+Parameter
+
+<MODULE‐ID>
+
+Description
+
+Examples
+
+Enabling per-interface power distribution:
+
+switch(config)# power-over-ethernet always-on 1/1
+
+Disabling per-interface power distribution:
+
+switch(config)# no power-over-ethernet always-on 1/1
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+power-over-ethernet assigned-class
+
+Syntax
+
+power-over-ethernet assigned-class {3 | 4 | 6}
+
+no power-over-ethernet assigned-class
+
+Description
+
+Limit PoE power based on the assigned class. When an user assigns a maximum class to an interface, the
+PSE will limit the maximum power delivered to the PD up to a total power draw not exceeding the PSE
+assigned-class power. Power demotion occurs when a PD requested class is higher than the PSE assigned
+class, permitting the PD to receive power and operate in a reduced power mode. PoE ports cannot set an
+
+Public
+
+power-over-ethernet assigned-class 209
+
+assigned class when Quick PoE is enabled on the sybsystem. The default assigned class is 4 for 2-pair
+capable PSE and 6 for 4-pair capable PSE.
+
+The no form of this command resets the action to default.
+
+Examples
+
+Setting PoE assigned class:
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# power-over-ethernet assigned-class 4
+
+Resetting PoE assigned class to default:
+
+switch(config-if)# no power-over-ethernet assigned-class 4
+
+Showing Quick PoE enabled:
+
+switch(config)# power-over-ethernet quick-poe 1/1
+
+switch(config)# interface 1/1/1
+
+switch(config)# power-over-ethernet assigned-class 4
+
+Interface assigned class cannot be configured when Quick PoE is enabled.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+power-over-ethernet pre-std-detect
+
+Syntax
+
+power-over-ethernet pre-std-detect
+
+no power-over-ethernet pre-std-detect
+
+Public
+
+power-over-ethernet pre-std-detect 210
+
+Description
+
+Before IEEE 802.3 released the first Power over Ethernet standard (802.3af), vendors had shipped PoE
+capable switches and PD's. HPE Aruba Networking switches are backward compatible and will support
+both IEEE standard and pre-standard 802.3af Power over Ethernet PD's concurrently. This CLI allows the
+user to enable or disable pre-802.3af-standard device detection and powering on the specific port. When
+pre-std-detect is enabled, power will be delivered on PairA only. Default is disabled.
+
+The no form of this command resets the action to default.
+
+Examples
+
+Enabling pre-standard device detection:
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# power-over-ethernet pre-std-detect
+
+Disabling pre-standard device detection:
+
+switch(config-if)# no power-over-ethernet pre-std-detect
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+power-over-ethernet priority
+
+Syntax
+
+power-over-ethernet priority {critical | high | low}
+
+no power-over-ethernet priority {critical | high | low}
+
+Public
+
+power-over-ethernet priority 211
+
+Description
+
+Sets PoE priority for an interface Specifying critical, high, or low indicates the priority of the interface in
+the event of power over-subscription. Within the same priority level, higher power-priority line-module ports
+have higher precedence. With same PoE priority and same line-module priority, lower numbered line-module
+ports have higher precedence. Per-interface PoE priority is low by default.
+
+The no form of this command resets the priority to default PoE priority "low".
+
+Examples
+
+Configuring PoE priority:
+
+switch(config)# interface 1/1/1
+
+switch(config-if)# power-over-ethernet priority critical
+
+switch(config-if)# power-over-ethernet priority high
+
+Resetting the PoE priority to default:
+
+switch(config-if)# no power-over-ethernet priority high
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+power-over-ethernet quick-poe
+
+Syntax
+
+power-over-ethernet quick-poe <MODULE-ID>
+
+no power-over-ethernet quick-poe <MODULE-ID
+
+Public
+
+power-over-ethernet quick-poe 212
+
+Description
+
+Quick PoE is a feature that provides the ability for the switch to provide power to the connected powered
+device as soon as switch goes through cold reboot. When quick PoE is enabled on the subsystem PoE port
+disablement and PD demotion is not allowed. also quick PoE enablement is not allowed if any of the port is
+disabled on the subsystem. User should not over-subscribe the PoE power when quick PoE is enabled. Quick
+PoE saved configuration will work irrespective of the configuration change at reboot.
+
+Enables quick PoE feature on the switch or the subsystem level. By default, quick-PoE is disabled for the
+subsystem.
+
+The no form of this command disables quick PoE.
+
+Parameter
+
+Description
+
+Specifies module number for quick PoE configuration .
+
+<MODULE‐ID>
+
+Examples
+
+Enabling and disabling quick PoE:
+
+switch(config)# power-over-ethernet quick-poe 1/2
+
+switch(config)# no power-over-ethernet quick-poe 1/2
+
+switch(config-if)# power-over-ethernet quick-poe 1/1
+
+PoE must be enabled on all interfaces before enabling Quick PoE
+
+switch(config-if)# power-over-ethernet quick-poe 1/3
+
+All interfaces must use the default assigned class before enabling Quick PoE
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+power-over-ethernet quick-poe 213
+
+power-over-ethernet threshold
+
+Syntax
+
+power-over-ethernet threshold <PERCENTAGE>
+
+no power-over-ethernet threshold <PERCENTAGE>
+
+Description
+
+Sets the threshold at which the system will send an excess power consumption notification trap. Default
+value is 80 percentage.
+
+The no form of this command resets the action to default.
+
+Parameter
+
+Description
+
+Excess power consumption trap threshold. Range 1‐99.
+
+<PERCENTAGE>
+
+Examples
+
+Setting the power-over-ethernet threshold:
+
+switch(config)# power-over-ethernet threshold 75
+
+Resetting the power-over-ethernet threshold to default:
+
+switch(config-if)# no power-over-ethernet threshold 75
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+power-over-ethernet threshold 214
+
+Platforms
+
+Command context
+
+Authority
+
+6200
+
+power-over-ethernet trap
+
+Syntax
+
+power-over-ethernet trap
+
+no power-over-ethernet trap
+
+Description
+
+This command enables/disables the SNMP trap generation for PoE related events at system level. PoE trap
+generation is enabled by default.
+
+The no form of this command resets the priority to default PoE priority "low".
+
+Examples
+
+Enabling SNMP trap generation for PoE:
+
+switch(config)# power-over-ethernet trap
+
+Disabling SNMP trap generation for PoE:
+
+switch(config-if)# no power-over-ethernet trap
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+config‐if
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Public
+
+power-over-ethernet trap 215
+
+show lldp local
+
+Syntax
+
+show lldp local-device [<INTERFACE-ID>]
+
+Description
+
+Displays information advertised by the switch if the LLDP feature is enabled by user.
+
+Parameter
+
+Description
+
+Specifies an interface. Format: member/slot/port
+
+<INTERFACE‐ID>
+
+Examples
+
+Showing LLDP local device:
+
+switch# show lldp local-device 1/1/10
+
+Local Port Data
+
+===============
+
+Port-ID           : 1/1/10
+
+Port-Desc         : "1/1/10"
+
+Port VLAN ID      : 0
+
+PoE Plus Information
+
+PoE Device Type    : Type 2 PSE
+
+Power Source       : Primary
+
+Power Priority     : low
+PSE Allocated Power: 25.0 W
+
+PD Requested Power : 25.0 W
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Public
+
+show lldp local 216
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+show lldp neighbor
+
+Syntax
+
+show lldp neighbor [<INTERFACE-ID>]
+
+Description
+
+Displays detailed information about a particular neighbor connected to a particular interface.
+
+Parameter
+
+Description
+
+Specifies an interface. Format: member/slot/port
+
+<INTERFACE‐ID>
+
+Examples
+
+Showing LLDP neighbor information when there is only one neighbor:
+
+switch# show lldp neighbor-info 1/1/10
+Port                           : 1/1/10
+
+Neighbor Entries               : 1
+
+Neighbor Entries Deleted       : 0
+
+Neighbor Entries Dropped       : 0
+
+Neighbor Entries Aged-Out      : 0
+
+Neighbor Chassis-Name          : 84:d4:7e:ce:5d:68
+
+Neighbor Chassis-Description   : ArubaOS (MODEL: 325), Version HPE_ANW IAP
+
+Neighbor Chassis-ID            : 84:d4:7e:ce:5d:68
+
+Neighbor Management-Address    : 169.254.41.250
+
+Chassis Capabilities Available : Bridge, WLAN
+
+Chassis Capabilities Enabled   :
+
+Neighbor Port-ID               : 84:d4:7e:ce:5d:68
+
+Public
+
+show lldp neighbor 217
+
+Neighbor Port-Desc             : eth0
+
+TTL                            : 120
+
+Neighbor Port VLAN ID          :
+
+Neighbor PoEplus information   : DOT3
+
+Neighbor Device Type           : TYPE2 PD
+
+Neighbor Power Priority        : Unkown
+
+Neighbor Power Source          : Primary
+
+Neighbor Power Requested       : 25.0 W
+
+Neighbor Power Allocated       : 0.0 W
+
+Neighbor Power Supported       : No
+
+Neighbor Power Enabled         : No
+
+Neighbor Power Class           : 5
+
+Neighbor Power Paircontrol     : No
+
+Neighbor Power Pairs           : SIGNAL
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+show power-over-ethernet
+
+Syntax
+
+show power-over-ethernet [member <MEMBER-ID>] [brief]
+
+Description
+
+Displays the status information of the full system.
+
+Public
+
+show power-over-ethernet 218
+
+Parameter
+
+Description
+
+Displays the detailed status of given member.
+
+<MEMBER‐ID>
+
+<IFNAME>
+
+brief
+
+Examples
+
+Display the detailed status of given port.
+
+Display the brief status of all ports or the given port.
+
+Showing sample output for show power-over-ethernet on standalone box with VSF capabiity:
+
+switch# show power-over-ethernet
+
+System Power Status for member 1
+
+  Configured  Power Status     : No redundancy
+
+  Operational Power Status     : No redundancy
+
+  Total Available Power        : 740 W
+
+  Total Failover Pwr Avl       :   0 W
+
+  Total Redundancy Power       :   0 W
+
+  Total Power Drawn            :   0 W +/- 6W
+
+  Total Power Reserved         :   0 W
+
+  Total Remaining Power        : 740 W
+
+  Trap Threshold               : 80 %
+
+  Trap Enabled                 : Yes
+
+  Always-on PoE Enabled        : 1/1
+
+  Quick PoE Enabled            : None
+
+Internal Power
+        Total Power
+
+  PS    (Watts)        Status
+
+  ----- -------------  ---------------------
+
+  1     0              Absent
+
+  2     740            Ok
+
+System Power Status for member 2
+
+  Configured  Power Status     : No redundancy
+
+  Operational Power Status     : No redundancy
+
+  Total Available Power        : 600 W
+
+  Total Failover Pwr Avl       :   0 W
+
+  Total Redundancy Power       :   0 W
+
+Public
+
+show power-over-ethernet 219
+
+Total Power Drawn            :   0 W +/- 6W
+
+  Total Power Reserved         :   0 W
+
+  Total Remaining Power        : 600 W
+
+  Trap Threshold               : 80 %
+
+  Trap Enabled                 : Yes
+
+  Always-on PoE Enabled        : None
+
+  Quick PoE Enabled            : None
+
+Internal Power
+
+        Total Power
+
+  PS    (Watts)        Status
+
+  ----- -------------  ---------------------
+
+  1     0              Absent
+
+  2     600            Ok
+Showing sample output for power-over-ethernet member:
+
+switch# show power-over-ethernet member 1
+
+System Power Status for member 1
+
+  Configured  Power Status     : No redundancy
+
+  Operational Power Status     : No redundancy
+
+  Total Available Power        : 740 W
+
+  Total Failover Pwr Avl       :   0 W
+
+  Total Redundancy Power       :   0 W
+
+  Total Power Drawn            :   0 W +/- 6W
+
+  Total Power Reserved         :   0 W
+
+  Total Remaining Power        : 740 W
+
+  Trap Threshold               : 80 %
+
+  Trap Enabled                 : No
+
+  Always-on PoE Enabled        : 1/1
+
+  Quick PoE Enabled            : 1/1
+
+Internal Power
+
+        Total Power
+
+  PS    (Watts)        Status
+
+  ----- -------------  ---------------------
+
+  1     0              Absent
+
+  2     740            Ok
+Showing sample output for power-over-ethernet brief in a VSF stack:
+
+switch# show power-over-ethernet brief
+
+Status and Configuration Information for PoE
+
+  Member 1 Power Status
+    Available: 370 W  Reserved: 55.60 W  Remaining: 314.40 W
+    Always-on PoE Enabled: 1/1
+
+    Quick PoE Enabled: None
+
+PoE      Pwr Power    Pre-std Alloc PSE Pwr PD Pwr PoE Port     PD     Cls
+
+Type
+
+Public
+
+show power-over-ethernet 220
+
+Port     En  Priority Detect  Act   Rsrvd   Draw   Status       Sign
+
+-------  --- ------   ------- ----- ------  ------ ---------    -----  ---
+
+----
+
+1/1/1    Yes Low      Off     Class  0.0 W   0.0 W Denied       None   4   2
+
+1/1/2    Yes Critical Off     Usage  1.6 W   1.5 W Delivering*  Single 0   1
+
+1/1/3    Yes High     Off     Class 54.0 W  25.5 W Delivering*^ Dual   1/3 3
+
+1/1/4    No  Low      On      Usage  0.0 W   0.0 W Disabled     None   N/A
+
+N/A
+
+  Member 2 Power Status
+
+    Available: 600 W  Reserved: 0.00 W  Remaining: 600 W
+
+    Always-on PoE Enabled: None
+
+    Quick PoE Enabled: None
+
+PoE      Pwr Power    Pre-std Alloc PSE Pwr PD Pwr PoE Port     PD     Cls
+
+Type
+
+Port     En  Priority Detect  Act   Rsrvd   Draw   Status       Sign
+
+-------  --- ------   ------- ----- ------  ------ ---------    -----  ---
+
+----
+
+2/1/1    Yes Low      Off     Class  0.0 W   0.0 W Searching    None   N/A
+
+N/A
+
+2/1/2    Yes Critical Off     Usage  0.0 W   0.0 W Searching    None   N/A
+
+N/A
+
+2/1/3    Yes High     Off     Class  0.0 W   0.0 W Searching    None   N/A
+
+N/A
+
+2/1/4    No  Low      On      Usage  0.0 W   0.0 W Disabled     None   N/A
+
+N/A
+
+*This port may go down in the event of a PSU failure.
+
+^This port is power demoted due to user config or power availabilty.
+Showing sample output for power-over-ethernet brief per-port:
+
+switch# show power-over-ethernet 1/1/1 brief
+
+Status and Configuration Information for port 1/1/1
+
+  Member 1Power Status
+
+    Available: 370 W  Reserved: 55.60 W  Remaining: 314.40 W
+
+    Always-on PoE Enabled: 1/1
+
+PoE      Pwr Power    Pre-std Alloc PSE Pwr PD Pwr PoE Port     PD     Cls
+
+Type
+
+Port     En  Priority Detect  Act   Rsrvd   Draw   Status       Sign
+
+-------  --- ------   ------- ----- ------  ------ ---------    -----  ---
+
+----
+
+1/1/1    Yes Low      Off     Class  0.0 W   0.0 W Denied       None   4   2
+Showing sample output for power-over-ethernet brief for interface range:
+
+For 6300 Switch series:
+
+Public
+
+show power-over-ethernet 221
+
+switch# show power-over-ethernet 1/1/1-1/1/2 brief
+
+Status and Configuration Information for port 1/1/1-1/1/2
+
+  Member 1Power Status
+
+    Available: 370 W  Reserved: 55.60 W  Remaining: 314.40 W
+
+    Always-on PoE Enabled: 1/1
+
+    Quick PoE Enabled: None
+
+PoE      Pwr Power    Pre-std Alloc PSE Pwr PD Pwr PoE Port     PD     Cls
+
+Type
+
+Port     En  Priority Detect  Act   Rsrvd   Draw   Status       Sign
+
+-------  --- ------   ------- ----- ------  ------ ---------    -----  ---
+
+----
+
+1/1/1    Yes Low      Off     Class  0.0 W   0.0 W Denied       None   4   2
+
+1/1/2    Yes Critical Off     Usage  1.6 W   1.5 W Delivering*  Single 0   1
+Showing sample output for power-over-ethernet for a missing line card:
+
+switch# show power-over-ethernet 1/3 brief
+
+Module 1/3 is not physically present.
+Showing sample output for power-over-ethernet brief for a missing member:
+
+switch# show power-over-ethernet member 3 brief
+
+Member 3 is not physically present.
+Showing sample output for power-over-ethernet port when physical interface is not present:
+
+switch# show power-over-ethernet 2/1/1
+
+Interface 2/1/1 is not present.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+5420
+
+6200
+
+Operator ( > ) or Manage
+r ( # )
+
+Operators or Administrators or local user group members with
+execution rights for this command. Operators can execute this c
+ommand from the operator context (>) only.
+
+Public
+
+show power-over-ethernet 222
+
+Aruba AirWave
+
+You can manage and monitor the AOS-CX switch through Aruba AirWave. The following benefits and
+functions include:
+
+•  Configuration (partial configuration)
+
+•  Device topology
+
+•
+
+Immediate and historical trend reports
+
+•  Monitoring of the device and user connected to the network.
+
+•  Network discovery
+
+•  Syslogs and trap receiver
+
+For information about which versions of Aruba AirWave support AOS-CX, see the AOS-CX Release Notes.
+
+Subtopics
+
+SNMP support and AirWave
+Supported features with AirWave and the AOS-CX switch
+Configuring the AOS-CX switch to be monitored by AirWave
+AirWave commands
+
+SNMP support and AirWave
+
+For AirWave to discover and monitor the switch, you must:
+
+•  Enable the SNMP services on the switch.
+
+•  Configure the SNMP agent to use the SNMP version supported by the management station.
+
+SNMP on the switch
+
+The switch provides SNMP services through the management channel and the data interfaces. Functionality,
+such as device discovery from NMS, syslog and trap forwarding, can be any channel configured by you.
+
+Although the SNMP server can be enabled on both VRFs ( mgmt  and  default ), only one instance of
+SNMP can be running. The highest priority is on the  default  VRF.
+
+For example, assume that SNMP is first enabled on the  mgmt  VRF ( snmp-server vrf mgmt ).
+Then, SNMP is enabled on the  default  VRF ( snmp-server vrf default ) without disabling
+SNMP on the  mgmt  (using an equivalent  no  form of the command). The  show running-config
+command displays both  snmp-server vrf  commands; however, the SNMP instance is running only on
+the  default  VRF (highest priority).
+
+Public
+
+Aruba AirWave 223
+
+switch# config
+
+switch(config)# snmp-server vrf mgmt
+
+switch(config)# snmp-server vrf default
+
+switch(config)# show running-config
+
+Current configuration:
+
+!
+
+!Version AOS-CX Virtual.10.01.
+
+led locator on
+
+!
+
+!
+
+!
+
+snmp-server vrf default
+
+snmp-server vrf mgmt
+
+!
+
+...
+
+Supported features with AirWave and the AOS-CX switch
+
+AirWave supports the following features with the AOS-CX switch:
+
+Device management
+
+Device discovery using SNMPv2C and SNMPv3
+
+Device dashboards
+
+Monitoring management
+
+Device health attributes (device status/reachability)
+
+Interface and VLAN management
+
+Initiates an SSH connection from Aruba AirWave to
+AOS-CX so that the device outputs from the AOS-CX
+CLI can be displayed in the Aruba AirWave user inter
+face.
+
+Firmware versions
+
+Displays neighbor devices connected to AOS-CX swi
+tches
+
+Device topology
+
+Configuration management
+
+Partial configuration
+
+Public
+
+Supported features with AirWave and the AOS-CX swi... 224
+
+S
+u
+p
+p
+o
+r
+t
+e
+d
+
+f
+e
+a
+t
+u
+r
+e
+s
+
+w
+i
+t
+h
+
+A
+i
+r
+W
+a
+v
+e
+
+a
+n
+d
+
+t
+h
+e
+
+A
+O
+S
+-
+C
+X
+
+s
+w
+i
+.
+.
+.
+
+Alarm management
+
+Alarm triggers (device and interface up/down, new d
+evice discoveries, custom event triggers)
+
+Report management
+
+Syslogs and traps
+
+Device inventory, interface utilization, and device rea
+chability reports
+
+Summary report of device model, firmware, and boot
+loader version
+
+Configuring the AOS-CX switch to be monitored by AirWave
+
+Prerequisites
+
+Aruba AirWave is active on the network.
+
+Procedure
+
+1.  Enable SNMP on the switch by entering the  snmp-server vrf  command.
+
+switch(config)# snmp-server vrf mgmt
+
+switch(config)# snmp-server vrf default
+
+2.  Configure the SNMPv2C community to public by entering the  snmp-server community publ
+
+ic  command. In this instance,  public  is a read-only community string.
+switch(config)# snmp-server community public
+
+3.  The community-string is used by SNMPv1 and SNMPv2C for unencrypted authentication. SNMPv3 lets
+you encrypt the authentication mechanism. To enable SNMPv3, enter the  snmpv3 user  and  snmp
+v3 context  commands.
+switch(config)# snmpv3 user Admin auth sha auth-pass ciphertext
+
+AQBapZHf2d20GYr/xcGUzYzm0zjNf/4VKHtSqbNImqtfYbJYCgAAALkGFJVcSp3nZ3o=
+
+priv des priv-pass ciphertext
+
+AQBapb0H2poBQKXPoVsC9L9qzZyfJQnzR7hmTr7LGsOsI7K3CgAAAKP98Rq2jfTrFwQ=
+
+switch(config)# snmpv3 context Admin
+
+For discovering devices in AirWave through the SNMPv3 community, the SNMPv3 context name is not
+mandatory. Devices can still be discovered in Aruba AirWave without the SNMPv3 context name.
+
+4.  Enter the  logging  command for enabling syslog forwarding to a remote syslog server, such as
+
+AirWave:
+
+Public
+
+Configuring the AOS-CX switch to be monitored by A... 225
+
+C
+o
+n
+fi
+g
+u
+r
+i
+n
+g
+
+t
+h
+e
+
+A
+O
+S
+-
+C
+X
+
+s
+w
+i
+t
+c
+h
+
+t
+o
+
+b
+e
+
+m
+o
+n
+i
+t
+o
+r
+e
+d
+
+b
+y
+
+A
+.
+.
+.
+
+switch(config)# logging 10.0.10.2 severity debug
+
+5.  SNMP traps enable an agent to notify the management station of significant events by way of an
+
+unsolicited SNMP message. Enable SNMP traps by entering the  snmp-server host  command:
+switch(config)# snmp-server host 10.10.10.10 trap version v2c vrf default
+
+SNMP traps cannot be forwarded from AOS-CX 10.00 switches that have the VRF configured as mgmt.
+Later versions of AOS-CX support SNMP trap forwarding even when the VRF is configured as default or
+mgmt.
+
+6.  For information on how to add a device for monitoring in the Aruba AirWave user interface, see the
+
+documentation for Aruba AirWave.
+
+AirWave commands
+
+Subtopics
+
+logging
+snmp-server community
+snmp-server host
+snmp-server vrf
+snmpv3 context
+snmpv3 user
+
+logging
+
+Syntax
+
+logging {<IPV4-ADDR> | <IPV6-ADDR> | <FQDN | HOSTNAME>} {udp [<PORT-NUM>]}|
+
+{tcp [<PORT-NUM>]}|{|tls [<PORT-NUM>]}
+
+   auth-mode {certificate|subject-name}
+
+   disable
+
+   filter <FILTER-NAME>
+
+   include-auditable-events
+
+   legacy-tls-renegotiation]
+   rate-limit-burst <BURST>
+
+   rate-limit-interval <INTERVAL>] ]
+
+   severity <LEVEL>]
+
+Public
+
+AirWave commands 226
+
+vrf <VRF-NAME>]
+
+no logging {<IPV4-ADDR> | <IPV6-ADDR> | <FQDN | HOSTNAME> }
+
+Description
+
+Enables syslog forwarding to a remote syslog server.
+
+The no form of this command disables syslog forwarding to a remote syslog server.
+
+Starting with AOS-CX 10.11, payload information is present in accounting logs.
+
+The maximum REST payload that can be sent to RADIUS/TACACS server is 1024 characters, and the
+maximum of REST payload that can be sent to syslog server is 3500 characters. If this limit is is reached, the
+log will display three dots (...) to indicate that the log an exceeded the character limit and is incomplete.
+
+Parameter
+
+Description
+
+{<IPV4‐ADDR> | <IPV6‐ADDR>
+| <HOSTNAME>}
+
+Selects the IPv4 address, IPv6 address, or host name of the rem
+ote syslog server. Required.
+
+[udp [<PORT‐NUM>] | tcp
+[<PORT‐NUM> |
+  tls [<PORT‐NUM>]]
+
+Specifies the UDP port, TCP port, or TLS port of the remote sysl
+og server to receive the forwarded syslog messages.
+
+   udp [<PORT‐NUM>]
+
+Range: 1 to 65535. Default: 514
+
+   tcp [<PORT‐NUM>]
+
+Range: 1 to 65535. Default: 1470
+
+   tls [<PORT‐NUM>]
+
+Range: 1 to 65535. Default: 6514
+
+auth‐mode
+
+disable
+
+Specifies the TLS authentication mode used to validate the cert
+ificate.
+
+•  certificate: Validates the peer using trust anchor certificate
+
+based authentication. Default.
+
+•  subject‐name: Validates the peer using trust anchor certif
+
+icates as well as subject‐name based authentication.
+
+Disable remote syslog confguration. This does not delete the co
+nfiguration, just disables/pauses the forwarding of syslog mess
+agesto the remote server. The config/forwarding can be reenabl
+ed (un‐paused) again using the no logging <hostname> disa
+ble command.
+
+filter <FILTER‐NAME>
+
+Specifies the name of the filter to be applied on the syslog mes
+sages.
+
+include‐auditable‐events
+
+Specifies that auditable messages are also logged to the remote
+syslog server.
+
+Public
+
+logging 227
+
+Parameter
+
+Description
+
+legacy‐tls‐renegotiation
+
+Enables the TLS connection with a remote syslog server suppor
+ting legacy renegotiation.
+
+rate‐limit‐burst <BURST>
+
+Specifies the rate limit for the messages sent to the remote sysl
+og server.
+
+rate‐limit‐interval
+<INTERVAL>
+
+Specifies the rate limit interval in seconds. Default: 30 Seconds
+
+severity <LEVEL>
+
+Specifies the severity of the syslog messages:
+
+•  alert: Forwards syslog messages with the severity of alert
+
+(6) and emergency (7).
+
+•  crit: Forwards syslog messages with the severity of critical
+
+(5) and above.
+
+•  debug: Forwards syslog messages with the severity of deb
+
+ug (0) and above.
+
+•  emerg: Forwards syslog messages with the severity of eme
+
+rgency (7) only.
+
+•  err: Forwards syslog messages with the severity of err (4) a
+
+•
+
+nd above
+info: Forwards syslog messages with the severity of info (1
+) and above. Default.
+
+•  notice: Forwards syslog messages with the severity of notic
+
+e (2) and above.
+
+•  warning: Forwards syslog messages with the severity of wa
+
+rning (3) and above.
+
+Specifies the VRF used to connect to the syslog server. Optional
+. Default:  default
+
+vrf <VRF‐NAME>
+
+Examples
+
+Enabling the syslog forwarding to remote syslog server 10.0.10.2:
+
+switch(config)# logging 10.0.10.2
+
+Enabling the syslog forwarding of messages with a severity of err (4) and above to TCP port 4242 on
+remote syslog server 10.0.10.9 with VRF lab_vrf:
+
+switch(config)# logging 10.0.10.9 tcp 4242 severity err vrf lab_vrf
+
+Disabling syslog forwarding to a remote syslog server:
+
+Public
+
+logging 228
+
+switch(config)# no logging
+
+Enabling syslog forwarding over TLS to a remote syslog server using subject-name authentication mode:
+
+switch(config)#logging example.com tls auth-mode subject-name
+
+Applying log filtering for syslog server forwarding:
+
+switch(config)# logging 10.0.10.6 severity info filter filter_lldp_logs vrf
+
+mgmt
+
+Applying log filtering and enabling the rate limit for syslog server forwarding over TCP port:
+
+switch(config)# logging 10.0.10.2 tcp 3440 severity err vrf mgmt include-
+
+auditable-events filter filter_lldp_logs rate-limit-burst 3 rate-limit-
+
+interval 35
+
+Command History
+
+Release
+
+Modification
+
+10.12.1000
+
+The disable parameter is introduced
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+snmp-server community
+
+Syntax
+
+snmp-server community <STRING>
+no snmp-server community <STRING>
+
+Public
+
+snmp-server community 229
+
+Description
+
+Adds an SNMPv1/SNMPv2c community string. A community string is like a password that controls read/
+write access to the SNMP agent. A network management program must supply this name when attempting
+to get SNMP information from the switch. A maximum of 10 community strings are supported. Once you
+create your own community string, the default community string ( public ) is deleted.
+
+The no form of this command removes the specified SNMPv1/SNMPv2c community string. When no
+community string exists, a default community string with the value public is automatically defined.
+
+Parameter
+
+Description
+
+Specifies the SNMPv1/SNMPv2c community string. Range: 1 to
+32 printable ASCII characters, excluding space and question ma
+rk.
+
+<STRING>
+
+Subcommands
+
+access-level {ro | rw}
+
+no access-level {ro | rw}
+This subcommand changes the access level of the SNMP community. The default access level is read-only
+(ro).
+
+The no form of this subcommand changes the access level of the community to default.
+
+Parameter
+
+Description
+
+ro
+
+rw
+
+Specifies Read‐Only access with the SNMP community.
+
+Specifies Read‐Write access with the SNMP community.
+
+access-list {ip | ipv6} <ACL-NAME>
+
+no access-list {ip | ipv6} <ACL-NAME>
+
+This subcommand associates an ACL with the SNMP community. If an ACL is not associated with the SNMP
+community, the default access is allowed for all the hosts.
+
+The no form of this subcommand removes association of the ACL with the SNMP community.
+
+Parameter
+
+ip
+
+ipv6
+
+Description
+
+Specifies the IPv4 ACL type.
+
+Specifies the IPv6 ACL type.
+
+Public
+
+snmp-server community 230
+
+Parameter
+
+Description
+
+Specifies the ACL name. It supports a maximum of 64 characte
+rs.
+
+<ACL‐NAME>
+
+Examples
+
+Setting the SNMPv1/SNMPv2c community string to private:
+
+switch(config)# snmp-server community private
+
+Removing SNMPv1/SNMPv2c community string private:
+
+switch(config)# no snmp-server community private
+
+Configuring the access level for the SMNP community to read-only:
+
+switch(config-community)# access-level ro
+
+Changing the access level of the SNMP community to default:
+
+switch(config-community)# no access-level rw
+
+Associating an IPv4 ACL named my_acl with the SMNP community:
+
+switch(config-community)# access-list ip my_acl
+
+Removing the associated IPv4 ACL named my_acl from the SNMP community:
+
+switch(config-community)# no access-list ip my_acl
+
+Configuration supported for SNMP ACL:
+
+access-list ip ipv4_acl
+    10 permit any 4.4.4.4 4.4.4.1
+
+    20 permit any 3.3.3.3 3.3.3.1
+
+access-list ipv6 ipv6_acl
+
+    10 permit any 2001::2 2001::1
+
+    20 permit any 3001::2 3001::1
+
+snmp-server vrf default
+
+snmp-server community my_comm_1
+
+    access-list ip ipv4_acl
+
+    access-list ipv6 ipv6_acl
+Configuration not supported for SNMP ACL:
+
+access-list ip ipv4_acl
+
+    10 deny any 6.6.6.6 6.6.6.1
+
+Public
+
+snmp-server community 231
+
+access-list ipv6 ipv6_acl
+
+    10 deny any 6001::6 6000::1
+
+snmp-server vrf default
+
+snmp-server community my_comm_1
+
+    access-list ip ipv4_acl
+
+    access-list ipv6 ipv6_acl
+
+NOTE
+hitcounts for SNMP ACL will not be incremented.
+Example:show access-list hitcounts ip all will not show the hit count of SNMP
+ACL.
+
+Command History
+
+Release
+
+10.14
+
+Modification
+
+Replaced the ipv4 parameter with the ip parameter. The ipv4 parameter is dep
+recated.
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config
+config‐
+community
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+snmp-server host
+
+Syntax
+
+snmp-server host <IPv4-ADDR | IPv6-ADDR> trap version <VERSION> [community
+
+<STRING>]
+[port <UDP-PORT>] [<VRF-NAME>] [notification-type <NOTIFICATION-TYPE>]
+no snmp-server host <IPv4-ADDR | IPv6-ADDR> trap version <VERSION>
+
+[community <STRING>]
+
+[port <UDP-PORT>] [<VRF-NAME>] [notification-type <NOTIFICATION-TYPE>]
+
+snmp-server host <IPv4-ADDR | IPv6-ADDR> inform version v2c [community
+
+Public
+
+snmp-server host 232
+
+<STRING>]
+
+[port <UDP-PORT>] [<VRF-NAME>] [notification-type <NOTIFICATION-TYPE>]
+
+no snmp-server host <IPv4-ADDR | IPv6-ADDR> inform version v2c [community
+
+<STRING>]
+
+[port <UDP-PORT>] [<VRF-NAME>] [notification-type <NOTIFICATION-TYPE>]
+
+snmp-server host <IPv4-ADDR | IPv6-ADDR> [trap version v3 | inform
+
+version v3] user <NAME> [port <UDP-PORT>] [<VRF-NAME>] [notification-type
+
+<NOTIFICATION-TYPE>]
+
+no snmp-server host <IPv4-ADDR | IPv6-ADDR> [trap version v3 | inform
+
+version v3] user <NAME> [port <UDP-PORT>] [<VRF-NAME>] [notification-type
+
+<NOTIFICATION-TYPE>]
+
+Description
+
+Configures a trap/informs receiver to which the SNMP agent can send SNMP v1/v2c/v3 traps or v2c informs.
+A maximum of 30 SNMP traps/informs receivers can be configured.
+
+The no form of this command removes the specified trap/inform receiver.
+
+NOTE
+
+Avoid configuring the same receiver for both SNMP traps and informs on the
+same UDP port for v1, v2, and v3.
+
+Parameter
+
+Description
+
+<IPv4‐ADDR>
+
+<IPv6‐ADDR>
+
+Specifies the IP address of a trap receiver in IPv4 format (x.x.x.
+x), where x is a decimal number from 0 to 255. You can remove
+leading zeros. For example, the address 192.169.005.100 beco
+mes 192.168.5.100.
+
+Specifies the IP address of a trap receiver in IPv6 format (x:x::x:
+x).
+
+trap version <VERSION>
+
+Specifies the trap notification type for SNMPv1, v2c or v3. Avail
+able options are: v1, v2c or v3.
+
+inform version v2c
+
+Specifies the inform notification type for SNMPv2c.
+
+trap version v3
+
+Specifies the trap notification type for SNMPv3.
+
+user <NAME>
+
+Specifies the SNMPv3 user name to be used in the SNMP trap n
+otifications.
+
+Public
+
+snmp-server host 233
+
+Parameter
+
+Description
+
+community <STRING>
+
+<UDP‐PORT>
+
+<VRF‐NAME>
+
+Specifies the name of the community string to use when sendin
+g trap notifications. Range: 1 ‐ 32 printable ASCII characters,
+excluding space and question mark. Default: public.
+
+Specifies the UDP port on which notifications are sent. Range: 1
+‐ 65535. Default: 162.
+
+Specifies the VRF on which the SNMP agent listens for incomin
+g requests.
+
+<notification‐type>
+
+The supported notification types are:
+
+Specifies the type of notification to be sent to the trap receiver.
+If no type is specified, all notifications are sent.
+
+interface
+lldp
+loop‐protect
+
+•  aaa‐server
+•  alarm
+•  bgp
+•  card
+•  config
+•  entity
+•  fan
+•
+•
+•
+•  mac‐notify
+•  mstp
+•  mvrp
+•  ospf
+•  ospfv3
+•  port‐security
+•  power
+•  power‐ethernet
+•  rmon
+•  rpvst
+•  stp
+•  temperature
+•  vrrp
+•  vsf
+
+Public
+
+snmp-server host 234
+
+Parameter
+
+Examples
+
+Description
+
+•  vsx
+
+switch(config)# snmp-server host 10.10.10.10 trap version v1
+
+switch(config)# no snmp-server host 10.10.10.10 trap version v1
+
+switch(config)# snmp-server host a:b::c:d trap version v1
+
+switch(config)# no snmp-server host a:b::c:d trap version v1
+
+switch(config)# snmp-server host 10.10.10.10 trap version v2c community
+
+public
+
+switch(config)# no snmp-server host 10.10.10.10 trap version v2c community
+
+public
+
+switch(config)# snmp-server host a:b::c:d trap version v2c community public
+
+switch(config)# no snmp-server host a:b::c:d trap version v2c community
+
+public
+
+switch(config)# snmp-server host 10.10.10.10 trap version v2c community
+
+public port 5000
+
+switch(config)# no snmp-server host 10.10.10.10 trap version v2c community
+
+public port 5000
+
+switch(config)# snmp-server host 10.10.10.10 trap version v2c community
+
+public port 5000 vrf default
+
+switch(config)# no snmp-server host 10.10.10.10 trap version v2c community
+
+public port 5000 vrf default
+
+switch(config)# snmp-server host a:b::c:d trap version v2c community public
+
+port 5000
+
+switch(config)# no snmp-server host a:b::c:d trap version v2c community
+
+public port 5000
+
+switch(config)# snmp-server host 10.10.10.10 inform version v2c community
+
+public
+
+switch(config)# no snmp-server host 10.10.10.10 inform version v2c
+
+community public
+
+switch(config)# snmp-server host a:b::c:d inform version v2c community
+
+public
+
+Public
+
+snmp-server host 235
+
+switch(config)# no snmp-server host a:b::c:d inform version v2c community
+
+public
+
+switch(config)# snmp-server host 10.10.10.10 inform version v2c community
+
+public port 5000
+
+switch(config)# no snmp-server host 10.10.10.10 inform version v2c
+
+community public port 5000
+
+switch(config)# snmp-server host 10.10.10.10 inform version v2c community
+
+public port 5000 vrf default
+
+switch(config)# no snmp-server host 10.10.10.10 inform version v2c
+
+community public port 5000 vrf default
+
+switch(config)# snmp-server host a:b::c:d inform version v2c community
+
+public port 5000
+
+switch(config)# no snmp-server host a:b::c:d inform version v2c community
+
+public port 5000
+
+switch(config)# snmp-server host 10.10.10.10 trap version v3 user Admin
+
+switch(config)# no snmp-server host 10.10.10.10 trap version v3 user Admin
+
+switch(config)# snmp-server host a:b::c:d trap version v3 user Admin
+
+switch(config)# no snmp-server host a:b::c:d trap version v3 user Admin
+
+switch(config)# snmp-server host 10.10.10.10 trap version v3 user Admin
+
+port 2000
+
+switch(config)# no snmp-server host 10.10.10.10 trap version v3 user Admin
+
+port 2000
+
+switch(config)# snmp-server host a:b::c:d trap version v3 user Admin port
+
+2000
+switch(config)# no snmp-server host a:b::c:d trap version v3 user Admin
+
+port 2000
+
+SNMP trap notification type examples:
+
+switch(config)# snmp-server host 10.10.10.10 trap version v2c community
+public notification-type bgp fan interface power entity
+
+switch(config)# no snmp-server host 10.10.10.10 trap version v2c community
+
+public notification-type bgp
+
+switch(config)# snmp-server host a:b::c:d inform version v3 user Admin
+
+Public
+
+snmp-server host 236
+
+notification-type bgp fan interface power-ethernet
+
+switch(config)# no snmp-server host a:b::c:d inform version v3 user Admin
+
+notification-type bgp interface
+
+switch(config)# snmp-server host a:b::c:d inform version v3 user Admin
+
+notification-type ?
+
+  aaa-server      Sends AAA notifications.
+
+  alarm           Sends Alarm notifications.
+
+  bgp             Sends Border Gateway Protocol (BGP) state change
+
+notifications.
+
+  card            Sends Card notifications.
+
+  config          Sends Configuration change notifications.
+
+  entity          Sends Entity notifications.
+
+  fan             Sends Fan notifications.
+
+  interface       Sends Interface notifications.
+
+  lldp            Sends Link Layer Discovery Protocol (LLDP) notifications.
+
+  loop-protect    Sends Loop Protect notifications.
+
+  mac-notify      Sends MAC Notify notifications.
+
+  mstp            Sends Multiple Spanning Tree Protocol (MSTP)
+
+notifications.
+
+  mvrp            Sends Multiple VLAN Registration Protocol (MVRP)
+
+notifications.
+
+  ospf            Sends Open Shortest Path First (OSPFv2) notifications.
+
+  ospfv3          Sends Open Shortest Path First version 3 (OSPFv3)
+
+notifications.
+
+  port-security   Sends Port Security notifications.
+
+  power           Sends Power notifications.
+
+  power-ethernet  Sends Power over Ethernet (PoE) notifications.
+
+  rmon            Sends Remote Network Monitoring (RMON) notifications.
+
+  rpvst           Sends Rapid Per VLAN Spanning Tree (RPVST) notifications.
+
+  snmp            Sends Sends Simple Network Management Protocol (SNMP)
+
+notifications.
+
+  stp             Sends Spanning Tree Protocol (STP) notifications.
+  temperature     Sends Temperature notifications.
+
+  vrrp            Sends Virtual Router Redundancy Protocol (VRRP)
+
+notifications.
+
+  vsf             Sends Virtual Switching Framework (VSF) notifications.
+
+  vsx             Sends Virtual System Extension (VSX) notifications.
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Public
+
+snmp-server host 237
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+snmp-server vrf
+
+Syntax
+
+snmp-server vrf <VRF-NAME>
+
+no snmp-server vrf <VRF-NAME>
+
+Description
+
+Configures a VRF on which the SNMP agent listens for incoming requests. By default, the SNMP agent does
+not listen on any VRF. 4100i, 6000, and 6100 only support default VRF. The SNMP agent can listen on
+multiple VRFs.
+
+The no form of this command stops the SNMP agent from listening for incoming requests on the specified
+VRF.
+
+Parameter
+
+Description
+
+Specifies the name of a VRF.
+
+<VRF‐NAME>
+
+Examples
+
+Configuring the SNMP agent to listen on VRF default.
+
+switch(config)# snmp-server vrf default
+
+Configuring the SNMP agent to listen on VRF mgmt.
+
+switch(config)# snmp-server vrf mgmt
+
+Stopping the SNMP agent from listening on VRF default.
+
+Public
+
+snmp-server vrf 238
+
+switch(config)# no snmp-server vrf default
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+snmpv3 context
+
+Syntax
+
+snmpv3 context <NAME> vrf <VRF-NAME> [community <STRING>]
+
+no snmpv3 context <NAME> [vrf <VRF-NAME>] [community <STRING>]
+
+Description
+
+Creates an SNMPv3 context on the specified VRF.
+
+The no form of this command removes the specified SNMP context.
+
+Parameter
+
+Description
+
+<NAME>
+
+Specifies the name of the context. Range: 1 to 32 printable ASC
+II characters, excluding space and question mark (?).
+
+vrf <VRF‐NAME>
+
+Specifies the VRF associated with the context. Default: default.
+
+community <STRING>
+
+Specifies the SNMP community string associated with the con
+text. Range: 1 to 32 printable ASCII characters, excluding space
+and question mark. Default: public.
+
+Public
+
+snmpv3 context 239
+
+Examples
+
+Creating an SNMPv3 context named newContext:
+
+switch(config)# snmpv3 context newContext
+
+Creating an SNMPv3 context named newContext on VRF myVrf and with community string private.
+
+switch(config)# snmpv3 context newContext vrf myVrf community private
+
+Removing the SNMPv3 context named newContext on VRF myVrf:
+
+switch(config)# no snmpv3 context newContext vrf myVrf
+
+Command History
+
+Release
+
+Modification
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+snmpv3 user
+
+Syntax
+
+snmpv3 user <NAME>
+
+      [auth <AUTH-PROTO> auth-pass [{plaintext | ciphertext} <AUTH-PASS>]]
+
+      [priv <PRIV-PROTO> priv-pass [{plaintext | ciphertext} <PRIV-PASS>]]
+
+      [access-level ro|rw]
+
+no snmpv3 user <NAME>
+
+        [auth <AUTH-PROTO> auth-pass [{plaintext | ciphertext} <AUTH-PASS>]]
+        [priv <PRIV-PROTO> priv-pass [{plaintext | ciphertext} <PRIV-PASS>]]
+
+[access-level ro|rw]
+
+Public
+
+snmpv3 user 240
+
+Description
+
+Creates an SNMPv3 user and adds it to an SNMPv3 context. The SNMPv3 security level (set with command
+snmpv3 security-level) determines which users are allowed to authenticate.
+
+The no form of this command removes the specified SNMPv3 user.
+
+NOTE
+
+When updating the authentication protocols and privacy protocols for the
+existing SNMPv3 users, you must also update the access level. Otherwise, the
+access level will be set to read-only.
+
+Parameter
+
+Description
+
+<NAME>
+
+access‐level
+
+auth <AUTH‐PROTO>
+
+auth‐pass [{plaintext |
+ciphertext} <AUTH‐PASS>]
+
+Specifies the SNMPv3 username. Range 1 to 32 printable ASCII
+characters, excluding space and question mark (?).
+
+Configures the access level for the SNMPv3 user:
+
+•  ro: Allow read‐only access for the SNMPv3 user
+•  rw: Allow read‐write access for the SNMPv3 user
+
+Sets the authentication protocol used to validate user logins. Su
+pported protocols are md5, sha, sha224, sha256, sha384, and
+sha512.
+
+Specifies the SNMPv3 user authentication password. Range for
+plaintext is 8 to 32 printable ASCII characters, excluding space
+and question mark (?). Range for ciphertext is 1 to 256 printab
+le ASCII characters. Ciphertext is used when copying user confi
+guration settings between switches.
+
+NOTE
+
+Authentication passwords that include special c
+haracters must be enclosed in single quotation
+marks ('). For example, 'auth‐pwd20246!@#'.
+
+priv <PRIV‐PROTO>
+
+Sets the SNMPv3 privacy protocol (encryption method). Suppor
+ted privacy protocols are aes, aes192, aes256, and des.
+
+priv‐pass [{plaintext |
+ciphertext} <PRIV‐PASS>]
+
+Specifies the SNMPv3 user privacy encryption password. Range
+for plaintext is 8 to 32 printable ASCII characters, excluding sp
+ace and question mark (?). Range for ciphertext is 1 to 256 pri
+
+Public
+
+snmpv3 user 241
+
+Parameter
+
+Description
+
+ntable ASCII characters. Ciphertext is used when copying user c
+onfiguration settings between switches.
+
+NOTE
+
+Authentication passwords that include special c
+haracters must be enclosed in single quotation
+marks ('). For example, 'priv‐pwd20246!@#'.
+
+NOTE
+
+When the authentication password is not provided on the command line,
+plaintext authentication password prompting occurs upon pressing Enter,
+followed by privacy encryption protocol prompting, and finally plaintext
+encryption password prompting. The entered password characters are masked
+with asterisks.
+
+NOTE
+
+When the authentication type and password plus the privacy protocol
+(encryption method) are provided on the command line but the encryption
+password is not provided, plaintext encryption password prompting occurs upon
+pressing Enter. The entered password characters are masked with asterisks.
+
+Examples
+
+Defining SNMPv3 user Admin1 using sha authentication and des privacy encryption with provided plaintext
+passwords:
+
+switch(config)# snmpv3 user Admin1 auth sha auth-pass plaintext F82#450h
+
+                priv des priv-pass plaintext F82#4eva
+
+Defining SNMPv3 user Admin2 using MD5 authentication and AES privacy encryption with provided
+authentication password and privacy encryption type but prompted encryption password:
+
+switch(config)# snmpv3 user Admin2 auth md5 auth-pass plaintext F82#450h
+
+                            priv aes priv-pass
+
+Enter the privacy encryption key: ********
+
+Re-Enter the privacy encryption key: ********
+
+Defining SNMPv3 user Admin2 using MD5 authentication and AES privacy encryption with plaintext
+password prompting and privacy encryption selection:
+
+Public
+
+snmpv3 user 242
+
+switch(config)# snmpv3 user Admin2 auth md5 auth-pass
+
+Enter the authentication password: ********
+
+Re-Enter the authentication password: ********
+
+Configure the privacy protocol (y/n)? y
+
+Enter the privacy protocol (aes/des)? aes
+
+Enter the privacy encryption key: ********
+
+Re-Enter the privacy encryption key: ********
+
+Removing SNMPv3 user Admin1:
+
+switch(config)# no snmpv3 user Admin1
+
+Creating an SNMP user on switch 1 and then creating the same user on switch 2 by copying from the switch
+1 configuration:
+
+On switch 1, configure a user named Admin3, and then use the show running-config command to display
+switch configuration. Save a copy of the full snmpv3 user command (shown by show running-config). This
+saved command is used on switch 2.
+
+switch1(config)# snmpv3 user Admin3 auth sha auth-pass plaintext F82#450h
+
+                 priv des priv-pass plaintext F82#4eva
+
+switch1(config)# exit
+
+switch1# show running-config
+
+Current configuration:
+
+!
+
+!Version AOS-CX xx.xx.xx.xxxxxx
+
+!
+
+snmpv3 user Admin3 auth sha auth-pass ciphertext AQBaf2d...FJVcZ3o=
+
+priv des priv-pass ciphertext AQBaH2p...2jfTFwQ=
+
+ssh server vrf mgmt
+
+!
+
+interface mgmt
+
+no shutdown
+
+ip dhcp
+vlan 1
+On switch 2, execute the snmpv3 user command that you saved from switch 1 (as shown by show
+running-config). This creates the user on switch 2 with the same configuration.
+
+switch2(config)# snmpv3 user Admin3 auth sha auth-pass ciphertext
+
+AQBaf2d...FJVcZ3o=
+
+                 priv des priv-pass ciphertext AQBaH2p...2jfTFwQ=
+
+The following command sets a read-write access level for an SNMPv3 user with the user name user1.
+
+switch(config)# snmpv3 user user1 auth md5 auth-pass plaintext abc1234
+
+access-level rw
+
+Public
+
+snmpv3 user 243
+
+Command History
+
+Release
+
+10.13
+
+Modification
+
+Following authentication protocols are supported: sha224, sha256, sha384, an
+d sha512.
+
+Following privacy protocols are supported: aes192 and aes256.
+
+10.09
+
+The access‐level parameter was introduced.
+
+10.07 or earlier
+
+‐‐
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Subtopics
+
+snmpv3 user view
+
+snmpv3 user view
+
+Syntax
+
+snmpv3 user <USER-NAME> view <VIEW-NAME>
+
+no snmpv3 user <USER-NAME> view <VIEW-NAME>
+
+Description
+
+Associates a user with an existing SNMP MIB view.
+
+The no form of this command removes the associated user from the specified SNMP MIB view.
+
+Parameter
+
+Description
+
+Specifies the user name for the SNMP MIB view. Accepts a maxi
+mum of 32 characters.
+
+Public
+
+snmpv3 user view 244
+
+Description
+
+Specifies the view name for the SNMP MIB view. Accepts a maxi
+mum of 32 characters.
+
+Parameter
+
+<USER‐NAME>
+
+<VIEWNAME>
+
+Examples
+
+Adding a user in the existing SNMP MIB view:
+
+switch(config)# snmpv3 user nw-admin view my-nw-view
+
+Removing the user from the SNMP MIB view:
+
+switch(config)# no snmpv3 user nw-admin view my-nw-view
+
+Attaching unconfigured or unknown SNMP view to an SNMPv3 user:
+
+switch(config)# snmpv3 user nw-admin view myView
+
+View myView is not configured.
+
+Command History
+
+Release
+
+10.10
+
+Modification
+
+Command introduced
+
+Command Information
+
+Platforms
+
+Command context
+
+Authority
+
+All platforms
+
+config
+
+Administrators or local user group members with execution righ
+ts for this command.
+
+Support and Other Resources
+
+Subtopics
+
+Accessing HPE Aruba Networking Support
+
+Public
+
+Support and Other Resources 245
+
+Accessing Updates
+Warranty Information
+Regulatory Information
+Documentation Feedback
+
+Accessing HPE Aruba Networking Support
+
+HPE Aruba Networking Support Services
+
+AOS‐CX Switch Software Documentation Portal
+
+https://www.hpe.com/us/en/networking/hpe‐aru
+ba‐networking‐support‐services.html
+
+https://arubanetworking.hpe.com/techdocs/Aruba
+DocPortal/content/new-portal/aoscx.html
+
+HPE Aruba Networking Support Portal
+
+https://networkingsupport.hpe.com/home
+
+North America telephone
+
+1‐800‐943‐4526 (US & Canada Toll‐Free Nu
+mber)
+
++1‐650‐750‐0350 (Backup—Toll Number)
+
+International telephone
+
+https://www.hpe.com/psnow/doc/a50011948enw
+
+Be sure to collect the following information before contacting Support:
+
+•  Technical support registration number (if applicable)
+
+•  Product name, model or version, and serial number
+
+•  Operating system name and version
+
+•  Firmware version
+
+•  Error messages
+
+•  Product-specific reports and logs
+
+•  Add-on products or components
+
+•  Third-party products or components
+
+Other useful sites
+
+Other websites that can be used to find information:
+
+Public
+
+Accessing HPE Aruba Networking Support 246
+
+HPE Aruba Networking Developer Hub
+
+https://developer.arubanetworks.com/hpe‐aruba
+‐networking‐aoscx/docs/about
+
+Airheads social forums and Knowledge Base
+
+https://community.arubanetworks.com/
+
+AOS‐CX Software Technical Update channel on You
+Tube.
+
+Videos on new features introduced in this release
+: https://www.youtube.com/playlist?list=PLsYGHu
+NuBZcbWPEjjHuVMqP‐Q_UL3CskS
+
+HPE Aruba Networking Hardware Documentation an
+d Translations Portal
+
+HPE Aruba Networking software
+
+https://networkingsupport.hpe.com/downloads h
+ttps://networkingsupport.hpe.com/downloads
+
+Software licensing and Feature Packs
+
+https://licensemanagement.hpe.com/
+
+End‐of‐Life information
+
+https://networkingsupport.hpe.com/end‐of‐life
+
+Accessing Updates
+
+You can access updates from the HPE Aruba Networking Support Portal at https://
+networkingsupport.hpe.com.
+
+Some software products provide a mechanism for accessing software updates through the product interface.
+Review your product documentation to identify the recommended software update method.
+
+To subscribe to eNewsletters and alerts:
+
+https://networkingsupport.hpe./notifications/subscriptions (requires an active HPE Aruba Networking
+Support Portal account to manage subscriptions). Security notices are viewable without an HPE Aruba
+Networking Support Portal account.
+
+Warranty Information
+
+To view warranty information for your product, go to https://www.arubanetworks.com/support-services/
+product-warranties/.
+
+Public
+
+Accessing Updates 247
+
+Regulatory Information
+
+To view the regulatory information for your product, view the Safety and Compliance Information for
+Server, Storage, Power, Networking, and Rack Products, available at https://www.hpe.com/support/Safety-
+Compliance-EnterpriseProducts
+
+Additional regulatory information
+
+HPE Aruba Networking is committed to providing our customers with information about the chemical
+substances in our products as needed to comply with legal requirements, environmental data (company
+programs, product recycling, energy efficiency), and safety information and compliance data, (RoHS and
+WEEE). For more information, see https://www.arubanetworks.com/company/about-us/environmental-
+citizenship/.
+
+Documentation Feedback
+
+HPE Aruba Networking is committed to providing documentation that meets your needs. To help us improve
+the documentation, send any errors, suggestions, or comments to Documentation Feedback (docsfeedback-
+switching@hpe.com). When submitting your feedback, include the document title, part number, edition, and
+publication date located on the front cover of the document. For online help content, include the product
+name, product version, help edition, and publication date located on the legal notices page.
+
+Public
+
+Regulatory Information 248
