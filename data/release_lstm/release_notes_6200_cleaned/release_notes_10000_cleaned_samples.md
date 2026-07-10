@@ -1,0 +1,32 @@
+# Release Notes Cleaning Samples
+
+## Bug Symptom
+1. `{"source_type":"release_notes_known_issues","question":"For 6200 AOS-CX 10.13.0001, what symptom occurs in IGMP Bug 341085?","answer":"IGMP (Bug ID 341085): The symptom is: Multicast traffic is being blocked after upgrading from AOS-CX 10.12.0006 or earlier versions of AOS-CX.","needs_review":true}`
+2. `{"source_type":"release_notes_known_issues","question":"For 6200 AOS-CX 10.13.0001, for HPE Aruba AOS-CX 10.13.0001, what symptom occurs in L3 Routes Bug 207077?","answer":"L3 Routes (Bug ID 207077): The symptom is: Traffic convergence takes approximately two minutes when VSF switchover is performed.","needs_review":true}`
+3. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, what issue was resolved in WebUI Bug 277504?","answer":"WebUI (Bug ID 277504): Symptom: A VSF stack breaks apart and a stack member reboots. Scenario: This occurs if an invalid client is connected to a downlink or if a counterfeit transceiver is connected to the uplink. Workaround: Disable the problematic ports and reboot the switch.","needs_review":true}`
+4. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, what symptom occurs in WebUI Bug 277504?","answer":"WebUI (Bug ID 277504): The symptom is: A VSF stack breaks apart and a stack member reboots.","needs_review":true}`
+5. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, for HPE Aruba AOS-CX 10.13.0001, what issue was resolved in SNMP Bug 281793?","answer":"SNMP (Bug ID 281793): Symptom: A desired source IP address is not seen when inform packets are received by the inform receiver. Scenario: The issue occurs when a user sets a source IP address for traps.","needs_review":true}`
+
+## Bug Scenario
+1. `{"source_type":"release_notes_known_issues","question":"For 6200 AOS-CX 10.13.0001, for HPE Aruba AOS-CX 10.13.0001, under what scenario does IGMP Bug 341085 occur?","answer":"IGMP (Bug ID 341085): This issue may occur when If the switch has a control plane ACL configured AND has IGMP or PIM configured on a pre-10.12.1000 build and upgrades to 10.12.1000 or a later release, the implicit deny in the control plane ACL will block multicast traffic thus inhibiting functionality of those features..","needs_review":true}`
+2. `{"source_type":"release_notes_known_issues","question":"For 6200 AOS-CX 10.13.0001, under what scenario does L3 Routes Bug 207077 occur?","answer":"L3 Routes (Bug ID 207077): This issue occurs when traffic is flowing through the switch using the uplink on the conductor. Performing a VSF switchover causes the standby to become the new conductor, and it takes approximately 2 minutes for traffic to resume using the uplink of the new conductor.","needs_review":true}`
+3. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, for HPE Aruba AOS-CX 10.13.0001, under what scenario does WebUI Bug 277504 occur?","answer":"WebUI (Bug ID 277504): This issue may occur when This occurs if an invalid client is connected to a downlink or if a counterfeit transceiver is connected to the uplink..","needs_review":true}`
+4. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, under what scenario does SNMP Bug 281793 occur?","answer":"SNMP (Bug ID 281793): The issue occurs when a user sets a source IP address for traps.","needs_review":true}`
+5. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, under what scenario does PKI Bug 281380 occur?","answer":"PKI (Bug ID 281380): This issue occurs when validating an Aruba Central server certificate.","needs_review":true}`
+
+## Bug Workaround
+1. `{"source_type":"release_notes_known_issues","question":"For 6200 AOS-CX 10.13.0001, what is the workaround for IGMP Bug 341085?","answer":"IGMP (Bug ID 341085): The documented workaround is: Manually add an ACE to the control plane ACL to explicitly permit multicast traffic.","needs_review":true}`
+2. `{"source_type":"release_notes_known_issues","question":"For 6200 AOS-CX 10.13.0001, what is the workaround for L3 Routes Bug 207077?","answer":"L3 Routes (Bug ID 207077): The documented workaround is: If the Uplink from the VSF is a LAG with members in Conductor/Standby/Member, the convergence time would be lesser and around 70 seconds.","needs_review":true}`
+3. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, what is the workaround for WebUI Bug 277504?","answer":"WebUI (Bug ID 277504): The documented workaround is: Disable the problematic ports and reboot the switch.","needs_review":true}`
+4. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, for HPE Aruba AOS-CX 10.13.0001, what is the workaround for SNMP Bug 281793?","answer":"SNMP (Bug ID 281793): No workaround is documented in the release notes.","needs_review":true}`
+5. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, for AOS-CX 6200 version 10.13.0001, what is the workaround for PKI Bug 281380?","answer":"PKI (Bug ID 281380): No workaround is documented in the release notes.","needs_review":true}`
+
+## Category
+1. `{"source_type":"release_notes_known_issues","question":"For 6200 AOS-CX 10.13.0001, for AOS-CX 6200 version 10.13.0001, which category is affected by Bug 341085?","answer":"IGMP (Bug ID 341085): This bug belongs to the IGMP category.","needs_review":true}`
+2. `{"source_type":"release_notes_known_issues","question":"For 6200 AOS-CX 10.13.0001, which category is affected by Bug 207077?","answer":"L3 Routes (Bug ID 207077): This bug belongs to the L3 Routes category.","needs_review":true}`
+3. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, which category does Bug 277504 belong to?","answer":"WebUI (Bug ID 277504): This bug belongs to the WebUI category.","needs_review":true}`
+4. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, for AOS-CX 6200 version 10.13.0001, which category does Bug 281793 belong to?","answer":"SNMP (Bug ID 281793): This bug belongs to the SNMP category.","needs_review":true}`
+5. `{"source_type":"release_notes_resolved_issues","question":"For 6200 AOS-CX 10.13.0001, for AOS-CX 6200 version 10.13.0001, which category does Bug 281380 belong to?","answer":"PKI (Bug ID 281380): This bug belongs to the PKI category.","needs_review":true}`
+
+## Version History
+_No samples collected._

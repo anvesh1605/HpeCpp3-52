@@ -1,0 +1,106 @@
+{
+  "switch": "10000",
+  "version": "10_07",
+  "total_review_rows": 64,
+  "rows_sent_to_ollama": 40,
+  "rows_repaired": 0,
+  "rows_rejected": 64,
+  "rows_unrepairable": 64,
+  "rows_by_switch": {
+    "10000": 101
+  },
+  "rows_by_version": {
+    "10000/10_07": 101
+  },
+  "rows_by_intent": {
+    "concept_explanation": 10,
+    "cli_meaning": 29,
+    "cli_syntax": 26,
+    "configuration_procedure": 2,
+    "show_command_meaning": 12,
+    "show_command_syntax": 15,
+    "snmp_mib_info": 6,
+    "troubleshooting": 1
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "markdown_repair_failed": 25,
+    "markdown_section_not_matched": 24,
+    "meaning_is_only_syntax": 6,
+    "same_input_text_different_target_value": 9
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the bfd enable command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "bfd enable",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the clear bfd statistics command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "clear bfd | statistics | [session | <ID>]",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the ip ospf bfd command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "ip ospf | bfd",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the neighbor fall-over bfd command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "neighbor | {<IP-ADDRESS>|<PEER-GROUP-NAME>} | | | | fall-over | | bfd",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the show bfd command?",
+      "intent": "show_command_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "show bfd | [session | <ID>] | [all-vrfs | | vrf | <NAME>] | [vsx-peer]",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the show bfd interface command?",
+      "intent": "show_command_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "show bfd interface | | <NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the erps ring <ringid> <port0 port1> interface command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "erps ring <ringid>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the erps ring <ringid> description command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "erps ring | <ringid>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the erps ring <ringid> guard-interval command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "erps ring | <ringid>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 10000 AOS-CX 10.07, what is the syntax of the erps ring <ringid> instance <id> control-vlan command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "erps | ring <ringid>",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}

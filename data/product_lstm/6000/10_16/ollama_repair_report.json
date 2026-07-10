@@ -1,0 +1,110 @@
+{
+  "switch": "6000",
+  "version": "10_16",
+  "total_review_rows": 94,
+  "rows_sent_to_ollama": 80,
+  "rows_repaired": 0,
+  "rows_rejected": 94,
+  "rows_unrepairable": 94,
+  "rows_by_switch": {
+    "6000": 224
+  },
+  "rows_by_version": {
+    "6000/10_16": 224
+  },
+  "rows_by_intent": {
+    "concept_explanation": 43,
+    "show_command_syntax": 39,
+    "cli_syntax": 48,
+    "cli_meaning": 36,
+    "show_command_meaning": 9,
+    "event_log_meaning": 20,
+    "configuration_procedure": 16,
+    "product_limitation": 5,
+    "snmp_mib_info": 6,
+    "product_generic": 2
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "generic_targets_moved_to_review": 1,
+    "long_target_rows_moved_to_review": 10,
+    "markdown_repair_failed": 41,
+    "markdown_section_not_matched": 14,
+    "meaning_is_only_syntax": 8,
+    "same_input_text_different_target_value": 20
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what does the access-list mac <ACL-NAME> command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no access-list mac <ACL-NAME>.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the access-list mac <ACL-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no access-list mac <ACL-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the aaa authentication port-access captive-portal-profile <PROFILE-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no aaa authentication port-access captive-portal-profile <PROFILE-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the no routing command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no routing",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the apply copp-policy command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no apply copp-policy <NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the IPv6 helper-address unicast <UNICAST-IPv6-ADDR> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no IPv6 helper-address unicast <UNICAST-IPv6-ADDR>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the ip icmp redirect command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip icmp redirect",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the ip icmp unreachable command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip icmp unreachable",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the ip igmp querier command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip igmp querier",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.16, what is the syntax of the no ip igmp command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip igmp",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}

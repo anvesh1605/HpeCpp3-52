@@ -1,0 +1,111 @@
+{
+  "switch": "6300_6400",
+  "version": "10_13",
+  "total_review_rows": 164,
+  "rows_sent_to_ollama": 113,
+  "rows_repaired": 0,
+  "rows_rejected": 164,
+  "rows_unrepairable": 164,
+  "rows_by_switch": {
+    "6300_6400": 343
+  },
+  "rows_by_version": {
+    "6300_6400/10_13": 343
+  },
+  "rows_by_intent": {
+    "concept_explanation": 92,
+    "cli_meaning": 54,
+    "cli_syntax": 72,
+    "show_command_syntax": 40,
+    "show_command_meaning": 8,
+    "event_log_meaning": 39,
+    "configuration_procedure": 26,
+    "troubleshooting": 2,
+    "product_limitation": 1,
+    "product_generic": 7,
+    "snmp_mib_info": 2
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "generic_targets_moved_to_review": 1,
+    "long_target_rows_moved_to_review": 12,
+    "markdown_repair_failed": 68,
+    "markdown_section_not_matched": 51,
+    "meaning_is_only_syntax": 16,
+    "same_input_text_different_target_value": 16
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what does the show track command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show track brief show vrrp shutdown timers advertise track (VRRP group) track (VRRP virtual router) track by version vrrp vrrp dual-active-forwarding.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what does the show ip pim dfe command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show ip pim dfe.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what does the show ip pim interface command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show ip pim interface.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what is the syntax of the no ip pim-bidir command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip pim-bidir",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what is the syntax of the aaa authentication port-access captive-portal-profile <PROFILE-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no aaa authentication port-access captive-portal-profile <PROFILE-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what does the apply policy <POLICY-NAME> routed-in command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no apply policy <POLICY-NAME> routed-in.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what is the syntax of the apply policy <POLICY-NAME> routed-in command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no apply policy <POLICY-NAME> routed-in",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what is the syntax of the IPv6 helper-address unicast <UNICAST-IPv6-ADDR> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no IPv6 helper-address unicast <UNICAST-IPv6-ADDR>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what is the syntax of the vlan <ID> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no vlan <ID>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6300_6400 AOS-CX 10.13, what does the vlan <ID-RANGE> command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "vlan <ID-RANGE> no vlan <ID-RANGE>.",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}

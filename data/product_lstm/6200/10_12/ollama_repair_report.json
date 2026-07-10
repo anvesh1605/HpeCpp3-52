@@ -1,0 +1,110 @@
+{
+  "switch": "6200",
+  "version": "10_12",
+  "total_review_rows": 119,
+  "rows_sent_to_ollama": 92,
+  "rows_repaired": 0,
+  "rows_rejected": 119,
+  "rows_unrepairable": 119,
+  "rows_by_switch": {
+    "6200": 228
+  },
+  "rows_by_version": {
+    "6200/10_12": 228
+  },
+  "rows_by_intent": {
+    "concept_explanation": 46,
+    "show_command_syntax": 37,
+    "cli_syntax": 48,
+    "cli_meaning": 36,
+    "show_command_meaning": 7,
+    "event_log_meaning": 25,
+    "configuration_procedure": 14,
+    "snmp_mib_info": 11,
+    "product_generic": 3,
+    "product_limitation": 1
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "generic_targets_moved_to_review": 1,
+    "long_target_rows_moved_to_review": 7,
+    "markdown_repair_failed": 54,
+    "markdown_section_not_matched": 27,
+    "meaning_is_only_syntax": 4,
+    "same_input_text_different_target_value": 26
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what is VLAN: 1?",
+      "intent": "concept_explanation",
+      "review_reason": "long_target_rows_moved_to_review",
+      "target_value": "40 deny any any any | | Hit-counts: | enabled | | | | --- | ----------- | ------- | --- | --- | AddinganACEtoanexistingMACACL: | switch(config)# | access-list | mac | MY_MAC_ACL | | | ---------------------- | ----------- | ----------- | ------------------ | ------ | | switch(config-acl-ip)# | | 35 permit | any aabb.cc11.1234 | 0xffee | | switch(config-acl-ip)# | | exit | | | | switch(config)# | do show | access-list | | | | Type | Name | | | | | Sequence | Comment | | | | Action EtherType | | Source MAC | Address | | | | --- | ----------- | ----------- | --- | --- | | | Destination | MAC Address | | | | | Additional | Parameters | | | ------------------------------------------------------------------------------- | MAC | MY_MAC_ACL | | | | | --- | ---------- | --- | --- | --- | 10 permit ipv6 1122.3344.5566/ffff.ffff.0000 any 20 permit any aaaa.bbbb.cccc 1111.2222.3333 | | QoS Priority | Code Point: | 4 | | | --- | ------------ | ----------- | --- | --- | 30 permit appletalk any any VLAN: 1 35 permit 0xffee any aabb.cc11.1234 40 deny any any any | | Hit-counts: | enabled | | | | --- | ----------- | ------- | --- | --- | ReplacinganACEinanexistingMACACL: switch(config)# | | access-list | mac | MY_MAC_ACL | | | ---------------------- | ----------- | ----------- | ------------------ | ------ | | switch(config-acl-ip)# | | 35 permit | any aabb.cc11.1234 | 0xeeee | | switch(config-acl-ip)# | | exit | | | | switch(config)# | do show | access-list | | | | Type | Name | | | | | Sequence | Comment | | | | Action EtherType | | Source MAC | Address | | | | --- | ----------- | ----------- | --- | --- | | | Destination | MAC Address | | | | | Additional | Parameters | | | ------------------------------------------------------------------------------- | MAC | MY_MAC_ACL | | | | | --- | ---------- | --- | --- | --- | 10 permit ipv6 1122.3344.5566/ffff.ffff.0000 AOS-CX10.12ACLsandClassifierPoliciesGuide| (6200SwitchSeries).",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what does the show ubt command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show ubt information show ubt state show ubt statistics show ubt users uac-keepalive-interval ubt ubt-client-vlan ubt mode vlan-extend wol-enable vlan.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what is the syntax of the aaa authentication port-access captive-portal-profile <PROFILE-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no aaa authentication port-access captive-portal-profile <PROFILE-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what does the vlan command do?",
+      "intent": "cli_meaning",
+      "review_reason": "long_target_rows_moved_to_review",
+      "target_value": "Thefollowingmatchcriteriaisnotsupported.Ifthismatchcriteriaisattemptedtobeconfigured,anerror messagewillbedisplayedandtheactionwillnotbecompleted. | PCP on | MAC classes | | | | | | | ------ | ----------- | --- | --- | --- | --- | --- | apply policy (config-if, config-lag-if, config-if-vlan, config- vlan) | Context config-if, | config-lag-if: | | | | | | | ------------------ | -------------- | ------------------ | --- | --------------- | --- | --- | | apply policy | <POLICY-NAME> | {in|out|routed-in} | | [per-interface] | | | no apply policy <POLICY-NAME> {in|out|routed-in} [per-interface] | Context config-vlan: | | | | | | | | ----------------------- | ------------- | --------- | --- | --- | --- | --- | | apply policy | <POLICY-NAME> | {in|out} | | | | | | no apply policy | <POLICY-NAME> | {in|out} | | | | | | Context config-if-vlan: | | | | | | | | apply policy | <POLICY-NAME> | routed-in | | | | | | no apply policy | <POLICY-NAME> | routed-in | | | | |.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what is the syntax of the vlan <ID> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no vlan <ID>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what is the syntax of the vrf <VRF-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no vrf <VRF-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what is the syntax of the ip icmp redirect command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip icmp redirect",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what is the syntax of the ip icmp unreachable command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip icmp unreachable",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what is the syntax of the ip igmp querier command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip igmp querier",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.12, what is the syntax of the IPv6 destination-guard command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no IPv6 destination-guard",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}

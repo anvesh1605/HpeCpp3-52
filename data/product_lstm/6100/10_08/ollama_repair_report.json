@@ -1,0 +1,111 @@
+{
+  "switch": "6100",
+  "version": "10_08",
+  "total_review_rows": 67,
+  "rows_sent_to_ollama": 58,
+  "rows_repaired": 0,
+  "rows_rejected": 67,
+  "rows_unrepairable": 67,
+  "rows_by_switch": {
+    "6100": 152
+  },
+  "rows_by_version": {
+    "6100/10_08": 152
+  },
+  "rows_by_intent": {
+    "concept_explanation": 30,
+    "cli_syntax": 27,
+    "cli_meaning": 24,
+    "show_command_syntax": 28,
+    "show_command_meaning": 9,
+    "event_log_meaning": 17,
+    "configuration_procedure": 8,
+    "product_generic": 5,
+    "product_limitation": 1,
+    "snmp_mib_info": 1,
+    "troubleshooting": 1,
+    "product_caveat": 1
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "generic_targets_moved_to_review": 1,
+    "long_target_rows_moved_to_review": 15,
+    "markdown_repair_failed": 38,
+    "markdown_section_not_matched": 9,
+    "meaning_is_only_syntax": 4
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the snmp-server host <IPv4-ADDR> trap version <VERSION> [community <STRING>] command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no snmp-server host <IPv4-ADDR> trap version <VERSION> [community <STRING>] - snmp-server host <IPv4-ADDR> inform version v2c [community <STRING>] - no snmp-server host <IPv4-ADDR> inform version v2c [community <STRING>]",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the snmp-server host <IPv4-ADDR> inform version v2c [community <STRING>] command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no snmp-server host <IPv4-ADDR> inform version v2c [community <STRING>]",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the no shutdown command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no shutdown",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the vsx-sync command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no vsx-sync",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what does the https-server vrf <VRF-NAME> command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no https-server vrf <VRF-NAME>.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the https-server vrf <VRF-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no https-server vrf <VRF-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the ip icmp redirect command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip icmp redirect",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the ip icmp unreachable command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip icmp unreachable",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the ip igmp querier command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip igmp querier",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6100 AOS-CX 10.08, what is the syntax of the no ip igmp command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip igmp",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}

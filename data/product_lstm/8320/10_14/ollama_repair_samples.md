@@ -1,0 +1,26 @@
+# Ollama Repair Samples
+
+## Report
+
+- total_review_rows: 130
+- rows_sent_to_ollama: 65
+- rows_repaired: 0
+- rows_rejected: 130
+- rows_unrepairable: 130
+- rows_fixed_deterministically: 0
+
+## Repaired Samples
+
+
+## Rejected Samples
+
+- {"input_text": "For 8320 AOS-CX 10.14, what does the show ip ospf statistics command do?", "intent": "show_command_meaning", "review_reason": "meaning_is_only_syntax", "target_value": "show ip ospf statistics interface area clear ipv6 ospfv3 neighbors clear ipv6 ospfv3 statistics redistribute reference-bandwidth retransmit-interval router-id show ipv6 ospfv3 show ipv6 ospfv3 border-routers show ipv6 ospfv3 interface show ipv6 ospfv3 neighbors show ipv6 ospfv3 routes show ipv6 ospfv3 statistics.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what does the VRF : default command do?", "intent": "cli_meaning", "review_reason": "long_target_rows_moved_to_review", "target_value": "| BGP Neighbor | 10.1.1.2 | | (Internal) | | | | | | | | | ------------------- | ---------- | ---- | ------------- | ----- | --- | ----------- | ---------------- | ---------- | ---------- | ---------- | | Description | | |: | | | | | | | | | Peer-group | | |: | | | | | | | | | Remote | Router | Id |: 10.1.1.2 | | | | Local Router | | Id |: 10.1.1.1 | | Remote | AS | |: 1 | | | | Local AS | | |: 1 | | Remote | Port | |: 179 | | | | Local Port | | |: 56008 | | State | | |: Established | | | | Admin Status | | |: Up | | Conn. Established | | |: 1 | | | | Conn. Dropped | | |: 0 | | Passive | | |: No | | | | Update-Source | | |: | | Cfg. Hold | Time | |: 180 | | | | Cfg. Keep | Alive | |: 60 | | Neg. Hold | Time | |: 180 | | | | Neg. Keep | Alive | |: 60 | | Up/Down | Time | |: 00m:01w:03d | | | | Alt. Local-AS | | |: 0 | | Local-AS | Prepend | |: No | | | | | | | | | BFD | | |: Disabled | | | | | | | | | Password | | |: | | | | | | | | | Last Err | Sent | |: No | Error | | | | | | | | Last SubErr | | Sent |: No | Error | | | | | | | | Last Err | Rcvd | |: No | Error | | | | | | | | Last SubErr | | Rcvd |: No | Error | | | | | | | | Graceful-Restart | | |: Enabled | | | | Gr. Restart | | Time |: 120 | | Gr. Stalepath | | Time |: 150 | | | | Remove | Private-AS | |: No | | TTL | | |: 255 | | | | Local Cluster-ID | | |: | | Weight | | |: 0 | | | | Fall-over | | |: No | | Message | statistics | | | Sent | | Rcvd | | | | | | ------------------- | | | | ----- | | ----- | | | | | | Open | | | | | 1 | 1 | | | | | | Notification | | | | | 0 | 0 | | | | | | Updates | | | | | 3 | 2 | | | | | | Keepalives | | | | 17995 | | 18009 | | | | | | Route Refresh | | | | | 0 | 0 | | | | | | Total | | | | 17999 | | 18012 | | | | | | Capability | | | | | | Advertised | | | Received | | | ----------- | | | | | | ----------- | | | ---------- | | | Route Refresh | | | | | | Yes | | | Yes | | | Graceful | Restart | | | | | Yes | | | Yes | | | Four Octet | ASN | | | | | Yes | | | Yes | | AOS-CX10.14.1000Command-LineInterfaceGuide|(8320,8325SwitchSeries) 325.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what does the vlan command do?", "intent": "cli_meaning", "review_reason": "meaning_is_only_syntax", "target_value": "vlan <ID> no vlan <ID>.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what does the vlan <ID-RANGE> command do?", "intent": "cli_meaning", "review_reason": "meaning_is_only_syntax", "target_value": "vlan <ID-RANGE> no vlan <ID-RANGE>.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what does the ip unnumbered <ifname> command do?", "intent": "cli_meaning", "review_reason": "meaning_is_only_syntax", "target_value": "no ip unnumbered <ifname>.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what does the aaa authentication limit-login-attempts <ATTEMPTS> lockout-time <LOCKOUT-TIME> command do?", "intent": "cli_meaning", "review_reason": "meaning_is_only_syntax", "target_value": "no aaa authentication limit-login-attempts <ATTEMPTS> lockout-time <LOCKOUT-TIME>.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what is the syntax of the ssh password-authentication command?", "intent": "cli_syntax", "review_reason": "markdown_repair_failed", "target_value": "The syntax of the ssh password-authentication command is: - ssh password-authentication - no ssh password-authentication.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what does the ssh public-key-authentication command do?", "intent": "cli_meaning", "review_reason": "generic_targets_moved_to_review", "target_value": "ssh public-key-authentication no ssh public-key-authentication.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what is the syntax of the ssh public-key-authentication command?", "intent": "cli_syntax", "review_reason": "markdown_repair_failed", "target_value": "The syntax of the ssh public-key-authentication command is: - ssh public-key-authentication - no ssh public-key-authentication.", "reason": "ollama_invalid_json"}
+- {"input_text": "For 8320 AOS-CX 10.14, what does the show mirror command do?", "intent": "show_command_meaning", "review_reason": "meaning_is_only_syntax", "target_value": "show mirror [<SESSION-ID>] [vsx-peer].", "reason": "ollama_invalid_json"}

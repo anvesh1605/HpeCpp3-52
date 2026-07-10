@@ -1,0 +1,41 @@
+{
+  "input_rows_scanned": 4638,
+  "switch_rows_selected": 4638,
+  "output_rows_written": 6142,
+  "question_variants_created": 2972,
+  "rows_marked_needs_review": 4638,
+  "duplicates_removed": 1468,
+  "json_errors_fixed": 0,
+  "bug_ids_preserved_count": 3906,
+  "event_ids_preserved_count": 0,
+  "version_numbers_preserved_count": 6142,
+  "categories_preserved_count": 3906,
+  "rows_with_switch_version_in_question": 4638,
+  "rows_with_switch_version_in_question_pct": 75.51,
+  "source_type_counts_before": {
+    "release_notes_caveats": 428,
+    "release_notes_certifications": 110,
+    "release_notes_compatibility": 500,
+    "release_notes_downgrade_restore": 108,
+    "release_notes_known_issues": 410,
+    "release_notes_resolved_issues": 2042,
+    "release_notes_supported_products": 330,
+    "release_notes_upgrade_procedure": 108,
+    "release_notes_version_history": 602
+  },
+  "source_type_counts_after": {
+    "release_notes_caveats": 428,
+    "release_notes_certifications": 110,
+    "release_notes_compatibility": 500,
+    "release_notes_downgrade_restore": 108,
+    "release_notes_known_issues": 532,
+    "release_notes_resolved_issues": 3374,
+    "release_notes_supported_products": 330,
+    "release_notes_upgrade_procedure": 108,
+    "release_notes_version_history": 652
+  },
+  "data_family_counts_after": {
+    "release_notes_bug": 3906,
+    "release_notes_generic": 2236
+  }
+}

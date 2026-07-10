@@ -1,0 +1,112 @@
+{
+  "switch": "6000",
+  "version": "10_18",
+  "total_review_rows": 149,
+  "rows_sent_to_ollama": 141,
+  "rows_repaired": 0,
+  "rows_rejected": 149,
+  "rows_unrepairable": 148,
+  "rows_by_switch": {
+    "6000": 444
+  },
+  "rows_by_version": {
+    "6000/10_18": 444
+  },
+  "rows_by_intent": {
+    "cli_meaning": 111,
+    "cli_syntax": 150,
+    "show_command_syntax": 90,
+    "show_command_meaning": 41,
+    "event_log_meaning": 21,
+    "configuration_procedure": 11,
+    "concept_explanation": 11,
+    "product_requirement": 2,
+    "product_generic": 1,
+    "troubleshooting": 1,
+    "snmp_mib_info": 5
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "generic_targets_moved_to_review": 4,
+    "long_target_rows_moved_to_review": 7,
+    "markdown_repair_failed": 43,
+    "markdown_section_not_matched": 7,
+    "meaning_is_only_syntax": 67,
+    "no_form_syntax_rows_moved_to_review": 1,
+    "same_input_text_different_target_value": 20
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what does the show access-list command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show access-list control-plane show access-list hitcounts show access-list hitcounts control-plane show access-list secure-update show capacities show capacities-status.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what does the access-list mac <ACL-NAME> command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no access-list mac <ACL-NAME>.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what is the syntax of the access-list mac <ACL-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no access-list mac <ACL-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what does the show arp command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show arp inspection interface show arp inspection statistics show arp inspection vlan show arp state show arp summary show arp timeout show arp vrf show ipv6 neighbors show ipv6 neighbors state show tech arp-security.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what does the show checkpoint <CHECKPOINT-NAME> command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show checkpoint <CHECKPOINT-NAME> hash show checkpoint post-configuration show checkpoint show checkpoint date show running-config hash show startup-config hash write memory.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what does the apply policy <POLICY-NAME> {in} [per-interface] command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no apply policy <POLICY-NAME> {in} [per-interface] Context config-vlan:.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what is the syntax of the apply policy <POLICY-NAME> {in} [per-interface] command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no apply policy <POLICY-NAME> {in} [per-interface] - apply policy <POLICY-NAME> in - no apply policy <POLICY-NAME> in",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what does the apply policy <POLICY-NAME> in command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no apply policy <POLICY-NAME> in.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what is the syntax of the apply policy <POLICY-NAME> in command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no apply policy <POLICY-NAME> in",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6000 AOS-CX 10.18, what does the show ip dns command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "Show FQDN Resolver Show IP DNS FQDN Resolver Detail Show IP DNS FQDN Resolver Refresh Interval.",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}

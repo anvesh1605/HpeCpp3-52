@@ -1,0 +1,136 @@
+[
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "Client IP Tracker",
+    "description": "User-Based Tunneling (UBT) and DHCPv4/v6 snooping are mutually exclusive features in AOS-CX. When these two features are configured simultaneously, binding entries for the end clients will not be populated in the binding database. IP source-lockdown feature permits traffic from the clients to pass through the switch only if the client's MAC and IP addresses are present in the binding database. IP source lockdown can be enabled at both port and VLAN levels. The port-level configuration will be overridden by the VLAN-level configuration only when the port is a member of a single VLAN. If the port is a member of multiple VLANs, then the VLAN-level configuration for IP source lockdown will not be applied. Client IP tracker can track the IP address until the IP source lockdown is applied. Once the lockdown is in effect, the IP address will only be tracked if there is a valid entry in the binding table. However, if an IP address is already being tracked, it will remain active through probes, as probes utilize ARP packets, which are Layer 2 (L2) packets rather than Layer 3 (L3) packets."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "Central",
+    "description": "When a switch is able to connect to Aruba Central but is not registered in the Aruba Central inventory or does not have a proper license, the switch will get disconnected. If the Aruba Central feature is enabled using this command, the switch will then reconnect back to Aruba Central and will get disconnected again. This connect/disconnect process will continue until the switch is properly registered in Aruba Central. To avoid this unnecessary reconnection cycle, best practice is to disable Aruba Central until the switch is registered in Aruba Central, or a license is obtained for that device."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "Hot Patch",
+    "description": "When a hot-patch file download is triggered using the switch WebUI, log messages can incorrectly state that the file is added to the database with a missing status. This is a temporary state, and will correctly change to Not applied once the download is completed."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "SNMP",
+    "description": "When SNMP is enabled via the switch CLI, it can take between 1-2 minutes for the SNMP daemon to be ready to respond to requests. If a local or external SNMP MIB walk is performed in the interval between when SNMP is first enabled and the SNMP daemon is ready, the MIB walk action will return an error."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "Certificates",
+    "description": "When a switch uses a certificate with a legacy certificate name that is not supported in 10.12 because it contains disallowed characters, the information will migrate properly in the upgrade, but that certificate can no longer be edited. For new certificate names, only alphanumeric characters, dots, dashes, and underscores are allowed."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "Classifiers",
+    "description": "For Classifier policy modifications to be secure, Aruba strongly encourages modifications be done as a three-step process: Bring down the port, modify, and bring the port back up."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "Classifiers",
+    "description": "Policies containing both MAC and IPv6 classes are not allowed."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "CMF",
+    "description": "No other checkpoint besides \"startup-configuration\" gets migrated during the upgrade process."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "DHCP Server, DHCP Relay, and DHCP Snooping",
+    "description": "DHCP Relay and DHCP Snooping can co-exist on the same switch. DHCP Snooping and DHCP Server cannot co-exist on the same switch. DHCP Snooping, DHCP Relay, and DHCP Server together cannot co-exist on the same switch."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "IP-SLA",
+    "description": "Reserved ports or ports used by other applications/services within the system are not recommended to be used for other services. When two services use the same port there is chance of unexpected behaviors from these services. Best practice is to use unique port for each service across system."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "RADIUS",
+    "description": "Authorization by means of HPE VSAs is not supported."
+  },
+  {
+    "source_type": "release_notes_caveats",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Feature Caveats",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\caveats.md",
+    "feature": "REST",
+    "description": "REST supports the 'admin' and 'operator' roles but does not work with TACACS+ command authorization."
+  },
+  {
+    "source_type": "release_notes_known_issues",
+    "switch": "6100",
+    "version": "10_13",
+    "sub_version": "1110",
+    "section": "Known Issues",
+    "source_file": "E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_13\\1110\\issues.md",
+    "category": "IGMP",
+    "bug_id": "341085",
+    "description": "Symptom: Multicast traffic is being blocked after upgrading from AOS-CX 10.12.0006 or earlier versions of AOS-CX. Scenario: If the switch has a control plane ACL configured AND has IGMP or PIM configured on a pre-10.12.1000 build and upgrades to 10.12.1000 or a later release, the implicit deny in the control plane ACL will block multicast traffic thus inhibiting functionality of those features. Workaround: Manually add an ACE to the control plane ACL to explicitly permit multicast traffic.",
+    "symptom": "Multicast traffic is being blocked after upgrading from AOS-CX 10.12.0006 or earlier versions of AOS-CX.",
+    "scenario": "If the switch has a control plane ACL configured AND has IGMP or PIM configured on a pre-10.12.1000 build and upgrades to 10.12.1000 or a later release, the implicit deny in the control plane ACL will block multicast traffic thus inhibiting functionality of those features.",
+    "workaround": "Manually add an ACE to the control plane ACL to explicitly permit multicast traffic."
+  }
+]

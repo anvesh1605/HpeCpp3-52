@@ -1,0 +1,104 @@
+{
+  "switch": "6200",
+  "version": "10_17_1000",
+  "total_review_rows": 119,
+  "rows_sent_to_ollama": 118,
+  "rows_repaired": 0,
+  "rows_rejected": 119,
+  "rows_unrepairable": 119,
+  "rows_by_switch": {
+    "6200": 419
+  },
+  "rows_by_version": {
+    "6200/10_17_1000": 419
+  },
+  "rows_by_intent": {
+    "concept_explanation": 11,
+    "cli_meaning": 116,
+    "cli_syntax": 166,
+    "show_command_syntax": 98,
+    "show_command_meaning": 28
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "generic_targets_moved_to_review": 1,
+    "long_target_rows_moved_to_review": 7,
+    "markdown_repair_failed": 8,
+    "markdown_section_not_matched": 1,
+    "meaning_is_only_syntax": 102
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what limitation is documented for Restrictions?",
+      "intent": "product_limitation",
+      "review_reason": "long_target_rows_moved_to_review",
+      "target_value": "For Restrictions, the guide documents the following restrictions, notes, or considerations: AAA Procedure 1. During ISSU new client authentication will occur on other members except the VSF conductor that is rebooting. Clients will not be able to access to the network until ISSU is complete. 2. Session timeout/inactivity timeout applied to clients will be delayed. Clients will remain longer than the configured timer. PIM with MSDP Currently, PIM is not supported in ISSU on RP routers, therefore traffic loss is expected during ISSU on RP routers where PIM and MSDP are enabled. Show tech 57 F e a t u r e s t h a t d o n ' t s u p p o r t u n i n t e r r u p t e d o p e r a t i o... Dynautz ISSU All Dynamic Authorization requests will be rejected with NAK during ISSU operation. Captive portal workflow will be affected due to NAK received for Dynauth requests during ISSU. BFD ISSU It's important to note that this mechanism is only recommended for sessions that have a failure detection time higher than 6 seconds (e.g. Tx=Rx=3000 and Detect Multiplier=2, or Tx=Rx=2000 and Detect Multiplier=3).",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what does the type <TYPE> command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no type <TYPE>.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what does the show issu command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show vsf show vsf detail show vsf link show vsf link detail show vsf link error-detail show vsf link error-detail member show vsf member show vsf split-detection show vsf topology vsf egress-shape vsf force-auto-join vsf start-auto-stacking vsf split-detect mgmt vsf secondary-member vsf renumber-to vsf member vsf member reboot.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what does the vsf member <MEMBER-ID> command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no vsf member <MEMBER-ID>.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what does the show access-list command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show access-list control-plane show access-list hitcounts show access-list hitcounts control-plane show access-list secure-update show capacities show capacities-status show object-group.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what does the access-list mac <ACL-NAME> command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no access-list mac <ACL-NAME>.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what is the syntax of the access-list mac <ACL-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no access-list mac <ACL-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what does the show capacities command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show capacities-status show object-group.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what does the show resources command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show resources.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 6200 AOS-CX 10.17.1000, what does the show arp command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show arp inspection interface show arp inspection statistics show arp inspection vlan show arp state show arp summary show arp timeout show arp vrf show ipv6 neighbors show ipv6 neighbors state show tech arp-security.",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "input_files": 15,
+  "sections_processed": {
+    "Sections Index": 1,
+    "Overview": 1,
+    "Feature Caveats": 1,
+    "Compatibility and Interoperability": 1,
+    "Enhancements": 1,
+    "Resolved Issues": 1,
+    "Important Information": 1,
+    "Industry and Government Certifications": 1,
+    "Known Issues": 1,
+    "License Written Offer": 1,
+    "Manual Configuration Restore for Software Downgrade": 1,
+    "Performing the Software Upgrade": 1,
+    "Products Supported": 1,
+    "Upgrade Information": 1,
+    "Version History": 1
+  },
+  "rows_extracted_by_section": {
+    "Feature Caveats": 11,
+    "Compatibility and Interoperability": 5,
+    "Industry and Government Certifications": 1,
+    "Known Issues": 1,
+    "License Written Offer": 1,
+    "Manual Configuration Restore for Software Downgrade": 1,
+    "Performing the Software Upgrade": 1,
+    "Products Supported": 28,
+    "Version History": 7
+  },
+  "qa_generated_by_section": {
+    "Feature Caveats": 11,
+    "Compatibility and Interoperability": 10,
+    "Industry and Government Certifications": 2,
+    "Known Issues": 5,
+    "License Written Offer": 0,
+    "Manual Configuration Restore for Software Downgrade": 2,
+    "Performing the Software Upgrade": 2,
+    "Products Supported": 84,
+    "Version History": 14
+  },
+  "qa_kept_by_section": {
+    "Feature Caveats": 11,
+    "Compatibility and Interoperability": 10,
+    "Industry and Government Certifications": 2,
+    "Known Issues": 5,
+    "Manual Configuration Restore for Software Downgrade": 2,
+    "Performing the Software Upgrade": 2,
+    "Products Supported": 84,
+    "Version History": 14
+  },
+  "qa_dropped_by_section": {},
+  "drop_reasons": {
+    "product_missing_required_field": 10
+  },
+  "unique_bug_ids": [
+    "341085"
+  ],
+  "fake_bug_ids_removed": 0,
+  "duplicates_removed": 0,
+  "double_period_answers": 0,
+  "bad_markup_remaining": 0,
+  "typo_cleanup_applied": 0,
+  "procedure_noise_rows_dropped": 0,
+  "section_counts": {
+    "Feature Caveats": 11,
+    "Compatibility and Interoperability": 5,
+    "Industry and Government Certifications": 1,
+    "Known Issues": 1,
+    "License Written Offer": 1,
+    "Manual Configuration Restore for Software Downgrade": 1,
+    "Performing the Software Upgrade": 1,
+    "Products Supported": 28,
+    "Version History": 7
+  },
+  "qa_counts_by_source_type": {
+    "release_notes_caveats": 11,
+    "release_notes_compatibility": 10,
+    "release_notes_certifications": 2,
+    "release_notes_known_issues": 5,
+    "release_notes_downgrade_restore": 2,
+    "release_notes_upgrade_procedure": 2,
+    "release_notes_supported_products": 84,
+    "release_notes_version_history": 14
+  },
+  "qa_counts_by_source_type_before": {
+    "release_notes_caveats": 11,
+    "release_notes_compatibility": 10,
+    "release_notes_certifications": 2,
+    "release_notes_known_issues": 5,
+    "release_notes_downgrade_restore": 2,
+    "release_notes_upgrade_procedure": 2,
+    "release_notes_supported_products": 84,
+    "release_notes_version_history": 14
+  },
+  "qa_counts_by_source_type_after": {
+    "release_notes_caveats": 11,
+    "release_notes_compatibility": 10,
+    "release_notes_certifications": 2,
+    "release_notes_known_issues": 5,
+    "release_notes_downgrade_restore": 2,
+    "release_notes_upgrade_procedure": 2,
+    "release_notes_supported_products": 84,
+    "release_notes_version_history": 14
+  },
+  "category_case_normalized": 0,
+  "command_list_cleanup_applied": 0,
+  "malformed_logged_out_count": 0,
+  "malformed_repeated_letters_count": 0,
+  "broken_mobility_conductor_count": 0,
+  "broken_tpm_quote_count": 0,
+  "missing_symptom_scenario_punctuation_count": 0,
+  "final_cleanup_applied_count": 0,
+  "total_rows_before_dedup": 130,
+  "total_rows_after_dedup": 130,
+  "global_exact_qa_duplicates_removed": 0,
+  "generic_rows_before_cap": 0,
+  "generic_rows_after_cap": 0,
+  "generic_rows_removed_by_cap": 0,
+  "question_grounding_enabled": true,
+  "rows_with_switch_version_in_question": 130,
+  "question_grounding_ratio": 1.0,
+  "warnings": [
+    "No records extracted from E:\\52\\test4_html\\markitdown_Raw_Data\\Aruba_6100_HTML_Content\\10_14\\1061\\fixes.md"
+  ],
+  "output_paths": {
+    "structured_records": "E:\\52\\test4_html\\project\\data\\processed_md\\6100\\10_14\\1061\\structured_records.json",
+    "train_chat": "E:\\52\\test4_html\\project\\data\\processed_md\\6100\\10_14\\1061\\train_chat.jsonl",
+    "quality_report": "E:\\52\\test4_html\\project\\data\\processed_md\\6100\\10_14\\1061\\quality_report.json",
+    "final_jsonl": "E:\\52\\test4_html\\project\\final_json\\6100\\10_14\\1061\\train_chat.jsonl"
+  },
+  "structured_records_extracted": 56,
+  "qa_rows_generated": 130,
+  "qa_rows_kept": 130
+}

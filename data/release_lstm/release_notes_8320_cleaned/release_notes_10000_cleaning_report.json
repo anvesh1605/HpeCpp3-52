@@ -1,0 +1,29 @@
+{
+  "input_rows_scanned": 2364,
+  "switch_rows_selected": 2364,
+  "output_rows_written": 3640,
+  "question_variants_created": 2112,
+  "rows_marked_needs_review": 2364,
+  "duplicates_removed": 836,
+  "json_errors_fixed": 0,
+  "bug_ids_preserved_count": 3456,
+  "event_ids_preserved_count": 0,
+  "version_numbers_preserved_count": 3640,
+  "categories_preserved_count": 3456,
+  "rows_with_switch_version_in_question": 0,
+  "rows_with_switch_version_in_question_pct": 0.0,
+  "source_type_counts_before": {
+    "release_notes_caveats": 184,
+    "release_notes_known_issues": 339,
+    "release_notes_resolved_issues": 1841
+  },
+  "source_type_counts_after": {
+    "release_notes_caveats": 184,
+    "release_notes_known_issues": 419,
+    "release_notes_resolved_issues": 3037
+  },
+  "data_family_counts_after": {
+    "release_notes_bug": 3456,
+    "release_notes_generic": 184
+  }
+}

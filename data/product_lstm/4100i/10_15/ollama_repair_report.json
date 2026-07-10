@@ -1,0 +1,110 @@
+{
+  "switch": "4100i",
+  "version": "10_15",
+  "total_review_rows": 93,
+  "rows_sent_to_ollama": 78,
+  "rows_repaired": 0,
+  "rows_rejected": 93,
+  "rows_unrepairable": 93,
+  "rows_by_switch": {
+    "4100i": 196
+  },
+  "rows_by_version": {
+    "4100i/10_15": 196
+  },
+  "rows_by_intent": {
+    "concept_explanation": 41,
+    "cli_syntax": 51,
+    "cli_meaning": 34,
+    "show_command_syntax": 36,
+    "show_command_meaning": 7,
+    "configuration_procedure": 14,
+    "product_limitation": 5,
+    "snmp_mib_info": 5,
+    "product_generic": 2,
+    "troubleshooting": 1
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "generic_targets_moved_to_review": 1,
+    "long_target_rows_moved_to_review": 12,
+    "markdown_repair_failed": 38,
+    "markdown_section_not_matched": 15,
+    "meaning_is_only_syntax": 7,
+    "same_input_text_different_target_value": 20
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what does the access-list mac <ACL-NAME> command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "no access-list mac <ACL-NAME>.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what is the syntax of the access-list mac <ACL-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no access-list mac <ACL-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what is the syntax of the aaa authentication port-access captive-portal-profile <PROFILE-NAME> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no aaa authentication port-access captive-portal-profile <PROFILE-NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what is the syntax of the apply copp-policy command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no apply copp-policy <NAME>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what does the ip dhcp command do?",
+      "intent": "cli_meaning",
+      "review_reason": "long_target_rows_moved_to_review",
+      "target_value": "| mac-group grp01 | | | | | | --------------- | -------- | ----------------- | --- | --- | | seq 10 ignore | mac | b2:c3:44:12:78:11 | | | | seq 30 ignore | mac-mask | 71:14:89:f3/32 | | | ``` Removingtherulethatmatchesthesequencenumber25fromtheMACgroupnamedgrp01. | switch(config)# | mac-group | grp01 | | | | ------------------------- | --------- | --------- | ------ | --- | | switch(config-mac-group)# | | no ignore | seq 25 | | Formoreinformationonfeaturesthatusethiscommand,refertotheFundamentalsGuideforyourswitch model. Command History | Release | | | Modification | | | -------------- | --- | --- | ------------ | --- | | 10.07orearlier | | | -- | | Command Information Deviceprofilecommands|347.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what is the syntax of the IPv6 helper-address unicast <UNICAST-IPv6-ADDR> command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no IPv6 helper-address unicast <UNICAST-IPv6-ADDR>",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what is the syntax of the ip icmp redirect command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip icmp redirect",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what is the syntax of the ip icmp unreachable command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip icmp unreachable",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what is the syntax of the ip igmp querier command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip igmp querier",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 4100i AOS-CX 10.15, what is the syntax of the no ip igmp command?",
+      "intent": "cli_syntax",
+      "review_reason": "markdown_repair_failed",
+      "target_value": "no ip igmp",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}

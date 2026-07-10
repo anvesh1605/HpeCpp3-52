@@ -1,0 +1,90 @@
+{
+  "switch": "8360",
+  "version": "10_07",
+  "total_review_rows": 261,
+  "rows_sent_to_ollama": 8,
+  "rows_repaired": 0,
+  "rows_rejected": 261,
+  "rows_unrepairable": 261,
+  "rows_by_switch": {
+    "8360": 463
+  },
+  "rows_by_version": {
+    "8360/10_07": 463
+  },
+  "rows_by_intent": {
+    "cli_meaning": 119,
+    "cli_syntax": 177,
+    "show_command_syntax": 88,
+    "show_command_meaning": 71,
+    "concept_explanation": 3,
+    "configuration_procedure": 3,
+    "snmp_mib_info": 1,
+    "troubleshooting": 1
+  },
+  "repair_reasons": {},
+  "remaining_review_reasons": {
+    "markdown_section_not_matched": 253,
+    "meaning_is_only_syntax": 8
+  },
+  "ollama_model_used": "qwen2.5:7b-instruct",
+  "sample_repaired_rows": [],
+  "sample_rejected_rows": [
+    {
+      "input_text": "For 8360 AOS-CX 10.07, what does the show ntp associations command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show ntp associations [vsx-peer].",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 8360 AOS-CX 10.07, what does the show ntp statistics command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show ntp statistics [vsx-peer].",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 8360 AOS-CX 10.07, what does the show snmp community command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show snmp community.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 8360 AOS-CX 10.07, what does the show snmp system command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show snmp system.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 8360 AOS-CX 10.07, what does the show snmpv3 engine-id command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show snmpv3 engine-id.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 8360 AOS-CX 10.07, what does the show snmpv3 security-level command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show snmpv3 security-level.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 8360 AOS-CX 10.07, what does the show snmpv3 users command do?",
+      "intent": "show_command_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "show snmpv3 users.",
+      "reason": "ollama_invalid_json"
+    },
+    {
+      "input_text": "For 8360 AOS-CX 10.07, what does the access-list command do?",
+      "intent": "cli_meaning",
+      "review_reason": "meaning_is_only_syntax",
+      "target_value": "access-list <ACL-NAME>.",
+      "reason": "ollama_invalid_json"
+    }
+  ]
+}
