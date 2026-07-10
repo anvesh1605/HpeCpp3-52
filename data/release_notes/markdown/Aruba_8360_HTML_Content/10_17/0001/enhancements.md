@@ -1,0 +1,144 @@
+Cookie PreferencesDo Not Sell or Share My Personal Information
+
+Close
+
+* [GreenLake](https://common.cloud.hpe.com/)
+* [My services](https://common.cloud.hpe.com/services/my-services)
+
+GreenLake Administration
+
+* [Manage workspace](https://common.cloud.hpe.com/manage-account)
+* [Manage devices](https://common.cloud.hpe.com/devices/inventory-list)
+
+HPE Resources
+
+* [HPE Support Center](https://support.hpe.com/connect/s/)
+* [HPE Developer Community](https://developer.hpe.com/)
+* [HPE Communities](https://www.hpe.com/us/en/communities.html)
+
+Legal & financial
+
+* [Privacy statement](https://www.hpe.com/us/en/legal/privacy.html)
+* [Cookies](https://www.hpe.com/us/en/legal/privacy.html#datacollection)
+* [Terms of use](https://www.hpe.com/us/en/about/legal/terms-of-use.html)
+* [Do not sell my personal info](https://www.hpe.com/us/en/privacy/personal-information.html)
+* [Financial Services](https://www.hpe.com/us/en/financing-asset-management-services.html)
+
+Close
+
+* [HPE Account Details](https://auth.hpe.com/profile)
+* [GreenLake Preferences](https://common.cloud.hpe.com/preferences-only)
+* [Visit hpe.com](https://www.hpe.com/)
+* Sign out of HPE
+
+[My HPE Account](https://www.hpe.com/us/en/my-account/overview.html)
+
+* Sign Out
+
+Close
+
+* [HPE Home](https://www.hpe.com/us/en/home.html)
+* [GreenLake](https://www.hpe.com/us/en/greenlake.html)
+* [Products and Solutions](https://www.hpe.com/us/en/products.html)
+* [Services](https://www.hpe.com/us/en/services.html)
+* [Company](https://www.hpe.com/us/en/about.html)
+* [Support](https://support.hpe.com/connect/s/)
+
+* [Dashboard](https://common.cloud.hpe.com/home)
+* [Applications](https://common.cloud.hpe.com/applications/my-apps)
+* [Devices](https://common.cloud.hpe.com/devices/inventory)
+* [Manage](https://common.cloud.hpe.com/manage-account)
+
+[**Support Center**](/connect/s/)
+
+English
+
+0 result(s) found
+
+No result found
+
+AOS-CX 8360 Release Notes
+
+Table of contents
+
+# Enhancements
+
+This section describes the enhancements introduced in this release. For more information about transceivers supported in this release, refer to the latest version of the [AOS-CX Transceiver Guide](https://arubanetworking.hpe.com/techdocs/Switches/xcvrs/PDF/AOS-S%20and%20AOS-CX%20Transceiver%20Guide.pdf).
+
+| Component | Summary |
+| --- | --- |
+| AP & switches onboarding | Provides necessary telemetry to troubleshoot APs and access switches onboarding to HPE Aruba Networking Central. |
+| CNX Packet Capture | Enables client and interface packet capture from HPE Aruba Networking Central. |
+| CX firmware upgrade | Supports CX firmware upgrade from HPE Aruba Networking Central. |
+| DHCP client‐ all vlans | Supports DHCP client on all VLANs. |
+| DODIN: NTP client | Enables modern algorithms for NTP client authentication. |
+| Flow Congestion | Reports flow congestion probability for applications. |
+| FQDN support | Enables FQDN support for port access policies. |
+| gMNI support | Support for an OpenConfig standardized YANG model for gNMI streaming telemetry. |
+| MAC Address – Container Apps | Enables MAC address for Container application to connect to underlying physical interfaces. |
+| Mirror on drop | Enables mirroring for dropped packets. |
+| Multicast : Bud node | Enables Multicast Bud node support for EVPN‐ VxLAN underlay |
+| Multicast SM underlay | Supports Multicast SM routing in underlay of VxLAN fabric. |
+| Multicast enhancements | Enables group‐based filtering, dynamic RP and increased source and VRFs. |
+| Opsramp Interop | Enables interoperability of IPFix, Syslog and REST API based telemetry with OpsRamp. |
+| Per VLAN PTP | Enables per VLAN PTP to cater to end devices on multiple VLANs. |
+| PIM BiDir‐ IPv6 | Enables Bi‐Directional PIM for IPv6 traffic. |
+| PTP BC with VSX | Supports PTP Boundary Clock on VSX peers. |
+| RPVST vport scale | Increase RPVST vport limit for Aggregation and Core platforms. |
+| Silent client Optimization | Auto generates probe file used to wake up silent clients. |
+| Traffic Inspection | Support for visibility and inspection on TLS encrypted traffic. |
+| Tunnels | Support for GRE, 6‐in‐6 and 6‐in‐4 IP tunnels with a sub‐interface as an underlay |
+| RADIUS | Increase RADIUS server and local user key length to 128 characters. |
+
+AOS-CX 10.17.0001
+
+Feedback
+
+Related Products
+
+- [HPE Aruba Networking CX 8360 Switch Series](https://support.hpe.com/connect/s/product?kmpmoid=1013035120)
+
+Recently Viewed
+
+- [AOS-CX 8360 Release Notes | Overview](?docId=sd00007738en_us&page=GUID-07A47E17-A8A9-4001-8CC3-7FB0487BFAA7_3.html)
+- [AOS-CX 8360 Release Notes | 10.17.0001](?docId=sd00007738en_us&page=GUID-F28770E8-4FC7-4D89-BCB1-2A6E2839E7E4.html)
+- [AOS-CX 8360 Release Notes | AOS-CX 10.17.xx](?docId=sd00007738en_us&page=GUID-DEA2ACE7-35CC-43DF-9068-F83EE2BC39F5.html)
+
+View more
+
+Related Products
+
+Recently Viewed
+
+**Legal Disclaimer:** Products sold prior to the November 1, 2015 separation of Hewlett-Packard Company into Hewlett Packard Enterprise Company and HP Inc. may have older product names and model numbers that differ from current models.Hewlett Packard Enterprise believes in being unconditionally inclusive. Efforts to replace noninclusive terms in our active products are ongoing.
+
+[How to buy](https://www.hpe.com/us/en/buy-parts-products.html)[Product support](https://support.hpe.com/connect/s/)[Email sales](https://www.hpe.com/us/en/contact-hpe.html)
+
+Follow HPE on
+
+Company
+
+[About HPE](https://www.hpe.com/us/en/about.html)[Accessibility](https://www.hpe.com/us/en/about/accessibility-aging.html)[Careers](https://careers.hpe.com/us/en)[Corporate responsibility](https://www.hpe.com/us/en/living-progress.html)[HPE Labs](https://www.hpe.com/us/en/hpe-labs.html)[HPE Modern Slavery Transparency Statement (PDF)](https://www.hpe.com/psnow/doc/a00005807enw?jumpid=in_pdfviewer-psnow)[Investor relations](https://investors.hpe.com/)[Leadership](https://www.hpe.com/us/en/leadership.html)[Public policy](https://www.hpe.com/us/en/living-progress/political-engagement-advocacy.html)
+
+Support
+
+[OEM Solutions](https://www.hpe.com/us/en/oem.html)[Product return and recycling](https://www.hpe.com/us/en/about/environment/product-recycling.html)[Product support](https://support.hpe.com/hpesc/public/home)[Software and drivers](https://myenterpriselicense.hpe.com/cwp-ui/auth/login)[Warranty check](https://support.hpe.com/connect/s/warrantycheck)
+
+Events and news
+
+[Events](https://www.hpe.com/us/en/events.html)[HPE Discover](https://www.hpe.com/us/en/events/discover-events.html)[Local events](https://www.hpe.com/h22166/Calendar_hpe.aspx?cc=us&lang=en)[Newsroom](https://www.hpe.com/us/en/newsroom.html)
+
+Customer resources
+
+[Contact Us](https://www.hpe.com/us/en/contact-hpe.html)[Education and training](https://education.hpe.com/us/en/training/index.html)[Email signup](https://explore.hpe.com/email-preference-center.html?language=en)[Enterprise glossary](https://www.hpe.com/us/en/what-is.html)[Financial services](https://www.hpe.com/us/en/financing-asset-management-services.html)[HPE communities](https://community.hpe.com/)[HPE customer centers](https://www.hpe.com/us/en/about/customer-centers.html)[HPE sign in](https://auth.hpe.com/)[Voice of the Customer signup](https://www.hpe.com/h41268/live/index_e.aspx?qid=29244)
+
+Partners
+
+[Alliances](https://www.hpe.com/us/en/alliance.html)[Certifications](https://certification-learning.hpe.com/TR/Index.html)[Find a partner](https://partnerconnect.hpe.com/partners)[Partner programs](https://www.hpe.com/us/en/partners/partner-ready-vantage.html)
+
+© Copyright 2026 Hewlett Packard Enterprise Development LP
+
+* [Privacy](https://www.hpe.com/us/en/legal/privacy.html)
+* [Terms of Use](https://www.hpe.com/us/en/about/legal/terms-of-use.html)
+* [Ad Choices & Cookies](https://www.hpe.com/us/en/legal/privacy.html#datacollection)
+* [Do not Sell my Personal Information](https://www.hpe.com/us/en/privacy/personal-information.html)
