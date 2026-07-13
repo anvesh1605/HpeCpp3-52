@@ -1,0 +1,29 @@
+{
+  "total_questions": 322,
+  "rows_with_gold": 322,
+  "lookup_found": 322,
+  "qwen_used": 322,
+  "qwen_validation_passed": 234,
+  "qwen_validation_failed": 88,
+  "lookup_exact_match": 1.0,
+  "lookup_token_f1": 1.0,
+  "lookup_rouge_l": 1.0,
+  "final_exact_match": 0.531055900621118,
+  "final_token_f1": 0.9373190263161308,
+  "final_rouge_l": 0.9371511565830436,
+  "answer_source_counts": {
+    "qwen_grounded": 234,
+    "lookup_fallback": 88
+  },
+  "accuracy": 0.531055900621118,
+  "final_verdict": "Qwen generates the final answer from grounded lookup text, with deterministic fallback on validation failure.",
+  "qwen_model_requested_path": "E:\\52\\Train_w\\Train\\outputs_final\\qwen25_3b_metadatactx_fullclean_1epoch_stratified",
+  "qwen_model_resolved_path": "E:\\52\\Train_w\\Train\\outputs_final\\qwen25_3b_metadatactx_fullclean_1epoch_stratified\\lora_adapters",
+  "qwen_model_kind": "adapter",
+  "qwen_model_resolution_reason": "direct adapter directory",
+  "lstm_model_path": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\best_model.pt",
+  "lookup_index_path": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\lookup_index.json",
+  "lookup_data_path": "C:\\Hpe\\Train\\outputs_4100i_gpu\\converted_4100i_lstm.jsonl",
+  "eval_path": "C:\\Hpe\\Train\\outputs_release_lstm\\qwen_answer_eval.jsonl",
+  "report_path": "C:\\Hpe\\Train\\outputs_release_lstm\\qwen_answer_report.json"
+}

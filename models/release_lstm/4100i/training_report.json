@@ -1,0 +1,251 @@
+{
+  "data_dir": "C:\\Hpe\\Train\\release_notes_4100i_cleaned",
+  "output_dir": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i",
+  "model_type": "bilstm",
+  "rows_scanned": 9454,
+  "rows_kept": 3752,
+  "split_sizes": {
+    "train": 3000,
+    "val": 376,
+    "test": 376
+  },
+  "filter_reasons": {
+    "intent not selected": 1609,
+    "empty input_text": 4093
+  },
+  "best_epoch": 1,
+  "best_val_macro_f1": 1.0,
+  "best_val_accuracy": 1.0,
+  "validation_metrics": {
+    "accuracy": 1.0,
+    "macro_precision": 1.0,
+    "macro_recall": 1.0,
+    "macro_f1": 1.0,
+    "per_class": {
+      "bug_category": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 56
+      },
+      "bug_symptom": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 120
+      },
+      "bug_scenario": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 60
+      },
+      "bug_workaround": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 58
+      },
+      "release_caveat": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 82
+      }
+    },
+    "total": 376
+  },
+  "train_metrics": {
+    "accuracy": 1.0,
+    "macro_precision": 1.0,
+    "macro_recall": 1.0,
+    "macro_f1": 1.0,
+    "per_class": {
+      "bug_category": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 450
+      },
+      "bug_symptom": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 956
+      },
+      "bug_scenario": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 481
+      },
+      "bug_workaround": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 462
+      },
+      "release_caveat": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 651
+      }
+    },
+    "total": 3000
+  },
+  "test_metrics": {
+    "accuracy": 1.0,
+    "macro_precision": 1.0,
+    "macro_recall": 1.0,
+    "macro_f1": 1.0,
+    "per_class": {
+      "bug_category": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 56
+      },
+      "bug_symptom": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 120
+      },
+      "bug_scenario": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 60
+      },
+      "bug_workaround": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 58
+      },
+      "release_caveat": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 82
+      }
+    },
+    "total": 376
+  },
+  "train_loss": 0.0005397322669159621,
+  "val_loss": 0.0006297992751685942,
+  "test_loss": 0.001089547703815426,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.15589012925544132,
+      "val_loss": 0.0006297992751685942,
+      "val_accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0038763550435348105,
+      "val_loss": 0.00024391821043149745,
+      "val_accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.00018612177072403332,
+      "val_loss": 0.00010032897138289433,
+      "val_accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "epoch": 4,
+      "train_loss": 9.686275684119513e-05,
+      "val_loss": 6.245418069042028e-05,
+      "val_accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "epoch": 5,
+      "train_loss": 6.575945750228129e-05,
+      "val_loss": 4.321630795528379e-05,
+      "val_accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "epoch": 6,
+      "train_loss": 4.718794208019972e-05,
+      "val_loss": 3.22311996647028e-05,
+      "val_accuracy": 1.0,
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "macro_f1": 1.0
+    }
+  ],
+  "label_names": [
+    "bug_category",
+    "bug_symptom",
+    "bug_scenario",
+    "bug_workaround",
+    "release_caveat"
+  ],
+  "confusion_matrix": [
+    [
+      56,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      120,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      60,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      58,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      82
+    ]
+  ],
+  "device": "cuda",
+  "gpu_name": "NVIDIA GeForce RTX 5070 Ti",
+  "verdict": "strong",
+  "artifacts": {
+    "best_model": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\best_model.pt",
+    "vocab": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\vocab.json",
+    "label_encoder": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\label_encoder.json",
+    "training_report": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\training_report.json",
+    "training_metrics": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\training_metrics.csv",
+    "confusion_matrix": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\confusion_matrix.json",
+    "samples_eval": "C:\\Hpe\\Train\\outputs_release_lstm\\4100i\\samples_eval.md"
+  }
+}

@@ -2,124 +2,124 @@
 
 ## 10 Best Predictions
 - intent: `cli_syntax`
-  - input: For 10000 AOS-CX 10.18, what is the syntax of the ip igmp version <VERSION> command?
-  - reference: ip igmp version <VERSION> strict
+  - input: For 4100i AOS-CX 10.13, what is the syntax of the The agent class constructor must begin with the following declaration: command?
+  - reference: The agent class constructor must begin with the following declaration:
   - prediction: cli_syntax
   - confidence: 1.0000
   - correct: true
 - intent: `cli_syntax`
-  - input: For 5420 AOS-CX 10.17.1000, what is the syntax of the vsx-sync route-map command?
-  - reference: ]
+  - input: For 4100i AOS-CX 10.16, what is the syntax of the aaa authentication limit-login-attempts <ATTEMPTS> lockout-time <LOCKOUT-TIME> command?
+  - reference: no aaa authentication limit-login-attempts <ATTEMPTS> lockout-time <LOCKOUT-TIME>
   - prediction: cli_syntax
-  - confidence: 1.0000
-  - correct: true
-- intent: `event_log_meaning`
-  - input: For 6000 AOS-CX 10.11, what event log information is documented for Event ID 10301?
-  - reference: Chapter 95 RBAC events RBAC events ThefollowingaretheeventsrelatedtoRBAC. Event ID: 10301 | Message | Local authorization | | has been <tac_status>d | | ----------- | --------------------------------------------- | --- | ---------------------- | | Category | RBAC | | | | Severity | Information | | | | Description | Logeventwhenlocaltac_plusserverhasbeenstarted | | | Event ID: 10302 | Message | Failed | to <tac_status> | local authorization | | ----------- | -------------------------------------------- | --------------- | ------------------- | | Category | RBAC | | | | Severity | Error | | | | Description | Logeventwhenlocaltac_plusserverfailedtostart | | | 249 AOS-CX10.11EventLogMessageReferenceGuide| (AllSwitchSeries) Chapter 96 | | | | Redundant | Management | events | | --------- | ---------- | ------ | --------- | ---------- | ------ | | Redundant | Management | events | | | | Thefollowingaretheeventsrelatedtoredundantmanagement. | Event ID: | 2201 | | | | | | ----------- | ---------------------------------------------- | --------- | --------------- | --- | --- | | Message | Failover | detected: | Reason <reason> | | | | Category | RedundantManagement | | | | | | Severity | Information | | | | | | Description | Thislogeventinformsthatfailovereventisdetected | | | | | | Event ID: | 2202 | | | | | Message Lost <mgmt_module> as Standby Management Module, redundancy disabled | Category | RedundantManagement | | | | | | -------- | ------------------- | --- | --- | --- | --- | | Severity | Information | | | | | Description Thislogeventinformsthatstandbymgmtmodulehasbeenremoved | Event ID: | 2203 | | | | | | --------- | ---- | --- | --- | --- | --- | Message Detected the removal of the Standby Management Module | Category | RedundantManagement | | | | | | -------- | ------------------- | --- | --- | --- | --- | | Severity | Information | | | | | Description Thislogeventinformsthatstandbymgmtmodulehasbeenremoved | Event ID: | 2204 | | | | | | --------- | ------------------- | --- | ------ | --- | --- | | Message | <mgmt_module> | is | Active | | | | Category | RedundantManagement | | | | | | Severity | Information | | | | | Description ThislogeventinformsaboutthestatusofActivemgmtmodule | Event ID: | 2205 | | | | | | --------- | ---- | --- | --- | --- | --- | 250 | AOS-CX10.11EventLogMessageReferenceGuide| | | (AllSwitchSeries) | | | | | ----------------------------------------- | --- | ----------------- | --- | --- | --- | | Message | <mgmt_module> | is Standby | | | -------- | ------------------- | ---------- | --- | | Category | RedundantManagement | | | | Severity | Information | | | Description ThislogeventinformsaboutthestatusofStandbymgmtmodule Event ID: 2206 Message Detected <mgmt_module> as Standby Management Module, redundancy enabled | Category | RedundantManagement | | | | -------- | ------------------- | --- | --- | | Severity | Information | | | Description Thislogeventinformsthatstandbymgmtmoduleisaddedtothesystem Event ID: 2207 Message Remote Standby Management module recover detected. Reason: Heartbeat loss | Category | RedundantManagement | | | | -------- | ------------------- | --- | --- | | Severity | Information | | | Description ThislogeventinformstheuserthatActivemgmtmodulehasdetectedheartbeatloss Event ID: 2208 | Message | <mgmt_module> | is waiting | for filesync | | ----------- | -------------------------------------------------- | ---------- | ------------ | | Category | RedundantManagement | | | | Severity | Information | | | | Description | Thislogeventinformstheuserthatfilesyncisinprogress | | | Event ID: 2209 | Message | <mgmt_module> | is starting | ISSU operation | | -------- | ------------------- | ----------- | -------------- | | Category | RedundantManagement | | | | Severity | Information | | | Description ThislogeventinformstheuserthatanISSUoperationhasbegun RedundantManagementevents|251 Chapter 97 | | | | | | Replication | Manager | events | | ----------- | ------- | ------ | --- | --- | ----------- | ------- | ------ | | Replication | Manager | events | | | | | | Thefollowingaretheeventsrelatedtoreplicationmanager. | Event | ID: 2701 (Severity: | Warning) | | | | | | | ----------- | ------------------- | ---------------------------------------- | --------- | ------------ | -------------- | --- | --- | | Message | | All bitmaps | have been | allocated | | | | | Category | | ReplicationManager | | | | | | | Severity | | Warning | | | | | | | Description | | Logtoindicateallbitmapshavebeenallocated | | | | | | | Event | ID: 2702 (Severity: | Warning) | | | | | | | Message | | Over 80 percent | of | bitmaps have | been allocated | | | | Category | | ReplicationManager | | | | | | | Severity | | Warning | | | | | | Description Logtoindicateover80percentofbitmapshavebeenallocated | Event | ID: 2705 (Severity: | Warning) | | | | | | | ----- | ------------------- | -------- | --- | --- | --- | --- | --- | Message Multicast L3 Bridge Control Forwarding entry with uuid <uuid_str> has | | | no reference | to a VLAN | | | | | | -------- | --- | ------------------ | --------- | --- | --- | --- | --- | | Category | | ReplicationManager | | | | | | | Severity | | Warning | | | | | | Description LogindicatesMutlicastL3BridgeControlForwardingentrywithuuidhasnoreferenceto aVLAN 252 | AOS-CX10.11EventLogMessageReferenceGuide| | | | (AllSwitchSeries) | | | | | | ----------------------------------------- | --- | --- | ----------------- | --- | --- | --- | --- | Chapter 98 REST events REST events ThefollowingaretheeventsrelatedtoREST.
-  - prediction: event_log_meaning
-  - confidence: 1.0000
-  - correct: true
-- intent: `event_log_meaning`
-  - input: For 10000 AOS-CX 10.10, what event log information is documented for Event ID 6128?
-  - reference: Message VSX neighbor datapath init sync status is neighbor sync completed Category NDM Severity Information VSX neighbor datapath init sync status is neighbor sync completed Event ID: 6120 Message VSX neighbor datapath init sync status is neighbor sync in progress Category NDM NDM events | 199 | Severity | Information | | | | | -------- | ----------- | --- | --- | --- | Description VSXneighbordatapathinitsyncstatusisneighborsyncinprogress Event ID: 6121 | Message | static neighbor | <ip> add | failed, Subnet | match failed | | ----------- | ---------------------------------------- | -------- | -------------- | ------------ | | Category | NDM | | | | | Severity | Error | | | | | Description | StaticNeighboraddfailed,subnetnotmatched | | | | Event ID: 6122 | Message | static neighbor | <ip> add | failed, it | is own ip | | ----------- | --------------------------------- | -------- | ---------- | --------- | | Category | NDM | | | | | Severity | Error | | | | | Description | StaticNeighboraddfailed,itisownip | | | | Event ID: 6123 Message static neighbor <ip> Subnet match add failed, port is down | Category | NDM | | | | | ----------- | ---------------------------------- | --- | --- | --- | | Severity | Error | | | | | Description | StaticNeighboraddfailed,portisdown | | | | Event ID: 6124 | Message | Neighbor table | VSX peer | DB connection | terminated | | ----------- | ------------------------------------------ | -------- | ------------- | ---------- | | Category | NDM | | | | | Severity | Information | | | | | Description | NeighbortableVSXpeerDBconnectionterminated | | | | Event ID: 6125 | Message | Neighbor table | VSX peer | DB connection | established | | ----------- | ------------------------------------------- | -------- | ------------- | ----------- | | Category | NDM | | | | | Severity | Information | | | | | Description | NeighbortableVSXpeerDBconnectionestablished | | | | AOS-CX10.10EventLogMessageReferenceGuide|(4100i,6xxx,8xxx,9300,10000SwitchSeries) 200 Event ID: 6126 | Message | VSX Peer | IP <ip> added | the port <port> | and VRF <vrf> | | ----------- | ---------------------------------- | ------------- | --------------- | ------------- | | Category | NDM | | | | | Severity | Information | | | | | Description | VSXPeerIPaddedinportvsxPeerIpCache | | | | Event ID: 6127 Message VSX Peer IP <ip> deleted from the port <port> and VRF <vrf> | Category | NDM | | | | | ----------- | ------------------------------------ | --- | --- | --- | | Severity | Information | | | | | Description | VSXPeerIPdeletedinportvsxPeerIpCache | | | | Event ID: 6128 | Message | Proxy arp | enabled for | the port <port> | | | ----------- | ----------------------------------- | ----------- | --------------- | --- | | Category | NDM | | | | | Severity | Information | | | | | Description | Proxyarpenabledforthegiveninterface | | | | Event ID: 6129 | Message | Proxy arp | disabled | for the port <port> | | | ----------- | ----------------------------------- | -------- | ------------------- | --- | | Category | NDM | | | | | Severity | Information | | | | | Description | Proxyarpdiabledforthegiveninterface | | | | Event ID: 6130 Message Neighbor <ip> modified on Port <port> and VRF <vrf> from mac <old_ | | mac> to | new mac <new_mac> | | | | ----------- | ---------------- | ----------------- | --- | --- | | Category | NDM | | | | | Severity | Information | | | | | Description | Neighbormodified | | | | Event ID: 6131 NDMevents|201 | Message | Neighbor | Discovery daemon started | | | ----------- | ------------------------------ | ------------------------ | --- | | Category | NDM | | | | Severity | Information | | | | Description | NeighborDiscoverydaemonstarted | | | Event ID: 6132 Message Duplicate IPv4 address <ip> is detected on port <port> with a MAC | | address | of <mac>' throttle_count: | 40 | | ----------- | ------------------------------- | ------------------------- | --- | | Category | NDM | | | | Severity | Error | | | | Description | DuplicateIPdetectedfromARPreply | | | Event ID: 6133 Message Duplicate IPv6 address <ip> is detected on port <port> with a MAC | | address | of <mac> | | | -------- | ------- | -------- | --- | | Category | NDM | | | | Severity | Error | | | Description DuplicateIPv6addressdetectedfromNeighbouradvertisement Event ID: 6134 Message Duplicate IPv4 address <ip> is detected on port <port> with a MAC | | address | of <mac>' throttle_count: | 40 | | ----------- | --------------------------------- | ------------------------- | --- | | Category | NDM | | | | Severity | Error | | |.
-  - prediction: event_log_meaning
-  - confidence: 1.0000
-  - correct: true
-- intent: `cli_meaning`
-  - input: For 9300 AOS-CX 10.17.1000, what does the system serviceos password-prompt command do?
-  - reference: The command `system serviceos password-prompt` shows system resource utilization data. Public.
-  - prediction: cli_meaning
   - confidence: 1.0000
   - correct: true
 - intent: `cli_syntax`
-  - input: For 8320 AOS-CX 10.07, what is the syntax of the erps ring <ringid> <port0 port1> interface command?
-  - reference: This command configures the ERPS ring member port. An L2 interface in the switch is associated to one of the two member ports of an ERPS ring. In case of an interconnection node, only port0 is applicable for the sub-ring. The no form of this command removes the association of the ring port to the L2 interface on the switch.
+  - input: For 4100i AOS-CX 10.13, what is the syntax of the aaa authentication limit-login-attempts <ATTEMPTS> lockout-time <LOCKOUT-TIME> command?
+  - reference: no aaa authentication limit-login-attempts <ATTEMPTS> lockout-time <LOCKOUT-TIME>
   - prediction: cli_syntax
-  - confidence: 1.0000
-  - correct: true
-- intent: `event_log_meaning`
-  - input: For 8400 AOS-CX 10.14, what event log information is documented for Event ID 11401?
-  - reference: The event log reference documents event 11401. Severity: Information Information. Description: Event ID: 11401.
-  - prediction: event_log_meaning
   - confidence: 1.0000
   - correct: true
 - intent: `cli_syntax`
-  - input: For 6200 AOS-CX 10.18, what is the syntax of the ip dhcp option IPv6-only-preferred command?
-  - reference: ip dhcp option ipv6-only-preferred
+  - input: For 4100i AOS-CX 10.16, what is the syntax of the diag cable-diagnostic command?
+  - reference: diag cable-diagnostic
   - prediction: cli_syntax
   - confidence: 1.0000
   - correct: true
-- intent: `show_command_syntax`
-  - input: For 8360 AOS-CX 10.06, what is the syntax of the show allow-unsupported-transceiver command?
-  - reference: The syntax of the show allow-unsupported-transceiver command is: show allow-unsupported-transceiver.
-  - prediction: show_command_syntax
+- intent: `cli_syntax`
+  - input: For 10000 AOS-CX 10.16, what is the syntax of the The agent class constructor must begin with the following declaration: command?
+  - reference: class Agent(NAE): def __init__(self): The name of the constructor, Agent, is recommended, but using a different name does not result in an error. AOS-CX 10.16.xxxx Network Analytics Engine Guide | (5420, 6200, 6300, 6400, 8xxx, 93xx, 100xx Switch Series)
+  - prediction: cli_syntax
   - confidence: 1.0000
   - correct: true
-- intent: `cli_meaning`
-  - input: For 6300_6400 AOS-CX 10.06, what does the ip pim-dense max-graft-retries command do?
-  - reference: The ip pim-dense max-graft-retries command configures the number of attempts the routing switch will retry sending the same graft packet to join a flow. The no form of this command removes the currently configured value and sets to the default of 3 attempts.
-  - prediction: cli_meaning
+- intent: `cli_syntax`
+  - input: For 6200 AOS-CX 10.16, what is the syntax of the aaa authorization commands <CONNECTION-TYPE> group <GROUP-LIST> command?
+  - reference: no aaa authorization commands <CONNECTION-TYPE> group <GROUP-LIST>
+  - prediction: cli_syntax
+  - confidence: 1.0000
+  - correct: true
+- intent: `cli_syntax`
+  - input: For 6200 AOS-CX 10.16, what is the syntax of the ip proxy-arp command?
+  - reference: The command syntax is `ip proxy-arp`.
+  - prediction: cli_syntax
+  - confidence: 1.0000
+  - correct: true
+- intent: `cli_syntax`
+  - input: For 4100i AOS-CX 10.16, what is the syntax of the apply qos [queue-profile <QUEUE-NAME>] schedule-profile <SCHEDULE-NAME> command?
+  - reference: no apply qos [queue-profile <QUEUE-NAME>] schedule-profile <SCHEDULE-NAME>
+  - prediction: cli_syntax
+  - confidence: 1.0000
+  - correct: true
+- intent: `cli_syntax`
+  - input: For 4100i AOS-CX 10.15, what is the syntax of the crypto pki application <APP-NAME> certificate <CERT-NAME> command?
+  - reference: Associates a leaf certificate with a feature (application) on the switch. By default, all features are associated with the default, self-signed certificate local-cert. This certificate is created by the switch the first time it starts. The no form of this command associates the specified feature with the default certificate.
+  - prediction: cli_syntax
+  - confidence: 1.0000
+  - correct: true
+- intent: `cli_syntax`
+  - input: For 4100i AOS-CX 10.13, what is the syntax of the crypto pki application <APP-NAME> certificate <CERT-NAME> command?
+  - reference: Associates a leaf certificate with a feature (application) on the switch. By default, all features are associated with the default, self-signed certificate local-cert. This certificate is created by the switch the first time it starts. The no form of this command associates the specified feature with the default certificate.
+  - prediction: cli_syntax
   - confidence: 1.0000
   - correct: true
 
 ## 10 Worst Predictions
-- intent: `event_id_action`
-  - input: Give the factual event ID action/message for this: What message is documented for Event ID 4618?
-  - reference: <user> deleted <uri>
-  - prediction: configuration_procedure
-  - confidence: 0.4982
-  - correct: false
-- intent: `concept_explanation`
-  - input: Give the factual event ID meaning for this: What meaning is documented for REST Event ID 4613?
-  - reference: logs a success config write operation
-  - prediction: event_id_meaning
-  - confidence: 0.5038
-  - correct: false
-- intent: `snmp_mib_info`
-  - input: What SNMP-related fact is given for show snmp views?
-  - reference: The show snmp views command displays the list of all the configured SNMP views.
+- intent: `event_id_meaning`
+  - input: For AOS-CX, what is the description of Event ID 4612?
+  - reference: logs an unsuccessful password change for a user via REST
   - prediction: concept_explanation
-  - confidence: 0.5140
+  - confidence: 0.5415
   - correct: false
-- intent: `concept_explanation`
-  - input: Give the factual event ID meaning for this: What does Event ID 4632 mean in AOS-CX?
+- intent: `event_id_meaning`
+  - input: For AOS-CX, what is the description of Event ID 4632?
   - reference: Connection is established with HPE Aruba Networking Central.
-  - prediction: event_id_meaning
-  - confidence: 0.5186
-  - correct: false
-- intent: `concept_explanation`
-  - input: What is documented for show snmp views in the SNMP/MIB guide?
-  - reference: The show snmp views command displays the list of all the configured SNMP views.
-  - prediction: snmp_mib_info
-  - confidence: 0.5259
-  - correct: false
-- intent: `configuration_procedure`
-  - input: What action or message does AOS-CX log for Event ID 4606?
-  - reference: Authorization failed for user <user>, for resource <resource>, with action <action>
-  - prediction: event_id_action
-  - confidence: 0.5361
-  - correct: false
-- intent: `configuration_procedure`
-  - input: For REST Event ID 4624, what event log message is shown?
-  - reference: Unable to add new subscriber. Max number of subscribers has been reached.
-  - prediction: event_id_action
-  - confidence: 0.5425
-  - correct: false
-- intent: `snmp_mib_info`
-  - input: What SNMP/MIB fact should be returned here: What SNMP MIB information is listed for show snmp views?
-  - reference: The show snmp views command displays the list of all the configured SNMP views.
   - prediction: concept_explanation
-  - confidence: 0.5428
+  - confidence: 0.5553
   - correct: false
-- intent: `configuration_procedure`
-  - input: What message is documented for Event ID 4624?
-  - reference: Unable to add new subscriber. Max number of subscribers has been reached.
-  - prediction: event_id_action
-  - confidence: 0.5433
+- intent: `event_id_meaning`
+  - input: What meaning is documented for REST Event ID 4613?
+  - reference: logs a success config write operation
+  - prediction: concept_explanation
+  - confidence: 0.5787
+  - correct: false
+- intent: `event_id_meaning`
+  - input: What meaning is documented for REST Event ID 4608?
+  - reference: logs an allowed authorization attempt of a user via REST
+  - prediction: concept_explanation
+  - confidence: 0.5861
+  - correct: false
+- intent: `event_id_meaning`
+  - input: What meaning is documented for REST Event ID 4614?
+  - reference: logs a success copy of saved configuration
+  - prediction: concept_explanation
+  - confidence: 0.5884
   - correct: false
 - intent: `concept_explanation`
-  - input: What is documented for SNMP MIB view in the SNMP/MIB guide?
-  - reference: SNMP MIB view is a group of view subtrees in the MIB hierarchy.
+  - input: What SNMP MIB information is listed for show snmp views?
+  - reference: The show snmp views command displays the list of all the configured SNMP views.
   - prediction: snmp_mib_info
-  - confidence: 0.5452
+  - confidence: 0.5893
+  - correct: false
+- intent: `concept_explanation`
+  - input: What does Event ID 4603 mean in AOS-CX?
+  - reference: logs an authorization configuration conflict
+  - prediction: event_id_meaning
+  - confidence: 0.5908
+  - correct: false
+- intent: `concept_explanation`
+  - input: What does Event ID 4607 mean in AOS-CX?
+  - reference: logs a successful authorization attempt of a user via REST
+  - prediction: event_id_meaning
+  - confidence: 0.5917
+  - correct: false
+- intent: `concept_explanation`
+  - input: What does Event ID 4611 mean in AOS-CX?
+  - reference: logs a successful password change for a user via REST
+  - prediction: event_id_meaning
+  - confidence: 0.6004
+  - correct: false
+- intent: `concept_explanation`
+  - input: What SNMP MIB information is listed for SNMP MIB view mask format?
+  - reference: The OID mask format is xx:xx.... (:), and each OID mask is 16 octets in length.
+  - prediction: snmp_mib_info
+  - confidence: 0.6269
   - correct: false

@@ -1647,106 +1647,6 @@ def trainer_eval_loss_summary(metrics: Dict[str, Any]) -> Dict[str, Any]:
     return {key: metrics[key] for key in keep if key in metrics}
 
 
-def _normalize_metric_weights(metrics_list: Sequence[Dict[str, Any]], key: str, default_weight: int) -> List[float]:
-    count_key = f"{key}_applicable_rows"
-    weights: List[float] = []
-    for metrics in metrics_list:
-        weight = metrics.get(count_key)
-        if weight is None:
-            weight = metrics.get("_chunk_rows", default_weight)
-        try:
-            weights.append(float(weight))
-        except (TypeError, ValueError):
-            weights.append(float(default_weight))
-    return weights
-
-
-def aggregate_chunked_eval_metrics(
-    metrics_list: Sequence[Dict[str, Any]],
-    metric_key_prefix: str,
-) -> Dict[str, Any]:
-    if not metrics_list:
-        return {}
-
-    prefix = f"{metric_key_prefix}_"
-    aggregated: Dict[str, Any] = {}
-    total_rows = sum(int(metrics.get("_chunk_rows", 0) or 0) for metrics in metrics_list)
-    total_runtime = sum(float(metrics.get(f"{prefix}runtime", 0.0) or 0.0) for metrics in metrics_list)
-    aggregated[f"{prefix}runtime"] = round(total_runtime, 3)
-    if total_rows > 0 and total_runtime > 0:
-        aggregated[f"{prefix}samples_per_second"] = round(total_rows / total_runtime, 3)
-    total_steps = sum(float(metrics.get(f"{prefix}steps_per_second", 0.0) or 0.0) * float(metrics.get(f"{prefix}runtime", 0.0) or 0.0) for metrics in metrics_list)
-    if total_runtime > 0 and total_steps > 0:
-        aggregated[f"{prefix}steps_per_second"] = round(total_steps / total_runtime, 3)
-
-    all_keys = sorted(
-        {
-            key
-            for metrics in metrics_list
-            for key in metrics
-            if key.startswith(prefix) and not key.endswith("_applicable_rows") and key not in {f"{prefix}runtime", f"{prefix}samples_per_second", f"{prefix}steps_per_second"}
-        }
-    )
-    for key in all_keys:
-        values: List[float] = []
-        weights = _normalize_metric_weights(metrics_list, key, default_weight=max(total_rows, 1))
-        for metrics in metrics_list:
-            value = metrics.get(key)
-            if value is None:
-                continue
-            try:
-                values.append(float(value))
-            except (TypeError, ValueError):
-                values.append(0.0)
-        if not values:
-            continue
-        aligned_weights = [weights[index] for index, metrics in enumerate(metrics_list) if metrics.get(key) is not None]
-        weight_sum = sum(aligned_weights)
-        if weight_sum > 0:
-            aggregated[key] = round(sum(value * weight for value, weight in zip(values, aligned_weights)) / weight_sum, 4)
-        else:
-            aggregated[key] = round(sum(values) / len(values), 4)
-        count_key = f"{key}_applicable_rows"
-        if any(count_key in metrics for metrics in metrics_list):
-            aggregated[count_key] = int(sum(int(metrics.get(count_key, 0) or 0) for metrics in metrics_list))
-    if metrics_list and f"{prefix}loss" in metrics_list[-1]:
-        key = f"{prefix}loss"
-        rows = [int(metrics.get("_chunk_rows", 0) or 0) for metrics in metrics_list]
-        values = [float(metrics.get(key, 0.0) or 0.0) for metrics in metrics_list]
-        row_sum = sum(rows)
-        if row_sum > 0:
-            aggregated[key] = round(sum(value * row for value, row in zip(values, rows)) / row_sum, 4)
-    return aggregated
-
-
-def safe_dataset_evaluate(
-    trainer,
-    dataset: Dataset,
-    metric_key_prefix: str = "eval",
-    chunk_size: int = 512,
-) -> Dict[str, Any]:
-    try:
-        return trainer.evaluate(eval_dataset=dataset, metric_key_prefix=metric_key_prefix)
-    except (MemoryError, np.core._exceptions._ArrayMemoryError) as exc:
-        LOGGER.warning(
-            "Falling back to chunked %s evaluation after memory error: %s",
-            metric_key_prefix,
-            exc,
-        )
-
-    chunk_metrics: List[Dict[str, Any]] = []
-    for start in range(0, len(dataset), chunk_size):
-        stop = min(start + chunk_size, len(dataset))
-        subset = dataset.select(range(start, stop))
-        metrics = trainer.evaluate(eval_dataset=subset, metric_key_prefix=metric_key_prefix)
-        metrics["_chunk_rows"] = len(subset)
-        chunk_metrics.append(metrics)
-    aggregated = aggregate_chunked_eval_metrics(chunk_metrics, metric_key_prefix)
-    aggregated[f"{metric_key_prefix}_chunked_fallback"] = True
-    aggregated[f"{metric_key_prefix}_chunk_size"] = chunk_size
-    return aggregated
-
-
 def generation_prompt_for_row(row: Dict[str, Any], tokenizer, template_name: str) -> str:
     user_content = build_user_content_with_metadata(row, row.get("question", ""))
     if hasattr(tokenizer, "apply_chat_template"):
@@ -2315,7 +2215,7 @@ def train(args: argparse.Namespace) -> Dict[str, float]:
     tokenizer.save_pretrained(adapter_dir)
     tokenizer.save_pretrained(tokenizer_dir)
 
-    eval_metrics = safe_dataset_evaluate(trainer, datasets["validation"], metric_key_prefix="eval")
+    eval_metrics = trainer.evaluate()
     eval_metrics = {key: float(value) if isinstance(value, (np.floating, np.integer)) else value for key, value in eval_metrics.items()}
     eval_metrics_by_family = metrics_by_family_from_references(datasets["validation"])
     save_json(output_dir / "eval_metrics.json", eval_metrics)
@@ -2324,7 +2224,7 @@ def train(args: argparse.Namespace) -> Dict[str, float]:
     test_metrics: Dict[str, Any] = {}
     test_metrics_by_family: Dict[str, Any] = {}
     if "test" in datasets:
-        test_metrics = safe_dataset_evaluate(trainer, prepared_test_dataset, metric_key_prefix="test")
+        test_metrics = trainer.evaluate(eval_dataset=prepared_test_dataset, metric_key_prefix="test")
         test_metrics = {key: float(value) if isinstance(value, (np.floating, np.integer)) else value for key, value in test_metrics.items()}
         test_metrics_by_family = metrics_by_family_from_references(datasets["test"])
         save_json(output_dir / "test_metrics.json", test_metrics)

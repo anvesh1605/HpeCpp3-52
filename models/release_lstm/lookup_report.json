@@ -1,0 +1,75 @@
+{
+  "total_questions": 322,
+  "rows_with_gold": 322,
+  "lookup_found": 322,
+  "lookup_correct": 322,
+  "lookup_exact_match": 1.0,
+  "lookup_token_f1": 1.0,
+  "lookup_rouge_l": 1.0,
+  "not_found": 0,
+  "needs_disambiguation": 0,
+  "slot_missing": 0,
+  "low_similarity": 0,
+  "lookup_accuracy": 1.0,
+  "correct": 322,
+  "incorrect": 0,
+  "accuracy": 1.0,
+  "found_count": 322,
+  "not_found_count": 0,
+  "needs_disambiguation_count": 0,
+  "slot_missing_count": 0,
+  "low_similarity_count": 0,
+  "accuracy_by_intent": {
+    "bug_category": {
+      "total": 52,
+      "correct": 52,
+      "incorrect": 0,
+      "accuracy": 1.0
+    },
+    "bug_scenario": {
+      "total": 50,
+      "correct": 50,
+      "incorrect": 0,
+      "accuracy": 1.0
+    },
+    "bug_symptom": {
+      "total": 86,
+      "correct": 86,
+      "incorrect": 0,
+      "accuracy": 1.0
+    },
+    "bug_workaround": {
+      "total": 52,
+      "correct": 52,
+      "incorrect": 0,
+      "accuracy": 1.0
+    },
+    "release_caveat": {
+      "total": 82,
+      "correct": 82,
+      "incorrect": 0,
+      "accuracy": 1.0
+    }
+  },
+  "errors_by_intent": {
+    "bug_category": {
+      "found": 52
+    },
+    "bug_scenario": {
+      "found": 50
+    },
+    "bug_symptom": {
+      "found": 86
+    },
+    "bug_workaround": {
+      "found": 52
+    },
+    "release_caveat": {
+      "found": 82
+    }
+  },
+  "top_20_failed_lookup_keys": [],
+  "sample_not_found": [],
+  "sample_needs_disambiguation": [],
+  "sample_wrong_answers": []
+}

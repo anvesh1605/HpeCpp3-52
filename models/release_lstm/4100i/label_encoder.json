@@ -1,0 +1,23 @@
+{
+  "label_names": [
+    "bug_category",
+    "bug_symptom",
+    "bug_scenario",
+    "bug_workaround",
+    "release_caveat"
+  ],
+  "label_to_id": {
+    "bug_category": 0,
+    "bug_symptom": 1,
+    "bug_scenario": 2,
+    "bug_workaround": 3,
+    "release_caveat": 4
+  },
+  "id_to_label": {
+    "0": "bug_category",
+    "1": "bug_symptom",
+    "2": "bug_scenario",
+    "3": "bug_workaround",
+    "4": "release_caveat"
+  }
+}

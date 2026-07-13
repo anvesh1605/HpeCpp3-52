@@ -1,0 +1,125 @@
+# Samples Eval
+
+## 10 Best Predictions
+- intent: `bug_category`
+  - input: Which category does Bug 336469 belong to?
+  - reference: SNMP (Bug ID 336469): This bug belongs to the SNMP category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 384872 belong to?
+  - reference: VSX (Bug ID 384872): This bug belongs to the VSX category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 410596 belong to?
+  - reference: Mirroring (Bug ID 410596): This bug belongs to the Mirroring category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 343456 belong to?
+  - reference: Mirroring (Bug ID 343456): This bug belongs to the Mirroring category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 317831 belong to?
+  - reference: SNMP (Bug ID 317831): This bug belongs to the SNMP category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 323844 belong to?
+  - reference: DHCP Snooping (Bug ID 323844): This bug belongs to the DHCP Snooping category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 273640 belong to?
+  - reference: Internal srvcs: linux (Bug ID 273640): This bug belongs to the Internal srvcs: linux category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 342437 belong to?
+  - reference: Mirroring (Bug ID 342437): This bug belongs to the Mirroring category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 308854 belong to?
+  - reference: RADIUS (Bug ID 308854): This bug belongs to the RADIUS category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+- intent: `bug_category`
+  - input: Which category does Bug 378624 belong to?
+  - reference: VLANS (Bug ID 378624): This bug belongs to the VLANS category.
+  - prediction: bug_category
+  - confidence: 1.0000
+  - correct: true
+
+## 10 Worst Predictions
+- intent: `release_caveat`
+  - input: For 4100i AOS-CX 10.16.1010, what limitation is mentioned for Classifiers in HPE Aruba AOS-CX 10.16.1010?
+  - reference: For secure classifier policy modifications, HPE Aruba Networking strongly encourages a three-step process: bring down the port, make the modifications, and then bring the port back up.
+  - prediction: release_caveat
+  - confidence: 0.9642
+  - correct: true
+- intent: `release_caveat`
+  - input: For 4100i AOS-CX 10.15.1050, what limitation is mentioned for Classifiers in HPE Aruba AOS-CX 10.15.1050?
+  - reference: For secure classifier policy modifications, HPE Aruba Networking strongly encourages a three-step process: bring down the port, make the modifications, and then bring the port back up.
+  - prediction: release_caveat
+  - confidence: 0.9822
+  - correct: true
+- intent: `release_caveat`
+  - input: For 4100i AOS-CX 10.13.1140, what limitation is mentioned for User Based Tunnel in AOS-CX 10.13.1140?
+  - reference: Feature Caveat: User Based Tunnel - In the event of license issues when onboarding a DUT to primary or backup mobility conductor, the DUT will not try to bootstrap to another mobility conductor where a license is available. For example, if the primary mobility conductor does not have a license to onboard the DUT but the backup mobility conductor does have adequate licenses, if both mobility conductors are reachable then UBT will be down, and the DUT will not attempt to bootstrap to the backup controller. However, if the primary mobility conductor is not reachable, the DUT gets tunneled to the standby/backup mobility conductor. Once the primary mobility conductor is reachable by the DUT once again, the DUT will not automatically bootstrap back to the primary. Network administrators should manually disable and enable UBT on the DUT to re-establish the tunnel to the primary mobility conductor.
+  - prediction: release_caveat
+  - confidence: 0.9948
+  - correct: true
+- intent: `bug_workaround`
+  - input: For 4100i AOS-CX 10.13.1020, what is the workaround for Tunneled Node Bug 304277?
+  - reference: Tunneled Node (Bug ID 304277): The documented workaround is: Disable and re-enable the UBT zone.
+  - prediction: bug_workaround
+  - confidence: 0.9957
+  - correct: true
+- intent: `bug_workaround`
+  - input: For 4100i AOS-CX 10.16.1010, what is the workaround for DFP Bug 386320?
+  - reference: DFP (Bug ID 386320): The documented workaround is: Disable HTTP user-agent in device fingerprinting configuration.
+  - prediction: bug_workaround
+  - confidence: 0.9958
+  - correct: true
+- intent: `bug_workaround`
+  - input: For 4100i AOS-CX 10.15.1010, what is the workaround for ARP Bug 340677?
+  - reference: ARP (Bug ID 340677): No workaround is documented in the release notes.
+  - prediction: bug_workaround
+  - confidence: 0.9961
+  - correct: true
+- intent: `bug_workaround`
+  - input: For 4100i AOS-CX 10.17.1010, what is the workaround for VSF PTP Bug 410980?
+  - reference: VSF PTP (Bug ID 410980): No workaround is documented in the release notes.
+  - prediction: bug_workaround
+  - confidence: 0.9964
+  - correct: true
+- intent: `bug_workaround`
+  - input: For 4100i AOS-CX 10.14.1020, what is the workaround for Tunneled Node Bug 326043?
+  - reference: Tunneled Node (Bug ID 326043): The documented workaround is: Perform shutdown and no shutdown on ports where the camera is connected.
+  - prediction: bug_workaround
+  - confidence: 0.9966
+  - correct: true
+- intent: `bug_workaround`
+  - input: For 4100i AOS-CX 10.14.1010, what is the workaround for AAA Bug 312535?
+  - reference: AAA (Bug ID 312535): The documented workaround is: Enter command eap-tls-fragment towards-server in a new line: Copy switch(config-if)# aaa authentication port-access dot1x authenticator.
+  - prediction: bug_workaround
+  - confidence: 0.9969
+  - correct: true
+- intent: `bug_workaround`
+  - input: For 4100i AOS-CX 10.15.0001, what is the workaround for PIM-SM Bug 328568?
+  - reference: PIM-SM (Bug ID 328568): The documented workaround is: Issue the commands router pim disable then router-pim enable, or restart the pim daemon.
+  - prediction: bug_workaround
+  - confidence: 0.9969
+  - correct: true
